@@ -3,32 +3,25 @@ package main.java.org.teamtree.objectaid;
 import org.teamtree.objectaid.Etat;
 import org.teamtree.objectaid.Accessibilite;
 
-public class Methode {
-    private final String typeRetourne;
+public class Attribut {
+    private final String type;
     private final String nom;
-
-    private final Parametre parametre;
     private final Etat etat;
     private final Accessibilite accessibilite;
 
-    public Methode(String typeRetourne, String nom, Parametre parametre, Etat etat, Accessibilite accessibilite) {
-        this.typeRetourne = typeRetourne;
+    public Attribut(String type, String nom, Etat etat, Accessibilite accessibilite) {
+        this.type = type;
         this.nom = nom;
-        this.parametre = parametre;
         this.etat = etat;
         this.accessibilite = accessibilite;
     }
 
-    public String getTypeRetourne() {
-        return typeRetourne;
+    public String getType() {
+        return type;
     }
 
     public String getNom() {
         return nom;
-    }
-
-    public String getParametre() {
-        return parametre.getType();
     }
 
     public String getEtat() {
