@@ -1,5 +1,5 @@
 package org.teamtree.objectaid;
 
-public interface Accessibilte {
+public interface Accessibilite {
     public String getAcces();
 }
