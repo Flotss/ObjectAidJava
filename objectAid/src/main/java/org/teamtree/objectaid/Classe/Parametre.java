@@ -1,4 +1,4 @@
-package org.teamtree.objectaid;
+package org.teamtree.objectaid.Classe;
 
 import java.lang.reflect.Parameter;
 

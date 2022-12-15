@@ -3,8 +3,8 @@ package org.teamtree.objectaid.classes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.teamtree.objectaid.Etat.Etat;
-import org.teamtree.objectaid.Methode;
-import org.teamtree.objectaid.Parametre;
+import org.teamtree.objectaid.Classe.Methode;
+import org.teamtree.objectaid.Classe.Parametre;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

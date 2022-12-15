@@ -1,4 +1,4 @@
-package org.teamtree.objectaid;
+package org.teamtree.objectaid.Classe;
 
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Accessibilite.Accessibilite;

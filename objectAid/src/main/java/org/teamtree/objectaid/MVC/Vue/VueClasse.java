@@ -2,8 +2,7 @@ package org.teamtree.objectaid.MVC.Vue;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
-import org.teamtree.objectaid.ClasseEntiere;
+import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.util.LineSeparator;
 

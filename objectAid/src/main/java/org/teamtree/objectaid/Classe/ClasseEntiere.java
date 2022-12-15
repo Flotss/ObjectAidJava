@@ -1,4 +1,6 @@
-package org.teamtree.objectaid;
+package org.teamtree.objectaid.Classe;
+
+import org.teamtree.objectaid.Attribut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +9,7 @@ public class ClasseEntiere {
     private final String name;
     private List<Attribut> attributes;
     private List<Methode> methods;
+    private List<Constructeur> contructeurs;
     private DefinitionClasse definition;
 
     public ClasseEntiere(final String name) {

@@ -1,6 +1,6 @@
 package org.teamtree.objectaid.classes;
 
-import org.teamtree.objectaid.Parametre;
+import org.teamtree.objectaid.Classe.Parametre;
 
 abstract class ClassePourLesTests {
     private int x;

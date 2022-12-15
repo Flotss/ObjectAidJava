@@ -6,7 +6,7 @@ import org.teamtree.objectaid.Entite.Record;
 
 public class FabriqueEntite {
 
-    public Entite creerEntite(Class<?> classe){
+    public Entite getEntite(Class<?> classe){
         if (classe.isInterface()){
             return new Interface();
         }
