@@ -1,6 +1,7 @@
 package main.java.org.teamtree.objectaid;
 
 import org.teamtree.objectaid.Etat;
+import org.teamtree.objectaid.Accessibilite;
 
 public class Methode {
     private final String typeRetourne;
