@@ -1,7 +1,7 @@
-package main.java.org.teamtree.objectaid;
+package org.teamtree.objectaid;
 
-import org.teamtree.objectaid.Etat;
-import org.teamtree.objectaid.Accessibilite;
+import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Etat.Etat;
 
 public class Attribut {
     private final String type;
