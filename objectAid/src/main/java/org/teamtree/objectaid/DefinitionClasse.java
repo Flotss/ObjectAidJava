@@ -2,6 +2,7 @@ package org.teamtree.objectaid;
 
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
 import org.teamtree.objectaid.Etat.Etat;
+import org.teamtree.objectaid.Entite.Entite;
 
 import java.util.ArrayList;
 
