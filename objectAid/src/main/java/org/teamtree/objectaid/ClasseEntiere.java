@@ -5,8 +5,8 @@ import java.util.List;
 
 public class ClasseEntiere {
     private final String name;
-    private final List<Attribut> attributes;
-    private final List<Methode> methods;
+    private List<Attribut> attributes;
+    private List<Methode> methods;
 
     public ClasseEntiere(final String name) {
         this.name = name;
@@ -26,7 +26,15 @@ public class ClasseEntiere {
         return attributes;
     }
 
+    public void setAttributes(List<Attribut> attributes) {
+        this.attributes = attributes;
+    }
+
     public List<Methode> getMethods() {
         return methods;
+    }
+
+    public void setMethods(List<Methode> methods) {
+        this.methods = methods;
     }
 }
