@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
 
 import java.io.IOException;
@@ -14,7 +15,8 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         final var pane = new Pane();
         final var scene = new Scene(pane);
-        final var classDiagram = new VueClasse();
+        final var model = new Model();
+        final var classDiagram = new VueClasse(model);
 
         pane.getChildren().add(classDiagram);
 
