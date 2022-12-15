@@ -14,6 +14,7 @@ public class ClasseEntiere {
         this.name = name;
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
+        this.contructeurs = new ArrayList<>();
     }
 
     public DefinitionClasse getDefinition() {

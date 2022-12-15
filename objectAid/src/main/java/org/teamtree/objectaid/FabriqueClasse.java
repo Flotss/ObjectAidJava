@@ -1,5 +1,7 @@
 package org.teamtree.objectaid;
 
+import org.teamtree.objectaid.Classe.ClasseEntiere;
+
 import java.lang.reflect.*;
 
 public class FabriqueClasse {
@@ -12,41 +14,70 @@ public class FabriqueClasse {
 
 
         Class<?> c = Class.forName(path);
-        String temporaire[] = path.split(".");
-        String nom = temporaire[temporaire.length-1];
+        String accessibilite = Modifier.toString(c.getModifiers()).split(" ")[0];
+        String typeClasse = c.toString().split(" ")[0];
+        String nomClasse = c.toString().split(" ")[1].split("\\.")[c.toString().split(" ")[1].split("\\.").length - 1];
         Field[] fields = c.getFields();
         Method[] methods = c.getDeclaredMethods();
         Constructor[] constructors = c.getConstructors();
         Class<?> parent = c.getSuperclass();
 
+        ;
+
         String affichage = "";
 
-        DefinitionClasse definitionClasse = new DefinitionClasse(nom,,,);
-
-        affichage += Modifier.toString(c.getModifiers());
-
-        affichage +=" "+ nomClasse + "\n";
+        //DefinitionClasse definitionClasse = new DefinitionClasse(nom,,,);
+        affichage +=  accessibilite + " " + typeClasse + " " + nomClasse + "\n";
         for(Constructor constructor : constructors){
+
+            //affichage de la signature du constructeur
+
             affichage += Modifier.toString(constructor.getModifiers());
-            affichage += " "+constructor.getName()+ "(";
+            String nomConstructeur = constructor.getName().split("\\.")[(constructor.getName().split("\\.").length) - 1];
+            affichage += " " + nomConstructeur + "(";
+
+            //affichage des parametres
+
             Parameter[] parameters = constructor.getParameters();
-            for (Parameter parameter : parameters){
-                affichage += parameter.getName() + ": "+ parameter.getType() +" ";
+            for (int i = 0; i < parameters.length; i++) {
+                Parameter parameter = parameters[i];
+                if (i != 0) {
+                    affichage += " ";
+                }
+                affichage += parameter.getName() + ": "+ parameter.getType().getName().split("\\.")[(parameter.getType().getName().split("\\.").length) - 1];
+                if(i < parameters.length - 1 && parameters.length > 1){
+                    affichage += ", ";
+                }
             }
             affichage += ")\n";
 
         }
 
         for(Method method : methods){
-            affichage += Modifier.toString(method.getModifiers());
+
+            //affichage de la signature de la methode
+
+            affichage += Modifier.toString(method.getModifiers()).split(" ")[0];
             affichage += " "+method.getName()+ "(";
+
+            //affichage des parametres
+
             Parameter[] parameters = method.getParameters();
-            for (Parameter parameter : parameters){
-                affichage += parameter.getName() + ": "+ parameter.getType().getName() +" ";
+            for (int i = 0; i < parameters.length; i++) {
+                Parameter parameter = parameters[i];
+                if (i != 0) {
+                    affichage += " ";
+                }
+                affichage += parameter.getName() + ": "+ parameter.getType().getName().split("\\.")[(parameter.getType().getName().split("\\.").length) - 1];
+                if(i < parameters.length - 1 && parameters.length > 1){
+                    affichage += ",";
+                }
             }
             affichage += ")";
-            Class<?> returnType = method.getReturnType();
-            affichage+= ": "+ returnType.getName() +"\n";
+
+            //affichage du type de retour
+
+            affichage+= ": " + method.getReturnType().getName().split("\\.")[(method.getReturnType().getName().split("\\.").length) - 1] +"\n";
 
         }
         System.out.println(affichage);

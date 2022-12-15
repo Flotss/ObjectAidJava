@@ -4,7 +4,7 @@ Participant :
 - [ ] [Mangin Florian](https://github.com/Flotss)
 - [ ] [Gridel Alexis](https://github.com/Inerska)
 - [ ] [Bernard Julien](https://github.com/julienBernard3)
-- [ ] [Grossman Jérémy](https://github.com/T1Boomer)
+- [ ] [Grossmann Jérémy](https://github.com/T1Boomer)
 
 ## Description
 
