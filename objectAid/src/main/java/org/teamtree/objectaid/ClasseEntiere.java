@@ -3,9 +3,9 @@ package org.teamtree.objectaid;
 import java.util.ArrayList;
 
 public class ClasseEntiere {
-    public DefinitionClasse definitionClasse;
-    public ArrayList<Methode> methodes;
-    public ArrayList<Attribut> attributs;
+    public main.java.org.teamtree.objectaid.DefinitionClasse definitionClasse;
+    public ArrayList<main.java.org.teamtree.objectaid.Methode> methodes;
+    public ArrayList<main.java.org.teamtree.objectaid.Attribut> attributs;
 
 
 }
