@@ -1,4 +1,4 @@
-package org.teamtree.objectaid;
+package org.teamtree.objectaid.Accessibilite;
 
 public interface Accessibilite {
     public String getAcces();
