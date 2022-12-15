@@ -5,6 +5,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import org.teamtree.objectaid.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.util.LineSeparator;
 
 public class VueClasse extends VBox implements Observateur {
 
@@ -17,9 +18,9 @@ public class VueClasse extends VBox implements Observateur {
         classeEntiere = dto;
 
         final var title = new Label("Class");
-        final var separator = new Rectangle(0, 0, 100, 1);
+        final var separator = new LineSeparator();
         final var attributes = new Label("Attributes");
-        final var methodSeparator = new Rectangle(0, 0, 100, 1);
+        final var methodSeparator = new LineSeparator();
         final var methods = new Label("Methods");
 
         getChildren().addAll(title, separator, attributes, methodSeparator, methods);
