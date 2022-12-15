@@ -103,7 +103,7 @@ class FabriqueFlecheHeritage extends FabriqueFleche{
 }
 
 class ClasseEntiere{
-    +ClasseEntiere(String)
+    +ClasseEntiere(path : String)
     +getAttributs() : ArrayList<Attribut>
     +getMethodes() : ArrayList<Methode>
     +getDefinition() : String
@@ -133,8 +133,11 @@ class Record implements Entite{
 }
 
 class Parametre{
-    +type : String
+    +Parametre(param : Parameter)
+    -type : String
+    -nom : String
     +getType() : String
+    +getNom() : String
 }
 
 interface Accessibilite{
@@ -176,18 +179,19 @@ class Static implements Etat{
 class DefinitionClasse{
     -nomClasse : String
 
-    +getAccessibilite() : String
-    +getEtat() : String
+    +DefinitionClasse(classe : Class<?>)
     +getNom() : String
+    +getAccessibilite() : String
+    +getEtat() : ArrayList<Etat>
     +getEntite() : String
 }
 
 class Attribut{
     -type : String
     -nom : String
-
+    +Attribut(attr : Field)
     +getAccessibilite() : String
-    +getEtat() : String
+    +getEtat() : ArrayList<Etat>
     +getType() : String
     +getNom() : String
 }
@@ -196,10 +200,20 @@ class Methode{
     -typeRetourne : String
     -nom : String
 
-    +getAccessibilite() : String
-    +getEtat() : String
-    +getTypeRetourne() : String
+    +Methode(m : Method)
     +getNom() : String
+    +getTypeRetourne() : String
+    +getAccessibilite() : String
+    +getEtat() : ArrayList<Etat>
+    +getParametres() : ArrayList<Parametre>
+}
+
+class Constructeur {
+    - nom : String
+    + Constructeur(c : Constructor<?>)
+    + getNom() : String
+    + getAccessibilite() : String
+    + getParametres() : ArrayList<Parametre>
 }
 
 abstract class Fleche {
@@ -244,19 +258,22 @@ class Relation{
 
 Modele --> Observateur : -observateurs
 Modele "1" --> "1" Relation : -relation
-VueClasse --> "0..1" Modele : sujet
-VueFleche --> "0..1" Modele : sujet
-Attribut "1" --> "0..1" Accessibilite : accessibilite
+VueClasse --> "0..1" Modele : - sujet
+VueFleche --> "0..1" Modele : - sujet
+Attribut "1" --> "0..1" Accessibilite : -accessibilite
 Attribut "1" --> "*" Etat : etat
-DefinitionClasse "1" --> "0..1" Accessibilite : accessibilite
-DefinitionClasse "1" --> "0..*" Etat : etat
-DefinitionClasse "1" --> "0..1" Entite : entite
-Methode "1" --> "0..1" Accessibilite : accessibilite
+DefinitionClasse "1" --> "0..1" Accessibilite : -accessibilite
+DefinitionClasse "1" --> "0..*" Etat : -etat
+DefinitionClasse "1" --> "0..1" Entite : -entite
+Constructeur "1" --> "0..1" Accessibilite : -accessibilite
+Constructeur "1" --> "*" Parametre : -parametres
+Methode "1" --> "0..1" Accessibilite : -accessibilite
 Methode "1" --> "*" Etat : etat
-Methode "1" --> "*" Parametre : parametre
+Methode "1" --> "*" Parametre : parametres
 ClasseEntiere "1" --> "1" DefinitionClasse : definitionClasse
-ClasseEntiere "1" --> "*" Attribut : attribut
-ClasseEntiere "1" --> "*" Methode : methode
+ClasseEntiere "1" --> "*" Attribut : attributs
+ClasseEntiere "1" --> "*" Methode : methodes
+ClasseEntiere "1" --> "*" Constructeur : constructeurs
 Fleche "1" --> "1" Accessibilite : accessibilite
 Fleche "2" *-- Point : pointDebutFin
 ClasseEntiere "1" --> "*" Point : position

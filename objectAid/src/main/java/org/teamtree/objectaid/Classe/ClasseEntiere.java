@@ -1,7 +1,5 @@
 package org.teamtree.objectaid.Classe;
 
-import org.teamtree.objectaid.Attribut;
-
 import java.util.ArrayList;
 import java.util.List;
 

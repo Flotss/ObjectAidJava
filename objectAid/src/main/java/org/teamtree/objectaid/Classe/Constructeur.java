@@ -13,7 +13,7 @@ public class Constructeur {
     private final Accessibilite accessibilite;
     private final ArrayList<Parametre> parametre;
 
-    public Constructeur (Constructor construct) {
+    public Constructeur (Constructor<?> construct) {
         this.nom = construct.getName();
 
         FabriqueAccessibilite fabriqueAccess = new FabriqueAccessibilite();
