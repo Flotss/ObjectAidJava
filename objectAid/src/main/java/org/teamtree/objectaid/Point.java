@@ -1,4 +1,4 @@
-package main.java.org.teamtree.objectaid;
+package org.teamtree.objectaid;
 
 public class Point {
     private int x;

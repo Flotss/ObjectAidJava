@@ -6,6 +6,6 @@ public class Default implements Accessibilite {
 
     @Override
     public String getAcces() {
-        return "";
+        return "default";
     }
 }
