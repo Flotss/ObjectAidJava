@@ -1,4 +1,6 @@
-package org.teamtree.objectaid;
+package org.teamtree.objectaid.Accessibilite;
+
+import org.teamtree.objectaid.Accessibilite.Accessibilite;
 
 public class Default implements Accessibilite {
 
