@@ -20,7 +20,8 @@ public class HelloApplication extends Application {
         final var classDiagram = new VueClasse(model, sampleClassEntiere);
 
         pane.getChildren().add(classDiagram);
-
+        System.out.println("affichage:");
+        System.out.println(sampleClassEntiere.toString());
         stage.setWidth(1024);
         stage.setHeight(768);
         stage.setScene(scene);
