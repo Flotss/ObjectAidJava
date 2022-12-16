@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
         final var pane = new Pane();
         final var scene = new Scene(pane);
         final var model = new Model();
-        final var sampleClassEntiere = new ClasseEntiere("foo");
+        final var sampleClassEntiere = new ClasseEntiere();
         final var classDiagram = new VueClasse(model, sampleClassEntiere);
 
         pane.getChildren().add(classDiagram);
