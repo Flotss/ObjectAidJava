@@ -10,7 +10,7 @@ public class FabriqueClasse {
     }
 
     public static ClasseEntiere fabriquer(String path) throws ClassNotFoundException {
-        ClasseEntiere classeEntiere = new ClasseEntiere("");
+        ClasseEntiere classeEntiere = new ClasseEntiere();
 
 
         Class<?> c = Class.forName(path);
