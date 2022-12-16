@@ -48,6 +48,10 @@ public class Model implements Sujet{
 
     public void ajouterClasse(ClasseEntiere classe) {
         if (!relations.containsKey(classe)) {
+            int x = getClasses().size() % 6 * 150 + 30;
+            int y = getClasses().size() / 6 * 100 + 30;
+            classe.setX(x);
+            classe.setY(y);
             relations.put(classe, new ArrayList<>());
         }
     }
@@ -56,8 +60,9 @@ public class Model implements Sujet{
         relations.remove(classe);
     }
 
-    public Set<ClasseEntiere> getClasses() {
-        return relations.keySet();
+    public ArrayList<ClasseEntiere> getClasses() {
+        return new ArrayList<>(relations.keySet());
+
     }
 
     public ArrayList<Fleche> getRelations(ClasseEntiere classe) {
