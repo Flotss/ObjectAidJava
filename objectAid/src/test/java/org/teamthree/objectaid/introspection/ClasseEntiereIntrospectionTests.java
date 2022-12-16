@@ -22,8 +22,7 @@ class ClasseEntiereIntrospectionTests {
 
     @BeforeEach
     public void setUp() throws ClassNotFoundException {
-        clazz = new ClasseEntiere(
-            Class.forName("org.teamtree.objectaid.classes.ClassePourLesTests"));
+        clazz = new ClasseEntiere("org.teamtree.objectaid.classes.ClassePourLesTests");
     }
 
     @Test
