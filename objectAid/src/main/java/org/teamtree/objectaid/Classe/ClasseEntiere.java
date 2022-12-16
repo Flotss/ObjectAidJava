@@ -1,20 +1,43 @@
 package org.teamtree.objectaid.Classe;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClasseEntiere {
-    private final String name;
+
     private List<Attribut> attributes;
     private List<Methode> methods;
-    private List<Constructeur> contructeurs;
+    private final List<Constructeur> contructeurs;
     private DefinitionClasse definition;
 
-    public ClasseEntiere(final String name) {
-        this.name = name;
+    private int x;
+    private int y;
+
+    public ClasseEntiere(Class<?> classe) {
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
+        this.definition = new DefinitionClasse(classe);
+        this.x = 0;
+        this.y = 0;
+
+        // Attributs
+        for (Field field : classe.getDeclaredFields()) {
+            this.attributes.add(new Attribut(field));
+        }
+
+        // Constructeurs
+        for (Constructor<?> constructor : classe.getDeclaredConstructors()) {
+            this.contructeurs.add(new Constructeur(constructor));
+        }
+
+        // Methodes
+        for (Method method : classe.getDeclaredMethods()) {
+            this.methods.add(new Methode(method));
+        }
     }
 
     public DefinitionClasse getDefinition() {
@@ -26,11 +49,8 @@ public class ClasseEntiere {
     }
 
     public void deplacer(final int x, final int y) {
-        // TODO
-    }
-
-    public String getName() {
-        return name;
+        this.x += x;
+        this.y += y;
     }
 
     public List<Attribut> getAttributes() {
