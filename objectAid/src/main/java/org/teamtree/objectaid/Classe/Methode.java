@@ -64,24 +64,39 @@ public class Methode {
 
     @Override
     public String toString() {
-        StringBuilder info = new StringBuilder("Methode : " + nom);
-        info.append("\n\tType de retour : ").append(typeRetourne);
+//        StringBuilder info = new StringBuilder("Methode : " + nom);
+//        info.append("\n\tType de retour : ").append(typeRetourne);
+//
+//        if (parametre.size() > 0){
+//            info.append("\n\tParametres :");
+//            for (Parametre param : parametre) {
+//                info.append("\n\t\t").append(param.toString());
+//            }
+//        }
+//
+//        info.append("\n\tAccessibilite : ").append(accessibilite.getAcces());
+//        if (etats.size() > 0){
+//            info.append("\n\tEtats : ");
+//            for (Etat etat : etats) {
+//                info.append("\n\t\t").append(etat.getEtat());
+//            }
+//        }
 
-        if (parametre.size() > 0){
-            info.append("\n\tParametres :");
-            for (Parametre param : parametre) {
-                info.append("\n\t\t").append(param.toString());
-            }
-        }
-
-        info.append("\n\tAccessibilite : ").append(accessibilite.getAcces());
+        String info = accessibilite.getAcces();
         if (etats.size() > 0){
-            info.append("\n\tEtats : ");
             for (Etat etat : etats) {
-                info.append("\n\t\t").append(etat.getEtat());
+                info += " " + etat.getEtat();
             }
         }
+        info += " " + nom + "(";
+        if (parametre.size() > 0) {
+            for (Parametre param : parametre) {
+                info += param.toString() + ", ";
+            }
+            info = info.substring(0, info.length() - 2);
+        }
+        info += ") : " + typeRetourne;
 
-        return info.toString();
+        return info + "\n";
     }
 }

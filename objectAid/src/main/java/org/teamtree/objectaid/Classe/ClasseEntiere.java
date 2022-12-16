@@ -73,24 +73,24 @@ public class ClasseEntiere {
 
     @Override
     public String toString() {
-        String info = definition.toString() + " \n";
+        String info = definition.toString();
         if (attributes.size() > 0) {
             info += "\tAttributs: \n";
             for (Attribut attribut : attributes) {
-                info += "\t\t" + attribut.toString() + "\n";
+                info += "\t\t" + attribut.toString();
             }
         }
         if (contructeurs.size() > 0) {
             info += "\tConstructeurs: \n";
             for (Constructeur constructeur : contructeurs) {
-                info += "\t\t" + constructeur.toString() + "\n";
+                info += "\t\t" + constructeur.toString();
             }
         }
 
         if (methods.size() > 0) {
             info += "\tMethodes: \n";
             for (Methode methode : methods) {
-                info += "\t\t" + methode.toString() + "\n";
+                info += methode.toString();
             }
         }
 

@@ -6,7 +6,6 @@ import org.teamtree.objectaid.MVC.Vue.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
 public class Model implements Sujet{
