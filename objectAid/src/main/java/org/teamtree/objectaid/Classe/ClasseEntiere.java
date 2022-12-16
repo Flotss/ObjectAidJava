@@ -16,7 +16,9 @@ public class ClasseEntiere {
     private int x;
     private int y;
 
-    public ClasseEntiere(Class<?> classe) {
+    public ClasseEntiere(String path) throws ClassNotFoundException {
+        Class<?> classe = Class.forName(path);
+
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
