@@ -27,4 +27,22 @@ abstract class ClassePourLesTests {
     public final static void methodeStatic() {
         throw new Error("Unimplemented");
     }
+
+    ClassePourLesTests(double x, double y, double z) {
+        throw new Error("Unimplemented");
+    }
+
+    public ClassePourLesTests(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    private ClassePourLesTests(int x) {
+        this.x  = x;
+    }
+
+    protected ClassePourLesTests(){
+        throw new Error("Unimplemented");
+    }
+
 }

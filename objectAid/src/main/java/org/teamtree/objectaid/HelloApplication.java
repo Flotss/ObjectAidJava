@@ -12,15 +12,16 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, ClassNotFoundException {
         final var pane = new Pane();
         final var scene = new Scene(pane);
         final var model = new Model();
-        final var sampleClassEntiere = new ClasseEntiere();
+        final var sampleClassEntiere = new ClasseEntiere("org.teamtree.objectaid.Classe.ClasseEntiere");
         final var classDiagram = new VueClasse(model, sampleClassEntiere);
 
         pane.getChildren().add(classDiagram);
-
+        System.out.println("affichage:");
+        System.out.println(sampleClassEntiere.toString());
         stage.setWidth(1024);
         stage.setHeight(768);
         stage.setScene(scene);

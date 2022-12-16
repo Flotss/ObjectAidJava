@@ -16,7 +16,9 @@ public class ClasseEntiere {
     private int x;
     private int y;
 
-    public ClasseEntiere(Class<?> classe) {
+    public ClasseEntiere(String path) throws ClassNotFoundException {
+        Class<?> classe = Class.forName(path);
+
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
@@ -67,5 +69,31 @@ public class ClasseEntiere {
 
     public void setMethods(List<Methode> methods) {
         this.methods = methods;
+    }
+
+    @Override
+    public String toString() {
+        String info = definition.toString() + " \n";
+        if (attributes.size() > 0) {
+            info += "\tAttributs: \n";
+            for (Attribut attribut : attributes) {
+                info += "\t\t" + attribut.toString() + "\n";
+            }
+        }
+        if (contructeurs.size() > 0) {
+            info += "\tConstructeurs: \n";
+            for (Constructeur constructeur : contructeurs) {
+                info += "\t\t" + constructeur.toString() + "\n";
+            }
+        }
+
+        if (methods.size() > 0) {
+            info += "\tMethodes: \n";
+            for (Methode methode : methods) {
+                info += "\t\t" + methode.toString() + "\n";
+            }
+        }
+
+        return info;
     }
 }

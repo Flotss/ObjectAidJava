@@ -40,4 +40,16 @@ public class Attribut {
     public String getAccessibilite() {
         return accessibilite.getAcces();
     }
+
+    @Override
+    public String toString() {
+        String info = accessibilite.getAcces();
+        if (etat.size() > 0) {
+            for (Etat etat : etat) {
+                info += " " + etat.getEtat();
+            }
+        }
+        info += " " + type + " " + nom;
+        return info;
+    }
 }
