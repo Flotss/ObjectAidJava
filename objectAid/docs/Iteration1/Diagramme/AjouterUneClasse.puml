@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Application as App
+participant Model as M
+participant ClasseEntiere as C
+participant VueClasse as V
+
+Activate App
+loop
+App -> M: ajouterClasse(classe)
+activate M
+alt !contains(classe)
+M -> M: put(classe)
+end alt
+
+M -> C: setX(x)
+activate C
+C --> M
+deactivate C
+M -> C: setY(y)
+activate C
+C --> M
+deactivate C
+end loop
+
+App -> V: new Vue(model)
+activate V
+V --> App
+deactivate V
+App -> M: ajouterObservateurs(vue)
+M --> App
+deactivate M
+deactivate App
+
+
+@enduml
