@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "main : Main" as main
+participant "classe : ClasseEntiere" as classe
+participant "defClasse : DefinitionClasse" as defClasse
+participant "attribut : Attribut" as attr
+participant "constructeur : Constructeur" as constr
+participant "methode : Methode" as meth
+
+activate main
+main -> classe : new ClasseEntiere(org.de.objectAid.Point)
+activate classe
+classe -> defClasse : new DefinitionClasse(Class<?> classe)
+activate defClasse
+defClasse --> classe
+deactivate defClasse
+
+loop for each Field
+    classe -> attr : new Attribut(Field f)
+    activate attr
+    attr --> classe
+    deactivate attr
+end
+loop for each Constructor
+    classe -> constr : new Constructeur(Constructor<?> const)
+    activate constr
+    constr --> classe
+    deactivate constr
+end
+loop for each Method
+    classe -> meth : new Methode(Method m)
+    activate meth
+    meth --> classe
+    deactivate meth
+end
+
+classe --> main
+deactivate classe
+
+
+@enduml

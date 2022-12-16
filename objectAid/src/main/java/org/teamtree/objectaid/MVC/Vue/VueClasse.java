@@ -4,8 +4,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.diagram.ClassTitleIcon;
-import org.teamtree.objectaid.diagram.InterfaceTitleIcon;
+import org.teamtree.objectaid.MVC.diagramIcons.ClassTitleIcon;
+import org.teamtree.objectaid.MVC.diagramIcons.InterfaceTitleIcon;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;

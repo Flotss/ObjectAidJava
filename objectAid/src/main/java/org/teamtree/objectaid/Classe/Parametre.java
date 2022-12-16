@@ -21,6 +21,6 @@ public class Parametre {
 
     @Override
     public String toString() {
-        return type + " " + nom + "\n";
+        return type + " " + nom;
     }
 }

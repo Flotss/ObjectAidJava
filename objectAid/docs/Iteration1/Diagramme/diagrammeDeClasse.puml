@@ -2,63 +2,84 @@
 'https://plantuml.com/class-diagram
 
 'Modele'
+package "MVC"{
+    class LineSeparator {
+        + LineSeparator()
+        + getSeparator() : String
+    }
 
-interface Sujet{
-    +ajouterObservateur(Observateur)
-    +supprimerObservateur(Observateur)
-    +notifierObservateurs()
+
+    interface Sujet{
+        +ajouterObservateur(Observateur)
+        +supprimerObservateur(Observateur)
+        +notifierObservateurs()
+    }
+
+    class Modele implements Sujet{
+        - relation : Map<ClasseEntiere, ArrayList<Fleche>>
+        + Modele()
+
+        + ajouterClasse(ClasseEntiere)
+        + supprimerClasse(ClasseEntiere)
+        + ajouterRelation(ClasseEntiere, Fleche)
+        + getClasses() : Set<ClasseEntiere>
+        + getRelations(ClasseEntiere) : ArrayList<Fleche>
+        + ajouterObservateur(Observateur)
+        + supprimerObservateur(Observateur)
+        + notifierObservateurs()
+    }
+
+    'Observateurs'
+
+    interface Observateur{
+        +actualiser(Sujet)
+    }
+
+    class VueClasse implements Observateur{
+        - classes : ArrayList<Vbox>
+        +VueClasse(Modele)
+        +actualiser()
+    }
+
+    class VueFleche implements Observateur{
+        +VueFleche(Modele)
+        +actualiser()
+    }
+
+    class VueArboressence implements Observateur {
+        + VueArboressence(Modele)
+        + actualiser()
+    }
+
+    'Controlleurs'
+
+    class ControleurBouton{
+        +ControleurBouton(Modele)
+        +handle(ActionEvent)
+    }
+
+    interface ClasseEntiereTitleIcon{
+        getIcon() : Image
+    }
+
+    class AbstractClasseTitleIcon implements ClasseEntiereTitleIcon{
+        +getIcon() : Image
+    }
+
+    class ClassEntiereTitleIcon implements ClasseEntiereTitleIcon{
+        +getIcon() : Image
+    }
+
+    class InterfaceTitleIcon implements ClasseEntiereTitleIcon{
+        +getIcon() : Image
+    }
+
+    class RecordTitleIcon implements ClasseEntiereTitleIcon{
+        +getIcon() : Image
+    }
+
 }
-
-class Modele implements Sujet{
-    - relation : Map<ClasseEntiere, ArrayList<Fleche>>
-    + Modele()
-
-    + ajouterClasse(ClasseEntiere)
-    + supprimerClasse(ClasseEntiere)
-    + ajouterRelation(ClasseEntiere, Fleche)
-    + getClasses() : Set<ClasseEntiere>
-    + getRelations(ClasseEntiere) : ArrayList<Fleche>
-    + ajouterObservateur(Observateur)
-    + supprimerObservateur(Observateur)
-    + notifierObservateurs()
-}
-
-'Observateurs'
-
-interface Observateur{
-    +actualiser(Sujet)
-}
-
-class VueClasse implements Observateur{
-    - classes : ArrayList<Vbox>
-    +VueClasse(Modele)
-    +actualiser()
-}
-
-class VueFleche implements Observateur{
-    +VueFleche(Modele)
-    +actualiser()
-}
-
-class VueArboressence implements Observateur {
-    + VueArboressence(Modele)
-    + actualiser()
-}
-
-'Controlleurs'
-
-class ControleurBouton{
-    +ControleurBouton(Modele)
-    +handle(ActionEvent)
-}
-
 'Classes'
-
-class FabriqueClasse{
-    + FabriqueClasse()
-    + fabriquer(path : String) : ClasseEntiere
-}
-
 
 class ClasseEntiere{
     +ClasseEntiere(path : String)
@@ -184,11 +205,6 @@ class Point{
     + getY() : int
 }
 
-class Relation{
-    +getFleches(ClasseEntiere) : ArrayList<Fleche>
-    +getClasseEntiere(Fleche) : ClasseEntiere
-}
-
 class FabriqueAccessibilite {
     + FabriqueAccessibilite()
     + getAccessibilite(access : int) : Accessibilite
@@ -204,13 +220,8 @@ class FabriqueEntite {
     + getEntite(classe : Class<?>) : Entite
 }
 
-package "MVC"{
-    class LineSeparator {
-        + LineSeparator()
-        + getSeparator() : String
-    }
-}
 
+class Fleche {}
 
 
 '-----------------------------------'
@@ -238,7 +249,6 @@ ClasseEntiere "1" --> "1" Point : -coordonnees
 Fleche "1" --> "1" Accessibilite : accessibilite
 Fleche "2" *-- Point : pointDebutFin
 ControleurBouton --> "0..1" Modele : -modele
-FabriqueClasse -[dashed]-> ClasseEntiere
 
 
 @enduml

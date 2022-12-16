@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.diagram;
+package org.teamtree.objectaid.MVC.diagramIcons;
 
 import javafx.scene.Node;
 
