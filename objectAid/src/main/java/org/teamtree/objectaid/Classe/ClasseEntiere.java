@@ -4,17 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClasseEntiere {
+
     private final String name;
     private List<Attribut> attributes;
     private List<Methode> methods;
-    private List<Constructeur> contructeurs;
+    private final List<Constructeur> contructeurs;
     private DefinitionClasse definition;
+
+    private int x;
+    private int y;
 
     public ClasseEntiere(final String name) {
         this.name = name;
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
+        this.x = 0;
+        this.y = 0;
     }
 
     public DefinitionClasse getDefinition() {
@@ -26,7 +32,8 @@ public class ClasseEntiere {
     }
 
     public void deplacer(final int x, final int y) {
-        // TODO
+        this.x += x;
+        this.y += y;
     }
 
     public String getName() {
