@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.diagram;
+package org.teamtree.objectaid.MVC.diagramIcons;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -6,18 +6,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class InterfaceTitleIcon implements ClasseEntiereTitleIcon {
+public class AbstractClassTitleIcon implements ClasseEntiereTitleIcon {
 
     @Override
     public Node getIcon() {
         final var parent = new StackPane();
         final var stackCircle = new Circle(8);
-        stackCircle.setFill(Color.LIGHTGREEN);
-        final var i = new Label("I");
+        stackCircle.setFill(Color.ORANGE);
+        final var a = new Label("A");
 
-        parent.getChildren().addAll(stackCircle, i);
-
+        parent.getChildren().addAll(stackCircle, a);
+        
         return parent;
     }
-
 }
