@@ -1,5 +1,7 @@
 package org.teamtree.objectaid.MVC.Vue;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.util.LineSeparator;
@@ -7,25 +9,64 @@ import org.teamtree.objectaid.util.LineSeparator;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class VueClasse extends VBox implements Observateur {
+import java.util.ArrayList;
 
-    private final Model model;
-    private final ClasseEntiere classeEntiere;
+public class VueClasse extends Pane implements Observateur {
 
-    public VueClasse(final Model mod, final ClasseEntiere dto) {
+    private Model model;
+    private ArrayList<VBox> classes;
 
-        model = mod;
-        classeEntiere = dto;
+    public VueClasse(Model mod) {
+        this.model = mod;
+        this.classes = new ArrayList<>();
 
-        final var title = new Label(dto.getDefinition().getNom());
-        final var separator = new LineSeparator();
-        final var attributes = new Label(dto.getAttributes().toString());
-        final var methodSeparator = new LineSeparator();
-        final var methods = new Label(dto.getMethods().toString());
+        for (ClasseEntiere c:mod.getClasses()) {
+            VBox classe = new VBox();
+            HBox definition = new HBox();
+            VBox attributs = new VBox();
+            VBox methodes = new VBox();
 
-        getChildren().addAll(title, separator, attributes, methodSeparator, methods);
+            //partie definition
+            String def = c.getDefinition().getAccessibilite() + " " + c.getDefinition().getNom();
+            Label definitionLabel = new Label(def);
+            definition.getChildren().add(definitionLabel);
 
-        setStyle("-fx-border-color: black; -fx-border-width: 1px;");
+/*
+            //partie attributs
+            for (int i = 0; i < c.getAttributes().size(); i++) {
+                String att = c.getAttributes().get(i).getAccessibilite() + " " + c.getAttributes().get(i).getType() + " " + c.getAttributes().get(i).getNom();
+                Label attributLabel = new Label(att);
+                attributs.getChildren().add(attributLabel);
+            }
+
+            //partie methodes
+            for (int i = 0; i < c.getMethods().size(); i++) {
+                String meth = c.getMethods().get(i).getAccessibilite() + " " + c.getMethods().get(i).getType() + " " + c.getMethods().get(i).getNom() + "(";
+                for (int j = 0; j < c.getMethods().get(i).getArguments().size(); j++) {
+                    meth += c.getMethods().get(i).getArguments().get(j).getType() + " " + c.getMethods().get(i).getArguments().get(j).getNom();
+                    if (j != c.getMethods().get(i).getArguments().size() - 1) {
+                        meth += ", ";
+                    }
+                }
+                meth += ")";
+                Label methodeLabel = new Label(meth);
+                methodes.getChildren().add(methodeLabel);
+            }
+            */
+
+            //ajout des parties de la classe
+            classe.getChildren().addAll(definition, attributs, methodes);
+
+            //coordonees de la classe
+            classe.setLayoutX(c.getX());
+            classe.setLayoutY(c.getY());
+
+            classe.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
+
+            //ajout de la classe au pane
+            this.getChildren().add(classe);
+        }
+
     }
 
     @Override
