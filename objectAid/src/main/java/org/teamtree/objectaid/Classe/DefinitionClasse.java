@@ -47,5 +47,17 @@ public class DefinitionClasse {
         return entite.getEntite();
     }
 
+    @Override
+    public String toString() {
+        String info = accessibilite.toString();
+        if (etats.size() > 0) {
+            for (Etat etat : etats) {
+                info += " " + etat.getEtat();
+            }
+        }
+        info += " " + entite.getEntite() + " " + nomClasse;
+        return info;
+    }
+
 
 }

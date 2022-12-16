@@ -37,4 +37,18 @@ public class Constructeur {
         return parametre;
     }
 
+    @Override
+    public String toString() {
+        String info = accessibilite.toString();
+        info += " " + nom + "(";
+        if (parametre.size() > 0) {
+            for (Parametre param : parametre) {
+                info += param.toString() + ", ";
+            }
+            info = info.substring(0, info.length() - 2);
+        }
+        info += ")";
+        return info;
+    }
+
 }
