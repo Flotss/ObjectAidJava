@@ -7,6 +7,4 @@ module org.teamtree.objectaid {
 
     opens org.teamtree.objectaid to javafx.fxml;
     exports org.teamtree.objectaid;
-    exports org.teamtree.objectaid.Classe;
-    opens org.teamtree.objectaid.Classe to javafx.fxml;
 }
