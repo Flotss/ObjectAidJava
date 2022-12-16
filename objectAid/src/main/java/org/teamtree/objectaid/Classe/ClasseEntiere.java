@@ -5,7 +5,6 @@ import java.util.List;
 
 public class ClasseEntiere {
 
-    private final String name;
     private List<Attribut> attributes;
     private List<Methode> methods;
     private final List<Constructeur> contructeurs;
@@ -14,8 +13,7 @@ public class ClasseEntiere {
     private int x;
     private int y;
 
-    public ClasseEntiere(final String name) {
-        this.name = name;
+    public ClasseEntiere() {
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
