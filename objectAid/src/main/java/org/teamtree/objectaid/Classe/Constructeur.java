@@ -39,7 +39,7 @@ public class Constructeur {
 
     @Override
     public String toString() {
-        String info = accessibilite.toString();
+        String info = accessibilite.getAcces();
         info += " " + nom + "(";
         if (parametre.size() > 0) {
             for (Parametre param : parametre) {
