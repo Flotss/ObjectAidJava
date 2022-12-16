@@ -24,3 +24,7 @@ Voici un exemple de résultat de l'application :
 Voici un exemple du résultat complet dans la console 
 
 ![](Image%20rendu/Rendu%20console.png)
+
+
+### Pour l'itération 2 
+Nous devons gérer la situation où le chemin donnée n'est pas valide.
