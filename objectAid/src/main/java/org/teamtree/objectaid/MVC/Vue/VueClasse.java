@@ -17,7 +17,7 @@ public class VueClasse extends VBox implements Observateur {
         model = mod;
         classeEntiere = dto;
 
-        final var title = new Label(dto.getName());
+        final var title = new Label(dto.getDefinition().getNom());
         final var separator = new LineSeparator();
         final var attributes = new Label(dto.getAttributes().toString());
         final var methodSeparator = new LineSeparator();
