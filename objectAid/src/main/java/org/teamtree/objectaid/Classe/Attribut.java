@@ -50,6 +50,6 @@ public class Attribut {
             }
         }
         info += " " + type + " " + nom;
-        return info;
+        return info + "\n";
     }
 }

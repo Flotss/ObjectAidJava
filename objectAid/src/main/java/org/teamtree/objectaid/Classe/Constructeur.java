@@ -48,7 +48,7 @@ public class Constructeur {
             info = info.substring(0, info.length() - 2);
         }
         info += ")";
-        return info;
+        return info + "\n";
     }
 
 }

@@ -56,7 +56,7 @@ public class DefinitionClasse {
             }
         }
         info += " " + entite.getEntite() + " " + nomClasse;
-        return info;
+        return info + "\n";
     }
 
 

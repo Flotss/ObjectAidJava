@@ -3,12 +3,9 @@ package org.teamtree.objectaid.classes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.teamtree.objectaid.Classe.Constructeur;
-import org.teamtree.objectaid.Classe.Methode;
 import org.teamtree.objectaid.Classe.Parametre;
-import org.teamtree.objectaid.Etat.Etat;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
