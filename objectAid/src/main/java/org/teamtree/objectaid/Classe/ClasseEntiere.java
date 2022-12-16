@@ -34,10 +34,6 @@ public class ClasseEntiere {
         this.y += y;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public List<Attribut> getAttributes() {
         return attributes;
     }
