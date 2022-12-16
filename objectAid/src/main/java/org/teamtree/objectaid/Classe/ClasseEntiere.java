@@ -1,5 +1,7 @@
 package org.teamtree.objectaid.Classe;
 
+import org.teamtree.objectaid.Point;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -13,8 +15,7 @@ public class ClasseEntiere {
     private final List<Constructeur> contructeurs;
     private DefinitionClasse definition;
 
-    private int x;
-    private int y;
+    private Point coordonnees;
 
     public ClasseEntiere(String path) throws ClassNotFoundException {
         Class<?> classe = Class.forName(path);
@@ -23,8 +24,7 @@ public class ClasseEntiere {
         this.methods = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
         this.definition = new DefinitionClasse(classe);
-        this.x = 0;
-        this.y = 0;
+        this.coordonnees = new Point(0, 0);
 
         // Attributs
         for (Field field : classe.getDeclaredFields()) {
@@ -51,8 +51,8 @@ public class ClasseEntiere {
     }
 
     public void deplacer(final int x, final int y) {
-        this.x += x;
-        this.y += y;
+        setX(x);
+        setY(y);
     }
 
     public List<Attribut> getAttributes() {
@@ -95,5 +95,21 @@ public class ClasseEntiere {
         }
 
         return info;
+    }
+
+    public int getX() {
+        return coordonnees.getX();
+    }
+
+    public int getY() {
+        return coordonnees.getY();
+    }
+
+    public void setX(int x) {
+        coordonnees.setX(x);
+    }
+
+    public void setY(int y) {
+        coordonnees.setY(y);
     }
 }
