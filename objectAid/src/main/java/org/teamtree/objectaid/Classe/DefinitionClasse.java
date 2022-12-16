@@ -49,7 +49,7 @@ public class DefinitionClasse {
 
     @Override
     public String toString() {
-        String info = accessibilite.toString();
+        String info = accessibilite.getAcces();
         if (etats.size() > 0) {
             for (Etat etat : etats) {
                 info += " " + etat.getEtat();

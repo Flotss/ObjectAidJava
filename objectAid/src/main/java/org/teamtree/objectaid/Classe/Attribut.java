@@ -43,7 +43,7 @@ public class Attribut {
 
     @Override
     public String toString() {
-        String info = accessibilite.toString();
+        String info = accessibilite.getAcces();
         if (etat.size() > 0) {
             for (Etat etat : etat) {
                 info += " " + etat.getEtat();
