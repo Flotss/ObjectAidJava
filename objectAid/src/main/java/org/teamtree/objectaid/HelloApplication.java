@@ -13,17 +13,17 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException {
-        final var pane = new Pane();
-        final var scene = new Scene(pane);
-        final var model = new Model();
-        final var sampleClassEntiere = new ClasseEntiere("org.teamtree.objectaid.Classe.ClasseEntiere");
-        final var classDiagram = new VueClasse(model, sampleClassEntiere);
+        Model model = new Model();
 
-        pane.getChildren().add(classDiagram);
-        System.out.println("affichage:");
-        System.out.println(sampleClassEntiere.toString());
-        stage.setWidth(1024);
-        stage.setHeight(768);
+        ClasseEntiere c = new ClasseEntiere("org.teamtree.objectaid.Classe.ClasseEntiere");
+        model.ajouterClasse(c);
+
+        VueClasse vue = new VueClasse(model);
+        System.out.println("ok");
+        model.ajouterObservateur(vue);
+
+
+        Scene scene = new Scene(vue, 1024, 768);
         stage.setScene(scene);
         stage.show();
     }

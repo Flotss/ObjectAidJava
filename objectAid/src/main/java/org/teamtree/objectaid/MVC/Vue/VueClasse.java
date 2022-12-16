@@ -65,6 +65,8 @@ public class VueClasse extends Pane implements Observateur {
 
             //ajout de la classe au pane
             this.getChildren().add(classe);
+            System.out.println(getChildren().get(0).getClass());
+            System.out.println(getChildren().get(0));
         }
 
     }
