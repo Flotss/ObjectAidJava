@@ -4,7 +4,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.util.LineSeparator;
+import org.teamtree.objectaid.diagram.ClassTitleIcon;
+import org.teamtree.objectaid.diagram.InterfaceTitleIcon;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -27,10 +28,18 @@ public class VueClasse extends Pane implements Observateur {
             VBox methodes = new VBox();
 
             //partie definition
-            String def = c.getDefinition().getAccessibilite() + " " + c.getDefinition().getNom();
+            String def = c.getDefinition().getNom();
             Label definitionLabel = new Label(def);
-            definition.getChildren().add(definitionLabel);
-
+            switch (c.getDefinition().getEntite()){
+                case "class":
+                    ClassTitleIcon classTitleIcon = new ClassTitleIcon();
+                    definition.getChildren().addAll(classTitleIcon.getIcon(), definitionLabel);
+                    break;
+                case "interface":
+                    InterfaceTitleIcon interfaceTitleIcon = new InterfaceTitleIcon();
+                    definition.getChildren().addAll(interfaceTitleIcon.getIcon(), definitionLabel);
+                    break;
+            }
 /*
             //partie attributs
             for (int i = 0; i < c.getAttributes().size(); i++) {
@@ -65,8 +74,6 @@ public class VueClasse extends Pane implements Observateur {
 
             //ajout de la classe au pane
             this.getChildren().add(classe);
-            System.out.println(getChildren().get(0).getClass());
-            System.out.println(getChildren().get(0));
         }
 
     }
