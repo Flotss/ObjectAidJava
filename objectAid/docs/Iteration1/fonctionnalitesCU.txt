@@ -1,0 +1,3 @@
+Générer structures de données contenant des classes
+
+Afficher les classes
