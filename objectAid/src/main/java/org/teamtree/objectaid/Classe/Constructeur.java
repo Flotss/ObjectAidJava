@@ -14,7 +14,7 @@ public class Constructeur {
     private final ArrayList<Parametre> parametre;
 
     public Constructeur (Constructor<?> construct) {
-        this.nom = construct.getName();
+        this.nom = construct.getName().substring(construct.getName().lastIndexOf(".") + 1);
 
         FabriqueAccessibilite fabriqueAccess = new FabriqueAccessibilite();
         this.accessibilite = fabriqueAccess.getAccessibilite(construct.getModifiers());

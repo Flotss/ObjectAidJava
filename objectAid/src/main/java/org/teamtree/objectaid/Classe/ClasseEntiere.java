@@ -90,7 +90,7 @@ public class ClasseEntiere {
         if (methods.size() > 0) {
             info += "\tMethodes: \n";
             for (Methode methode : methods) {
-                info += methode.toString();
+                info += "\t\t" + methode.toString();
             }
         }
 
