@@ -16,7 +16,7 @@ package "MVC"{
     }
 
     class Modele implements Sujet{
-        - relation : Map<ClasseEntiereAffichage, ArrayList<Fleche>>
+        - relation : Map<ClasseEntiere, ArrayList<Fleche>>
         - nomSelection : String
         + Modele()
 
@@ -83,6 +83,12 @@ package "MVC"{
 'Classes'
 
 class ClasseEntiere{
+    -ConstructeurEstAffiche : boolean
+    -AttributEstAffiche : boolean
+    -MethodeEstAffiche : boolean
+    -setAffichageConstructeurs()
+    -setAffichageMethods()
+    -setAffichageAttributs()
     +ClasseEntiere(path : String)
     +deplacer(int, int)
     +getAttributs() : ArrayList<Attribut>
@@ -93,13 +99,8 @@ class ClasseEntiere{
     +getY() : int
 }
 
-class ClasseEntiereAffichage{
-    -ConstructeurEstAffiche : boolean
-    -AttributEstAffiche : boolean
-    -MethodeEstAffiche : boolean
-    -setAffichageConstructeurs()
-    -setAffichageMethods()
-    -setAffichageAttributs()
+class FabriqueAffichageClasse{
+    +FabriqueAffichageClasse(ClasseEntiere)
     +getDefinitionAffichage(): HBox
     +getAttributsAffichage(): HBox
     +getConstructeurAffichage(): HBox
@@ -258,7 +259,7 @@ Constructeur "1" --> "*" Parametre : -parametres
 Methode "1" --> "0..1" Accessibilite : -accessibilite
 Methode "1" --> "*" Etat : etats
 Methode "1" --> "*" Parametre : parametres
-ClasseEntiere <|-- ClasseEntiereAffichage
+ClasseEntiere <-- FabriqueAffichageClasse :-Classe
 ClasseEntiere "1" --> "1" DefinitionClasse : definitionClasse
 ClasseEntiere "1" --> "*" Attribut : attributs
 ClasseEntiere "1" --> "*" Methode : methodes
