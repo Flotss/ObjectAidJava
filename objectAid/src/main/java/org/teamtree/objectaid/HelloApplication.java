@@ -2,10 +2,12 @@ package org.teamtree.objectaid;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
@@ -50,6 +52,17 @@ public class HelloApplication extends Application {
         model.ajouterObservateur(vue);
 
         HBox buttonBar = new HBox();
+
+        final var attributesDisplayButton = new Button("Afficher les attributs");
+        attributesDisplayButton.setOnAction(event -> model.afficherAttributs());
+
+        final var methodsDisplayButton = new Button("Afficher les méthodes");
+        methodsDisplayButton.setOnAction(event -> model.afficherMethodes());
+
+        final var constructorsDisplayButton = new Button("Afficher les constructeurs");
+        constructorsDisplayButton.setOnAction(event -> model.afficherConstructeurs());
+
+        buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton);
 
         applicationLayout.getChildren().addAll(buttonBar, vue);
 

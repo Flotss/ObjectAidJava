@@ -13,28 +13,38 @@ import java.util.List;
  */
 public class ClasseEntiere {
 
-    /** Liste des attributs de la classe */
-    private List<Attribut> attributs;
-
-    /** Liste des constructeurs de la classe */
+    /**
+     * Liste des constructeurs de la classe
+     */
     private final List<Constructeur> contructeurs;
-
-    /** Liste des méthodes de la classe */
+    /**
+     * Liste des attributs de la classe
+     */
+    private List<Attribut> attributs;
+    /**
+     * Liste des méthodes de la classe
+     */
     private List<Methode> methods;
 
-    /** Definition de la classe */
+    /**
+     * Definition de la classe
+     */
     private DefinitionClasse definition;
 
-    /** Coordonnées de la classe defini par un point */
-    private Point coordonnees;
+    /**
+     * Coordonnées de la classe defini par un point
+     */
+    private final Point coordonnees;
 
     private boolean constructeurEstAffiche;
     private boolean attributEstAffiche;
     private boolean methodsEstAffiche;
 
-    /** Constructeur de la classe
+    /**
+     * Constructeur de la classe
      * Génère les attributs, les constructeurs et les méthodes de la classe, ainsi que sa définition
      * Et un point pour ses coordonnées
+     *
      * @param path Chemin de la classe
      */
     public ClasseEntiere(String path) throws ClassNotFoundException {
@@ -69,6 +79,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne La liste des attributs de la classe
+     *
      * @return La liste des attributs de la classe : DefinitionClasse
      */
     public DefinitionClasse getDefinition() {
@@ -77,6 +88,7 @@ public class ClasseEntiere {
 
     /**
      * Set la definition de la classe
+     *
      * @param definition Definition de la classe
      */
     public void setDefinition(DefinitionClasse definition) {
@@ -85,6 +97,7 @@ public class ClasseEntiere {
 
     /**
      * Methode permettant de deplacer la classe
+     *
      * @param x Translation de x
      * @param y Translation de y
      */
@@ -95,6 +108,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la liste des attributs de la classe
+     *
      * @return La liste des attributs de la classe : List<Attribut>
      */
     public List<Attribut> getAttributs() {
@@ -103,6 +117,7 @@ public class ClasseEntiere {
 
     /**
      * Set la liste des attributs de la classe
+     *
      * @param attributs Liste des attributs de la classe
      */
     public void setAttributs(List<Attribut> attributs) {
@@ -111,6 +126,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la liste des méthodes de la classe
+     *
      * @return La liste des méthodes de la classe : List<Methode>
      */
     public List<Methode> getMethods() {
@@ -119,6 +135,7 @@ public class ClasseEntiere {
 
     /**
      * Set la liste des méthodes de la classe
+     *
      * @param methods Liste des méthodes de la classe
      */
     public void setMethods(List<Methode> methods) {
@@ -153,6 +170,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la position x de la classe
+     *
      * @return La position x de la classe : int
      */
     public int getX() {
@@ -160,15 +178,8 @@ public class ClasseEntiere {
     }
 
     /**
-     * Retourne la position y de la classe
-     * @return La position y de la classe : int
-     */
-    public int getY() {
-        return coordonnees.getY();
-    }
-
-    /**
      * Set la position x de la classe
+     *
      * @param x Position x de la classe
      */
     public void setX(int x) {
@@ -176,7 +187,17 @@ public class ClasseEntiere {
     }
 
     /**
+     * Retourne la position y de la classe
+     *
+     * @return La position y de la classe : int
+     */
+    public int getY() {
+        return coordonnees.getY();
+    }
+
+    /**
      * Set la position y de la classe
+     *
      * @param y Position y de la classe
      */
     public void setY(int y) {
@@ -191,11 +212,23 @@ public class ClasseEntiere {
         return constructeurEstAffiche;
     }
 
+    public void setConstructeurEstAffiche(boolean constructeurEstAffiche) {
+        this.constructeurEstAffiche = constructeurEstAffiche;
+    }
+
     public boolean isAttributEstAffiche() {
         return attributEstAffiche;
     }
 
+    public void setAttributEstAffiche(boolean attributEstAffiche) {
+        this.attributEstAffiche = attributEstAffiche;
+    }
+
     public boolean isMethodsEstAffiche() {
         return methodsEstAffiche;
+    }
+
+    public void setMethodsEstAffiche(boolean methodsEstAffiche) {
+        this.methodsEstAffiche = methodsEstAffiche;
     }
 }

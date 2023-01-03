@@ -1,9 +1,6 @@
 package org.teamtree.objectaid.MVC.Model;
 
-import javafx.scene.Node;
-import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
-import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
 
@@ -80,5 +77,30 @@ public class Model implements Sujet {
 
     public void setCurrentClickedClass(final String currentClickedClass) {
         this.currentClickedClass = currentClickedClass;
+    }
+
+    public Optional<ClasseEntiere> getClasse(String nom) {
+        return getClasses().stream().filter(classe -> classe.getNom().equals(nom)).findFirst();
+    }
+
+    public void afficherAttributs() {
+        getClasses().forEach(c -> {
+            c.setAttributEstAffiche(!c.isAttributEstAffiche());
+            notifierObservateur();
+        });
+    }
+
+    public void afficherMethodes() {
+        getClasses().forEach(c -> {
+            c.setMethodsEstAffiche(!c.isMethodsEstAffiche());
+            notifierObservateur();
+        });
+    }
+
+    public void afficherConstructeurs() {
+        getClasses().forEach(c -> {
+            c.setConstructeurEstAffiche(!c.isConstructeurEstAffiche());
+            notifierObservateur();
+        });
     }
 }
