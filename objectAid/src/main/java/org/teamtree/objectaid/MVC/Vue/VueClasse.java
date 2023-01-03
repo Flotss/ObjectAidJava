@@ -2,6 +2,7 @@ package org.teamtree.objectaid.MVC.Vue;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -25,7 +26,7 @@ public class VueClasse extends Pane implements Observateur {
         for (ClasseEntiere c:mod.getClasses()) {
 
             FabriqueAffichage f = new FabriqueAffichage(c);
-            VBox classe = f.affichage();
+            ClasseAffichage classe = f.affichage();
 
 
             //ajout de la classe au pane

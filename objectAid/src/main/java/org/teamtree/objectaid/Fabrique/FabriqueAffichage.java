@@ -3,6 +3,7 @@ package org.teamtree.objectaid.Fabrique;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.diagramIcons.ClassTitleIcon;
 import org.teamtree.objectaid.MVC.diagramIcons.InterfaceTitleIcon;
@@ -14,8 +15,8 @@ public class FabriqueAffichage {
         this.c = classeEntiere;
     }
 
-    public VBox affichage(){
-        VBox classe = new VBox();
+    public ClasseAffichage affichage(){
+        ClasseAffichage classe = new ClasseAffichage(c.getDefinition().getNom());
         HBox definition = new HBox();
         VBox attributs = new VBox();
         VBox methodes = new VBox();
