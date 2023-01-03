@@ -28,6 +28,10 @@ public class ClasseEntiere {
     /** Coordonnées de la classe defini par un point */
     private Point coordonnees;
 
+    private boolean constructeurEstAffiche;
+    private boolean attributEstAffiche;
+    private boolean methodsEstAffiche;
+
     /** Constructeur de la classe
      * Génère les attributs, les constructeurs et les méthodes de la classe, ainsi que sa définition
      * Et un point pour ses coordonnées
@@ -58,6 +62,9 @@ public class ClasseEntiere {
         for (Method method : classe.getDeclaredMethods()) {
             this.methods.add(new Methode(method));
         }
+        this.attributEstAffiche = false;
+        this.methodsEstAffiche = true;
+        this.constructeurEstAffiche = false;
     }
 
     /**
@@ -174,5 +181,17 @@ public class ClasseEntiere {
      */
     public void setY(int y) {
         coordonnees.setY(y);
+    }
+
+    public boolean isConstructeurEstAffiche() {
+        return constructeurEstAffiche;
+    }
+
+    public boolean isAttributEstAffiche() {
+        return attributEstAffiche;
+    }
+
+    public boolean isMethodsEstAffiche() {
+        return methodsEstAffiche;
     }
 }
