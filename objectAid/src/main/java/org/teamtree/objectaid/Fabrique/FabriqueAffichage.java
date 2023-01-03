@@ -7,6 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
+import org.teamtree.objectaid.Classe.Constructeur;
+import org.teamtree.objectaid.Classe.Methode;
 import org.teamtree.objectaid.MVC.diagramIcons.ClassTitleIcon;
 import org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon;
 import org.teamtree.objectaid.MVC.diagramIcons.InterfaceTitleIcon;
@@ -21,7 +23,7 @@ public class FabriqueAffichage {
     public ClasseAffichage affichage(){
         ClasseAffichage classe = new ClasseAffichage(c.getDefinition().getNom());
         HBox definition = new HBox();
-
+        VBox constructeur = new VBox();
         VBox attributs = new VBox();
         VBox methodes = new VBox();
 
@@ -44,16 +46,38 @@ public class FabriqueAffichage {
             }
 
         }
+
+        //partie constructeur
+        if(c.isConstructeurEstAffiche()) {
+            if (c.getContructeurs().size() != 0) {
+                attributs.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
+            }
+            for (int i = 0; i < c.getContructeurs().size(); i++) {
+                Constructeur constructeurx = c.getContructeurs().get(i);
+                String constr = fabriqueAcces(constructeurx.getAccessibilite()) + " " + constructeurx.getNom() + "(";
+                for (int j = 0; j < constructeurx.getParametre().size(); j++) {
+                    constr += constructeurx.getParametre().get(j).getType() + " " + constructeurx.getParametre().get(j).getNom();
+                    if (j != constructeurx.getParametre().size() - 1) {
+                        constr += ", ";
+                    }
+                }
+                constr += ")";
+                Label constrLabel = new Label(constr);
+                constructeur.getChildren().add(constrLabel);
+            }
+        }
+
         //partie methodes
         if(c.isMethodsEstAffiche()) {
             if (c.getMethods().size() != 0) {
-                attributs.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
+                constructeur.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
             }
             for (int i = 0; i < c.getMethods().size(); i++) {
-                String meth = fabriqueAcces(c.getMethods().get(i).getAccessibilite()) + " " + c.getMethods().get(i).getNom() + "(";
-                for (int j = 0; j < c.getMethods().get(i).getParametre().size(); j++) {
-                    meth += c.getMethods().get(i).getParametre().get(j).getType() + " " + c.getMethods().get(i).getParametre().get(j).getNom();
-                    if (j != c.getMethods().get(i).getParametre().size() - 1) {
+                Methode methodeX = c.getMethods().get(i);
+                String meth = fabriqueAcces(methodeX.getAccessibilite()) + " " + methodeX.getNom() + "(";
+                for (int j = 0; j < methodeX.getParametre().size(); j++) {
+                    meth += methodeX.getParametre().get(j).getType() + " " + methodeX.getParametre().get(j).getNom();
+                    if (j != methodeX.getParametre().size() - 1) {
                         meth += ", ";
                     }
                 }
@@ -65,7 +89,7 @@ public class FabriqueAffichage {
 
 
         //ajout des parties de la classe
-        classe.getChildren().addAll(definition, attributs, methodes);
+        classe.getChildren().addAll(definition, attributs,constructeur, methodes);
 
         //coordonees de la classe
         classe.setLayoutX(c.getX());

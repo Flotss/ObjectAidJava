@@ -72,9 +72,9 @@ public class ClasseEntiere {
         for (Method method : classe.getDeclaredMethods()) {
             this.methods.add(new Methode(method));
         }
-        this.attributEstAffiche = false;
+        this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
-        this.constructeurEstAffiche = false;
+        this.constructeurEstAffiche = true;
     }
 
     /**
@@ -140,6 +140,10 @@ public class ClasseEntiere {
      */
     public void setMethods(List<Methode> methods) {
         this.methods = methods;
+    }
+
+    public List<Constructeur> getContructeurs(){
+        return contructeurs;
     }
 
     @Override
