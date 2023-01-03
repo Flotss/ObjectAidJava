@@ -1,20 +1,25 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import javafx.scene.Node;
+import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
+import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.Optional;
 
-public class Model implements Sujet{
-    private ArrayList<Observateur> observateurs;
-    private HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
+public class Model implements Sujet {
+    private final ArrayList<Observateur> observateurs;
+    private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
+    private String currentClickedClass;
 
     public Model() {
         this.observateurs = new ArrayList<>();
         this.relations = new HashMap<>();
+        this.currentClickedClass = "";
     }
 
     public void ajouterObservateur(Observateur o) {
@@ -69,4 +74,11 @@ public class Model implements Sujet{
         return relations.get(classe);
     }
 
+    public String getCurrentClickedClass() {
+        return currentClickedClass;
+    }
+
+    public void setCurrentClickedClass(final String currentClickedClass) {
+        this.currentClickedClass = currentClickedClass;
+    }
 }

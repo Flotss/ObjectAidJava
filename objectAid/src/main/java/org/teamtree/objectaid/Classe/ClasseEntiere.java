@@ -183,6 +183,10 @@ public class ClasseEntiere {
         coordonnees.setY(y);
     }
 
+    public String getNom() {
+        return definition.getNom();
+    }
+
     public boolean isConstructeurEstAffiche() {
         return constructeurEstAffiche;
     }
