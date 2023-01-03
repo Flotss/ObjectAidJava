@@ -175,4 +175,8 @@ public class ClasseEntiere {
     public void setY(int y) {
         coordonnees.setY(y);
     }
+
+    public String getNom() {
+        return definition.getNom();
+    }
 }
