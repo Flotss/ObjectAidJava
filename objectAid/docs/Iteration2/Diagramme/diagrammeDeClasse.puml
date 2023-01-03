@@ -16,7 +16,8 @@ package "MVC"{
     }
 
     class Modele implements Sujet{
-        - relation : Map<ClasseEntiere, ArrayList<Fleche>>
+        - relation : Map<ClasseEntiereAffichage, ArrayList<Fleche>>
+        - nomSelection : String
         + Modele()
 
         + ajouterClasse(ClasseEntiere)
@@ -90,6 +91,13 @@ class ClasseEntiere{
     +getNom() : String
     +getX() : int
     +getY() : int
+}
+
+class ClasseEntiereAffichage{
+    +getDefinitionAffichage(): HBox
+    +getAttributsAffichage(): HBox
+    +getConstructeurAffichage(): HBox
+    +getMethodesAffichage(): HBox
 }
 
 interface Entite{
@@ -241,6 +249,7 @@ Constructeur "1" --> "*" Parametre : -parametres
 Methode "1" --> "0..1" Accessibilite : -accessibilite
 Methode "1" --> "*" Etat : etats
 Methode "1" --> "*" Parametre : parametres
+ClasseEntiere <|-- ClasseEntiereAffichage
 ClasseEntiere "1" --> "1" DefinitionClasse : definitionClasse
 ClasseEntiere "1" --> "*" Attribut : attributs
 ClasseEntiere "1" --> "*" Methode : methodes
