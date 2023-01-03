@@ -10,13 +10,23 @@ import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.ArrayList;
 
+/**
+ * Classe qui permet de représenter la vue des classes
+ */
 public class VueClasse extends Pane implements Observateur {
 
+    /** Modèle */
     private final Model model;
+
+    /** Liste des classes */
     private final ArrayList<VBox> classes;
 
-    public VueClasse(Model mod) {
-        this.model = mod;
+    /**
+     * Constructeur de la classe VueClasse
+     * @param model Modèle
+     */
+    public VueClasse(Model model) {
+        this.model = model;
         this.classes = new ArrayList<>();
 
         actualiser();
@@ -24,19 +34,28 @@ public class VueClasse extends Pane implements Observateur {
 
     @Override
     public void actualiser() {
+        // Mise a zero de la vue
         this.getChildren().clear();
 
+        // Pour chaque classe
         for (ClasseEntiere c : model.getClasses()) {
+            // On creation de l'affichage de la classe
             FabriqueAffichage f = new FabriqueAffichage(c);
             ClasseAffichage classe = f.affichage();
 
             setBorderColor(classe);
 
             this.getChildren().add(classe);
+
+            // On ajoute le controller
             classe.setOnMouseClicked(new ClasseEntiereClickedController(model));
         }
     }
 
+    /**
+     * Méthode qui permet de mettre la couleur de la bordure de la classe
+     * @param node ClasseAffichage à mettre en couleur
+     */
     public void setBorderColor(final ClasseAffichage node) {
         final String color = model.getCurrentClickedClass().equals(node.getNom()) ? "blue" : "black";
         final var builderStyle = new StringBuilder();

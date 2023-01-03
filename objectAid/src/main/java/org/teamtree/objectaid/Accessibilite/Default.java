@@ -1,7 +1,8 @@
 package org.teamtree.objectaid.Accessibilite;
 
-import org.teamtree.objectaid.Accessibilite.Accessibilite;
-
+/**
+ * Classe qui représente l'accessibilité : Default
+ */
 public class Default implements Accessibilite {
 
     @Override

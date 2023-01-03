@@ -208,30 +208,58 @@ public class ClasseEntiere {
         coordonnees.setY(y);
     }
 
+    /**
+     * Retourne le nom de la classe
+     * @return Le nom de la classe : String
+     */
     public String getNom() {
         return definition.getNom();
     }
 
+    /**
+     * Retourne la possibilite d'afficher le constructeur
+     * @return Vrai si le constructeur est affiché : boolean
+     */
     public boolean isConstructeurEstAffiche() {
         return constructeurEstAffiche;
     }
 
+    /**
+     * Set la possibilite d'afficher le constructeur
+     * @param constructeurEstAffiche Boolean vrai pour afficher le constructeur sinon faux
+     */
     public void setConstructeurEstAffiche(boolean constructeurEstAffiche) {
         this.constructeurEstAffiche = constructeurEstAffiche;
     }
 
+    /**
+     * Retourne la possibilite d'afficher les attributs
+     * @return Vrai si les attributs sont affichés : boolean
+     */
     public boolean isAttributEstAffiche() {
         return attributEstAffiche;
     }
 
+    /**
+     * Set la possibilite d'afficher les attributs
+     * @param attributEstAffiche Boolean vrai pour afficher les attributs sinon faux
+     */
     public void setAttributEstAffiche(boolean attributEstAffiche) {
         this.attributEstAffiche = attributEstAffiche;
     }
 
+    /**
+     * Retourne la possibilite d'afficher les méthodes
+     * @return Vrai si les méthodes sont affichées : boolean
+     */
     public boolean isMethodsEstAffiche() {
         return methodsEstAffiche;
     }
 
+    /**
+     * Set la possibilite d'afficher les méthodes
+     * @param methodsEstAffiche Boolean vrai pour afficher les méthodes sinon faux
+     */
     public void setMethodsEstAffiche(boolean methodsEstAffiche) {
         this.methodsEstAffiche = methodsEstAffiche;
     }

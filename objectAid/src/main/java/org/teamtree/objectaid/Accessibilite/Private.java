@@ -1,7 +1,8 @@
 package org.teamtree.objectaid.Accessibilite;
 
-import org.teamtree.objectaid.Accessibilite.Accessibilite;
-
+/**
+ * Classe qui représente l'accessibilité : Private
+ */
 public class Private implements Accessibilite {
     @Override
     public String getAcces() {

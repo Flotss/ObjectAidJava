@@ -6,6 +6,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * Classe qui permet de créer une icône pour une classe
+ */
 public class ClassTitleIcon implements ClasseEntiereTitleIcon {
 
     @Override

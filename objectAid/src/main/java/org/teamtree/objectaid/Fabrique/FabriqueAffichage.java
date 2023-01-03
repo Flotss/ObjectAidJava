@@ -13,13 +13,26 @@ import org.teamtree.objectaid.MVC.diagramIcons.ClassTitleIcon;
 import org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon;
 import org.teamtree.objectaid.MVC.diagramIcons.InterfaceTitleIcon;
 
+/**
+ * Classe qui permet de créer un affichage pour une classe
+ */
 public class FabriqueAffichage {
+
+    /** La classe à afficher */
     private ClasseEntiere c;
 
+    /**
+     * Constructeur de la classe
+     * @param classeEntiere La classe à afficher
+     */
     public FabriqueAffichage(ClasseEntiere classeEntiere){
         this.c = classeEntiere;
     }
 
+    /**
+     * Méthode qui permet de créer un affichage pour une classe
+     * @return Un affichage pour une classe
+     */
     public ClasseAffichage affichage(){
         ClasseAffichage classe = new ClasseAffichage(c.getDefinition().getNom());
         HBox definition = new HBox();

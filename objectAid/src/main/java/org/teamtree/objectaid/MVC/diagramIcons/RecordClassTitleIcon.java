@@ -5,6 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 
+/**
+ * Classe qui permet de créer une icône pour un record
+ */
 public class RecordClassTitleIcon implements ClasseEntiereTitleIcon {
 
     @Override
