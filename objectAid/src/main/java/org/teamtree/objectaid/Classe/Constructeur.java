@@ -7,32 +7,56 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 
+/**
+ * Classe qui représente un constructeur d'une classe
+ */
 public class Constructeur {
 
+    /** Nom du constructeur */
     private final String nom;
+
+    /** L'accessibilité du constructeur */
     private final Accessibilite accessibilite;
+
+    /** Liste des paramètres du constructeur */
     private final ArrayList<Parametre> parametre;
 
-    public Constructeur (Constructor<?> construct) {
-        this.nom = construct.getName().substring(construct.getName().lastIndexOf(".") + 1);
+    /**
+     * Constructeur du constructeur
+     * @param constructor Constructeur de la classe
+     */
+    public Constructeur (Constructor<?> constructor) {
+        this.nom = constructor.getName().substring(constructor.getName().lastIndexOf(".") + 1);
 
         FabriqueAccessibilite fabriqueAccess = new FabriqueAccessibilite();
-        this.accessibilite = fabriqueAccess.getAccessibilite(construct.getModifiers());
+        this.accessibilite = fabriqueAccess.getAccessibilite(constructor.getModifiers());
 
         this.parametre = new ArrayList<>();
-        for (Parameter parameter : construct.getParameters()) {
+        for (Parameter parameter : constructor.getParameters()) {
             this.parametre.add(new Parametre(parameter));
         }
     }
 
+    /**
+     * Retourne le nom du constructeur
+     * @return Nom du constructeur : String
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Retourne l'accessibilité du constructeur
+     * @return Accessibilité du constructeur : Accessibilite
+     */
     public String getAccessibilite() {
         return accessibilite.getAcces();
     }
 
+    /**
+     * Retourne la liste des paramètres du constructeur
+     * @return Liste des paramètres du constructeur : ArrayList<Parametre>
+     */
     public ArrayList<Parametre> getParametre() {
         return parametre;
     }
