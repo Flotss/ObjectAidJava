@@ -94,6 +94,12 @@ class ClasseEntiere{
 }
 
 class ClasseEntiereAffichage{
+    -ConstructeurEstAffiche : boolean
+    -AttributEstAffiche : boolean
+    -MethodeEstAffiche : boolean
+    -setAffichageConstructeurs()
+    -setAffichageMethods()
+    -setAffichageAttributs()
     +getDefinitionAffichage(): HBox
     +getAttributsAffichage(): HBox
     +getConstructeurAffichage(): HBox
@@ -229,7 +235,10 @@ class FabriqueEntite {
 }
 
 
-class Fleche {}
+class Fleche {
+    -EstAffiche : boolean
+    +setAffichage()
+}
 
 
 '-----------------------------------'
