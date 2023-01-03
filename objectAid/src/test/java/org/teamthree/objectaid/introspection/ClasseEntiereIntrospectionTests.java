@@ -40,8 +40,8 @@ class ClasseEntiereIntrospectionTests {
     @Test
     @DisplayName("Should have a correct list of attributes")
     void shouldHaveACorrectListOfAttributes() {
-        assertThat(clazz.getAttributes()).hasSize(3);
-        assertThat(clazz.getAttributes().stream().map(Attribut::getNom)).containsAll(
+        assertThat(clazz.getAttributs()).hasSize(3);
+        assertThat(clazz.getAttributs().stream().map(Attribut::getNom)).containsAll(
             CLAZZ_ATTRIBUTES);
     }
 
