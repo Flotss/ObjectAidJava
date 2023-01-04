@@ -3,12 +3,6 @@
 
 'Modele'
 package "MVC"{
-    class LineSeparator {
-        + LineSeparator()
-        + getSeparator() : String
-    }
-
-
     interface Sujet{
         +ajouterObservateur(Observateur)
         +supprimerObservateur(Observateur)
@@ -41,49 +35,11 @@ package "MVC"{
         +actualiser()
     }
 
-    class VueFleche implements Observateur{
-        +VueFleche(Modele)
-        +actualiser()
-    }
-
-    class VueArboressence implements Observateur {
-        + VueArboressence(Modele)
-        + actualiser()
-    }
-
-    'Controlleurs'
-
-    class ControleurBouton{
-        +ControleurBouton(Modele)
-        +handle(ActionEvent)
-    }
-
-    interface ClasseEntiereTitleIcon{
-        getIcon() : Image
-    }
-
-    class AbstractClasseTitleIcon implements ClasseEntiereTitleIcon{
-        +getIcon() : Image
-    }
-
-    class ClassEntiereTitleIcon implements ClasseEntiereTitleIcon{
-        +getIcon() : Image
-    }
-
-    class InterfaceTitleIcon implements ClasseEntiereTitleIcon{
-        +getIcon() : Image
-    }
-
-    class RecordTitleIcon implements ClasseEntiereTitleIcon{
-        +getIcon() : Image
-    }
-
 }
 'Classes'
 
 class ClasseEntiere{
     +ClasseEntiere(path : String)
-    +deplacer(int, int)
     +getAttributs() : ArrayList<Attribut>
     +getMethodes() : ArrayList<Methode>
     +getDefinition() : DefinitionClasse
@@ -152,7 +108,6 @@ class Static implements Etat{
 
 class DefinitionClasse{
     -nomClasse : String
-
     +DefinitionClasse(classe : Class<?>)
     +getNom() : String
     +getAccessibilite() : String
@@ -221,16 +176,12 @@ class FabriqueEntite {
 }
 
 
-class Fleche {}
 
 
 '-----------------------------------'
 'Associations'
 
 Modele "1" --> "*" Observateur : -observateurs
-VueClasse --> "0..1" Modele : - model
-VueFleche --> "0..1" Modele : - model
-VueArboressence --> "0..1" Modele : - model
 Attribut "1" --> "0..1" Accessibilite : -accessibilite
 Attribut "1" --> "*" Etat : -etats
 DefinitionClasse "1" --> "0..1" Accessibilite : -accessibilite
@@ -246,9 +197,6 @@ ClasseEntiere "1" --> "*" Attribut : attributs
 ClasseEntiere "1" --> "*" Methode : methodes
 ClasseEntiere "1" --> "*" Constructeur : constructeurs
 ClasseEntiere "1" --> "1" Point : -coordonnees
-Fleche "1" --> "1" Accessibilite : accessibilite
-Fleche "2" *-- Point : pointDebutFin
-ControleurBouton --> "0..1" Modele : -modele
 
 
 @enduml
