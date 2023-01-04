@@ -16,7 +16,7 @@ public class Model implements Sujet {
     /** Liste des observateurs */
     private final ArrayList<Observateur> observateurs;
 
-    /** Liste des classes avec leur flèche*/
+    /** Liste des classes avec leurs flèches*/
     private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
 
     /** Classe sélectionnée */
