@@ -1,16 +1,15 @@
-package org.teamtree.objectaid.classes;
+package org.teamthree.objectaid.introspection;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Classe.Methode;
 import org.teamtree.objectaid.Classe.Parametre;
+import org.teamtree.objectaid.Etat.Etat;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 
 class MethodeTest {
@@ -19,8 +18,8 @@ class MethodeTest {
 
 
     @BeforeEach
-    public void setUp() throws ClassNotFoundException {
-        Class<?> c = Class.forName("org.teamtree.objectaid.classes.ClassePourLesTests");
+    void setUp() throws ClassNotFoundException {
+        Class<?> c = Class.forName("org.teamthree.objectaid.introspection.ClassePourLesTests");
         Method[] methods = c.getDeclaredMethods();
         methodes = new Methode[methods.length];
         for (int i = 0; i < methods.length; i++) {
@@ -29,7 +28,8 @@ class MethodeTest {
     }
 
 
-    @Test void testAccessibilite(){
+    @Test
+    void testAccessibilite() {
         for (Methode methode : methodes) {
             switch (methode.getNom()) {
                 case "methodeAbstraiteProtected" -> assertEquals("protected", methode.getAccessibilite());
@@ -43,7 +43,7 @@ class MethodeTest {
     }
 
     @Test
-    public void testEtat() {
+    void testEtat() {
         for (Methode methode : methodes) {
             switch (methode.getNom()) {
                 case "methodeAbstraiteProtected" -> {
@@ -66,7 +66,7 @@ class MethodeTest {
     }
 
     @Test
-    public void testRetourne(){
+    void testRetourne() {
         for (Methode methode : methodes) {
             switch (methode.getNom()) {
                 case "methodeAbstraiteProtected" -> assertEquals("void", methode.getTypeRetourne());
@@ -82,7 +82,7 @@ class MethodeTest {
     }
 
     @Test
-    public void testParametre(){
+    void testParametre() {
         for (Methode methode : methodes) {
             System.out.println(methode);
             switch (methode.getNom()) {

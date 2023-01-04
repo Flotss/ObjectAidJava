@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.classes;
+package org.teamthree.objectaid.introspection;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,8 @@ class ConstructeurTest {
 
 
     @BeforeEach
-    public void setUp() throws ClassNotFoundException {
-        Class<?> c = Class.forName("org.teamtree.objectaid.classes.ClassePourLesTests");
+    void setUp() throws ClassNotFoundException {
+        Class<?> c = Class.forName("org.teamthree.objectaid.introspection.ClassePourLesTests");
         Constructor<?>[] constructeurs = c.getDeclaredConstructors();
         constructeur = new Constructeur[constructeurs.length];
         for (int i = 0; i < constructeurs.length; i++) {
@@ -27,7 +27,8 @@ class ConstructeurTest {
     }
 
 
-    @Test void testAccessibilite(){
+    @Test
+    void testAccessibilite() {
         for (Constructeur constructeur : this.constructeur) {
             switch (constructeur.getParametre().size()) {
                 case 0 -> assertEquals("protected", constructeur.getAccessibilite());
@@ -41,7 +42,7 @@ class ConstructeurTest {
     }
 
     @Test
-    public void testParametre(){
+    void testParametre() {
         for (Constructeur construc : constructeur) {
             switch (construc.getAccessibilite()) {
                 case "default" -> {
