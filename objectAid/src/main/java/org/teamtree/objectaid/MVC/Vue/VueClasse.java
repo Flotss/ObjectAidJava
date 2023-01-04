@@ -18,16 +18,12 @@ public class VueClasse extends Pane implements Observateur {
     /** Modèle */
     private final Model model;
 
-    /** Liste des classes */
-    private final ArrayList<VBox> classes;
-
     /**
      * Constructeur de la classe VueClasse
      * @param model Modèle
      */
     public VueClasse(Model model) {
         this.model = model;
-        this.classes = new ArrayList<>();
 
         actualiser();
     }

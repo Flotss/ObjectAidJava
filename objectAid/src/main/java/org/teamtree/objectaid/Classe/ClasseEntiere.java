@@ -36,8 +36,13 @@ public class ClasseEntiere {
      */
     private final Point coordonnees;
 
+    /** Constructeur est afficher ou non */
     private boolean constructeurEstAffiche;
+
+    /** Attributs sont afficher ou non */
     private boolean attributEstAffiche;
+
+    /** Methodes sont afficher ou non */
     private boolean methodsEstAffiche;
 
     /**
@@ -72,6 +77,8 @@ public class ClasseEntiere {
         for (Method method : classe.getDeclaredMethods()) {
             this.methods.add(new Methode(method));
         }
+
+        // Partie affichage des attributs, constructeurs et méthodes
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
         this.constructeurEstAffiche = true;
