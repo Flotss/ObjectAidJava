@@ -9,6 +9,7 @@ import org.teamtree.objectaid.MVC.Controller.ClasseEntiereClickedController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe qui permet de représenter la vue des classes
@@ -34,6 +35,7 @@ public class VueClasse extends Pane implements Observateur {
         this.getChildren().clear();
 
         // Pour chaque classe
+
         for (ClasseEntiere c : model.getClasses()) {
             // On creation de l'affichage de la classe
             FabriqueAffichage f = new FabriqueAffichage(c);

@@ -3,6 +3,7 @@ package org.teamtree.objectaid.MVC.Model;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
+import org.teamtree.objectaid.MVC.Vue.VueClasse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,8 +88,8 @@ public class Model implements Sujet {
      */
     public void ajouterClasse(ClasseEntiere classe) {
         if (!relations.containsKey(classe)) {
-            int x = getClasses().size() % 6 * 150 + 30;
-            int y = getClasses().size() / 6 * 100 + 30;
+            int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
+            int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.setX(x);
             classe.setY(y);
             relations.put(classe, new ArrayList<>());

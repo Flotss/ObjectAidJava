@@ -19,4 +19,5 @@ public class ClasseAffichage extends VBox {
     public String getNom(){
         return this.nom;
     }
+
 }

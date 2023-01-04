@@ -39,6 +39,15 @@ public class FabriqueAffichage {
 
         //partie definition: On génère l'affichage de la définition
         //Nom
+
+        classe.setMaxSize(150,300);
+
+
+
+
+
+
+        //partie definition
         String def = c.getDefinition().getNom();
         Label definitionLabel = new Label(def);
 
@@ -85,31 +94,23 @@ public class FabriqueAffichage {
                 Label constrLabel = new Label(constr);
                 constructeur.getChildren().add(constrLabel);
             }
-
         }
 
         //partie methodes
-        //On vérifie que les méthodes doivent être affichées
         if(c.isMethodsEstAffiche()) {
-            //Si il existe des méthodes, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
             if (c.getMethods().size() != 0) {
                 constructeur.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
             }
-            //Pour chaque méthodes
-            for(Methode methodeX:c.getMethods()){
-                //Debut de la ligne (accesibilité, nom,...)
+            for (int i = 0; i < c.getMethods().size(); i++) {
+                Methode methodeX = c.getMethods().get(i);
                 String meth = fabriqueAcces(methodeX.getAccessibilite()) + " " + methodeX.getNom() + "(";
-                int n = 0;
-                //Pour chaque parametre de la méthode, on l'écrit dans l'affichage
-                for(Parametre parametreX :methodeX.getParametre() ){
-                    meth += parametreX.getType() + " " + parametreX.getNom();
-                    if (n != methodeX.getParametre().size() - 1) {
+                for (int j = 0; j < methodeX.getParametre().size(); j++) {
+                    meth += methodeX.getParametre().get(j).getType() + " " + methodeX.getParametre().get(j).getNom();
+                    if (j != methodeX.getParametre().size() - 1) {
                         meth += ", ";
                     }
-                    n++;
                 }
-                //On écrit la fin de la méthode puis on l'ajoute avec les autres constructeurs
-                meth += "): " + methodeX.getTypeRetourne();
+                meth += "): " + c.getMethods().get(i).getTypeRetourne();
                 Label methodeLabel = new Label(meth);
                 methodes.getChildren().add(methodeLabel);
             }
