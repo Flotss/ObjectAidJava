@@ -6,6 +6,7 @@ import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.MVC.Controller.ClasseEntiereClickedController;
+import org.teamtree.objectaid.MVC.Controller.DragAndDropController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class VueClasse extends Pane implements Observateur {
 
     /** Modèle */
     private final Model model;
+    private final List<ClasseAffichage> classes;
+
 
     /**
      * Constructeur de la classe VueClasse
@@ -25,17 +28,12 @@ public class VueClasse extends Pane implements Observateur {
      */
     public VueClasse(Model model) {
         this.model = model;
+        this.classes = new ArrayList<>();
 
-        actualiser();
-    }
-
-    @Override
-    public void actualiser() {
         // Mise a zero de la vue
         this.getChildren().clear();
 
         // Pour chaque classe
-
         for (ClasseEntiere c : model.getClasses()) {
             // On creation de l'affichage de la classe
             FabriqueAffichage f = new FabriqueAffichage(c);
@@ -45,8 +43,27 @@ public class VueClasse extends Pane implements Observateur {
 
             this.getChildren().add(classe);
 
-            // On ajoute le controller
+            // On ajoute le controller lorsqu'on clique sur la classe
             classe.setOnMouseClicked(new ClasseEntiereClickedController(model));
+
+            //on ajoute le drag and drop de la classe
+            classe.setOnMouseDragged(new DragAndDropController(model));
+
+            classes.add(classe);
+        }
+    }
+
+    /**
+     * Méthode qui permet de mettre a jour la vue
+     */
+
+    @Override
+    public void actualiser() {
+        for (ClasseAffichage classe : classes) {
+            ClasseEntiere classeEntiere = model.getClasse(classe.getNom()).get();
+            setBorderColor(classe);
+            classe.setPosition(classeEntiere);
+            classe.afficherClasse(classeEntiere);
         }
     }
 
