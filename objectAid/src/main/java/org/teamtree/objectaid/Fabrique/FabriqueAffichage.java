@@ -32,10 +32,10 @@ public class FabriqueAffichage {
         //On crée la classeAffichage correspondant a un VBox, servant à recevoir tout le bloc de la classe
         ClasseAffichage classe = new ClasseAffichage(c.getDefinition().getNom());
         //On crée les différentes parties de la classe
-        HBox definition = new HBox();
-        VBox constructeur = new VBox();
-        VBox attributs = new VBox();
-        VBox methodes = new VBox();
+        HBox definition = classe.getDefinition();
+        VBox constructeur = classe.getConstructeur();
+        VBox attributs = classe.getAttributs();
+        VBox methodes = classe.getMethodes();
 
         //partie definition: On génère l'affichage de la définition
         //Nom
@@ -53,7 +53,10 @@ public class FabriqueAffichage {
 
         //Icon selon le type de la classe
         definition.getChildren().addAll(fabriqueIcon().getIcon(), definitionLabel);
+        classe.setDefinition(definition);
 
+        classe.setAttributs(c);
+        /*
         //partie attributs
         //On vérifie que les attributs doivent être affichés
         if(c.isAttributEstAffiche()) {
@@ -68,6 +71,7 @@ public class FabriqueAffichage {
                 attributs.getChildren().add(attributLabel);
             }
         }
+         */
 
         //partie constructeur
         //On vérifie que les constructeurs doivent être affichés
@@ -126,6 +130,8 @@ public class FabriqueAffichage {
 
         classe.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
 
+        classe.setConstructeur(constructeur);
+        classe.setMethodes(methodes);
         return classe;
     }
 
@@ -158,7 +164,7 @@ public class FabriqueAffichage {
      * @param acces String correspondant à l'accesibilité
      * @return symbole de cette accesibilité
      */
-    private String fabriqueAcces(String acces){
+    public static String fabriqueAcces(String acces){
         switch (acces){
             case "public":
                 return "+";
