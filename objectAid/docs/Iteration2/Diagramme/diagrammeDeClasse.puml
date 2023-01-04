@@ -96,9 +96,9 @@ class ClasseEntiere{
     -AttributEstAffiche : boolean
     -ConstructeurEstAffiche : boolean
     -MethodeEstAffiche : boolean
-    -setAffichageConstructeurs()
-    -setAffichageMethods()
-    -setAffichageAttributs()
+    +setAffichageConstructeurs()
+    +setAffichageMethods()
+    +setAffichageAttributs()
     +ClasseEntiere(path : String)
     +deplacer(int, int)
     +getAttributs() : ArrayList<Attribut>
@@ -234,6 +234,35 @@ class Point{
     + getY() : int
 }
 
+abstract class Relation {
+    - nom : String
+
+    + Relation(nom : String)
+    + getNom() : String
+
+    {abstract} + toString() : String
+}
+
+class Association extends Relation {
+    - cardinalite1 : String
+    - cardinalite2 : String
+
+    + Association(nom : String, card1 : String, card2 : String)
+    + getCardinalite1() : String
+    + getCardinalite2() : String
+    + toString() : String
+}
+
+class Heritage extends Relation {
+    + Heritage(nom : String)
+    + toString() : String
+}
+
+class Implementation extends Relation {
+    + Implementation(nom : String)
+    + toString() : String
+}
+
 class FabriqueAccessibilite {
     + FabriqueAccessibilite()
     + getAccessibilite(access : int) : Accessibilite
@@ -286,6 +315,7 @@ ClasseEntiere "1" --> "*" Attribut : attributs
 ClasseEntiere "1" --> "*" Methode : methodes
 ClasseEntiere "1" --> "*" Constructeur : constructeurs
 ClasseEntiere "1" --> "1" Point : -coordonnees
+ClasseEntiere "1" --> "*" Relation : -relations
 Fleche "1" --> "1" Accessibilite : accessibilite
 Fleche "2" *-- Point : pointDebutFin
 ControllerButon "*" --> "1" Modele : -modele

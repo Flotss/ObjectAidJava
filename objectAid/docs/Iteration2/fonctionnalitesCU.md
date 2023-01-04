@@ -5,6 +5,7 @@ En tant qu’étudiant, je souhaiterais pouvoir sélectionner une classe spécif
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Gridel Alexis
+- Mangin Florian (petite partie)
 
 ### Critères de validation :
 - Lors d'un click sur une classe, cette dernière se met en évidence.
@@ -43,6 +44,7 @@ cet attribut de toute les classes, lors de l'affichage, l'attribut sera control�
 #### Patron de conception utilisé :
  - fabrique : Pour fabriquer l'affichage
 
+---
 ## Fonctionnalité 3-4 : Afficher les méthodes et les constructeurs
 Même principe que pour la fonctionnalitée 2
 
@@ -53,6 +55,7 @@ Même principe que pour la fonctionnalitée 2
 ### Etat :
 Fonctionnalité achevée
 
+---
 ## Fonctionnalité 5 : Afficher les relations
 ##### Difficulté: 3
 
@@ -70,21 +73,18 @@ Les relations s'affichent / se désaffichent après avoir appuyé sur le bouton
 
 ### Etat :
 Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
+Les associations, héritage et implémentation sont affichées dans la console, mais il reste à les afficher sur l'interface graphique
 
 #### Détail de la fonctionnalité :
-?
+Nous avons réalisé la structure de données permettant de stocker les relations entre les classes.
+C'est-à-dire que maintenant lorque l'on crée une classe, ses relations sont stockées dans une liste de relations donc pour les associations, les implémentations et pour l'héritage.
 
-## Tâche supplémentaire : Commentaire et JavaDoc du projet
 
-Nous n'avions pas commenté le code lors de la précédente itération et nous devions commenté la nouvelle itération
+#### Patron de conception utilisé :
+- Strategy : Pour la gestion des relations entre Héritage, Implémentation et Association
 
-#### Les étudiants qui se sont occupés de cette partie sont :
-- Mangin Florian
-- Bernard Julien
 
-### Etat :
-Tâche terminée
-
+---
 ## Fonctionnalité 6 : Déplacer les classes
 ##### Difficulté: 3
 
@@ -99,3 +99,17 @@ En tant qu'étudiant, je souhaiterais pouvoir déplacer les différentes classes
 
 ### Etat :
 Tâche terminée
+
+---
+## Tâche supplémentaire : Commentaire et JavaDoc du projet
+
+Nous n'avions pas commenté le code lors de la précédente itération et nous devions commenté la nouvelle itération
+
+#### Les étudiants qui se sont occupés de cette partie sont :
+- Mangin Florian
+- Bernard Julien
+
+### Etat :
+Tâche terminée
+
+

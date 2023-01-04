@@ -1,5 +1,9 @@
 package org.teamtree.objectaid.Classe;
 
+import org.teamtree.objectaid.Classe.Relations.Association;
+import org.teamtree.objectaid.Classe.Relations.Heritage;
+import org.teamtree.objectaid.Classe.Relations.Implementation;
+import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Point;
 
 import java.lang.reflect.Constructor;
@@ -12,12 +16,6 @@ import java.util.List;
  * Classe qui représente une classe
  */
 public class ClasseEntiere {
-
-    /** Liste des interfaces implémentées */
-    private final List<String> interfaces;
-
-    /** Nom de la classe parent */
-    private final String classeParent;
 
     /**
      * Liste des constructeurs de la classe
@@ -53,8 +51,8 @@ public class ClasseEntiere {
     /** Methodes sont afficher ou non */
     private boolean methodsEstAffiche;
 
-    /** Association */
-    private final List<String> associations;
+    /** Relation entre classe */
+    private final List<Relation> relations;
 
     /**
      * Constructeur de la classe
@@ -68,31 +66,27 @@ public class ClasseEntiere {
         Class<?> classe = Class.forName(path);
 
         // Création des types des attributs
-        this.interfaces = new ArrayList<>();
         this.attributs = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.definition = new DefinitionClasse(classe);
         this.coordonnees = new Point(0, 0);
-        this.associations = new ArrayList<>();
+        this.relations = new ArrayList<>();
 
 
         // Interfaces
         for (Class<?> inter : classe.getInterfaces()) {
-            this.interfaces.add(inter.getSimpleName());
+            this.relations.add(new Implementation(inter.getSimpleName()));
         }
 
         // Classe parent
         if (classe.getSuperclass() != null) {
             String nameParent = classe.getSuperclass().getSimpleName();
 
-            if (nameParent.equals("Object")) {
-                nameParent = "";
+            // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
+            if (!nameParent.equals("Object")) {
+                this.relations.add(new Heritage(nameParent));
             }
-
-            this.classeParent = nameParent;
-        }else{
-            this.classeParent = "";
         }
 
         // Attributs et Relations
@@ -119,8 +113,13 @@ public class ClasseEntiere {
                 }
             }
 
+            // Ajout de la relation si l'attribut n'est pas primitif
             if (!isPrimitive) {
-                this.associations.add(type);
+                if (isCollection){
+                    this.relations.add(new Association(type, "*", "*"));
+                }else{
+                    this.relations.add(new Association(type, "1", "*"));
+                }
             }
         }
 
@@ -214,46 +213,35 @@ public class ClasseEntiere {
 
     @Override
     public String toString() {
-        String info = definition.toString();
+        StringBuilder info = new StringBuilder(definition.toString());
         if (attributs.size() > 0) {
-            info += "\tAttributs: \n";
+            info.append("\tAttributs: \n");
             for (Attribut attribut : attributs) {
-                info += "\t\t" + attribut.toString();
+                info.append("\t\t").append(attribut.toString());
             }
         }
         if (contructeurs.size() > 0) {
-            info += "\tConstructeurs: \n";
+            info.append("\tConstructeurs: \n");
             for (Constructeur constructeur : contructeurs) {
-                info += "\t\t" + constructeur.toString();
+                info.append("\t\t").append(constructeur.toString());
             }
         }
 
         if (methods.size() > 0) {
-            info += "\tMethodes: \n";
+            info.append("\tMethodes: \n");
             for (Methode methode : methods) {
-                info += "\t\t" + methode.toString();
+                info.append("\t\t").append(methode.toString());
             }
         }
 
-        if (associations.size() > 0) {
-            info += "\tAssociations: \n";
-            for (String association : associations) {
-                info += "\t\t" + association + "\n";
+        if (relations.size() > 0) {
+            info.append("\tRelations: \n");
+            for (Relation relation : relations) {
+                info.append("\t\t").append(relation.toString());
             }
         }
 
-        if (interfaces.size() > 0) {
-            info += "\tInterfaces: \n";
-            for (String inter : interfaces) {
-                info += "\t\t" + inter + "\n";
-            }
-        }
-
-        if (!classeParent.equals("")) {
-            info += "\tClasse parent: " + classeParent + "\n";
-        }
-
-        return info;
+        return info.toString();
     }
 
     /**
