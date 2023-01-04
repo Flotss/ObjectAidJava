@@ -13,7 +13,10 @@ En tant qu’étudiant, je souhaiterais pouvoir sélectionner une classe spécif
 Fonctionnalité achevée
 
 #### Détail de la fonctionnalité :
-?
+Quand on sélectionne une classe avec le clic dgauche de la sours, elle est censée "s'illuminer" d'un contour bleu
+Pour cela, j'ai du crée un controller qui gère le click sur un VBox (ClasseAffichage) s'appellant ClasseEntiereClickedController
+
+Le controller va appeler la méthode setCurrentClickedClass dans le modèle qui va set le nom de la classe dans une propriété String pour ensuite actualiser les observateurs.
 
 
 ---
