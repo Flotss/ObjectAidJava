@@ -14,7 +14,9 @@ package "MVC"{
             - relation : Map<ClasseEntiere, ArrayList<Fleche>>
             - nomSelection : String
             - currentClickedClass : String
+            - currentDirectory : File
             + Modele()
+            + setCurrentDirectory(File)
             + deplacerClasse(String, int, int)
             + afficherAttributs()
             + afficherConstructeurs()
@@ -73,6 +75,11 @@ package "MVC"{
     class DragAndDropClasseEntiereController{
             + DragAndDropClasseEntiereController(Modele)
             +handle(MouseEvent)
+    }
+
+    class WindowsExplorerModalController {
+        + WindowsExplorerModalController(Modele)
+        + handle(ActionEvent)
     }
 
     interface ClasseEntiereTitleIcon{
@@ -304,5 +311,6 @@ ControleurBouton "*" --> "1" Modele : -modele
 ClasseEntiereClickedController "*" --> "1" Modele : -modele
 FabriqueAffichage --> "1" ClasseEntiere : -c
 DragAndDropClasseEntiereController "*" --> "1" Modele : -modele
+WindowsExplorerModalController "*" --> "1" Modele : -modele
 
 @enduml
