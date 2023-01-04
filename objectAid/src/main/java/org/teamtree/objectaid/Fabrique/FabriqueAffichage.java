@@ -5,10 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.teamtree.objectaid.Classe.ClasseAffichage;
-import org.teamtree.objectaid.Classe.ClasseEntiere;
-import org.teamtree.objectaid.Classe.Constructeur;
-import org.teamtree.objectaid.Classe.Methode;
+import org.teamtree.objectaid.Classe.*;
 import org.teamtree.objectaid.MVC.diagramIcons.ClassTitleIcon;
 import org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon;
 import org.teamtree.objectaid.MVC.diagramIcons.InterfaceTitleIcon;
@@ -34,67 +31,87 @@ public class FabriqueAffichage {
      * @return Un affichage pour une classe
      */
     public ClasseAffichage affichage(){
+        //On crée la classeAffichage correspondant a un VBox, servant à recevoir tout le bloc de la classe
         ClasseAffichage classe = new ClasseAffichage(c.getDefinition().getNom());
+        //On crée les différentes parties de la classe
         HBox definition = new HBox();
         VBox constructeur = new VBox();
         VBox attributs = new VBox();
         VBox methodes = new VBox();
 
-        //partie definition
+        //partie definition: On génère l'affichage de la définition
+        //Nom
         String def = c.getDefinition().getNom();
         Label definitionLabel = new Label(def);
 
+        //Icon selon le type de la classe
         definition.getChildren().addAll(fabriqueIcon().getIcon(), definitionLabel);
 
         //partie attributs
+        //On vérifie que les attributs doivent être affichés
         if(c.isAttributEstAffiche()) {
+            //Si il existe des attributs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
             if (c.getAttributs().size() != 0) {
                 definition.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
             }
-
-            for (int i = 0; i < c.getAttributs().size(); i++) {
-                String att = fabriqueAcces(c.getAttributs().get(i).getAccessibilite()) + " " + c.getAttributs().get(i).getType() + " " + c.getAttributs().get(i).getNom();
+            //Pour chaque attributs
+            for (Attribut attributX: c.getAttributs()) {
+                String att = fabriqueAcces(attributX.getAccessibilite()) + " " + attributX.getType() + " " + attributX.getNom();
                 Label attributLabel = new Label(att);
                 attributs.getChildren().add(attributLabel);
             }
-
         }
 
         //partie constructeur
+        //On vérifie que les constructeurs doivent être affichés
         if(c.isConstructeurEstAffiche()) {
+            //Si il existe des constructeurs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
             if (c.getContructeurs().size() != 0) {
                 attributs.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
             }
-            for (int i = 0; i < c.getContructeurs().size(); i++) {
-                Constructeur constructeurx = c.getContructeurs().get(i);
-                String constr = fabriqueAcces(constructeurx.getAccessibilite()) + " " + constructeurx.getNom() + "(";
-                for (int j = 0; j < constructeurx.getParametre().size(); j++) {
-                    constr += constructeurx.getParametre().get(j).getType() + " " + constructeurx.getParametre().get(j).getNom();
-                    if (j != constructeurx.getParametre().size() - 1) {
+            //Pour chaque Constructeurs
+            for (Constructeur constructeurX:c.getContructeurs()) {
+                //Debut de la ligne (accesibilité, nom,...)
+                String constr = fabriqueAcces(constructeurX.getAccessibilite()) + " " + constructeurX.getNom() + "(";
+                int n = 0;
+                //Pour chaque parametre du constructeur, on l'écrit dans l'affichage
+                for(Parametre parametreX: constructeurX.getParametre()){
+                    constr += parametreX.getType() + " " + parametreX.getNom();
+                    if (n != constructeurX.getParametre().size() - 1) {
                         constr += ", ";
                     }
+                    n++;
                 }
+                //On écrit la fin du constructeur puis on l'ajoute avec les autres constructeurs
                 constr += ")";
                 Label constrLabel = new Label(constr);
                 constructeur.getChildren().add(constrLabel);
             }
+
         }
 
         //partie methodes
+        //On vérifie que les méthodes doivent être affichées
         if(c.isMethodsEstAffiche()) {
+            //Si il existe des méthodes, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
             if (c.getMethods().size() != 0) {
                 constructeur.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
             }
-            for (int i = 0; i < c.getMethods().size(); i++) {
-                Methode methodeX = c.getMethods().get(i);
+            //Pour chaque méthodes
+            for(Methode methodeX:c.getMethods()){
+                //Debut de la ligne (accesibilité, nom,...)
                 String meth = fabriqueAcces(methodeX.getAccessibilite()) + " " + methodeX.getNom() + "(";
-                for (int j = 0; j < methodeX.getParametre().size(); j++) {
-                    meth += methodeX.getParametre().get(j).getType() + " " + methodeX.getParametre().get(j).getNom();
-                    if (j != methodeX.getParametre().size() - 1) {
+                int n = 0;
+                //Pour chaque parametre de la méthode, on l'écrit dans l'affichage
+                for(Parametre parametreX :methodeX.getParametre() ){
+                    meth += parametreX.getType() + " " + parametreX.getNom();
+                    if (n != methodeX.getParametre().size() - 1) {
                         meth += ", ";
                     }
+                    n++;
                 }
-                meth += "): " + c.getMethods().get(i).getTypeRetourne();
+                //On écrit la fin de la méthode puis on l'ajoute avec les autres constructeurs
+                meth += "): " + methodeX.getTypeRetourne();
                 Label methodeLabel = new Label(meth);
                 methodes.getChildren().add(methodeLabel);
             }
