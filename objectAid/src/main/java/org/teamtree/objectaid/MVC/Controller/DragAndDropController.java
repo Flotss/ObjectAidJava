@@ -30,12 +30,10 @@ public class DragAndDropController implements EventHandler<MouseEvent> {
      */
     @Override
     public void handle(MouseEvent event) {
-        if (event.isPrimaryButtonDown()){
-
+        ClasseAffichage classe = (ClasseAffichage) event.getSource();
+        if (model.getCurrentClickedClass().equals(classe.getNom()) && event.isPrimaryButtonDown()){
             int x = (int) event.getSceneX();
             int y = (int) event.getSceneY();
-            ClasseAffichage classe = (ClasseAffichage) event.getSource();
-            model.setCurrentClickedClass(classe.getNom());
             ClasseEntiere classeEntiere = model.getClasse(model.getCurrentClickedClass()).get();
             classeEntiere.setX(x);
             classeEntiere.setY(y);
