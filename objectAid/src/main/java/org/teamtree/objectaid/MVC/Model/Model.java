@@ -7,6 +7,7 @@ import org.teamtree.objectaid.MVC.Vue.VueClasse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -135,11 +136,13 @@ public class Model implements Sujet {
      * @param currentClickedClass Classe sélectionnée
      */
     public void setCurrentClickedClass(final String currentClickedClass) {
-        this.currentClickedClass = currentClickedClass;
+       this.currentClickedClass = (Objects.equals(currentClickedClass, this.currentClickedClass))
+                                    ? ""
+                                    : currentClickedClass;
     }
 
     /**
-     * TODO : FAIRE CE COMMENTAIRE
+     * Retourne la classe grâce à son nom
      * @param nom Le nom de la classe
      * @return La classe correspondante
      */
