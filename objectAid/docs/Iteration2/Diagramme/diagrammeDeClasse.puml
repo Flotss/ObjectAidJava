@@ -3,11 +3,6 @@
 
 'Modele'
 package "MVC"{
-    class LineSeparator {
-        + LineSeparator()
-        + getSeparator() : String
-    }
-
 
     interface Sujet{
         +ajouterObservateur(Observateur)
