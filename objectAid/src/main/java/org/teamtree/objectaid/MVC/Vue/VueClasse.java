@@ -43,23 +43,27 @@ public class VueClasse extends Pane implements Observateur {
 
             this.getChildren().add(classe);
 
-            // On ajoute le controller
+            // On ajoute le controller lorsqu'on clique sur la classe
             classe.setOnMouseClicked(new ClasseEntiereClickedController(model));
 
-            //on ajoute le drag and drop
+            //on ajoute le drag and drop de la classe
             classe.setOnMouseDragged(new DragAndDropController(model));
+
             classes.add(classe);
         }
-
-        actualiser();
     }
+
+    /**
+     * Méthode qui permet de mettre a jour la vue
+     */
 
     @Override
     public void actualiser() {
         for (ClasseAffichage classe : classes) {
+            ClasseEntiere classeEntiere = model.getClasse(classe.getNom()).get();
             setBorderColor(classe);
-            classe.setLayoutX(model.getClasse(classe.getNom()).get().getX());
-            classe.setLayoutY(model.getClasse(classe.getNom()).get().getY());
+            classe.setPosition(classeEntiere);
+            classe.afficherClasse(classeEntiere);
         }
     }
 
