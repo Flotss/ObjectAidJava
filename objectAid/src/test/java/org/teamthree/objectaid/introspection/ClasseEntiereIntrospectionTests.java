@@ -28,19 +28,25 @@ class ClasseEntiereIntrospectionTests {
     @Test
     @DisplayName("Should not be null")
     void shouldNotBeNull() {
+        // La classe entière introspectée ne doit pas être nulle.
         assertThat(clazz).isNotNull();
     }
 
     @Test
     @DisplayName("Should have a name")
     void shouldHaveAName() {
+        // La classe entière introspectée doit avoir le nom de la classe.
         assertThat(clazz.getClass().getSimpleName()).isEqualTo("ClasseEntiere");
     }
 
     @Test
     @DisplayName("Should have a correct list of attributes")
     void shouldHaveACorrectListOfAttributes() {
+        // La classe entière introspectée doit avoir la liste des attributs de la classe.
+        // il doit notamment avoir une taille de 3
         assertThat(clazz.getAttributs()).hasSize(3);
+
+        // il doit avoir les attributs x, y et staticAttribut
         assertThat(clazz.getAttributs().stream().map(Attribut::getNom)).containsAll(
             CLAZZ_ATTRIBUTES);
     }
@@ -48,7 +54,11 @@ class ClasseEntiereIntrospectionTests {
     @Test
     @DisplayName("Should have a correct list of methods")
     void shouldHaveACorrectListOfMethods() {
+        // La classe entière introspectée doit avoir la liste des méthodes de la classe.
+        // il doit notamment avoir une taille de 6
         assertThat(clazz.getMethods()).hasSize(6);
+
+        // il doit avoir les méthodes methodeAbstraiteProtected, MethodepublicAbstract,
         assertThat(clazz.getMethods().stream().map(Methode::getNom)).containsAll(CLAZZ_METHODS);
     }
 }
