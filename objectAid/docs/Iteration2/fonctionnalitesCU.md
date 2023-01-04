@@ -65,7 +65,7 @@ Il faudra donc générer des flèches et autres relations entre les classes.
 
 
 ### Critères de validation :
-Bouton pour réaliser cet affichage
+Bouton pour réaliser cet affichage.
 Les relations s'affichent / se désaffichent après avoir appuyé sur le bouton
 
 ### Etat :
@@ -81,6 +81,21 @@ Nous n'avions pas commenté le code lors de la précédente itération et nous d
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Mangin Florian
 - Bernard Julien
+
+### Etat :
+Tâche terminée
+
+## Fonctionnalité 6 : Déplacer les classes
+##### Difficulté: 3
+
+En tant qu'étudiant, je souhaiterais pouvoir déplacer les différentes classes dans le diagramme pour pouvoir les agencer comme bon me semble afin de pouvoir dégager par exemple les différents patrons de conception.
+
+#### Les étudiants qui se sont occupés de cette partie sont :
+- Grossmann Jérémy
+
+### Critères de validation :
+- Lors d'un click gauche maintenu sur une classe sélectionnée, je peux la déplacer avec la souris.
+- Lorsque je relache le click gauche, la classe reste à l'endroit où je l'ai lâché.
 
 ### Etat :
 Tâche terminée
