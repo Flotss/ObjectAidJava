@@ -21,6 +21,8 @@ targetCompatibility = '16'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+
+    options.compilerArgs << '-parameters'
 }
 
 application {
