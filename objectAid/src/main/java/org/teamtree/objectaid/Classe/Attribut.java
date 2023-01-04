@@ -4,6 +4,7 @@ import org.teamtree.objectaid.Accessibilite.Accessibilite;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Fabrique.FabriqueAccessibilite;
 import org.teamtree.objectaid.Fabrique.FabriqueEtat;
+import org.teamtree.objectaid.Point;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -35,13 +36,14 @@ public class Attribut {
         if (Collection.class.isAssignableFrom(field.getType())) {
             // Si oui, on récupère le type de la collection
             String nomField= field.getGenericType().getTypeName().trim();
-            String nomFieldFini = "";
 
+            // Ici l'on a un problème de nom, puisqu'il est du type "java.util.List<org.teamtree.objectaid.Classe.ClasseEntiere>"
+            // Alors on ne garde que le nom de la classe
             String[] nomFieldSplit = nomField.split("<");
+            String nomFieldPart1 = nomFieldSplit[0].substring(nomFieldSplit[0].lastIndexOf(".") + 1);
+            String nomFieldPart2 = nomFieldSplit[1].substring(nomFieldSplit[1].lastIndexOf(".") + 1, nomFieldSplit[1].length() - 1);
 
-            nomFieldFini += nomFieldSplit[1].substring(nomFieldSplit[1].lastIndexOf(".") + 1, nomFieldSplit[1].length() - 1);
-
-            this.type = nomFieldFini;
+            this.type = nomFieldPart1 + "<" + nomFieldPart2 + ">";
         }else{
             this.type = field.getType().getSimpleName().trim();
         }

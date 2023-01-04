@@ -6,9 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Classe qui représente une classe
@@ -25,10 +23,12 @@ public class ClasseEntiere {
      * Liste des constructeurs de la classe
      */
     private final List<Constructeur> contructeurs;
+
     /**
      * Liste des attributs de la classe
      */
     private List<Attribut> attributs;
+
     /**
      * Liste des méthodes de la classe
      */
@@ -53,7 +53,8 @@ public class ClasseEntiere {
     /** Methodes sont afficher ou non */
     private boolean methodsEstAffiche;
 
-    private Set<String> relations;
+    /** Association */
+    private final List<String> associations;
 
     /**
      * Constructeur de la classe
@@ -73,7 +74,7 @@ public class ClasseEntiere {
         this.methods = new ArrayList<>();
         this.definition = new DefinitionClasse(classe);
         this.coordonnees = new Point(0, 0);
-        this.relations = new HashSet<>();
+        this.associations = new ArrayList<>();
 
 
         // Interfaces
@@ -96,24 +97,33 @@ public class ClasseEntiere {
 
         // Attributs et Relations
         for (Field field : classe.getDeclaredFields()) {
+            // On cherche si l'attribut est une association donc s'il est primitif ou non
             Attribut attribut = new Attribut(field);
-            switch (attribut.getType()){
-                case "int":
-                case "double":
-                case "float":
-                case "long":
-                case "short":
-                case "byte":
-                case "char":
-                case "boolean":
-                case "String":
+            String type = attribut.getType();
+            boolean isCollection = (type.contains("<") && type.contains(">"));
+
+            // Si c'est une collection, on récupère le type de la collection
+            if (isCollection) {
+                type = type.substring(type.indexOf("<") + 1, type.indexOf(">"));
+            }
+
+            // Si le type n'est pas primitif, c'est une association
+            // Sinon, c'est un attribut
+            String [] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
+            boolean isPrimitive = false;
+            for (String primitive : primitives) {
+                if (type.contains(primitive) && type.length() == primitive.length()) {
                     this.attributs.add(attribut);
+                    isPrimitive = true;
                     break;
-                default:
-                    this.relations.add(attribut.getType());
-                    break;
+                }
+            }
+
+            if (!isPrimitive) {
+                this.associations.add(type);
             }
         }
+
 
         // Constructeurs
         for (Constructor<?> constructor : classe.getDeclaredConstructors()) {
@@ -223,6 +233,24 @@ public class ClasseEntiere {
             for (Methode methode : methods) {
                 info += "\t\t" + methode.toString();
             }
+        }
+
+        if (associations.size() > 0) {
+            info += "\tAssociations: \n";
+            for (String association : associations) {
+                info += "\t\t" + association + "\n";
+            }
+        }
+
+        if (interfaces.size() > 0) {
+            info += "\tInterfaces: \n";
+            for (String inter : interfaces) {
+                info += "\t\t" + inter + "\n";
+            }
+        }
+
+        if (!classeParent.equals("")) {
+            info += "\tClasse parent: " + classeParent + "\n";
         }
 
         return info;
