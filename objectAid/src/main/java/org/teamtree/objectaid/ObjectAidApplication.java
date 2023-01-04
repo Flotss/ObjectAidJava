@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
+import org.teamtree.objectaid.MVC.Controller.ControllerButton;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
 
@@ -50,15 +51,15 @@ public class ObjectAidApplication extends Application {
         model.ajouterObservateur(vue);
 
         HBox buttonBar = new HBox();
-
+        ControllerButton controllerButton = new ControllerButton(model);
         final var attributesDisplayButton = new Button("Afficher les attributs");
-        attributesDisplayButton.setOnAction(event -> model.afficherAttributs());
+        attributesDisplayButton.setOnAction(controllerButton);
 
         final var methodsDisplayButton = new Button("Afficher les méthodes");
-        methodsDisplayButton.setOnAction(event -> model.afficherMethodes());
+        methodsDisplayButton.setOnAction(controllerButton);
 
         final var constructorsDisplayButton = new Button("Afficher les constructeurs");
-        constructorsDisplayButton.setOnAction(event -> model.afficherConstructeurs());
+        constructorsDisplayButton.setOnAction(controllerButton);
 
         buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton);
 

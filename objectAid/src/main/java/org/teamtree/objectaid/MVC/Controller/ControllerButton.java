@@ -2,6 +2,7 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 public class ControllerButton implements EventHandler<ActionEvent> {
@@ -15,6 +16,16 @@ public class ControllerButton implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        throw new Error("Not yet implemented");
+        switch (((Button)event.getSource()).getText()){
+            case "Afficher les attributs":
+                model.afficherAttributs();
+                break;
+            case "Afficher les méthodes":
+                model.afficherMethodes();
+                break;
+            case "Afficher les constructeurs":
+                model.afficherConstructeurs();
+                break;
+        }
     }
 }
