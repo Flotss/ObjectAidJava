@@ -1,0 +1,30 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant "ControllerButton" as controller
+participant "Model" as model
+participant "ClasseEntiere" as clazz
+
+activate user
+user -> controller : handle(MouseEvent: mouseEvent)
+activate controller
+controller -> model : afficherAttributs()
+activate model
+'foreach classes in model.getClasses() and do something
+loop for each c in model.getClasses()
+model -> clazz : setAttributEstAffiche()
+activate clazz
+clazz --> model
+deactivate clazz
+end loop
+
+model -> model : notifierObservateur()
+
+model --> controller
+deactivate model
+controller --> user
+deactivate controller
+
+@enduml
