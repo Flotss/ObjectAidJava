@@ -6,9 +6,7 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Classe.*;
-import org.teamtree.objectaid.MVC.diagramIcons.ClassTitleIcon;
-import org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon;
-import org.teamtree.objectaid.MVC.diagramIcons.InterfaceTitleIcon;
+import org.teamtree.objectaid.MVC.diagramIcons.*;
 
 /**
  * Classe qui permet de créer un affichage pour une classe
@@ -130,6 +128,10 @@ public class FabriqueAffichage {
         return classe;
     }
 
+    /**
+     * Methode permetant de généré l'icon de la classe
+     * @return ClasseEntiereTitleIcon icon
+     */
     private ClasseEntiereTitleIcon fabriqueIcon(){
         ClasseEntiereTitleIcon TitleIcon = null;
         switch (c.getDefinition().getEntite()){
@@ -139,11 +141,22 @@ public class FabriqueAffichage {
             case "interface":
                 TitleIcon = new InterfaceTitleIcon();
                 break;
+            case "record":
+                TitleIcon = new RecordClassTitleIcon();
+                break;
+            case "abstract":
+                TitleIcon = new AbstractClassTitleIcon();
+                break;
         }
         return TitleIcon;
 
     }
 
+    /**
+     * Methode permetant de retourner le symbole de l'accesibitilé
+     * @param acces String correspondant à l'accesibilité
+     * @return symbole de cette accesibilité
+     */
     private String fabriqueAcces(String acces){
         switch (acces){
             case "public":
