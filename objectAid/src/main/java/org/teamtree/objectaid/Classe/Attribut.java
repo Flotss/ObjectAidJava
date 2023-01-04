@@ -7,6 +7,7 @@ import org.teamtree.objectaid.Fabrique.FabriqueEtat;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Classe qui représente un attribut d'une classe
@@ -30,7 +31,22 @@ public class Attribut {
      * @param field Attribut de la classe
      */
     public Attribut(Field field) {
-        this.type = field.getType().getSimpleName().trim();
+        // Est-ce que le type hérite de Collection
+        if (Collection.class.isAssignableFrom(field.getType())) {
+            // Si oui, on récupère le type de la collection
+            String nomField= field.getGenericType().getTypeName().trim();
+            String nomFieldFini = "";
+
+            String[] nomFieldSplit = nomField.split("<");
+
+            nomFieldFini += nomFieldSplit[1].substring(nomFieldSplit[1].lastIndexOf(".") + 1, nomFieldSplit[1].length() - 1);
+
+            this.type = nomFieldFini;
+        }else{
+            this.type = field.getType().getSimpleName().trim();
+        }
+
+
         this.nom = field.getName();
 
         FabriqueEtat fabriqueEtat = new FabriqueEtat();

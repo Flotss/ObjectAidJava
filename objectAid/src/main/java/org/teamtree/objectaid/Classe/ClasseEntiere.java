@@ -6,12 +6,20 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Classe qui représente une classe
  */
 public class ClasseEntiere {
+
+    /** Liste des interfaces implémentées */
+    private final List<String> interfaces;
+
+    /** Nom de la classe parent */
+    private final String classeParent;
 
     /**
      * Liste des constructeurs de la classe
@@ -45,6 +53,8 @@ public class ClasseEntiere {
     /** Methodes sont afficher ou non */
     private boolean methodsEstAffiche;
 
+    private Set<String> relations;
+
     /**
      * Constructeur de la classe
      * Génère les attributs, les constructeurs et les méthodes de la classe, ainsi que sa définition
@@ -57,15 +67,52 @@ public class ClasseEntiere {
         Class<?> classe = Class.forName(path);
 
         // Création des types des attributs
+        this.interfaces = new ArrayList<>();
         this.attributs = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.definition = new DefinitionClasse(classe);
         this.coordonnees = new Point(0, 0);
+        this.relations = new HashSet<>();
 
-        // Attributs
+
+        // Interfaces
+        for (Class<?> inter : classe.getInterfaces()) {
+            this.interfaces.add(inter.getSimpleName());
+        }
+
+        // Classe parent
+        if (classe.getSuperclass() != null) {
+            String nameParent = classe.getSuperclass().getSimpleName();
+
+            if (nameParent.equals("Object")) {
+                nameParent = "";
+            }
+
+            this.classeParent = nameParent;
+        }else{
+            this.classeParent = "";
+        }
+
+        // Attributs et Relations
         for (Field field : classe.getDeclaredFields()) {
-            this.attributs.add(new Attribut(field));
+            Attribut attribut = new Attribut(field);
+            switch (attribut.getType()){
+                case "int":
+                case "double":
+                case "float":
+                case "long":
+                case "short":
+                case "byte":
+                case "char":
+                case "boolean":
+                case "String":
+                    this.attributs.add(attribut);
+                    break;
+                default:
+                    this.relations.add(attribut.getType());
+                    break;
+            }
         }
 
         // Constructeurs
@@ -77,6 +124,8 @@ public class ClasseEntiere {
         for (Method method : classe.getDeclaredMethods()) {
             this.methods.add(new Methode(method));
         }
+
+
 
         // Partie affichage des attributs, constructeurs et méthodes
         this.attributEstAffiche = true;
