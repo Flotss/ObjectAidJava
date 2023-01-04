@@ -1,0 +1,26 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant ClasseEntiereClickedController as controller
+participant Model as model
+
+activate user
+user -> controller : handle(MouseEvent: event)
+activate controller
+controller -> model : getClasseEntiere()
+activate model
+model --> controller : classeEntiere
+deactivate model
+controller -> controller : addClickedEffect(source);
+controller -> model : setCurrentClickedClass(source.getNom());
+activate model
+model --> controller :
+deactivate model
+controller --> user
+deactivate controller
+deactivate user
+
+
+@enduml
