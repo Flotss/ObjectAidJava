@@ -15,6 +15,7 @@ package "MVC"{
             - nomSelection : String
             - currentClickedClass : String
             + Modele()
+            + deplacerClasse(String, int, int)
             + afficherAttributs()
             + afficherConstructeurs()
             + afficherMethodes()
@@ -66,6 +67,11 @@ package "MVC"{
     class ClasseEntiereClickedController{
             + ClasseEntiereClickedController(Modele)
             + addClickedEffect(ClasseAffichage)
+            +handle(MouseEvent)
+    }
+
+    class DragAndDropClasseEntiereController{
+            + DragAndDropClasseEntiereController(Modele)
             +handle(MouseEvent)
     }
 
@@ -297,5 +303,6 @@ Fleche "2" *-- Point : pointDebutFin
 ControleurBouton "*" --> "1" Modele : -modele
 ClasseEntiereClickedController "*" --> "1" Modele : -modele
 FabriqueAffichage --> "1" ClasseEntiere : -c
+DragAndDropClasseEntiereController "*" --> "1" Modele : -modele
 
 @enduml
