@@ -1,9 +1,8 @@
 package org.teamtree.objectaid.MVC.Model;
 
 import org.teamtree.objectaid.Classe.ClasseEntiere;
-import org.teamtree.objectaid.Fleche;
+import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
-import org.teamtree.objectaid.MVC.Vue.VueClasse;
 
 import java.util.ArrayList;
 import java.util.HashMap;

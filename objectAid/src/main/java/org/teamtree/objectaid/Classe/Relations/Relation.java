@@ -1,14 +1,20 @@
 package org.teamtree.objectaid.Classe.Relations;
 
 public abstract class Relation {
-    private String nom;
+    private final String depart;
+    private final String destination;
 
-    public Relation(String nom) {
-        this.nom = nom;
+    public Relation(String depart, String destination) {
+        this.depart = depart;
+        this.destination = destination;
     }
 
-    public String getNom() {
-        return nom;
+    public String getDepart(){
+        return depart;
+    }
+
+    public String getDestination() {
+        return destination;
     }
 
     public abstract String toString();

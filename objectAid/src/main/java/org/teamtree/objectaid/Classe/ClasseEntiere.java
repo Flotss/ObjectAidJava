@@ -76,7 +76,7 @@ public class ClasseEntiere {
 
         // Interfaces
         for (Class<?> inter : classe.getInterfaces()) {
-            this.relations.add(new Implementation(inter.getSimpleName()));
+            this.relations.add(new Implementation(this.definition.getNom(), inter.getSimpleName()));
         }
 
         // Classe parent
@@ -85,7 +85,7 @@ public class ClasseEntiere {
 
             // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
             if (!nameParent.equals("Object")) {
-                this.relations.add(new Heritage(nameParent));
+                this.relations.add(new Heritage(this.definition.getNom(),nameParent));
             }
         }
 
@@ -93,12 +93,12 @@ public class ClasseEntiere {
         for (Field field : classe.getDeclaredFields()) {
             // On cherche si l'attribut est une association donc s'il est primitif ou non
             Attribut attribut = new Attribut(field);
-            String type = attribut.getType();
-            boolean isCollection = (type.contains("<") && type.contains(">"));
+            String destinationType = attribut.getType();
+            boolean isCollection = (destinationType.contains("<") && destinationType.contains(">"));
 
             // Si c'est une collection, on récupère le type de la collection
             if (isCollection) {
-                type = type.substring(type.indexOf("<") + 1, type.indexOf(">"));
+                destinationType = destinationType.substring(destinationType.indexOf("<") + 1, destinationType.indexOf(">"));
             }
 
             // Si le type n'est pas primitif, c'est une association
@@ -106,7 +106,7 @@ public class ClasseEntiere {
             String [] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
             boolean isPrimitive = false;
             for (String primitive : primitives) {
-                if (type.contains(primitive) && type.length() == primitive.length()) {
+                if (destinationType.contains(primitive) && destinationType.length() == primitive.length()) {
                     this.attributs.add(attribut);
                     isPrimitive = true;
                     break;
@@ -116,9 +116,9 @@ public class ClasseEntiere {
             // Ajout de la relation si l'attribut n'est pas primitif
             if (!isPrimitive) {
                 if (isCollection){
-                    this.relations.add(new Association(type, "*", "*"));
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut.getNom(), attribut.getType(), "*", "*"));
                 }else{
-                    this.relations.add(new Association(type, "1", "*"));
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut.getNom(), attribut.getType(), "1", "*"));
                 }
             }
         }
@@ -140,6 +140,11 @@ public class ClasseEntiere {
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
         this.constructeurEstAffiche = true;
+
+        System.out.println("-----------------\n");
+        for (Relation relation : this.relations) {
+            System.out.println(relation);
+        }
     }
 
     /**

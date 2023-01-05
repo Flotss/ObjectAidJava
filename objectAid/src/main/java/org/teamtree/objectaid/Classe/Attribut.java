@@ -43,12 +43,14 @@ public class Attribut {
             String nomFieldPart1 = nomFieldSplit[0].substring(nomFieldSplit[0].lastIndexOf(".") + 1);
             String nomFieldPart2 = nomFieldSplit[1].substring(nomFieldSplit[1].lastIndexOf(".") + 1, nomFieldSplit[1].length() - 1);
 
+            // On a alors le part1 = List, part2 = ClasseEntiere
+            // On doit ajouter <> pour que le nom soit complet
             this.type = nomFieldPart1 + "<" + nomFieldPart2 + ">";
         }else{
             this.type = field.getType().getSimpleName().trim();
         }
 
-
+        // Affecte le nom de l'attribut
         this.nom = field.getName();
 
         FabriqueEtat fabriqueEtat = new FabriqueEtat();

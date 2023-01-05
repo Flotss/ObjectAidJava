@@ -1,14 +1,13 @@
 package org.teamtree.objectaid.Classe.Relations;
 
 public class Implementation extends Relation {
-    private String nom;
 
-    public Implementation(String nom) {
-        super(nom);
+    public Implementation(String depart, String destination) {
+        super(depart, destination);
     }
 
     @Override
     public String toString() {
-        return "Implementation: " + getNom();
+        return "Implementation: " + getDepart() + " -> " + getDestination();
     }
 }
