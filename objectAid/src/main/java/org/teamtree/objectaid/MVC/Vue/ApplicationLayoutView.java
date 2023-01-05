@@ -1,13 +1,20 @@
 package org.teamtree.objectaid.MVC.Vue;
 
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.render.ApplicationLayoutBootstrapRender;
 
-public class ApplicationLayoutView implements Observateur {
+public class ApplicationLayoutView extends Pane implements Observateur {
 
     private final Model model;
+    private final Stage stage;
 
-    public ApplicationLayoutView(Model model) {
+    public ApplicationLayoutView(Model model, Stage stage) {
         this.model = model;
+        this.stage = stage;
+
+        actualiser();
     }
 
 
@@ -16,15 +23,18 @@ public class ApplicationLayoutView implements Observateur {
      */
     @Override
     public void actualiser() {
-        switch (model.getApplicationState()) {
-            case BOOTSTRAP -> {
-                break;
-            }
-            case PROJECT_LOADED -> {
-                break;
-            }
 
-            default -> throw new IllegalStateException("Unexpected value: " + model.getApplicationState());
-        }
+        this.getChildren().clear();
+
+    }
+
+    public void run() {
+        final var scene = switch(model.getApplicationState()) {
+            case BOOTSTRAP -> new ApplicationLayoutBootstrapRender(model);
+            case PROJECT_LOADED -> null;
+        };
+
+        stage.setScene(new ApplicationLayoutBootstrapRender(model).getScene());
+        stage.show();
     }
 }
