@@ -67,7 +67,6 @@ public class ClasseAffichage extends VBox {
 
     /**
      * Méthode qui permet de créer la partie constructeurs de la classe
-     * @param c La classe à afficher
      */
 
     public void setAttributs(){
@@ -87,7 +86,6 @@ public class ClasseAffichage extends VBox {
 
     /**
      * Méthode qui permet de créer la partie constructeurs de la classe
-     * @param c La classe à afficher
      */
 
     public void setConstructeur(){
@@ -121,7 +119,6 @@ public class ClasseAffichage extends VBox {
 
     /**
      * Méthode qui permet de créer la partie méthodes de la classe
-     * @param c La classe à afficher
      */
 
     public void setMethodes(){
@@ -148,7 +145,6 @@ public class ClasseAffichage extends VBox {
 
     /**
      * Méthode qui permet de créer l'affichage de la classe
-     * @param c La classe à afficher
      */
 
     public void setPosition(){
