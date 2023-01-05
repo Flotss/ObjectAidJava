@@ -26,15 +26,19 @@ public class ApplicationLayoutView extends Pane implements Observateur {
 
         this.getChildren().clear();
 
+        switch (model.getApplicationState()) {
+            case BOOTSTRAP -> stage.setScene(new ApplicationLayoutBootstrapRender(model).getScene());
+            case PROJECT_LOADED -> stage.setScene(new ApplicationLayoutProjectLoadedRender(model).getScene());
+        }
     }
 
     public void run() {
         final var scene = switch(model.getApplicationState()) {
             case BOOTSTRAP -> new ApplicationLayoutBootstrapRender(model);
-            case PROJECT_LOADED -> null;
+            case PROJECT_LOADED -> new ApplicationLayoutProjectLoadedRender(model);
         };
 
-        stage.setScene(new ApplicationLayoutBootstrapRender(model).getScene());
+        stage.setScene(scene.getScene());
         stage.show();
     }
 }

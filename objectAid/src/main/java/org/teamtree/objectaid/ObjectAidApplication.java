@@ -69,6 +69,8 @@ public class ObjectAidApplication extends Application {
         //applicationLayout.getChildren().addAll(buttonBar);
 
         final var applicationLayoutView = new ApplicationLayoutView(model, stage);
+        model.ajouterObservateur(applicationLayoutView);
+
         applicationLayoutView.run();
     }
 }
