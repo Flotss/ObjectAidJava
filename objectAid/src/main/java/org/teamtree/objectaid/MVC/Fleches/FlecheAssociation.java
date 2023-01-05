@@ -21,8 +21,4 @@ public class FlecheAssociation implements Fleche{
         return null;
     }
 
-    @Override
-    public String getNomFleche() {
-        return null;
-    }
 }

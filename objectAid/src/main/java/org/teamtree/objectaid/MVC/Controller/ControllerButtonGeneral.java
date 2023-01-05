@@ -5,11 +5,11 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import org.teamtree.objectaid.MVC.Model.Model;
 
-public class ControllerButton implements EventHandler<ActionEvent> {
+public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
 
     private final Model model;
 
-    public ControllerButton(Model model) {
+    public ControllerButtonGeneral(Model model) {
         this.model = model;
     }
 

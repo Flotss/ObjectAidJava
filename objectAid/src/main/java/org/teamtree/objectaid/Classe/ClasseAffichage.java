@@ -38,6 +38,8 @@ public class ClasseAffichage extends VBox {
      */
     private VBox methodes;
 
+    private String couleur;
+
     /**
      * Constructeur de la classe
      * @param c La classe à afficher
@@ -147,7 +149,7 @@ public class ClasseAffichage extends VBox {
      * Méthode qui permet de créer l'affichage de la classe
      */
 
-    public void setPosition(){
+    public void actualiserPosition(){
         this.setLayoutX(c.getX());
         this.setLayoutY(c.getY());
     }
@@ -196,5 +198,17 @@ public class ClasseAffichage extends VBox {
 
     public ClasseEntiere getClasseEntiere(){
         return this.c;
+    }
+
+    public void classeSelectionnee(){
+        this.couleur = "blue";
+    }
+
+    public void classeDeSelectionnee(){
+        this.couleur = "black";
+    }
+
+    public void actualiserBordure(){
+        super.setStyle("-fx-border-color: "+this.couleur+ " ; -fx-border-width: 1px;");
     }
 }

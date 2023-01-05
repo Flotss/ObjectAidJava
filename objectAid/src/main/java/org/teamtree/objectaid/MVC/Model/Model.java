@@ -1,5 +1,6 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
@@ -21,7 +22,7 @@ public class Model implements Sujet {
     private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
 
     /** Classe sélectionnée */
-    private String currentClickedClass;
+    private ClasseAffichage currentClickedClass;
 
     /**
      * Constructeur du model
@@ -29,7 +30,7 @@ public class Model implements Sujet {
     public Model() {
         this.observateurs = new ArrayList<>();
         this.relations = new HashMap<>();
-        this.currentClickedClass = "";
+        this.currentClickedClass = null;
     }
 
     /**
@@ -54,6 +55,17 @@ public class Model implements Sujet {
     public void notifierObservateur() {
         for (Observateur o : observateurs) {
             o.actualiser();
+        }
+    }
+
+    public void notifierObservateur(String selection){
+        switch(selection){
+            case "selection":
+                this.currentClickedClass.actualiserBordure();
+            break;
+            case "deplacement selection":
+                this.currentClickedClass.actualiserPosition();
+            break;
         }
     }
 
@@ -125,7 +137,7 @@ public class Model implements Sujet {
      * Méthode qui permet de récupérer la classe sélectionnée
      * @return Classe sélectionnée
      */
-    public String getCurrentClickedClass() {
+    public ClasseAffichage getCurrentClickedClass() {
         return currentClickedClass;
     }
 
@@ -133,10 +145,17 @@ public class Model implements Sujet {
      * Méthode qui permet de définir la classe sélectionnée
      * @param currentClickedClass Classe sélectionnée
      */
-    public void setCurrentClickedClass(final String currentClickedClass) {
-       this.currentClickedClass = (Objects.equals(currentClickedClass, this.currentClickedClass))
+    public void setCurrentClickedClass(ClasseAffichage currentClickedClass) {
+        if(this.currentClickedClass != null) {
+            this.currentClickedClass.classeDeSelectionnee();
+            this.notifierObservateur("selection");
+        }
+       this.currentClickedClass =  currentClickedClass;
+       this.currentClickedClass.classeSelectionnee();
+        this.notifierObservateur("selection");
+               /*(Objects.equals(currentClickedClass, this.currentClickedClass))
                                     ? ""
-                                    : currentClickedClass;
+                                    : currentClickedClass;*/
     }
 
     /**
@@ -182,9 +201,8 @@ public class Model implements Sujet {
      * Methode qui permet de deplacer une classe
      */
     public void deplacerClasse(int x, int y) {
-        getClasse(currentClickedClass).ifPresent(classe -> {
-            classe.deplacer(x,y);
-            notifierObservateur();
-        });
+        this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
+        notifierObservateur("deplacement selection");
+
     }
 }

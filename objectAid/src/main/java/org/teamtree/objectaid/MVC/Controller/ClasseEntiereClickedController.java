@@ -33,8 +33,8 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
      * @param source Classe cliquée
      */
     private void addClickedEffect(final ClasseAffichage source) {
-        model.setCurrentClickedClass(source.getNom());
+        model.setCurrentClickedClass(source);
 
-        model.notifierObservateur();
+//        model.notifierObservateur();
     }
 }

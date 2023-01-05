@@ -36,7 +36,7 @@ public class VueClasse extends Pane implements Observateur {
             FabriqueAffichage f = new FabriqueAffichage(c);
             ClasseAffichage classe = f.affichage();
 
-            setBorderColor(classe);
+//            setBorderColor(classe);
 
             this.getChildren().add(classe);
 
@@ -57,8 +57,7 @@ public class VueClasse extends Pane implements Observateur {
     @Override
     public void actualiser() {
         for (ClasseAffichage classe : classes) {
-            setBorderColor(classe);
-            classe.setPosition();
+            ClasseEntiere classeEntiere = model.getClasse(classe.getNom()).get();
             classe.afficherClasse();
         }
     }
@@ -67,15 +66,15 @@ public class VueClasse extends Pane implements Observateur {
      * Méthode qui permet de mettre la couleur de la bordure de la classe
      * @param node ClasseAffichage à mettre en couleur
      */
-    public void setBorderColor(final ClasseAffichage node) {
-        final String color = model.getCurrentClickedClass().equals(node.getNom()) ? "blue" : "black";
-        final var builderStyle = new StringBuilder();
-        builderStyle.append(node.getStyle());
-        builderStyle.append("-fx-border-color: ");
-        builderStyle.append(color);
-        builderStyle.append("; -fx-border-width: 1px;");
-
-        node.setStyle(builderStyle.toString());
-    }
+//    public void setBorderColor(final ClasseAffichage node) {
+//        final String color = model.getCurrentClickedClass().equals(node.getNom()) ? "blue" : "black";
+//        final var builderStyle = new StringBuilder();
+//        builderStyle.append(node.getStyle());
+//        builderStyle.append("-fx-border-color: ");
+//        builderStyle.append(color);
+//        builderStyle.append("; -fx-border-width: 1px;");
+//
+//        node.setStyle(builderStyle.toString());
+//    }
 
 }

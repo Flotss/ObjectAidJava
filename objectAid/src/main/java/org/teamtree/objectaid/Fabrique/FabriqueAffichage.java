@@ -51,7 +51,7 @@ public class FabriqueAffichage {
         classe.afficherClasse();
 
         //coordonees de la classe
-        classe.setPosition();
+        classe.actualiserPosition();
 
         classe.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
 
