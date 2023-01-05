@@ -18,7 +18,7 @@ public class ObjectAidApplication extends Application {
     public void start(Stage stage) throws IOException, ClassNotFoundException {
         Model model = new Model();
         VBox applicationLayout = new VBox();
-
+/**
         ClasseEntiere c = new ClasseEntiere("org.teamtree.objectaid.Classe.ClasseEntiere");
         model.ajouterClasse(c);
 
@@ -49,7 +49,7 @@ public class ObjectAidApplication extends Application {
 
         VueClasse vue = new VueClasse(model);
         model.ajouterObservateur(vue);
-
+ */
         HBox buttonBar = new HBox();
         ControllerButton controllerButton = new ControllerButton(model);
         final var attributesDisplayButton = new Button("Afficher les attributs");
@@ -63,7 +63,7 @@ public class ObjectAidApplication extends Application {
 
         buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton);
 
-        applicationLayout.getChildren().addAll(buttonBar, vue);
+        //applicationLayout.getChildren().addAll(buttonBar);
 
 
         Scene scene = new Scene(applicationLayout, 1024, 768);
