@@ -347,4 +347,8 @@ public class ClasseEntiere {
     public ClasseAffichage getClasseAffichage() {
         return classeAffichage;
     }
+
+    public void setClasseAffichage(ClasseAffichage classeAffichage) {
+        this.classeAffichage = classeAffichage;
+    }
 }

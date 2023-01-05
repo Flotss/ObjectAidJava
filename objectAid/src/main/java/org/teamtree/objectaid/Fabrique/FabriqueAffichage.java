@@ -55,6 +55,9 @@ public class FabriqueAffichage {
 
         classe.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
 
+        //ajoute la classe qui est affiché à la classeEntiere
+        c.setClasseAffichage(classe);
+
         return classe;
     }
 
