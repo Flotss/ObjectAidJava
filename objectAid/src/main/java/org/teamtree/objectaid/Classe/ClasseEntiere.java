@@ -1,34 +1,32 @@
 package org.teamtree.objectaid.Classe;
 
+import org.teamtree.objectaid.Classe.Relations.Association;
+import org.teamtree.objectaid.Classe.Relations.Heritage;
+import org.teamtree.objectaid.Classe.Relations.Implementation;
+import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Point;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Classe qui représente une classe
  */
 public class ClasseEntiere {
 
-    /** Liste des interfaces implémentées */
-    private final List<String> interfaces;
-
-    /** Nom de la classe parent */
-    private final String classeParent;
-
     /**
      * Liste des constructeurs de la classe
      */
     private final List<Constructeur> contructeurs;
+
     /**
      * Liste des attributs de la classe
      */
     private List<Attribut> attributs;
+
     /**
      * Liste des méthodes de la classe
      */
@@ -53,7 +51,8 @@ public class ClasseEntiere {
     /** Methodes sont afficher ou non */
     private boolean methodsEstAffiche;
 
-    private Set<String> relations;
+    /** Relation entre classe */
+    private final List<Relation> relations;
 
     /**
      * Constructeur de la classe
@@ -67,53 +66,63 @@ public class ClasseEntiere {
         Class<?> classe = Class.forName(path);
 
         // Création des types des attributs
-        this.interfaces = new ArrayList<>();
         this.attributs = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.definition = new DefinitionClasse(classe);
         this.coordonnees = new Point(0, 0);
-        this.relations = new HashSet<>();
+        this.relations = new ArrayList<>();
 
 
         // Interfaces
         for (Class<?> inter : classe.getInterfaces()) {
-            this.interfaces.add(inter.getSimpleName());
+            this.relations.add(new Implementation(inter.getSimpleName()));
         }
 
         // Classe parent
         if (classe.getSuperclass() != null) {
             String nameParent = classe.getSuperclass().getSimpleName();
 
-            if (nameParent.equals("Object")) {
-                nameParent = "";
+            // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
+            if (!nameParent.equals("Object")) {
+                this.relations.add(new Heritage(nameParent));
             }
-
-            this.classeParent = nameParent;
-        }else{
-            this.classeParent = "";
         }
 
         // Attributs et Relations
         for (Field field : classe.getDeclaredFields()) {
+            // On cherche si l'attribut est une association donc s'il est primitif ou non
             Attribut attribut = new Attribut(field);
-            switch (attribut.getType()){
-                case "int":
-                case "double":
-                case "float":
-                case "long":
-                case "short":
-                case "byte":
-                case "char":
-                case "boolean":
-                case "String":
+            String type = attribut.getType();
+            boolean isCollection = (type.contains("<") && type.contains(">"));
+
+            // Si c'est une collection, on récupère le type de la collection
+            if (isCollection) {
+                type = type.substring(type.indexOf("<") + 1, type.indexOf(">"));
+            }
+
+            // Si le type n'est pas primitif, c'est une association
+            // Sinon, c'est un attribut
+            String [] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
+            boolean isPrimitive = false;
+            for (String primitive : primitives) {
+                if (type.contains(primitive) && type.length() == primitive.length()) {
                     this.attributs.add(attribut);
+                    isPrimitive = true;
                     break;
-                default:
-                    this.relations.add(attribut.getType());
-                    break;
+                }
+            }
+
+            // Ajout de la relation si l'attribut n'est pas primitif
+            if (!isPrimitive) {
+                if (isCollection){
+                    this.relations.add(new Association(type, "*", "*"));
+                }else{
+                    this.relations.add(new Association(type, "1", "*"));
+                }
             }
         }
+
 
         // Constructeurs
         for (Constructor<?> constructor : classe.getDeclaredConstructors()) {
@@ -204,28 +213,35 @@ public class ClasseEntiere {
 
     @Override
     public String toString() {
-        String info = definition.toString();
+        StringBuilder info = new StringBuilder(definition.toString());
         if (attributs.size() > 0) {
-            info += "\tAttributs: \n";
+            info.append("\tAttributs: \n");
             for (Attribut attribut : attributs) {
-                info += "\t\t" + attribut.toString();
+                info.append("\t\t").append(attribut.toString());
             }
         }
         if (contructeurs.size() > 0) {
-            info += "\tConstructeurs: \n";
+            info.append("\tConstructeurs: \n");
             for (Constructeur constructeur : contructeurs) {
-                info += "\t\t" + constructeur.toString();
+                info.append("\t\t").append(constructeur.toString());
             }
         }
 
         if (methods.size() > 0) {
-            info += "\tMethodes: \n";
+            info.append("\tMethodes: \n");
             for (Methode methode : methods) {
-                info += "\t\t" + methode.toString();
+                info.append("\t\t").append(methode.toString());
             }
         }
 
-        return info;
+        if (relations.size() > 0) {
+            info.append("\tRelations: \n");
+            for (Relation relation : relations) {
+                info.append("\t\t").append(relation.toString());
+            }
+        }
+
+        return info.toString();
     }
 
     /**

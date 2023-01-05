@@ -1,8 +1,9 @@
 package org.teamtree.objectaid.MVC.Controller;
 
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -11,7 +12,7 @@ import org.teamtree.objectaid.MVC.Model.Model;
  * Classe qui permet de gérer le drag and drop
  */
 
-public class DragAndDropController implements EventHandler<MouseEvent> {
+public class DeplacementClasseDragAndDropController implements EventHandler<MouseEvent> {
 
     /** Modèle */
     private Model model;
@@ -20,7 +21,7 @@ public class DragAndDropController implements EventHandler<MouseEvent> {
      * Constructeur du controller
      * @param model Modèle
      */
-    public DragAndDropController(Model model) {
+    public DeplacementClasseDragAndDropController(Model model) {
         this.model = model;
     }
 
