@@ -74,10 +74,12 @@ Les relations s'affichent / se désaffichent après avoir appuyé sur le bouton
 ### Etat :
 Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
 Les associations, héritage et implémentation sont affichées dans la console, mais il reste à les afficher sur l'interface graphique
-
-#### Détail de la fonctionnalité :
 Nous avons réalisé la structure de données permettant de stocker les relations entre les classes.
 C'est-à-dire que maintenant lorque l'on crée une classe, ses relations sont stockées dans une liste de relations donc pour les associations, les implémentations et pour l'héritage.
+
+#### Détail de la fonctionnalité :
+Cette fonctionnalité permet de créer des relations entre les classes.
+C'est à dire la création d'associations, d'héritage et d'implémentations pour chaque classe qui a été importé. De plus elle doit permettre de les afficher ou non dans l'affichage graphique de l'application grace à un bouton et des flèches.
 
 
 #### Patron de conception utilisé :
