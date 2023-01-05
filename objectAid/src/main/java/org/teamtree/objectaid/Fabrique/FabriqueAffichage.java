@@ -30,28 +30,28 @@ public class FabriqueAffichage {
      */
     public ClasseAffichage affichage(){
         //On crée la classeAffichage correspondant a un VBox, servant à recevoir tout le bloc de la classe
-        ClasseAffichage classe = new ClasseAffichage(c.getDefinition().getNom());
+        ClasseAffichage classe = new ClasseAffichage(c);
 
         //on affecte la taille maximale de la classe
         classe.setMaxWidth(150);
 
         //on s'occupe de la partie definition
-        classe.setDefinition(c);
+        classe.setDefinition();
 
         //on s'occupe de la partie attributs
-        classe.setAttributs(c);
+        classe.setAttributs();
 
         //on s'occupe de la partie constructeurs
-        classe.setConstructeur(c);
+        classe.setConstructeur();
 
         //on s'occupe de la partie methodes
-        classe.setMethodes(c);
+        classe.setMethodes();
 
         //ajout des parties de la classe
-        classe.afficherClasse(c);
+        classe.afficherClasse();
 
         //coordonees de la classe
-        classe.setPosition(c);
+        classe.setPosition();
 
         classe.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
 

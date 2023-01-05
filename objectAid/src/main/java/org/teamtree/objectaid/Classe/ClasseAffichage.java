@@ -15,6 +15,9 @@ public class ClasseAffichage extends VBox {
      */
     private String nom;
 
+    /** ClasseEntiere de la classe qui est affichée */
+    private ClasseEntiere c;
+
     /**
      * HBox qui contient la définition de la classe
      */
@@ -37,11 +40,12 @@ public class ClasseAffichage extends VBox {
 
     /**
      * Constructeur de la classe
-     * @param nom Le nom de la classe
+     * @param c La classe à afficher
      */
 
-    public ClasseAffichage(String nom){
-        this.nom = nom;
+    public ClasseAffichage(ClasseEntiere c){
+        this.nom = c.getDefinition().getNom();
+        this.c = c;
         this.definition = new HBox();
         this.constructeur = new VBox();
         this.attributs = new VBox();
@@ -50,10 +54,9 @@ public class ClasseAffichage extends VBox {
 
     /**
      * Méthode qui permet de créer la partie définition de la classe
-     * @param c La classe à afficher
      */
 
-    public void setDefinition(ClasseEntiere c) {
+    public void setDefinition() {
         //partie definition
         String def = c.getDefinition().getNom();
         Label definitionLabel = new Label(def);
@@ -67,7 +70,7 @@ public class ClasseAffichage extends VBox {
      * @param c La classe à afficher
      */
 
-    public void setAttributs(ClasseEntiere c){
+    public void setAttributs(){
         if(c.isAttributEstAffiche()) {
             //Si il existe des attributs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
             if (c.getAttributs().size() != 0) {
@@ -87,7 +90,7 @@ public class ClasseAffichage extends VBox {
      * @param c La classe à afficher
      */
 
-    public void setConstructeur(ClasseEntiere c){
+    public void setConstructeur(){
         //partie constructeur
         //On vérifie que les constructeurs doivent être affichés
         if(c.isConstructeurEstAffiche()) {
@@ -121,7 +124,7 @@ public class ClasseAffichage extends VBox {
      * @param c La classe à afficher
      */
 
-    public void setMethodes(ClasseEntiere c){
+    public void setMethodes(){
         //partie methodes
         if(c.isMethodsEstAffiche()) {
             if (c.getMethods().size() != 0) {
@@ -148,7 +151,7 @@ public class ClasseAffichage extends VBox {
      * @param c La classe à afficher
      */
 
-    public void setPosition(ClasseEntiere c){
+    public void setPosition(){
         this.setLayoutX(c.getX());
         this.setLayoutY(c.getY());
     }
@@ -158,7 +161,7 @@ public class ClasseAffichage extends VBox {
      * @param c La classe à afficher
      */
 
-    public void afficherClasse(ClasseEntiere c){
+    public void afficherClasse(){
 
     //On ajoute les différentes parties de la classe
         this.getChildren().clear();
@@ -193,5 +196,9 @@ public class ClasseAffichage extends VBox {
 
     public VBox getMethodes() {
         return methodes;
+    }
+
+    public ClasseEntiere getClasseEntiere(){
+        return this.c;
     }
 }
