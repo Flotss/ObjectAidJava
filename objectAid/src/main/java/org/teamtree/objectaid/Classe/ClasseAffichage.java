@@ -71,7 +71,7 @@ public class ClasseAffichage extends VBox {
         if(c.isAttributEstAffiche()) {
             //Si il existe des attributs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
             if (c.getAttributs().size() != 0) {
-                definition.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
+                attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
             }
             //Pour chaque attributs
             for (Attribut attributX: c.getAttributs()) {
@@ -93,7 +93,7 @@ public class ClasseAffichage extends VBox {
         if(c.isConstructeurEstAffiche()) {
             //Si il existe des constructeurs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
             if (c.getContructeurs().size() != 0) {
-                attributs.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
+                constructeur.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
             }
             //Pour chaque Constructeurs
             for (Constructeur constructeurX:c.getContructeurs()) {
@@ -125,7 +125,7 @@ public class ClasseAffichage extends VBox {
         //partie methodes
         if(c.isMethodsEstAffiche()) {
             if (c.getMethods().size() != 0) {
-                constructeur.setStyle("-fx-border-color: transparent transparent black transparent; -fx-border-width: 1px;");
+                methodes.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
             }
             for (int i = 0; i < c.getMethods().size(); i++) {
                 Methode methodeX = c.getMethods().get(i);
