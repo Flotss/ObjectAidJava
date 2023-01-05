@@ -4,7 +4,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
-import org.teamtree.objectaid.MVC.diagramIcons.*;
 
 /**
  * Classe qui représente l'affichage d'une classe
@@ -184,31 +183,15 @@ public class ClasseAffichage extends VBox {
         return definition;
     }
 
-    public void setDefinition(HBox definition) {
-        this.definition = definition;
-    }
-
     public VBox getConstructeur() {
         return constructeur;
-    }
-
-    public void setConstructeur(VBox constructeur) {
-        this.constructeur = constructeur;
     }
 
     public VBox getAttributs() {
         return attributs;
     }
 
-    public void setAttributs(VBox attributs) {
-        this.attributs = attributs;
-    }
-
     public VBox getMethodes() {
         return methodes;
-    }
-
-    public void setMethodes(VBox methodes) {
-        this.methodes = methodes;
     }
 }
