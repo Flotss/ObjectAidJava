@@ -1,13 +1,12 @@
 package org.teamtree.objectaid.MVC.Model;
 
-import org.teamtree.objectaid.Classe.ClasseAffichage;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -22,7 +21,7 @@ public class Model implements Sujet {
     private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
 
     /** Classe sélectionnée */
-    private ClasseAffichage currentClickedClass;
+    private VueClasseAffichage currentClickedClass;
 
     /**
      * Constructeur du model
@@ -137,7 +136,7 @@ public class Model implements Sujet {
      * Méthode qui permet de récupérer la classe sélectionnée
      * @return Classe sélectionnée
      */
-    public ClasseAffichage getCurrentClickedClass() {
+    public VueClasseAffichage getCurrentClickedClass() {
         return currentClickedClass;
     }
 
@@ -145,7 +144,7 @@ public class Model implements Sujet {
      * Méthode qui permet de définir la classe sélectionnée
      * @param currentClickedClass Classe sélectionnée
      */
-    public void setCurrentClickedClass(ClasseAffichage currentClickedClass) {
+    public void setCurrentClickedClass(VueClasseAffichage currentClickedClass) {
         if(this.currentClickedClass != null) {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");

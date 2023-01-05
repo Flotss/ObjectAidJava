@@ -1,14 +1,15 @@
-package org.teamtree.objectaid.Classe;
+package org.teamtree.objectaid.MVC.Vue;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.teamtree.objectaid.Classe.*;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 
 /**
  * Classe qui représente l'affichage d'une classe
  */
-public class ClasseAffichage extends VBox {
+public class VueClasseAffichage extends VBox implements Observateur {
 
     /**
      * Nom de cette classe, permettant de la retrouver lorsqu'on clique dessus notamment
@@ -45,7 +46,7 @@ public class ClasseAffichage extends VBox {
      * @param c La classe à afficher
      */
 
-    public ClasseAffichage(ClasseEntiere c){
+    public VueClasseAffichage(ClasseEntiere c){
         this.nom = c.getDefinition().getNom();
         this.c = c;
         this.definition = new HBox();
@@ -210,5 +211,10 @@ public class ClasseAffichage extends VBox {
 
     public void actualiserBordure(){
         super.setStyle("-fx-border-color: "+this.couleur+ " ; -fx-border-width: 1px;");
+    }
+
+    @Override
+    public void actualiser() {
+
     }
 }
