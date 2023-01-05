@@ -35,9 +35,7 @@ public class DeplacementClasseDragAndDropController implements EventHandler<Mous
         if (model.getCurrentClickedClass().equals(classe.getNom()) && event.isPrimaryButtonDown()){
             int x = (int) event.getSceneX();
             int y = (int) event.getSceneY() - 25;
-            ClasseEntiere classeEntiere = model.getClasse(model.getCurrentClickedClass()).get();
-            classeEntiere.setX(x);
-            classeEntiere.setY(y);
+            model.deplacerClasse(x,y);
             model.notifierObservateur();
         }
     }

@@ -54,6 +54,9 @@ public class ClasseEntiere {
     /** Relation entre classe */
     private final List<Relation> relations;
 
+    /** Classe qui sera affichée correspondant à la ClasseEntiere */
+    private ClasseAffichage classeAffichage;
+
     /**
      * Constructeur de la classe
      * Génère les attributs, les constructeurs et les méthodes de la classe, ainsi que sa définition
@@ -72,6 +75,7 @@ public class ClasseEntiere {
         this.definition = new DefinitionClasse(classe);
         this.coordonnees = new Point(0, 0);
         this.relations = new ArrayList<>();
+        this.classeAffichage = null;
 
 
         // Interfaces
@@ -339,5 +343,17 @@ public class ClasseEntiere {
      */
     public void setMethodsEstAffiche(boolean methodsEstAffiche) {
         this.methodsEstAffiche = methodsEstAffiche;
+    }
+
+    /**
+     * Retourne la liste des relations de la classe
+     * @return La liste des relations de la classe : List<Relation>
+     */
+    public ClasseAffichage getClasseAffichage() {
+        return classeAffichage;
+    }
+
+    public void setClasseAffichage(ClasseAffichage classeAffichage) {
+        this.classeAffichage = classeAffichage;
     }
 }

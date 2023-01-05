@@ -57,10 +57,9 @@ public class VueClasse extends Pane implements Observateur {
     @Override
     public void actualiser() {
         for (ClasseAffichage classe : classes) {
-            ClasseEntiere classeEntiere = model.getClasse(classe.getNom()).get();
             setBorderColor(classe);
-            classe.setPosition(classeEntiere);
-            classe.afficherClasse(classeEntiere);
+            classe.setPosition();
+            classe.afficherClasse();
         }
     }
 

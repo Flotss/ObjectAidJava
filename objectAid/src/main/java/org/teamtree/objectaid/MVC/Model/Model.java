@@ -90,8 +90,7 @@ public class Model implements Sujet {
         if (!relations.containsKey(classe)) {
             int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
-            classe.setX(x);
-            classe.setY(y);
+            classe.deplacer(x, y);
             relations.put(classe, new ArrayList<>());
         }
     }
@@ -175,6 +174,16 @@ public class Model implements Sujet {
     public void afficherConstructeurs() {
         getClasses().forEach(c -> {
             c.setConstructeurEstAffiche(!c.isConstructeurEstAffiche());
+            notifierObservateur();
+        });
+    }
+
+    /**
+     * Methode qui permet de deplacer une classe
+     */
+    public void deplacerClasse(int x, int y) {
+        getClasse(currentClickedClass).ifPresent(classe -> {
+            classe.deplacer(x,y);
             notifierObservateur();
         });
     }
