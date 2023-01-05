@@ -1,4 +1,4 @@
-## Bilan itération 1
+## Bilan itération 2
 
 ### Objectifs
 Gérer l'interactivité entre l'application et l'utilisateur, c'est-à-dire :
