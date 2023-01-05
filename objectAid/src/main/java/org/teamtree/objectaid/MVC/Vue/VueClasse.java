@@ -34,6 +34,7 @@ public class VueClasse extends Pane implements Observateur {
             // On creation de l'affichage de la classe
             FabriqueAffichage f = new FabriqueAffichage(c);
             VueClasseAffichage classe = f.affichage();
+            classe.updateAttributsRelation(model);
 
 //            setBorderColor(classe);
 
@@ -57,6 +58,7 @@ public class VueClasse extends Pane implements Observateur {
     public void actualiser() {
         for (VueClasseAffichage classe : classes) {
             ClasseEntiere classeEntiere = model.getClasse(classe.getNom()).get();
+            classe.updateAttributsRelation(model);
             classe.afficherClasse();
         }
     }

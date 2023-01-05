@@ -2,6 +2,7 @@ package org.teamtree.objectaid.MVC.Model;
 
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
+import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
 
@@ -18,7 +19,7 @@ public class Model implements Sujet {
     private final ArrayList<Observateur> observateurs;
 
     /** Liste des classes avec leurs flèches*/
-    private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
+    private final HashMap<ClasseEntiere, ArrayList<Relation>> relations;
 
     /** Classe sélectionnée */
     private VueClasseAffichage currentClickedClass;
@@ -73,12 +74,12 @@ public class Model implements Sujet {
      * @param classe Classe
      * @param fleche Flèche
      */
-    public void ajouterRelation(ClasseEntiere classe, Fleche fleche) {
+    public void ajouterRelation(ClasseEntiere classe, Relation relation) {
         if (relations.containsKey(classe)) {
-            relations.get(classe).add(fleche);
+            relations.get(classe).add(relation);
         } else {
             relations.put(classe, new ArrayList<>());
-            relations.get(classe).add(fleche);
+            relations.get(classe).add(relation);
         }
     }
 
@@ -102,7 +103,7 @@ public class Model implements Sujet {
             int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
-            relations.put(classe, new ArrayList<>());
+            relations.put(classe, new ArrayList<>(classe.getRelations()));
         }
     }
 
@@ -128,7 +129,7 @@ public class Model implements Sujet {
      * @param classe Classe
      * @return Liste des flèches
      */
-    public ArrayList<Fleche> getRelations(ClasseEntiere classe) {
+    public ArrayList<Relation> getRelations(ClasseEntiere classe) {
         return relations.get(classe);
     }
 

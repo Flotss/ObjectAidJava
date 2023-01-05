@@ -121,9 +121,9 @@ public class ClasseEntiere {
             // Ajout de la relation si l'attribut n'est pas primitif
             if (!isPrimitive) {
                 if (isCollection){
-                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut.getNom(), attribut.getType(), "*", "*"));
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
                 }else{
-                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut.getNom(), attribut.getType(), "1", "*"));
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
                 }
             }
         }
@@ -356,5 +356,9 @@ public class ClasseEntiere {
 
     public void setClasseAffichage(VueClasseAffichage classeAffichage) {
         this.classeAffichage = classeAffichage;
+    }
+
+    public List<Relation> getRelations(){
+        return relations;
     }
 }

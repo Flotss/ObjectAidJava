@@ -4,7 +4,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Classe.*;
+import org.teamtree.objectaid.Classe.Relations.Association;
+import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
+import org.teamtree.objectaid.MVC.Model.Model;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Classe qui représente l'affichage d'une classe
@@ -17,7 +23,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
     private String nom;
 
     /** ClasseEntiere de la classe qui est affichée */
-    private ClasseEntiere c;
+    private ClasseEntiere classeEntiere;
 
     /**
      * HBox qui contient la définition de la classe
@@ -35,6 +41,11 @@ public class VueClasseAffichage extends VBox implements Observateur {
     private VBox attributs;
 
     /**
+     * VBox qui contient les attributs en lien avec les relations
+     */
+    private VBox attributsRelation;
+
+    /**
      * VBox qui contient les méthodes de la classe
      */
     private VBox methodes;
@@ -43,15 +54,16 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     /**
      * Constructeur de la classe
-     * @param c La classe à afficher
+     * @param classeEntiere La classe à afficher
      */
 
-    public VueClasseAffichage(ClasseEntiere c){
-        this.nom = c.getDefinition().getNom();
-        this.c = c;
+    public VueClasseAffichage(ClasseEntiere classeEntiere){
+        this.nom = classeEntiere.getDefinition().getNom();
+        this.classeEntiere = classeEntiere;
         this.definition = new HBox();
         this.constructeur = new VBox();
         this.attributs = new VBox();
+        this.attributsRelation = new VBox();
         this.methodes = new VBox();
     }
 
@@ -61,11 +73,11 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     public void setDefinition() {
         //partie definition
-        String def = c.getDefinition().getNom();
+        String def = classeEntiere.getDefinition().getNom();
         Label definitionLabel = new Label(def);
 
         //Icon selon le type de la classe
-        definition.getChildren().addAll(FabriqueAffichage.fabriqueIcon(c).getIcon(), definitionLabel);
+        definition.getChildren().addAll(FabriqueAffichage.fabriqueIcon(classeEntiere).getIcon(), definitionLabel);
     }
 
     /**
@@ -73,16 +85,34 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
 
     public void setAttributs(){
-        if(c.isAttributEstAffiche()) {
+        if(classeEntiere.isAttributEstAffiche()) {
             //Si il existe des attributs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
-            if (c.getAttributs().size() != 0) {
+            if (classeEntiere.getAttributs().size() != 0) {
                 attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
             }
             //Pour chaque attributs
-            for (Attribut attributX: c.getAttributs()) {
+            for (Attribut attributX: classeEntiere.getAttributs()) {
                 String att = FabriqueAffichage.fabriqueAcces(attributX.getAccessibilite()) + " " + attributX.getType() + " " + attributX.getNom();
                 Label attributLabel = new Label(att);
                 attributs.getChildren().add(attributLabel);
+            }
+        }
+    }
+
+
+    public void updateAttributsRelation(Model model){
+        this.attributsRelation.getChildren().clear();
+
+        if (classeEntiere.getAttributs().size() == 0) {
+            attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
+        }
+        List<Relation> relations = this.classeEntiere.getRelations();
+        for (Relation relation : relations) {
+            Optional<ClasseEntiere> classeEntiere = model.getClasse(relation.getDestination());
+            if (! classeEntiere.isPresent() && relation instanceof Association association) {
+                String attRela = FabriqueAffichage.fabriqueAcces(association.getAttribut().getAccessibilite()) + " " + association.getAttribut().getType() + " " + association.getAttribut().getNom();
+                Label attributRelationLabel = new Label(attRela);
+                attributsRelation.getChildren().add(attributRelationLabel);
             }
         }
     }
@@ -94,13 +124,13 @@ public class VueClasseAffichage extends VBox implements Observateur {
     public void setConstructeur(){
         //partie constructeur
         //On vérifie que les constructeurs doivent être affichés
-        if(c.isConstructeurEstAffiche()) {
+        if(classeEntiere.isConstructeurEstAffiche()) {
             //Si il existe des constructeurs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
-            if (c.getContructeurs().size() != 0) {
+            if (classeEntiere.getContructeurs().size() != 0) {
                 constructeur.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
             }
             //Pour chaque Constructeurs
-            for (Constructeur constructeurX:c.getContructeurs()) {
+            for (Constructeur constructeurX: classeEntiere.getContructeurs()) {
                 //Debut de la ligne (accesibilité, nom,...)
                 String constr = FabriqueAffichage.fabriqueAcces(constructeurX.getAccessibilite()) + " " + constructeurX.getNom() + "(";
                 int n = 0;
@@ -126,12 +156,12 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     public void setMethodes(){
         //partie methodes
-        if(c.isMethodsEstAffiche()) {
-            if (c.getMethods().size() != 0) {
+        if(classeEntiere.isMethodsEstAffiche()) {
+            if (classeEntiere.getMethods().size() != 0) {
                 methodes.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
             }
-            for (int i = 0; i < c.getMethods().size(); i++) {
-                Methode methodeX = c.getMethods().get(i);
+            for (int i = 0; i < classeEntiere.getMethods().size(); i++) {
+                Methode methodeX = classeEntiere.getMethods().get(i);
                 String meth = FabriqueAffichage.fabriqueAcces(methodeX.getAccessibilite()) + " " + methodeX.getNom() + "(";
                 for (int j = 0; j < methodeX.getParametre().size(); j++) {
                     meth += methodeX.getParametre().get(j).getType() + " " + methodeX.getParametre().get(j).getNom();
@@ -139,7 +169,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
                         meth += ", ";
                     }
                 }
-                meth += "): " + c.getMethods().get(i).getTypeRetourne();
+                meth += "): " + classeEntiere.getMethods().get(i).getTypeRetourne();
                 Label methodeLabel = new Label(meth);
                 methodes.getChildren().add(methodeLabel);
             }
@@ -151,8 +181,8 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
 
     public void actualiserPosition(){
-        this.setLayoutX(c.getX());
-        this.setLayoutY(c.getY());
+        this.setLayoutX(classeEntiere.getX());
+        this.setLayoutY(classeEntiere.getY());
     }
 
     /**
@@ -165,13 +195,14 @@ public class VueClasseAffichage extends VBox implements Observateur {
     //On ajoute les différentes parties de la classe
         this.getChildren().clear();
         this.getChildren().add(definition);
-        if (c.isAttributEstAffiche()) {
+        if (classeEntiere.isAttributEstAffiche()) {
             this.getChildren().add(attributs);
+            this.getChildren().add(attributsRelation);
         }
-        if (c.isConstructeurEstAffiche()) {
+        if (classeEntiere.isConstructeurEstAffiche()) {
             this.getChildren().add(constructeur);
         }
-        if (c.isMethodsEstAffiche()) {
+        if (classeEntiere.isMethodsEstAffiche()) {
             this.getChildren().add(methodes);
         }
     }
@@ -198,7 +229,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
     }
 
     public ClasseEntiere getClasseEntiere(){
-        return this.c;
+        return this.classeEntiere;
     }
 
     public void classeSelectionnee(){
