@@ -1,0 +1,41 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant DeplacementClasseDragAndDropController as controller
+participant Model as model
+participant ClasseEntiere as classeEntiere
+
+activate user
+user -> controller : handle(MouseEvent: event)
+
+alt isPrimaryButtonDown() and getCurrentClass()
+activate controller
+controller -> model : getClasse(nom)
+activate model
+model --> controller : classeEntiere
+deactivate model
+
+controller -> classeEntiere : setX(event.getSceneX())
+activate classeEntiere
+classeEntiere --> controller :
+deactivate classeEntiere
+
+controller -> classeEntiere : setX(event.getSceneY() - 25)
+activate classeEntiere
+classeEntiere --> controller :
+deactivate classeEntiere
+
+controller -> model : notifierObservateurs()
+activate model
+model --> controller :
+deactivate model
+end alt
+
+controller --> user
+deactivate controller
+deactivate user
+
+
+@enduml
