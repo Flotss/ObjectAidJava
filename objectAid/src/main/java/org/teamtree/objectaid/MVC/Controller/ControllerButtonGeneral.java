@@ -5,18 +5,31 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import org.teamtree.objectaid.MVC.Model.Model;
 
+/**
+ * Classe qui permet de gérer tous les boutons de l'application
+ */
 public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
 
+    /** Modèle */
     private final Model model;
+
+    /** Booleens pour savoir l'etat de l'affichage des boutons de l'affichage general des classes */
     private static boolean attributGenerauxAffiche = true;
     private static boolean constructeurGenerauxAffiche = true;
     private static boolean methodesGenerauxAffiche = true;
 
+    /**
+     * Constructeur
+     * @param model Modèle
+     */
     public ControllerButtonGeneral(Model model) {
         this.model = model;
     }
 
-
+    /**
+     * Méthode qui permet de gérer les boutons de l'application
+     * @param event Evènement
+     */
     @Override
     public void handle(ActionEvent event) {
         switch (((Button)event.getSource()).getText()){
