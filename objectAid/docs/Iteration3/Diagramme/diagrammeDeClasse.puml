@@ -39,9 +39,9 @@ package "MVC"{
 
     class VueClasse implements Observateur{
         +HashMap<String, VueClasseAffichage>
-        +VueClasse(Modele)
+        +VueClasse(model : Model)
         +actualiser()
-        +setBorderColor(ClasseAffichage)
+        +getClasseAffichage(nom : String) : VueClasseAffichage
     }
 
     class VueClasseAffichage implements Observateur{
@@ -58,14 +58,25 @@ package "MVC"{
         +afficherClasse(ClasseEntiere)
         +actualiser()
         +actualiserBordure()
-
+        +classeDeSelectionnee()
+        +classeSelectionnee
         +getNom() : String
         +getDefinition() : HBox
         +getConstructeur() : Vbox
         +getAttributs() : Vbox
         +getMethodes() : Vbox
+        +getClasseEntiere() : ClasseEntiere
     }
 
+    class VueButtonBarClasse implements Observateur{
+        -buttonAttributs : Button
+        -buttonConstructeurs : Button
+        -buttonMethodes : Button
+        -afficherButtonBarClasse : boolean
+        -model : Model
+        +VueButtonBarClasse(model : Model)
+        +actualiser()
+    }
 
     class VueFleche implements Observateur{
         +VueFleche(Modele)
@@ -343,6 +354,8 @@ ControllerButon "*" --> "1" Modele : -modele
 DeplacementClasseDragAndDropController "*" --> "1" Modele : -modele
 ClasseEntiereClickedController "*" --> "1" Modele : -modele
 FabriqueAffichage --> "1" ClasseEntiere : -c
+ClasseEntiere "1" --> "1" VueClasseAffichage : -classeAffichage
+ClasseEntiere "1" <-- "1" VueClasseAffichage : -classeEntiere
 
 
 @enduml
