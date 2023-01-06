@@ -1,5 +1,6 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
@@ -62,7 +63,6 @@ public class Model implements Sujet {
         switch(selection){
             case "selection":
                 this.currentClickedClass.actualiserBordure();
-                this.notifierObservateurs("VueButtonBarClasse");
             break;
             case "deplacement selection":
                 this.currentClickedClass.actualiserPosition();
@@ -161,15 +161,21 @@ public class Model implements Sujet {
         if(this.currentClickedClass != null) {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
-            this.currentClickedClass = null;
-        } else {
+            if(this.currentClickedClass.getNom() != currentClickedClass.getNom()) {
+                this.currentClickedClass = currentClickedClass;
+                this.currentClickedClass.classeSelectionnee();
+                this.notifierObservateur("selection");
+               /*(Objects.equals(currentClickedClass, this.currentClickedClass))
+                                    ? ""
+                                    : currentClickedClass;*/
+            }else {
+                this.currentClickedClass = null;
+            }
+        }else {
             this.currentClickedClass = currentClickedClass;
             this.currentClickedClass.classeSelectionnee();
             this.notifierObservateur("selection");
         }
-               /*(Objects.equals(currentClickedClass, this.currentClickedClass))
-                                    ? ""
-                                    : currentClickedClass;*/
     }
 
     /**
@@ -241,5 +247,15 @@ public class Model implements Sujet {
     public void deplacerClasse(int x, int y) {
         this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
         notifierObservateur("deplacement selection");
+
+    }
+
+    public VueClasseAffichage getVueClasseAffichage(String nom){
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                return ((VueClasse) observateur).getClasseAffichage(nom);
+            }
+        }
+        return null;
     }
 }

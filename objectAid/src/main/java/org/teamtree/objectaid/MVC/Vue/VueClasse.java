@@ -8,6 +8,7 @@ import org.teamtree.objectaid.MVC.Controller.DeplacementClasseDragAndDropControl
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class VueClasse extends Pane implements Observateur {
 
     /** Modèle */
     private final Model model;
-    private final List<VueClasseAffichage> classes;
+    private final HashMap<String, VueClasseAffichage> classes;
 
 
     /**
@@ -26,7 +27,7 @@ public class VueClasse extends Pane implements Observateur {
      */
     public VueClasse(Model model) {
         this.model = model;
-        this.classes = new ArrayList<>();
+        this.classes = new HashMap<>();
 
 
         // Pour chaque classe
@@ -46,7 +47,7 @@ public class VueClasse extends Pane implements Observateur {
             //on ajoute le drag and drop de la classe
             classe.setOnMouseDragged(new DeplacementClasseDragAndDropController(model));
 
-            classes.add(classe);
+            classes.put(classe.getNom(),classe);
         }
     }
 
@@ -56,17 +57,17 @@ public class VueClasse extends Pane implements Observateur {
 
     @Override
     public void actualiser() {
-        for (VueClasseAffichage classe : classes) {
+        for (VueClasseAffichage classe : classes.values()) {
             ClasseEntiere classeEntiere = model.getClasse(classe.getNom()).get();
             classe.updateAttributsRelation(model);
             classe.afficherClasse();
         }
     }
 
-    /**
-     * Méthode qui permet de mettre la couleur de la bordure de la classe
-     * @param node ClasseAffichage à mettre en couleur
-     */
+//    /**
+//     * Méthode qui permet de mettre la couleur de la bordure de la classe
+//     * @param node ClasseAffichage à mettre en couleur
+//     */
 //    public void setBorderColor(final ClasseAffichage node) {
 //        final String color = model.getCurrentClickedClass().equals(node.getNom()) ? "blue" : "black";
 //        final var builderStyle = new StringBuilder();
@@ -78,4 +79,7 @@ public class VueClasse extends Pane implements Observateur {
 //        node.setStyle(builderStyle.toString());
 //    }
 
+    public VueClasseAffichage getClasseAffichage(String nom){
+        return this.classes.get(nom);
+    }
 }
