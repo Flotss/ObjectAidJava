@@ -161,7 +161,7 @@ public class Model implements Sujet {
         if(this.currentClickedClass != null) {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
-            if(this.currentClickedClass.getNom() != currentClickedClass.getNom()) {
+            if(this.currentClickedClass.getNom().equals(currentClickedClass.getNom())) {
                 this.currentClickedClass = currentClickedClass;
                 this.currentClickedClass.classeSelectionnee();
                 this.notifierObservateur("selection");
@@ -247,7 +247,6 @@ public class Model implements Sujet {
     public void deplacerClasse(int x, int y) {
         this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
         notifierObservateur("deplacement selection");
-
     }
 
     public VueClasseAffichage getVueClasseAffichage(String nom){

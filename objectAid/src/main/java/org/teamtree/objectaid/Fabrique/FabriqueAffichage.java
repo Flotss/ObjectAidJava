@@ -1,6 +1,7 @@
 package org.teamtree.objectaid.Fabrique;
 
 import org.teamtree.objectaid.Classe.*;
+import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.MVC.diagramIcons.*;
 
@@ -10,14 +11,20 @@ import org.teamtree.objectaid.MVC.diagramIcons.*;
 public class FabriqueAffichage {
 
     /** La classe à afficher */
-    private ClasseEntiere c;
+    private ClasseEntiere classeEntiere;
+
+    /**
+     Le model à associer
+     */
+    private Model model;
 
     /**
      * Constructeur de la classe
      * @param classeEntiere La classe à afficher
      */
-    public FabriqueAffichage(ClasseEntiere classeEntiere){
-        this.c = classeEntiere;
+    public FabriqueAffichage(ClasseEntiere classeEntiere, Model model){
+        this.classeEntiere = classeEntiere;
+        this.model = model;
     }
 
     /**
@@ -26,7 +33,7 @@ public class FabriqueAffichage {
      */
     public VueClasseAffichage affichage(){
         //On crée la classeAffichage correspondant a un VBox, servant à recevoir tout le bloc de la classe
-        VueClasseAffichage classe = new VueClasseAffichage(c);
+        VueClasseAffichage classe = new VueClasseAffichage(classeEntiere, model);
 
         //on affecte la taille maximale de la classe
         classe.setMaxWidth(150);
@@ -52,7 +59,7 @@ public class FabriqueAffichage {
         classe.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
 
         //ajoute la classe qui est affiché à la classeEntiere
-        c.setClasseAffichage(classe);
+        classeEntiere.setClasseAffichage(classe);
 
         return classe;
     }
@@ -62,21 +69,13 @@ public class FabriqueAffichage {
      * @return ClasseEntiereTitleIcon icon
      */
     public static ClasseEntiereTitleIcon fabriqueIcon(ClasseEntiere c){
-        ClasseEntiereTitleIcon TitleIcon = null;
-        switch (c.getDefinition().getEntite()){
-            case "class":
-                TitleIcon = new ClassTitleIcon();
-                break;
-            case "interface":
-                TitleIcon = new InterfaceTitleIcon();
-                break;
-            case "record":
-                TitleIcon = new RecordClassTitleIcon();
-                break;
-            case "abstract":
-                TitleIcon = new AbstractClassTitleIcon();
-                break;
-        }
+        ClasseEntiereTitleIcon TitleIcon = switch (c.getDefinition().getEntite()) {
+            case "class" -> new ClassTitleIcon();
+            case "interface" -> new InterfaceTitleIcon();
+            case "record" -> new RecordClassTitleIcon();
+            case "abstract" -> new AbstractClassTitleIcon();
+            default -> null;
+        };
         return TitleIcon;
 
     }
@@ -87,15 +86,11 @@ public class FabriqueAffichage {
      * @return symbole de cette accesibilité
      */
     public static String fabriqueAcces(String acces){
-        switch (acces){
-            case "public":
-                return "+";
-            case "private":
-                return "-";
-            case "protected":
-                return "#";
-            default:
-                return "";
-        }
+        return switch (acces) {
+            case "public" -> "+";
+            case "private" -> "-";
+            case "protected" -> "#";
+            default -> "";
+        };
     }
 }
