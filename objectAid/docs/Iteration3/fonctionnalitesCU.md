@@ -17,8 +17,16 @@ L'utilisateur pourra importer ses classes en fournissant le chemin de son fichie
 Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
 
 #### Détail de la fonctionnalité :
-TODO
+Cette fonctionnalité permet de séparer l'application en deux états:
+- L'état d'importation où l'utilisateur peut importer son projet
+- L'état d'affichage où l'utilisateur peut afficher son projet
 
+L'importation se fait via un explorateur de fichier, où on peut sélectionner un dossier. Ce dossier sera affiché dans une arborescence à gauche de l'application. L'utilisateur peut ensuite glisser et déposer les classes de l'arborescence à l'écran principal pour pouvoir les afficher en tant que diagramme.
+Les classes à l'intérieur du projet se font compiler et sont stockées dans une liste de classes.
+Plus précisemment dans un dictionnaire qui associe un nom à chaque classe, le but étant de pouvoir introspecté les classes pour pouvoir les afficher dans le diagramme.
+
+Quant à l'affiche:
+Une fois les classes à gauche dans l'arborescence, on peut glisser-déposer (drag n drop) la classe au menu d'à droite (vueclasse) pour le "transformer" en un diagramme.
 
 ---
 ## Fonctionnalité 2 : Afficher les relations
