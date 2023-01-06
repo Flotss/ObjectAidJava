@@ -107,4 +107,13 @@ public class VueClasse extends Pane implements Observateur {
     public VueClasseAffichage getClasseAffichage(String nom){
         return this.classes.get(nom);
     }
+
+    /**
+     * Méthode qui permet de actualiser la vue des fleches
+     */
+    public void actualiserFleches() {
+        for (Fleche fleche : fleches) {
+            fleche.actualiser();
+        }
+    }
 }
