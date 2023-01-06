@@ -26,6 +26,16 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
             case "Afficher les constructeurs":
                 model.afficherConstructeurs();
                 break;
+            case "Attributs":
+                model.afficherAttributsSelection();
+                System.out.println("sfsdf");
+                break;
+            case "Méthodes":
+                model.afficherMethodesSelection();
+                break;
+            case "Constructeurs":
+                model.afficherConstructeursSelection();
+                break;
         }
     }
 }

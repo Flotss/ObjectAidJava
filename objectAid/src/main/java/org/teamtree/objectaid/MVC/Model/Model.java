@@ -1,10 +1,5 @@
 package org.teamtree.objectaid.MVC.Model;
 
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import org.teamtree.objectaid.Classe.ButtonBarClasse;
-import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
@@ -30,18 +25,12 @@ public class Model implements Sujet {
     private VueClasseAffichage currentClickedClass;
 
     /**
-     * HBox contenant les boutons de la classe sélectionnée
-     */
-    private ButtonBarClasse buttonBarClasse;
-
-    /**
      * Constructeur du model
      */
     public Model() {
         this.observateurs = new ArrayList<>();
         this.relations = new HashMap<>();
         this.currentClickedClass = null;
-        this.buttonBarClasse = new ButtonBarClasse();
     }
 
     /**
@@ -73,6 +62,7 @@ public class Model implements Sujet {
         switch(selection){
             case "selection":
                 this.currentClickedClass.actualiserBordure();
+                this.notifierObservateurs("VueButtonBarClasse");
             break;
             case "deplacement selection":
                 this.currentClickedClass.actualiserPosition();
@@ -83,10 +73,18 @@ public class Model implements Sujet {
         }
     }
 
+    public void notifierObservateurs(String vue){
+        for (Observateur observateur : observateurs) {
+            if (observateur.getClass().getSimpleName().equals(vue)){
+                observateur.actualiser();
+            }
+        }
+    }
+
     /**
      * Méthode qui permet d'ajouter une relation
      * @param classe Classe
-     * @param fleche Flèche
+     * @param relation Relation
      */
     public void ajouterRelation(ClasseEntiere classe, Relation relation) {
         if (relations.containsKey(classe)) {
@@ -163,10 +161,12 @@ public class Model implements Sujet {
         if(this.currentClickedClass != null) {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
+            this.currentClickedClass = null;
+        } else {
+            this.currentClickedClass = currentClickedClass;
+            this.currentClickedClass.classeSelectionnee();
+            this.notifierObservateur("selection");
         }
-       this.currentClickedClass =  currentClickedClass;
-       this.currentClickedClass.classeSelectionnee();
-        this.notifierObservateur("selection");
                /*(Objects.equals(currentClickedClass, this.currentClickedClass))
                                     ? ""
                                     : currentClickedClass;*/
@@ -241,14 +241,5 @@ public class Model implements Sujet {
     public void deplacerClasse(int x, int y) {
         this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
         notifierObservateur("deplacement selection");
-
-    }
-
-    public void afficherButtonBarClasse() {
-        buttonBarClasse.setButtons();
-    }
-
-    public HBox getButtonBarClasse() {
-        return buttonBarClasse;
     }
 }
