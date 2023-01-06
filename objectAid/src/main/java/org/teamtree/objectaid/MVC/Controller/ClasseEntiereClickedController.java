@@ -21,6 +21,10 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
         this.model = model;
     }
 
+    /**
+     * Méthode qui permet de gérer le clic sur une classe
+     * @param event Evènement
+     */
     @Override
     public void handle(MouseEvent event) {
         final var source = (VueClasseAffichage) event.getSource();
@@ -29,7 +33,7 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
     }
 
     /**
-     * Méthode qui permet d'affecter le classe en tant que classe sélectionnée
+     * Méthode qui permet d'affecter le classe en tant que classe sélectionnée et d'afficher les boutons d'affichage spécifiques à la classe
      * @param source Classe cliquée
      */
     private void addClickedEffect(final VueClasseAffichage source) {
