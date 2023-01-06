@@ -34,7 +34,7 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
      */
     private void addClickedEffect(final ClasseAffichage source) {
         model.setCurrentClickedClass(source);
-
+        model.afficherButtonBarClasse();
 //        model.notifierObservateur();
     }
 }

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.teamtree.objectaid.Classe.ButtonBarClasse;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -63,7 +64,10 @@ public class ObjectAidApplication extends Application {
 
         buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton);
 
-        applicationLayout.getChildren().addAll(buttonBar, vue);
+        HBox buttonBarClasse = model.getButtonBarClasse();
+
+
+        applicationLayout.getChildren().addAll(buttonBar,buttonBarClasse, vue);
 
 
         Scene scene = new Scene(applicationLayout, 1024, 768);

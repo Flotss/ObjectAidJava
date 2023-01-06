@@ -1,5 +1,9 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import org.teamtree.objectaid.Classe.ButtonBarClasse;
 import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
@@ -15,14 +19,25 @@ import java.util.Optional;
  */
 public class Model implements Sujet {
 
-    /** Liste des observateurs */
+    /**
+     * Liste des observateurs
+     */
     private final ArrayList<Observateur> observateurs;
 
-    /** Liste des classes avec leurs flèches*/
+    /**
+     * Liste des classes avec leurs flèches
+     */
     private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
 
-    /** Classe sélectionnée */
+    /**
+     * Classe sélectionnée
+     */
     private ClasseAffichage currentClickedClass;
+
+    /**
+     * HBox contenant les boutons de la classe sélectionnée
+     */
+    private ButtonBarClasse buttonBarClasse;
 
     /**
      * Constructeur du model
@@ -31,10 +46,12 @@ public class Model implements Sujet {
         this.observateurs = new ArrayList<>();
         this.relations = new HashMap<>();
         this.currentClickedClass = null;
+        this.buttonBarClasse = new ButtonBarClasse();
     }
 
     /**
      * Méthode qui permet d'ajouter un observateur
+     *
      * @param o Observateur
      */
     public void ajouterObservateur(Observateur o) {
@@ -43,6 +60,7 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de supprimer un observateur
+     *
      * @param o Observateur
      */
     public void supprimerObservateur(Observateur o) {
@@ -58,19 +76,20 @@ public class Model implements Sujet {
         }
     }
 
-    public void notifierObservateur(String selection){
-        switch(selection){
+    public void notifierObservateur(String selection) {
+        switch (selection) {
             case "selection":
                 this.currentClickedClass.actualiserBordure();
-            break;
+                break;
             case "deplacement selection":
                 this.currentClickedClass.actualiserPosition();
-            break;
+                break;
         }
     }
 
     /**
      * Méthode qui permet d'ajouter une relation
+     *
      * @param classe Classe
      * @param fleche Flèche
      */
@@ -85,6 +104,7 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de supprimer une relation
+     *
      * @param classe Classe
      * @param fleche Flèche
      */
@@ -96,6 +116,7 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet d'ajouter une Classe au model
+     *
      * @param classe Classe
      */
     public void ajouterClasse(ClasseEntiere classe) {
@@ -109,6 +130,7 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de supprimer une Classe du model
+     *
      * @param classe Classe
      */
     public void supprimerClasse(ClasseEntiere classe) {
@@ -117,6 +139,7 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de récupérer la liste des classes
+     *
      * @return Liste des classes
      */
     public ArrayList<ClasseEntiere> getClasses() {
@@ -126,6 +149,7 @@ public class Model implements Sujet {
 
     /**
      * Retourne la liste des flèches d'une classe
+     *
      * @param classe Classe
      * @return Liste des flèches
      */
@@ -135,6 +159,7 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de récupérer la classe sélectionnée
+     *
      * @return Classe sélectionnée
      */
     public ClasseAffichage getCurrentClickedClass() {
@@ -143,15 +168,16 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de définir la classe sélectionnée
+     *
      * @param currentClickedClass Classe sélectionnée
      */
     public void setCurrentClickedClass(ClasseAffichage currentClickedClass) {
-        if(this.currentClickedClass != null) {
+        if (this.currentClickedClass != null) {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
         }
-       this.currentClickedClass =  currentClickedClass;
-       this.currentClickedClass.classeSelectionnee();
+        this.currentClickedClass = currentClickedClass;
+        this.currentClickedClass.classeSelectionnee();
         this.notifierObservateur("selection");
                /*(Objects.equals(currentClickedClass, this.currentClickedClass))
                                     ? ""
@@ -160,6 +186,7 @@ public class Model implements Sujet {
 
     /**
      * Retourne la classe grâce à son nom
+     *
      * @param nom Le nom de la classe
      * @return La classe correspondante
      */
@@ -201,8 +228,15 @@ public class Model implements Sujet {
      * Methode qui permet de deplacer une classe
      */
     public void deplacerClasse(int x, int y) {
-        this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
+        this.getCurrentClickedClass().getClasseEntiere().deplacer(x, y);
         notifierObservateur("deplacement selection");
+    }
 
+    public void afficherButtonBarClasse() {
+        buttonBarClasse.setButtons();
+    }
+
+    public HBox getButtonBarClasse() {
+        return buttonBarClasse;
     }
 }
