@@ -3,10 +3,12 @@ package org.teamtree.objectaid.service;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.util.FileExtension;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -35,67 +37,53 @@ public class ProjectCompilationProcessService {
         }
     }
 
-    /**
-     * void compile(Path sourceDirectory, Path targetDirectory) {
-     * <p>
-     * // check if sourceDirectory is valid
-     * if (!sourceDirectory.toFile().isDirectory()) {
-     * throw new IllegalArgumentException("sourceDirectory is not a directory");
-     * }
-     * <p>
-     * // check if targetDirectory is valid
-     * if (!targetDirectory.toFile().isDirectory()) {
-     * throw new IllegalArgumentException("targetDirectory is not a directory");
-     * }
-     * <p>
-     * try {
-     * final var processes = ProcessBuilder.startPipeline(List.of(
-     * new ProcessBuilder("find", sourceDirectory.toString(), "-name", "*.java")
-     * .inheritIO().redirectOutput(ProcessBuilder.Redirect.PIPE),
-     * new ProcessBuilder("xargs", "javac", "-d", targetDirectory.toString())
-     * .redirectError(ProcessBuilder.Redirect.INHERIT)
-     * ));
-     * <p>
-     * System.out.println("Number of files compilated : " + targetDirectory.toFile().listFiles().length);
-     * } catch (IOException e) {
-     * throw new RuntimeException(e);
-     * }
-     * <p>
-     * }
-     **/
-
     void compile(Path source, Path target) {
+
+        // clear target dir
+        target.toFile().deleteOnExit();
 
         // Search for settings.gradle in the source directory
         final var isGradleProject = Files.exists(source.resolve("settings.gradle"));
 
 
         if (isGradleProject) {
+
             try {
+                // compile all java files, and put the compiled classes in the target directory with gradle
                 final var processes = ProcessBuilder.startPipeline(List.of(
-                        new ProcessBuilder("gradle", "build", "-p", source.toString())
-                                .inheritIO().redirectOutput(ProcessBuilder.Redirect.PIPE),
-                        new ProcessBuilder("unzip", "-o", source.resolve("build").resolve("libs").resolve("objectaid.jar").toString(), "-d", target.toString())
-                                .redirectError(ProcessBuilder.Redirect.INHERIT)
+                        new ProcessBuilder("./gradlew", "compileJava")
+                                .directory(source.toFile())
+                                .inheritIO()
+                                .redirectOutput(ProcessBuilder.Redirect.PIPE)
                 ));
 
                 System.out.println("(GRADLE) Number of files compilated : " + target.toFile().listFiles().length);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else {
-            try {
-                final var processes = ProcessBuilder.startPipeline(List.of(
-                        new ProcessBuilder("find", source.toString(), "-name", "*.java")
-                                .inheritIO().redirectOutput(ProcessBuilder.Redirect.PIPE),
-                        new ProcessBuilder("xargs", "javac", "-d", target.toString())
-                                .redirectError(ProcessBuilder.Redirect.INHERIT)
-                ));
 
-                System.out.println("Number of files compilated : " + target.toFile().listFiles().length);
+            final List<Path> classFiles;
+            try {
+                classFiles = Files.walk(source)
+                        .filter(Files::isRegularFile)
+                        .filter(file -> file.toString().endsWith(FileExtension.CLASS_EXTENSION))
+                        .collect(Collectors.toList());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
+            System.out.println("(GRADLE) Number of files found : " + classFiles.size());
+
+            classFiles.forEach(file -> {
+                try {
+                    Files.move(file, target.resolve(file.getFileName()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            System.out.println("(GRADLE) Number of files moved : " + target.toFile().listFiles().length);
+
         }
 
         if (!isGradleProject) {
