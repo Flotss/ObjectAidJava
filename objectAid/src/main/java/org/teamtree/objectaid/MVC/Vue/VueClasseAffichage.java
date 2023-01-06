@@ -3,8 +3,8 @@ package org.teamtree.objectaid.MVC.Vue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import org.teamtree.objectaid.Classe.*;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Relation;
@@ -58,11 +58,15 @@ public class VueClasseAffichage extends VBox implements Observateur {
     private String couleur;
 
     /**
+     Le model
+     */
+    private final Model model;
+
+    /**
      * Constructeur de la classe
      * @param classeEntiere La classe à afficher
      */
-
-    public VueClasseAffichage(ClasseEntiere classeEntiere){
+    public VueClasseAffichage(ClasseEntiere classeEntiere, Model model){
         this.nom = classeEntiere.getDefinition().getNom();
         this.classeEntiere = classeEntiere;
         this.definition = new HBox();
@@ -70,6 +74,9 @@ public class VueClasseAffichage extends VBox implements Observateur {
         this.attributs = new VBox();
         this.attributsRelation = new VBox();
         this.methodes = new VBox();
+        this.model = model;
+
+        this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     /**
@@ -111,10 +118,10 @@ public class VueClasseAffichage extends VBox implements Observateur {
      * exemple : si Point n'est pas dans le diagramme, mais qu'il a une relation d'association avec la classe
      *           alors il doit être en attribut
      */
-    public void updateAttributsRelation(Model model){
+    public void updateAttributsRelation(){
         this.attributsRelation.getChildren().clear();
         this.attributsRelation.setPadding(new Insets(0, 5, 0, 5));
-        Boolean bordureAffichee = false;
+        boolean bordureAffichee = false;
 
         List<Relation> relations = this.classeEntiere.getRelations();
         for (Relation relation : relations) {
@@ -144,10 +151,12 @@ public class VueClasseAffichage extends VBox implements Observateur {
         }
         //Pour chaque Constructeurs
         for (Constructeur constructeurX: classeEntiere.getContructeurs()) {
-            //Debut de la ligne (accesibilité, nom,...)
+            //Debut de la ligne (accesibilité, nom,...), du type : + Constructeur(
             String constr = FabriqueAffichage.fabriqueAcces(constructeurX.getAccessibilite()) + " " + constructeurX.getNom() + "(";
             int n = 0;
+
             //Pour chaque parametre du constructeur, on l'écrit dans l'affichage
+            //exemple : + Constructeur(int a, int b)
             for(Parametre parametreX: constructeurX.getParametre()){
                 constr += parametreX.getType() + " " + parametreX.getNom();
                 if (n != constructeurX.getParametre().size() - 1) {
@@ -155,6 +164,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
                 }
                 n++;
             }
+
             //On écrit la fin du constructeur puis on l'ajoute avec les autres constructeurs
             constr += ")";
             Label constrLabel = new Label(constr);
@@ -199,6 +209,9 @@ public class VueClasseAffichage extends VBox implements Observateur {
      * Méthode qui permet de créer l'affichage de la classe
      */
     public void afficherClasse(){
+        updateAttributsRelation();
+
+        //On ajoute les différentes parties de la classe
     //TODO: a renomé en actualiser (julien le fera)
     //On ajoute les différentes parties de la classe
         this.getChildren().clear();

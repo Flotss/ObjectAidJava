@@ -10,12 +10,13 @@ import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
+import org.teamtree.objectaid.MVC.Vue.VueFleche;
 
 import java.io.IOException;
 
 public class ObjectAidApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException, ClassNotFoundException {
+    public void start(Stage stage) throws ClassNotFoundException {
         Model model = new Model();
         VBox applicationLayout = new VBox();
 
@@ -49,8 +50,11 @@ public class ObjectAidApplication extends Application {
 //        ClasseEntiere c9 = new ClasseEntiere("org.teamtree.objectaid.Etat.Etat");
 //        model.ajouterClasse(c9);
 
-        VueClasse vue = new VueClasse(model);
-        model.ajouterObservateur(vue);
+        VueClasse vueClass = new VueClasse(model);
+        model.ajouterObservateur(vueClass);
+
+        VueFleche vueFleche = new VueFleche(model);
+        model.ajouterObservateur(vueFleche);
 
         HBox buttonBar = new HBox();
         ControllerButtonGeneral controllerButtonGeneral = new ControllerButtonGeneral(model);
@@ -65,7 +69,7 @@ public class ObjectAidApplication extends Application {
 
         buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton);
 
-        applicationLayout.getChildren().addAll(buttonBar, vue);
+        applicationLayout.getChildren().addAll(buttonBar, vueClass);
 
 
         Scene scene = new Scene(applicationLayout, 1024, 768);
@@ -73,7 +77,7 @@ public class ObjectAidApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) {
         launch();
     }
 }

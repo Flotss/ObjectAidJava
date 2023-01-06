@@ -74,31 +74,6 @@ public class Model implements Sujet {
     }
 
     /**
-     * Méthode qui permet d'ajouter une relation
-     * @param classe Classe
-     * @param fleche Flèche
-     */
-    public void ajouterRelation(ClasseEntiere classe, Relation relation) {
-        if (relations.containsKey(classe)) {
-            relations.get(classe).add(relation);
-        } else {
-            relations.put(classe, new ArrayList<>());
-            relations.get(classe).add(relation);
-        }
-    }
-
-    /**
-     * Méthode qui permet de supprimer une relation
-     * @param classe Classe
-     * @param fleche Flèche
-     */
-    public void supprimerRelation(ClasseEntiere classe, Fleche fleche) {
-        if (relations.containsKey(classe)) {
-            relations.get(classe).remove(fleche);
-        }
-    }
-
-    /**
      * Méthode qui permet d'ajouter une Classe au model
      * @param classe Classe
      */
@@ -145,6 +120,11 @@ public class Model implements Sujet {
         return currentClickedClass;
     }
 
+
+//    public VueClasseAffichage getVueClasseAffichage(ClasseEntiere classe){
+//
+//    }
+
     /**
      * Méthode qui permet de définir la classe sélectionnée
      * @param currentClickedClass Classe sélectionnée
@@ -153,7 +133,7 @@ public class Model implements Sujet {
         if(this.currentClickedClass != null) {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
-            if(this.currentClickedClass.getNom() != currentClickedClass.getNom()) {
+            if(this.currentClickedClass.getNom().equals(currentClickedClass.getNom())) {
                 this.currentClickedClass = currentClickedClass;
                 this.currentClickedClass.classeSelectionnee();
                 this.notifierObservateur("selection");
@@ -239,7 +219,6 @@ public class Model implements Sujet {
     public void deplacerClasse(int x, int y) {
         this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
         notifierObservateur("deplacement selection");
-
     }
 
     public VueClasseAffichage getVueClasseAffichage(String nom){

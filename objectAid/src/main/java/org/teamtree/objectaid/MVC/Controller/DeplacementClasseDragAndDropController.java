@@ -12,7 +12,7 @@ import org.teamtree.objectaid.MVC.Model.Model;
 public class DeplacementClasseDragAndDropController implements EventHandler<MouseEvent> {
 
     /** Modèle */
-    private Model model;
+    private final Model model;
 
     /**
      * Constructeur du controller
@@ -34,7 +34,6 @@ public class DeplacementClasseDragAndDropController implements EventHandler<Mous
                 int x = (int) event.getSceneX();
                 int y = (int) event.getSceneY() - 25;
                 model.deplacerClasse(x, y);
-//                model.notifierObservateur();
             }
         }
     }
