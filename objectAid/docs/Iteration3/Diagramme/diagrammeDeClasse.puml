@@ -59,7 +59,8 @@ package "MVC"{
         +actualiser()
         +actualiserBordure()
         +classeDeSelectionnee()
-        +classeSelectionnee
+        +classeSelectionnee()
+        +updateAttributsRelation()
         +getNom() : String
         +getDefinition() : HBox
         +getConstructeur() : Vbox
