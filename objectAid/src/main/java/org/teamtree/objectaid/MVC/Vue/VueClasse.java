@@ -80,6 +80,11 @@ public class VueClasse extends Pane implements Observateur {
 //        node.setStyle(builderStyle.toString());
 //    }
 
+    /**
+     * Méthode qui permet de retourner la classe affichage correspondant au nom de la classe dans la liste des classes
+     * @param nom String
+     * @return classeAffichage
+     */
     public VueClasseAffichage getClasseAffichage(String nom){
         return this.classes.get(nom);
     }
