@@ -17,11 +17,14 @@ public class ApplicationLayoutBootstrapRender implements SceneFactory {
         this.base = new BorderPane();
 
         final var button = new Button("Charger un projet");
+
+        //TODO: to be removed, replace by a controller
         button.setOnAction(event -> {
             final var fileChooser = new DirectoryChooser();
             fileChooser.setTitle("Ouvrir un projet");
 
             final var file = fileChooser.showDialog(null);
+            model.setCurrentProject(file);
         });
 
         base.setCenter(button);

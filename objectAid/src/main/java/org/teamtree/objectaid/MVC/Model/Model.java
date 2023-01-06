@@ -4,6 +4,7 @@ import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -22,6 +23,7 @@ public class Model implements Sujet {
      * Liste des classes avec leurs flèches
      */
     private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
+    private File currentProject;
     // État actuel de l'application
     private ApplicationState applicationState;
     /**
@@ -37,13 +39,24 @@ public class Model implements Sujet {
         this.relations = new HashMap<>();
         this.currentClickedClass = "";
         this.applicationState = ApplicationState.BOOTSTRAP;
+        this.currentProject = null;
+    }
+
+    public File getCurrentProject() {
+        return currentProject;
+    }
+
+    public void setCurrentProject(File currentProject) {
+        this.currentProject = currentProject;
+
+        setApplicationState(ApplicationState.PROJECT_LOADED);
     }
 
     public ApplicationState getApplicationState() {
         return applicationState;
     }
 
-    public void setApplicationState(final ApplicationState applicationState) {
+    private void setApplicationState(final ApplicationState applicationState) {
         this.applicationState = applicationState;
 
         notifierObservateur();
