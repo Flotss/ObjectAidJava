@@ -57,7 +57,7 @@ Fonctionnalité achevée
 
 ---
 ## Fonctionnalité 5 : Afficher les relations
-##### Difficulté: 3
+##### Difficulté: 4
 
 En tant qu’étudiant, je souhaiterais pouvoir afficher ou non les différentes relations d’héritage/ d’implémentation entre les différentes classes, ainsi que les relation d'association. Cet affichage se fera après avoir appuyé un bouton.
 Il faudra donc générer des flèches et autres relations entre les classes.
