@@ -8,6 +8,9 @@ import org.teamtree.objectaid.MVC.Model.Model;
 public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
 
     private final Model model;
+    private static boolean attributGenerauxAffiche = true;
+    private static boolean constructeurGenerauxAffiche = true;
+    private static boolean methodesGenerauxAffiche = true;
 
     public ControllerButtonGeneral(Model model) {
         this.model = model;
@@ -18,13 +21,16 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         switch (((Button)event.getSource()).getText()){
             case "Afficher les attributs":
-                model.afficherAttributs();
+                attributGenerauxAffiche = !attributGenerauxAffiche;
+                model.afficherAttributs(attributGenerauxAffiche);
                 break;
             case "Afficher les méthodes":
-                model.afficherMethodes();
+                methodesGenerauxAffiche = !methodesGenerauxAffiche;
+                model.afficherMethodes(methodesGenerauxAffiche);
                 break;
             case "Afficher les constructeurs":
-                model.afficherConstructeurs();
+                constructeurGenerauxAffiche = !constructeurGenerauxAffiche;
+                model.afficherConstructeurs(constructeurGenerauxAffiche);
                 break;
             case "Attributs":
                 model.afficherAttributsSelection();

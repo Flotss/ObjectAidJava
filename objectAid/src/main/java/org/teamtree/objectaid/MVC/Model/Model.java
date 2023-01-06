@@ -1,5 +1,6 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import org.teamtree.objectaid.MVC.Vue.VueButtonBarClasse;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
@@ -25,6 +26,8 @@ public class Model implements Sujet {
     /** Classe sélectionnée */
     private VueClasseAffichage currentClickedClass;
 
+    private boolean barreBoutonsSpecifique;
+
     /**
      * Constructeur du model
      */
@@ -32,6 +35,7 @@ public class Model implements Sujet {
         this.observateurs = new ArrayList<>();
         this.relations = new HashMap<>();
         this.currentClickedClass = null;
+        this.barreBoutonsSpecifique= false;
     }
 
     /**
@@ -63,13 +67,21 @@ public class Model implements Sujet {
         switch(selection){
             case "selection":
                 this.currentClickedClass.actualiserBordure();
-                this.notifierObservateurs("VueButtonBarClasse");
             break;
             case "deplacement selection":
                 this.currentClickedClass.actualiserPosition();
             break;
             case "classe selection complete":
                 this.currentClickedClass.afficherClasse();
+                break;
+            case "barre":
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueButtonBarClasse){
+                        this.setBarreBoutonsSpecifique();
+                        observateur.actualiser();
+                        return;
+                    }
+                }
                 break;
         }
     }
@@ -159,23 +171,20 @@ public class Model implements Sujet {
      * @param currentClickedClass Classe sélectionnée
      */
     public void setCurrentClickedClass(VueClasseAffichage currentClickedClass) {
-        if(this.currentClickedClass != null) {
-            this.currentClickedClass.classeDeSelectionnee();
-            this.notifierObservateur("selection");
-            if(this.currentClickedClass.getNom().equals(currentClickedClass.getNom())) {
-                this.currentClickedClass = currentClickedClass;
-                this.currentClickedClass.classeSelectionnee();
-                this.notifierObservateur("selection");
-               /*(Objects.equals(currentClickedClass, this.currentClickedClass))
-                                    ? ""
-                                    : currentClickedClass;*/
-            }else {
-                this.currentClickedClass = null;
-            }
-        }else {
+        if(this.currentClickedClass == null) {
             this.currentClickedClass = currentClickedClass;
             this.currentClickedClass.classeSelectionnee();
             this.notifierObservateur("selection");
+        }else {
+            this.currentClickedClass.classeDeSelectionnee();
+            this.notifierObservateur("selection");
+            if (currentClickedClass.getNom() == this.currentClickedClass.getNom()) {
+                this.currentClickedClass = null;
+            } else {
+                this.currentClickedClass = currentClickedClass;
+                this.currentClickedClass.classeSelectionnee();
+                this.notifierObservateur("selection");
+            }
         }
     }
 
@@ -191,9 +200,9 @@ public class Model implements Sujet {
     /**
      * Methode qui permet de changer la possibilité d'afficher les attributs
      */
-    public void afficherAttributs() {
+    public void afficherAttributs(boolean affiche) {
         getClasses().forEach(c -> {
-            c.setAttributEstAffiche(!c.isAttributEstAffiche());
+            c.setAttributEstAffiche(affiche);
             notifierObservateur();
         });
     }
@@ -209,9 +218,9 @@ public class Model implements Sujet {
     /**
      * Methode qui permet de changer la possibilité d'afficher les méthodes
      */
-    public void afficherMethodes() {
+    public void afficherMethodes(boolean affiche) {
         getClasses().forEach(c -> {
-            c.setMethodsEstAffiche(!c.isMethodsEstAffiche());
+            c.setMethodsEstAffiche(affiche);
             notifierObservateur();
         });
     }
@@ -227,9 +236,9 @@ public class Model implements Sujet {
     /**
      * Methode qui permet de changer la possibilité d'afficher les constructeurs
      */
-    public void afficherConstructeurs() {
+    public void afficherConstructeurs(boolean affiche) {
         getClasses().forEach(c -> {
-            c.setConstructeurEstAffiche(!c.isConstructeurEstAffiche());
+            c.setConstructeurEstAffiche(affiche);
             notifierObservateur();
         });
     }
@@ -257,5 +266,13 @@ public class Model implements Sujet {
             }
         }
         return null;
+    }
+
+    public void setBarreBoutonsSpecifique(){
+        this.barreBoutonsSpecifique = this.currentClickedClass!=null;
+    }
+
+    public boolean getBarreBoutonsSpecifique(){
+        return this.barreBoutonsSpecifique;
     }
 }

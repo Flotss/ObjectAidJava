@@ -23,16 +23,15 @@ public class VueButtonBarClasse extends HBox implements Observateur {
         buttonMethodes.setOnAction(new ControllerButtonGeneral(model));
         buttonConstructeurs = new Button("Constructeurs");
         buttonConstructeurs.setOnAction(new ControllerButtonGeneral(model));
-        afficherButtonBarClasse = false;
+        afficherButtonBarClasse = model.getBarreBoutonsSpecifique();
     }
 
     @Override
     public void actualiser() {
-        if (!afficherButtonBarClasse){
+        afficherButtonBarClasse = model.getBarreBoutonsSpecifique();
+        this.getChildren().clear();
+        if (afficherButtonBarClasse){
             this.getChildren().addAll(buttonAttributs, buttonMethodes, buttonConstructeurs);
-        } else {
-            this.getChildren().clear();
         }
-        afficherButtonBarClasse = !afficherButtonBarClasse;
     }
 }

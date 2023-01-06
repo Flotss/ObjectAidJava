@@ -34,6 +34,7 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
      */
     private void addClickedEffect(final VueClasseAffichage source) {
         model.setCurrentClickedClass(source);
-//        model.notifierObservateur();
+        model.setBarreBoutonsSpecifique();
+        model.notifierObservateur("barre");
     }
 }
