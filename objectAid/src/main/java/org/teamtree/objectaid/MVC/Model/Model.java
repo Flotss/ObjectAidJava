@@ -66,6 +66,9 @@ public class Model implements Sujet {
             case "deplacement selection":
                 this.currentClickedClass.actualiserPosition();
             break;
+            case "classe selection complete":
+                this.currentClickedClass.afficherClasse();
+                break;
         }
     }
 
@@ -178,6 +181,14 @@ public class Model implements Sujet {
     }
 
     /**
+     * Methode qui permet de changer la possibilité d'afficher les attributs d'une classe spécifique
+     */
+    public void afficherAttributsSelection() {
+        this.currentClickedClass.getClasseEntiere().setAttributEstAffiche(this.currentClickedClass.getClasseEntiere().isAttributEstAffiche());
+        notifierObservateur("classe selection complete");
+    }
+
+    /**
      * Methode qui permet de changer la possibilité d'afficher les méthodes
      */
     public void afficherMethodes() {
@@ -188,13 +199,29 @@ public class Model implements Sujet {
     }
 
     /**
-     * Methode qui permet de changer la possibilité d'afficher les paramètres
+     * Methode qui permet de changer la possibilité d'afficher les méthodes d'une classe spécifique
+     */
+    public void afficherMethodesSelection() {
+        this.currentClickedClass.getClasseEntiere().setMethodsEstAffiche(this.currentClickedClass.getClasseEntiere().isMethodsEstAffiche());
+        notifierObservateur("classe selection complete");
+    }
+
+    /**
+     * Methode qui permet de changer la possibilité d'afficher les constructeurs
      */
     public void afficherConstructeurs() {
         getClasses().forEach(c -> {
             c.setConstructeurEstAffiche(!c.isConstructeurEstAffiche());
             notifierObservateur();
         });
+    }
+
+    /**
+     * Methode qui permet de changer la possibilité d'afficher les constructeurs d'une classe spécifique
+     */
+    public void afficherConstructeursSelection() {
+        this.currentClickedClass.getClasseEntiere().setConstructeurEstAffiche(this.currentClickedClass.getClasseEntiere().isConstructeurEstAffiche());
+        notifierObservateur("classe selection complete");
     }
 
     /**

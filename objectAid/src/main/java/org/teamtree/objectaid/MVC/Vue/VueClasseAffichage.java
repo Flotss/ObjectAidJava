@@ -194,7 +194,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
 
     public void afficherClasse(){
-
+    //TODO: a renomé en actualiser (julien le fera)
     //On ajoute les différentes parties de la classe
         this.getChildren().clear();
         this.getChildren().add(definition);
