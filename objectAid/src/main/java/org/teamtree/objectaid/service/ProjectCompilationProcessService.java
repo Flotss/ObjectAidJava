@@ -1,15 +1,15 @@
 package org.teamtree.objectaid.service;
 
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.util.FileExtension;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class ProjectCompilationProcessService {
     private final Model model;
@@ -21,41 +21,32 @@ public class ProjectCompilationProcessService {
     public void compileProject(final File file) {
         if (file.isDirectory()) {
             Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(this::compileProject);
-        } else {
-            if (FileExtension.isJavaFile(file.getName())) {
-                try {
-                    final var temporaryOutputDirectory = Files.createTempDirectory("objectaid").toFile();
-                    final var processBuilder = new ProcessBuilder("javac", "-d", temporaryOutputDirectory.getAbsolutePath(), file.getAbsolutePath());
+            try {
+                final var temporaryOutputDirectory = Files.createTempDirectory("objectaid");
 
-                    System.out.println(processBuilder.command());
+                System.out.println("Temporary output directory: " + temporaryOutputDirectory);
 
-                    final var res = processBuilder.start().waitFor();
+                final var tempFile = temporaryOutputDirectory.toFile();
 
-                    System.out.println(Arrays.toString(temporaryOutputDirectory.listFiles()));
+                compile(Path.of(file.getAbsolutePath()), temporaryOutputDirectory);
 
-                    // if listFiles is empty, then humanize the error res
-                    if (res != 0) {
-                        System.out.println("Compilation error for file " + file.getName() + " with error code " + res);
-                    } else {
-                        final var classLoader = new URLClassLoader(new URL[]{temporaryOutputDirectory.toURI().toURL()});
-                        final var className = file.getName().replace(".java", "");
-                        final var clazz = classLoader.loadClass(className);
-                    }
+                System.out.println(Arrays.stream(Objects.requireNonNull(tempFile.listFiles())).count() + " classes compiled");
 
-                    final var url = temporaryOutputDirectory.toURI().toURL();
-                    System.out.println(url);
-                    final var clazz = new URLClassLoader(new URL[]{url}).loadClass(url + file.getName().replace(".java", ""));
-
-                    this.model.addClassPathEntry(clazz.getSimpleName(), clazz);
-
-                    System.out.println("Class " + clazz.getSimpleName() + " loaded");
-
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
+    }
+
+    void compile(Path source, Path target) {
+        try (Stream<Path> files = Files.list(source)) {
+            Stream<String> javaFiles = files.filter(Files::isRegularFile).filter(p -> p.getFileName().toString().endsWith(".java")).map(Path::toAbsolutePath).map(Path::toString);
+            List<String> args = Stream.concat(Stream.of("javac", "-d", target.toAbsolutePath().toString()), javaFiles).toList();
+            Process process = new ProcessBuilder(args).inheritIO().start();
+            process.getInputStream().transferTo(System.out);
+            process.waitFor();
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException(ex);
         }
     }
 }
