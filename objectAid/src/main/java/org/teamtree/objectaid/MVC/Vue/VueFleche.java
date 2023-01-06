@@ -13,6 +13,6 @@ public class VueFleche extends Line implements Observateur {
 
     @Override
     public void actualiser() {
-        throw new Error("Not yet implemented");
+        //throw new Error("Not yet implemented");
     }
 }

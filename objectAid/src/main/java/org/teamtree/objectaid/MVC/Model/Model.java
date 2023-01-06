@@ -63,6 +63,7 @@ public class Model implements Sujet {
         switch(selection){
             case "selection":
                 this.currentClickedClass.actualiserBordure();
+                this.notifierObservateurs("VueButtonBarClasse");
             break;
             case "deplacement selection":
                 this.currentClickedClass.actualiserPosition();
@@ -201,7 +202,7 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les attributs d'une classe spécifique
      */
     public void afficherAttributsSelection() {
-        this.currentClickedClass.getClasseEntiere().setAttributEstAffiche(this.currentClickedClass.getClasseEntiere().isAttributEstAffiche());
+        this.currentClickedClass.getClasseEntiere().setAttributEstAffiche(!this.currentClickedClass.getClasseEntiere().isAttributEstAffiche());
         notifierObservateur("classe selection complete");
     }
 
@@ -219,7 +220,7 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les méthodes d'une classe spécifique
      */
     public void afficherMethodesSelection() {
-        this.currentClickedClass.getClasseEntiere().setMethodsEstAffiche(this.currentClickedClass.getClasseEntiere().isMethodsEstAffiche());
+        this.currentClickedClass.getClasseEntiere().setMethodsEstAffiche(!this.currentClickedClass.getClasseEntiere().isMethodsEstAffiche());
         notifierObservateur("classe selection complete");
     }
 
@@ -237,7 +238,7 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les constructeurs d'une classe spécifique
      */
     public void afficherConstructeursSelection() {
-        this.currentClickedClass.getClasseEntiere().setConstructeurEstAffiche(this.currentClickedClass.getClasseEntiere().isConstructeurEstAffiche());
+        this.currentClickedClass.getClasseEntiere().setConstructeurEstAffiche(!this.currentClickedClass.getClasseEntiere().isConstructeurEstAffiche());
         notifierObservateur("classe selection complete");
     }
 
