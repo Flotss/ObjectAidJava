@@ -34,7 +34,6 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 break;
             case "Attributs":
                 model.afficherAttributsSelection();
-                System.out.println("sfsdf");
                 break;
             case "Méthodes":
                 model.afficherMethodesSelection();
