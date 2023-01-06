@@ -228,42 +228,75 @@ public class VueClasseAffichage extends VBox implements Observateur {
         }
     }
 
-
+    /**
+     * Retourne le nom de la classe affichée
+     * @return le nom de la classe affichée : String
+     */
     public String getNom(){
         return this.nom;
     }
 
+    /**
+     * Retourne la partie definition de la classe affichée
+     * @return la partie definition de la classe affichée : HBox
+     */
     public HBox getDefinition() {
         return definition;
     }
 
+    /**
+     * Retourne la partie attributs de la classe affichée
+     * @return la partie attributs de la classe affichée : VBox
+     */
     public VBox getConstructeur() {
         return constructeur;
     }
 
+    /**
+     * Retourne la partie constructeurs de la classe affichée
+     * @return la partie constructeurs de la classe affichée : VBox
+     */
     public VBox getAttributs() {
         return attributs;
     }
 
+    /**
+     * Retourne la partie méthodes de la classe affichée
+     * @return la partie méthodes de la classe affichée : VBox
+     */
     public VBox getMethodes() {
         return methodes;
     }
 
+    /**
+     * Retourne la classe entière de la classe affichée
+     * @return la classe entière de la classe affichée : Classe
+     */
     public ClasseEntiere getClasseEntiere(){
         return this.classeEntiere;
     }
 
+    /**
+     * Methode qui affecte la couleur bleu à la bordure de la classe affichée lorsqu'elle est sélectionnée
+     */
     public void classeSelectionnee(){
         this.couleur = "blue";
     }
 
+    /**
+     * Methode qui affecte la couleur noire à la bordure de la classe affichée lorsqu'elle n'est pas sélectionnée
+     */
     public void classeDeSelectionnee(){
         this.couleur = "black";
     }
 
+    /**
+     * Methode qui permet de mettre à jour la bordure de la classe affichée
+     */
     public void actualiserBordure(){
         super.setStyle("-fx-border-color: "+this.couleur+ " ; -fx-border-width: 1px;");
     }
+
 
     @Override
     public void actualiser() {
