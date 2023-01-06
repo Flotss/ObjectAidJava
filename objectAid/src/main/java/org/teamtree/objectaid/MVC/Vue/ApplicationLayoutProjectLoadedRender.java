@@ -132,6 +132,6 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
     @Override
     public Scene getScene() {
-        return new Scene(base, 1920, 1080);
+        return new Scene(base, 800, 600);
     }
 }
