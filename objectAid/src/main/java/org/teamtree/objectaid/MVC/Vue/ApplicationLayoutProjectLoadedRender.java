@@ -15,6 +15,9 @@ import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.util.FileExtension;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -74,22 +77,19 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
                 final var itemContent = dragBoard.getString();
                 success = true;
 
-                final var entrySearch = this.model.getClassesPath().entrySet()
-                        .stream()
-                        .filter(entry -> entry.getKey().equals(itemContent))
-                        .findFirst();
+                final var entrySearch = this.model.getClassesPath().entrySet().stream().filter(entry -> entry.getKey().equals(itemContent)).findFirst();
 
-                if (entrySearch.isPresent()){
+                if (entrySearch.isPresent()) {
                     System.out.println(entrySearch.get().getKey() + ", " + entrySearch.get().getValue());
 
                     final ClasseEntiere classeEntiere;
-                    try {
-                        classeEntiere = new ClasseEntiere(entrySearch.get().getValue());
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                    this.model.ajouterClasse(classeEntiere);
-                }else {
+                    final var fqn = entrySearch.get().getValue();
+
+                    System.out.println(fqn.getCanonicalName());
+
+                    //classeEntiere = new ClasseEntiere(entrySearch.get().getValue());
+                    //this.model.ajouterClasse(classeEntiere);
+                } else {
                     System.out.println("not found for " + itemContent);
                     System.out.println(this.model.getClassesPath());
                 }
@@ -105,6 +105,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         base.setCenter(vbox);
     }
 
+
     public void createTree(File file, TreeItem<String> parent) {
         if (file.isDirectory()) {
             final var treeItem = new CheckBoxTreeItem<>(file.getName());
@@ -118,11 +119,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
             }
 
             //todo: refactor it to a service
-            final var name = FileExtension.isClassFile(file.getName())
-                    ? file.getName().substring(0, file.getName().length() - 6)
-                    : file.getName();
-
-            this.model.addClassPathEntry(name, file.getAbsolutePath());
+            final var name = FileExtension.isClassFile(file.getName()) ? file.getName().substring(0, file.getName().length() - 6) : file.getName();
 
             final var checkBox = new CheckBoxTreeItem<>(name);
 

@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class Model implements Sujet {
 
-    private final Map<String, String> classesPath = new HashMap<>();
+    private final Map<String, Class<?>> classesPath = new HashMap<>();
 
     /**
      * Liste des observateurs
@@ -47,7 +47,7 @@ public class Model implements Sujet {
     }
 
     public void setCurrentProject(File currentProject) {
-        final var service = new ProjectCompilationProcessService();
+        final var service = new ProjectCompilationProcessService(this);
 
         service.compileProject(currentProject);
         this.currentProject = currentProject;
@@ -55,12 +55,12 @@ public class Model implements Sujet {
         setApplicationState(ApplicationState.PROJECT_LOADED);
     }
 
-    public Map<String, String> getClassesPath() {
+    public Map<String, Class<?>> getClassesPath() {
         return classesPath;
     }
 
-    public void addClassPathEntry(String className, String classPath) {
-        classesPath.put(className, classPath);
+    public void addClassPathEntry(String className, Class<?> clazz) {
+        classesPath.put(className, clazz);
     }
 
     public ApplicationState getApplicationState() {
