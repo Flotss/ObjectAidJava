@@ -103,13 +103,16 @@ public class VueClasseAffichage extends VBox implements Observateur {
     public void updateAttributsRelation(Model model){
         this.attributsRelation.getChildren().clear();
 
-        if (classeEntiere.getAttributs().size() == 0) {
-            attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
-        }
+        Boolean bordureAffichee = false;
+
         List<Relation> relations = this.classeEntiere.getRelations();
         for (Relation relation : relations) {
-            Optional<ClasseEntiere> classeEntiere = model.getClasse(relation.getDestination());
-            if (! classeEntiere.isPresent() && relation instanceof Association association) {
+            Optional<ClasseEntiere> classeEntiereDestination = model.getClasse(relation.getDestination());
+            if (! classeEntiereDestination.isPresent() && relation instanceof Association association) {
+                if(!bordureAffichee){
+                    attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
+                    bordureAffichee = true;
+                }
                 String attRela = FabriqueAffichage.fabriqueAcces(association.getAttribut().getAccessibilite()) + " " + association.getAttribut().getType() + " " + association.getAttribut().getNom();
                 Label attributRelationLabel = new Label(attRela);
                 attributsRelation.getChildren().add(attributRelationLabel);
