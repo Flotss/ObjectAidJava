@@ -44,6 +44,29 @@ package "MVC"{
         +setBorderColor(ClasseAffichage)
     }
 
+    class VueClasseAffichage implements Observateur{
+        -nom : String
+        -definition : HBox
+        -constructeur : Vbox
+        -attributs : Vbox
+        -methodes : Vbox
+        +ClasseAffichage(String)
+        +setDefinition(ClasseEntiere) : HBox
+        +setConstructeur(ClasseEntiere) : Vbox
+        +setAttributs(ClasseEntiere) : Vbox
+        +setMethodes(ClasseEntiere) : Vbox
+        +afficherClasse(ClasseEntiere)
+        +actualiser()
+        +actualiserBordure()
+
+        +getNom() : String
+        +getDefinition() : HBox
+        +getConstructeur() : Vbox
+        +getAttributs() : Vbox
+        +getMethodes() : Vbox
+    }
+
+
     class VueFleche implements Observateur{
         +VueFleche(Modele)
         +actualiser()
@@ -94,24 +117,6 @@ package "MVC"{
 
 }
 'Classes'
-class ClasseAffichage{
-    -nom : String
-    -definition : HBox
-    -constructeur : Vbox
-    -attributs : Vbox
-    -methodes : Vbox
-    +ClasseAffichage(String)
-    +setDefinition(ClasseEntiere) : HBox
-    +setConstructeur(ClasseEntiere) : Vbox
-    +setAttributs(ClasseEntiere) : Vbox
-    +setMethodes(ClasseEntiere) : Vbox
-    +afficherClasse(ClasseEntiere)
-    +getNom() : String
-    +getDefinition() : HBox
-    +getConstructeur() : Vbox
-    +getAttributs() : Vbox
-    +getMethodes() : Vbox
-}
 
 
 class ClasseEntiere{
