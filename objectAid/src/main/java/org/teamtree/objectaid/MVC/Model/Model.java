@@ -248,5 +248,6 @@ public class Model implements Sujet {
                 return ((VueClasse) observateur).getClasseAffichage(nom);
             }
         }
+        return null;
     }
 }
