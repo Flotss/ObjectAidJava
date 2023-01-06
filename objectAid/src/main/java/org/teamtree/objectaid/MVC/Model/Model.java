@@ -6,15 +6,14 @@ import org.teamtree.objectaid.MVC.Vue.Observateur;
 import org.teamtree.objectaid.service.ProjectCompilationProcessService;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Classe qui permet de gérer les données du diagramme de classe
  */
 public class Model implements Sujet {
+
+    private final Map<String, String> classesPath = new HashMap<>();
 
     /**
      * Liste des observateurs
@@ -54,6 +53,14 @@ public class Model implements Sujet {
         this.currentProject = currentProject;
 
         setApplicationState(ApplicationState.PROJECT_LOADED);
+    }
+
+    public Map<String, String> getClassesPath() {
+        return classesPath;
+    }
+
+    public void addClassPathEntry(String className, String classPath) {
+        classesPath.put(className, classPath);
     }
 
     public ApplicationState getApplicationState() {
