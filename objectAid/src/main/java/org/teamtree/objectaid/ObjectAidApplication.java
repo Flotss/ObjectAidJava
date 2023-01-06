@@ -15,7 +15,14 @@ import org.teamtree.objectaid.MVC.Vue.VueFleche;
 
 import java.io.IOException;
 
+/**
+ * Classe principale de l'application
+ */
 public class ObjectAidApplication extends Application {
+
+    /**
+     * Methode qui permet de lancer l'application
+     */
     @Override
     public void start(Stage stage) throws ClassNotFoundException {
         Model model = new Model();
