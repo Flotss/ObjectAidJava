@@ -20,7 +20,11 @@ public class VueClasse extends Pane implements Observateur {
 
     /** Modèle */
     private final Model model;
+
+    /** HashMap qui represente la liste des classes à afficher, chaque classe possede comme clé le nom de la classe */
     private final HashMap<String, VueClasseAffichage> classes;
+
+    /** Liste des fleches */
     private final List<VueFleche> fleches;
 
 
