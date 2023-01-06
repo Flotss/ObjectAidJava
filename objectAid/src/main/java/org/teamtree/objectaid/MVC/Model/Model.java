@@ -1,5 +1,6 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
@@ -239,5 +240,13 @@ public class Model implements Sujet {
         this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
         notifierObservateur("deplacement selection");
 
+    }
+
+    public VueClasseAffichage getVueClasseAffichage(String nom){
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                return ((VueClasse) observateur).getClasseAffichage(nom);
+            }
+        }
     }
 }
