@@ -54,8 +54,8 @@ public class ObjectAidApplication extends Application {
         VueClasse vueClass = new VueClasse(model);
         model.ajouterObservateur(vueClass);
 
-        VueFleche vueFleche = new VueFleche(model);
-        model.ajouterObservateur(vueFleche);
+//        VueFleche vueFleche = new VueFleche(model);
+//        model.ajouterObservateur(vueFleche);
 
         HBox buttonBar = new HBox();
         ControllerButtonGeneral controllerButtonGeneral = new ControllerButtonGeneral(model);
