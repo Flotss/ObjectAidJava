@@ -11,31 +11,25 @@ package "MVC"{
     }
 
     class Modele implements Sujet{
-            - relation : Map<ClasseEntiere, ArrayList<Fleche>>
-            - nomSelection : String
-            - currentClickedClass : String
-            - currentDirectory : File
-            + Modele()
-            + setCurrentDirectory(File)
-            + deplacerClasse(String, int, int)
-            + afficherAttributs()
-            + afficherConstructeurs()
-            + afficherMethodes()
-            + afficherAttributsSelection()
-            + afficherConstructeursSelection()
-            + afficherMethodesSelection()
-            + ajouterClasse(ClasseEntiere)
-            + supprimerClasse(ClasseEntiere)
-            + ajouterRelation(ClasseEntiere, Fleche)
-            + getClasse(String) : Optional<ClasseEntiere>
-            + getClasses() : Set<ClasseEntiere>
-            + getCurrentClickedClass(): String
-            + getRelations(ClasseEntiere) : ArrayList<Fleche>
-            + supprimerClasse(ClasseEntiere)
-            + ajouterObservateur(Observateur)
-            + supprimerObservateur(Observateur)
-            + notifierObservateurs()
-        }
+        - relation : Map<ClasseEntiere, ArrayList<Fleche>>
+        - nomSelection : String
+        - currentClickedClass : String
+        + Modele()
+        + afficherAttributs()
+        + afficherConstructeurs()
+        + afficherMethodes()
+        + ajouterClasse(ClasseEntiere)
+        + supprimerClasse(ClasseEntiere)
+        + ajouterRelation(ClasseEntiere, Fleche)
+        + getClasse(String) : Optional<ClasseEntiere>
+        + getClasses() : Set<ClasseEntiere>
+        + getCurrentClickedClass(): String
+        + getRelations(ClasseEntiere) : ArrayList<Fleche>
+        + supprimerClasse(ClasseEntiere)
+        + ajouterObservateur(Observateur)
+        + supprimerObservateur(Observateur)
+        + notifierObservateurs()
+    }
 
     'Observateurs'
 
@@ -44,8 +38,43 @@ package "MVC"{
     }
 
     class VueClasse implements Observateur{
-        - classes : ArrayList<Vbox>
-        +VueClasse(Modele)
+        +HashMap<String, VueClasseAffichage>
+        +VueClasse(model : Model)
+        +actualiser()
+        +getClasseAffichage(nom : String) : VueClasseAffichage
+    }
+
+    class VueClasseAffichage implements Observateur{
+        -nom : String
+        -definition : HBox
+        -constructeur : Vbox
+        -attributs : Vbox
+        -methodes : Vbox
+        +ClasseAffichage(String)
+        +setDefinition(ClasseEntiere) : HBox
+        +setConstructeur(ClasseEntiere) : Vbox
+        +setAttributs(ClasseEntiere) : Vbox
+        +setMethodes(ClasseEntiere) : Vbox
+        +afficherClasse(ClasseEntiere)
+        +actualiser()
+        +actualiserBordure()
+        +classeDeSelectionnee()
+        +classeSelectionnee
+        +getNom() : String
+        +getDefinition() : HBox
+        +getConstructeur() : Vbox
+        +getAttributs() : Vbox
+        +getMethodes() : Vbox
+        +getClasseEntiere() : ClasseEntiere
+    }
+
+    class VueButtonBarClasse implements Observateur{
+        -buttonAttributs : Button
+        -buttonConstructeurs : Button
+        -buttonMethodes : Button
+        -afficherButtonBarClasse : boolean
+        -model : Model
+        +VueButtonBarClasse(model : Model)
         +actualiser()
     }
 
@@ -54,32 +83,27 @@ package "MVC"{
         +actualiser()
     }
 
-    class VueArboressence implements Observateur {
-        + VueArboressence(Modele)
-        + actualiser()
-    }
 
     'Controlleurs'
 
-    class ControleurBouton{
-        +ControleurBouton(Modele)
+    class ControllerButtonGeneral{
+        +{static} attributGenerauxAffiche : boolean
+        +{static} constructeurGenerauxAffiche : boolean
+        +{static} methodeGenerauxAffiche : boolean
+        +ControllerButon(Modele)
         +handle(ActionEvent)
     }
 
+    class DeplacementClasseDragAndDropController {
+        - model : Model
+        + DeplacementClasseDragAndDropController(modele : Model)
+        + handle(MouseEvent) : void
+    }
+
     class ClasseEntiereClickedController{
-            + ClasseEntiereClickedController(Modele)
-            + addClickedEffect(ClasseAffichage)
-            +handle(MouseEvent)
-    }
-
-    class DragAndDropClasseEntiereController{
-            + DragAndDropClasseEntiereController(Modele)
-            +handle(MouseEvent)
-    }
-
-    class WindowsExplorerModalController {
-        + WindowsExplorerModalController(Modele)
-        + handle(ActionEvent)
+        + ClasseEntiereClickedController(Modele)
+        + addClickedEffect(ClasseAffichage)
+        +handle(MouseEvent)
     }
 
     interface ClasseEntiereTitleIcon{
@@ -104,20 +128,16 @@ package "MVC"{
 
 }
 'Classes'
-class ClasseAffichage{
-    -nom : String
-    +ClasseAffichage(String)
-    +getNom() : String
-}
+
 
 class ClasseEntiere{
     -ConstructeurEstAffiche : boolean
     -AttributEstAffiche : boolean
     -ConstructeurEstAffiche : boolean
     -MethodeEstAffiche : boolean
-    -setAffichageConstructeurs()
-    -setAffichageMethods()
-    -setAffichageAttributs()
+    +setAffichageConstructeurs()
+    +setAffichageMethods()
+    +setAffichageAttributs()
     +ClasseEntiere(path : String)
     +deplacer(int, int)
     +getAttributs() : ArrayList<Attribut>
@@ -131,14 +151,6 @@ class ClasseEntiere{
     +isConstructeurEstAffiche(): boolean
     +isMethodsEstAffiche(): boolean
 }
-
-'class FabriqueAffichageClasse{
-'    +FabriqueAffichageClasse(ClasseEntiere)
-'    +getDefinitionAffichage(): HBox
-'    +getAttributsAffichage(): HBox
-'    +getConstructeurAffichage(): HBox
-'    +getMethodesAffichage(): HBox
-'}
 
 interface Entite{
     +getEntite() : String
@@ -253,6 +265,35 @@ class Point{
     + getY() : int
 }
 
+abstract class Relation {
+    - nom : String
+
+    + Relation(nom : String)
+    + getNom() : String
+
+    {abstract} + toString() : String
+}
+
+class Association extends Relation {
+    - cardinalite1 : String
+    - cardinalite2 : String
+
+    + Association(nom : String, card1 : String, card2 : String)
+    + getCardinalite1() : String
+    + getCardinalite2() : String
+    + toString() : String
+}
+
+class Heritage extends Relation {
+    + Heritage(nom : String)
+    + toString() : String
+}
+
+class Implementation extends Relation {
+    + Implementation(nom : String)
+    + toString() : String
+}
+
 class FabriqueAccessibilite {
     + FabriqueAccessibilite()
     + getAccessibilite(access : int) : Accessibilite
@@ -261,8 +302,8 @@ class FabriqueAccessibilite {
 class FabriqueAffichage {
     + FabriqueAffichage(ClasseEntiere)
     + setAffichage():ClasseAffichage
-    + fabriqueAcces(String): String
-    + fabriqueIcon(): ClasseEntiereTitleIcon
+    + {static}fabriqueAcces(String): String
+    + {static}fabriqueIcon(): ClasseEntiereTitleIcon
 }
 
 class FabriqueEtat {
@@ -287,6 +328,7 @@ class Fleche {
 
 Modele "1" --> "*" Observateur : -observateurs
 VueClasse --> "0..1" Modele : - model
+VueClasse --> VueFleche : - fleches
 VueFleche --> "0..1" Modele : - model
 VueArboressence --> "0..1" Modele : - model
 Attribut "1" --> "0..1" Accessibilite : -accessibilite
@@ -305,12 +347,15 @@ ClasseEntiere "1" --> "*" Attribut : attributs
 ClasseEntiere "1" --> "*" Methode : methodes
 ClasseEntiere "1" --> "*" Constructeur : constructeurs
 ClasseEntiere "1" --> "1" Point : -coordonnees
+ClasseEntiere "1" --> "*" Relation : -relations
 Fleche "1" --> "1" Accessibilite : accessibilite
 Fleche "2" *-- Point : pointDebutFin
-ControleurBouton "*" --> "1" Modele : -modele
+ControllerButon "*" --> "1" Modele : -modele
+DeplacementClasseDragAndDropController "*" --> "1" Modele : -modele
 ClasseEntiereClickedController "*" --> "1" Modele : -modele
 FabriqueAffichage --> "1" ClasseEntiere : -c
-DragAndDropClasseEntiereController "*" --> "1" Modele : -modele
-WindowsExplorerModalController "*" --> "1" Modele : -modele
+ClasseEntiere "1" --> "1" VueClasseAffichage : -classeAffichage
+ClasseEntiere "1" <-- "1" VueClasseAffichage : -classeEntiere
+
 
 @enduml

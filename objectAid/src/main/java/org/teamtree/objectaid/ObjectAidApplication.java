@@ -13,7 +13,14 @@ import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
 
 
+/**
+ * Classe principale de l'application
+ */
 public class ObjectAidApplication extends Application {
+
+    /**
+     * Methode qui permet de lancer l'application
+     */
     @Override
     public void start(Stage stage) throws ClassNotFoundException {
         Model model = new Model();
