@@ -107,4 +107,10 @@ public class VueClasse extends Pane implements Observateur {
     public VueClasseAffichage getClasseAffichage(String nom){
         return this.classes.get(nom);
     }
+
+    public void actualiserFleches() {
+        for (Fleche fleche : fleches) {
+            fleche.actualiser();
+        }
+    }
 }
