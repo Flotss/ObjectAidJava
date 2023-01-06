@@ -3,6 +3,7 @@ package org.teamtree.objectaid.MVC.Model;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
+import org.teamtree.objectaid.service.ProjectCompilationProcessService;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,6 +48,9 @@ public class Model implements Sujet {
     }
 
     public void setCurrentProject(File currentProject) {
+        final var service = new ProjectCompilationProcessService();
+
+        service.compileProject(currentProject);
         this.currentProject = currentProject;
 
         setApplicationState(ApplicationState.PROJECT_LOADED);

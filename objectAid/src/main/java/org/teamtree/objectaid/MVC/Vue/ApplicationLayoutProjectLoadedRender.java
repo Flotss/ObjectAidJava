@@ -1,10 +1,7 @@
 package org.teamtree.objectaid.MVC.Vue;
 
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBoxTreeItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -42,6 +39,11 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
             Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(f -> createTree(f, treeItem));
         } else {
+
+            if (file.getName().endsWith(".java")) {
+                return;
+            }
+
             parent.getChildren().add(new CheckBoxTreeItem<>(file.getName()));
         }
     }
