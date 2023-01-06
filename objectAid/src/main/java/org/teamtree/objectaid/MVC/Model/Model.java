@@ -152,13 +152,21 @@ public class Model implements Sujet {
         if(this.currentClickedClass != null) {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
-        }
-       this.currentClickedClass =  currentClickedClass;
-       this.currentClickedClass.classeSelectionnee();
-        this.notifierObservateur("selection");
+            if(this.currentClickedClass.getNom() != currentClickedClass.getNom()) {
+                this.currentClickedClass = currentClickedClass;
+                this.currentClickedClass.classeSelectionnee();
+                this.notifierObservateur("selection");
                /*(Objects.equals(currentClickedClass, this.currentClickedClass))
                                     ? ""
                                     : currentClickedClass;*/
+            }else {
+                this.currentClickedClass = null;
+            }
+        }else {
+            this.currentClickedClass = currentClickedClass;
+            this.currentClickedClass.classeSelectionnee();
+            this.notifierObservateur("selection");
+        }
     }
 
     /**
