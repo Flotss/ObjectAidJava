@@ -5,7 +5,7 @@ import org.teamtree.objectaid.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
 import org.teamtree.objectaid.service.ProjectCompilationProcessService;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -23,7 +23,7 @@ public class Model implements Sujet {
      * Liste des classes avec leurs flèches
      */
     private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
-    private File currentProject;
+    private Path currentProject;
     // État actuel de l'application
     private ApplicationState applicationState;
     /**
@@ -42,15 +42,17 @@ public class Model implements Sujet {
         this.currentProject = null;
     }
 
-    public File getCurrentProject() {
+    public Path getCurrentProject() {
         return currentProject;
     }
 
-    public void setCurrentProject(File currentProject) {
+    public void setCurrentProject(Path currentProject) {
         final var service = new ProjectCompilationProcessService(this);
 
         service.compileProject(currentProject);
         this.currentProject = currentProject;
+
+        System.out.println("Set current project to " + currentProject);
 
         setApplicationState(ApplicationState.PROJECT_LOADED);
     }

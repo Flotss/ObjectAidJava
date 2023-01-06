@@ -23,7 +23,7 @@ public class ApplicationLayoutBootstrapRender implements SceneFactory {
             fileChooser.setTitle("Ouvrir un projet");
 
             final var file = fileChooser.showDialog(null);
-            model.setCurrentProject(file);
+            model.setCurrentProject(file.toPath());
         });
 
         base.setCenter(button);

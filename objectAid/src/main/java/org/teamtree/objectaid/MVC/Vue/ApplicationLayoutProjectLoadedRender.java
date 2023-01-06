@@ -32,7 +32,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         final var scrollPane = new ScrollPane();
 
         TreeItem<String> root = new TreeItem<>();
-        Arrays.stream(Objects.requireNonNull(model.getCurrentProject().listFiles())).forEach(file -> createTree(file, root));
+        Arrays.stream(Objects.requireNonNull(model.getCurrentProject().toFile().listFiles())).forEach(file -> createTree(file, root));
 
         final var treeView = new TreeView<>(root);
 
