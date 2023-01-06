@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
-import org.teamtree.objectaid.MVC.Model.ApplicationState;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 public class ApplicationLayoutBootstrapRender implements SceneFactory {
