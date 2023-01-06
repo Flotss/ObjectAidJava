@@ -8,6 +8,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.util.FileExtension;
 
 import java.io.File;
 import java.util.Arrays;
@@ -43,11 +44,12 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
             Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(f -> createTree(f, treeItem));
         } else {
 
-            if (file.getName().endsWith(".java")) {
+            if (FileExtension.isJavaFile(file.getName())) {
                 return;
             }
 
-            final var name = file.getName().endsWith(".class")
+            //todo: refactor it to a service
+            final var name = FileExtension.isClassFile(file.getName())
                     ? file.getName().substring(0, file.getName().length() - 6)
                     : file.getName();
 
