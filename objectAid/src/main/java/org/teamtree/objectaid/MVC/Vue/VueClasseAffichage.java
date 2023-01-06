@@ -67,7 +67,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
      * @param classeEntiere La classe à afficher
      */
     public VueClasseAffichage(ClasseEntiere classeEntiere, Model model){
-        this.nom = classeEntiere.getDefinition().getNom();
+        this.nom = classeEntiere.getNom();
         this.classeEntiere = classeEntiere;
         this.definition = new HBox();
         this.constructeur = new VBox();
@@ -126,7 +126,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
         List<Relation> relations = this.classeEntiere.getRelations();
         for (Relation relation : relations) {
             Optional<ClasseEntiere> classeEntiereDestination = model.getClasse(relation.getDestination());
-            if (! classeEntiereDestination.isPresent() && relation instanceof Association association) {
+            if (! classeEntiereDestination.isEmpty() && relation instanceof Association association) {
                 if(!bordureAffichee){
                     attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
                     bordureAffichee = true;

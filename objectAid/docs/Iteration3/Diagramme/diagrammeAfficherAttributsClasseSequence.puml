@@ -1,0 +1,40 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant "ControllerButtonGeneral" as controller
+participant "Model" as model
+participant "ClasseEntiere" as classe
+participant "ClasseAffichage" as classeAffichage
+
+activate user
+user -> controller : handle(MouseEvent: mouseEvent)
+activate controller
+controller -> model : afficherAttributsSelection()
+activate model
+'foreach classes in model.getClasses() and do something
+model -> classe : setAttributEstAffiche()
+activate classe
+classe --> model
+deactivate classe
+
+
+model -> model : notifierObservateur("classe selection complete")
+model -> classeAffichage : afficherClasse()
+activate classeAffichage
+classeAffichage -> classeAffichage : updateAttributsRelation()
+classeAffichage -> classeAffichage : getChildren().clear()
+classeAffichage -> classeAffichage : getChildren().add(definition)
+alt isAttributEstAffiche()
+classeAffichage -> classeAffichage : getChildren().add(attributs)
+classeAffichage -> classeAffichage : getChildren().add(attributsRelation)
+end alt
+classeAffichage --> model
+deactivate classeAffichage
+model --> controller
+deactivate model
+controller --> user
+deactivate controller
+
+@enduml

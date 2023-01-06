@@ -7,6 +7,7 @@ import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichageFleche;
 import org.teamtree.objectaid.MVC.Controller.ClasseEntiereClickedController;
 import org.teamtree.objectaid.MVC.Controller.DeplacementClasseDragAndDropController;
+import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.ArrayList;
@@ -25,7 +26,8 @@ public class VueClasse extends Pane implements Observateur {
     private final HashMap<String, VueClasseAffichage> classes;
 
     /** Liste des fleches */
-    private final List<VueFleche> fleches;
+    private final List<Fleche> fleches;
+
 
 
     /**
@@ -56,17 +58,30 @@ public class VueClasse extends Pane implements Observateur {
 
             classes.put(classe.getNom(),classe);
         }
+        model.ajouterObservateur(this);
+
+        // Pour chaque relation
+        for (ClasseEntiere classEntiere : model.getClasses()) {
+            for (Relation relation : model.getRelations(classEntiere)) {
+                if (model.getVueClasseAffichage(relation.getDestination()) == null) continue;
+
+                // Relation
+                Fleche fleche = FabriqueAffichageFleche.creerAffichageFleche(model, relation);
+                fleches.add(fleche);
+                this.getChildren().add(fleche);
+            }
+        }
     }
 
     /**
      * Méthode qui permet de mettre a jour la vue
      */
-
     @Override
     public void actualiser() {
         for (VueClasseAffichage classe : classes.values()) {
             classe.afficherClasse();
         }
+
     }
 
 //    /**
@@ -91,5 +106,14 @@ public class VueClasse extends Pane implements Observateur {
      */
     public VueClasseAffichage getClasseAffichage(String nom){
         return this.classes.get(nom);
+    }
+
+    /**
+     * Méthode qui permet de actualiser la vue des fleches
+     */
+    public void actualiserFleches() {
+        for (Fleche fleche : fleches) {
+            fleche.actualiser();
+        }
     }
 }
