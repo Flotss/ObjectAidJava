@@ -11,9 +11,7 @@ import org.teamtree.objectaid.MVC.Vue.VueButtonBarClasse;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
-import org.teamtree.objectaid.MVC.Vue.VueFleche;
 
-import java.io.IOException;
 
 public class ObjectAidApplication extends Application {
     @Override
@@ -51,8 +49,7 @@ public class ObjectAidApplication extends Application {
 //        ClasseEntiere c9 = new ClasseEntiere("org.teamtree.objectaid.Etat.Etat");
 //        model.ajouterClasse(c9);
 
-        VueClasse vueClass = new VueClasse(model);
-        model.ajouterObservateur(vueClass);
+        VueClasse vueClass = new VueClasse(model); // La vue se rajoute elle-même au modèle
 
 //        VueFleche vueFleche = new VueFleche(model);
 //        model.ajouterObservateur(vueFleche);

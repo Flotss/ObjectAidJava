@@ -1,12 +1,9 @@
 package org.teamtree.objectaid.MVC.Model;
 
-import org.teamtree.objectaid.MVC.Vue.VueButtonBarClasse;
-import org.teamtree.objectaid.MVC.Vue.VueClasse;
-import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
+import org.teamtree.objectaid.MVC.Vue.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
-import org.teamtree.objectaid.MVC.Vue.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,6 +73,12 @@ public class Model implements Sujet {
             break;
             case "deplacement selection":
                 this.currentClickedClass.actualiserPosition();
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueClasse){
+                        ((VueClasse) observateur).actualiserFleches();
+                        return;
+                    }
+                }
             break;
             case "classe selection complete":
                 this.currentClickedClass.afficherClasse();
@@ -88,6 +91,7 @@ public class Model implements Sujet {
                         return;
                     }
                 }
+
                 break;
         }
     }
@@ -264,7 +268,7 @@ public class Model implements Sujet {
 
     public VueClasseAffichage getVueClasseAffichage(String nom){
         for(Observateur observateur: this.observateurs){
-            if(observateur instanceof VueClasse){
+            if(observateur.getClass().getSimpleName().equals("VueClasse")){
                 return ((VueClasse) observateur).getClasseAffichage(nom);
             }
         }
