@@ -2,7 +2,7 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import org.teamtree.objectaid.Classe.ClasseAffichage;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 /**
@@ -23,7 +23,7 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
 
     @Override
     public void handle(MouseEvent event) {
-        final var source = (ClasseAffichage) event.getSource();
+        final var source = (VueClasseAffichage) event.getSource();
 
         addClickedEffect(source);
     }
@@ -32,7 +32,7 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
      * Méthode qui permet d'affecter le classe en tant que classe sélectionnée
      * @param source Classe cliquée
      */
-    private void addClickedEffect(final ClasseAffichage source) {
+    private void addClickedEffect(final VueClasseAffichage source) {
         model.setCurrentClickedClass(source);
         model.afficherButtonBarClasse();
 //        model.notifierObservateur();

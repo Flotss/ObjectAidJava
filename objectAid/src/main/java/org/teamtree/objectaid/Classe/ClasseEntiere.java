@@ -4,6 +4,7 @@ import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Heritage;
 import org.teamtree.objectaid.Classe.Relations.Implementation;
 import org.teamtree.objectaid.Classe.Relations.Relation;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Point;
 
 import java.lang.reflect.Constructor;
@@ -55,7 +56,7 @@ public class ClasseEntiere {
     private final List<Relation> relations;
 
     /** Classe qui sera affichée correspondant à la ClasseEntiere */
-    private ClasseAffichage classeAffichage;
+    private VueClasseAffichage classeAffichage;
 
     /**
      * Constructeur de la classe
@@ -120,9 +121,9 @@ public class ClasseEntiere {
             // Ajout de la relation si l'attribut n'est pas primitif
             if (!isPrimitive) {
                 if (isCollection){
-                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut.getNom(), attribut.getType(), "*", "*"));
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
                 }else{
-                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut.getNom(), attribut.getType(), "1", "*"));
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
                 }
             }
         }
@@ -349,11 +350,15 @@ public class ClasseEntiere {
      * Retourne la liste des relations de la classe
      * @return La liste des relations de la classe : List<Relation>
      */
-    public ClasseAffichage getClasseAffichage() {
+    public VueClasseAffichage getClasseAffichage() {
         return classeAffichage;
     }
 
-    public void setClasseAffichage(ClasseAffichage classeAffichage) {
+    public void setClasseAffichage(VueClasseAffichage classeAffichage) {
         this.classeAffichage = classeAffichage;
+    }
+
+    public List<Relation> getRelations(){
+        return relations;
     }
 }

@@ -1,7 +1,6 @@
 package org.teamtree.objectaid.MVC.Vue;
 
 import javafx.scene.layout.Pane;
-import org.teamtree.objectaid.Classe.ClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.MVC.Controller.ClasseEntiereClickedController;
@@ -18,7 +17,7 @@ public class VueClasse extends Pane implements Observateur {
 
     /** Modèle */
     private final Model model;
-    private final List<ClasseAffichage> classes;
+    private final List<VueClasseAffichage> classes;
 
 
     /**
@@ -34,7 +33,8 @@ public class VueClasse extends Pane implements Observateur {
         for (ClasseEntiere c : model.getClasses()) {
             // On creation de l'affichage de la classe
             FabriqueAffichage f = new FabriqueAffichage(c);
-            ClasseAffichage classe = f.affichage();
+            VueClasseAffichage classe = f.affichage();
+            classe.updateAttributsRelation(model);
 
 //            setBorderColor(classe);
 
@@ -56,8 +56,9 @@ public class VueClasse extends Pane implements Observateur {
 
     @Override
     public void actualiser() {
-        for (ClasseAffichage classe : classes) {
+        for (VueClasseAffichage classe : classes) {
             ClasseEntiere classeEntiere = model.getClasse(classe.getNom()).get();
+            classe.updateAttributsRelation(model);
             classe.afficherClasse();
         }
     }

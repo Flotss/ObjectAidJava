@@ -1,11 +1,7 @@
 package org.teamtree.objectaid.Fabrique;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Classe.*;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.MVC.diagramIcons.*;
 
 /**
@@ -28,9 +24,9 @@ public class FabriqueAffichage {
      * Méthode qui permet de créer un affichage pour une classe
      * @return Un affichage pour une classe
      */
-    public ClasseAffichage affichage(){
+    public VueClasseAffichage affichage(){
         //On crée la classeAffichage correspondant a un VBox, servant à recevoir tout le bloc de la classe
-        ClasseAffichage classe = new ClasseAffichage(c);
+        VueClasseAffichage classe = new VueClasseAffichage(c);
 
         //on affecte la taille maximale de la classe
         classe.setMaxWidth(150);

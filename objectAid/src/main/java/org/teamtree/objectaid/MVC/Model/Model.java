@@ -5,13 +5,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.teamtree.objectaid.Classe.ButtonBarClasse;
 import org.teamtree.objectaid.Classe.ClasseAffichage;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
+import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -19,20 +20,14 @@ import java.util.Optional;
  */
 public class Model implements Sujet {
 
-    /**
-     * Liste des observateurs
-     */
+    /** Liste des observateurs */
     private final ArrayList<Observateur> observateurs;
 
-    /**
-     * Liste des classes avec leurs flèches
-     */
-    private final HashMap<ClasseEntiere, ArrayList<Fleche>> relations;
+    /** Liste des classes avec leurs flèches*/
+    private final HashMap<ClasseEntiere, ArrayList<Relation>> relations;
 
-    /**
-     * Classe sélectionnée
-     */
-    private ClasseAffichage currentClickedClass;
+    /** Classe sélectionnée */
+    private VueClasseAffichage currentClickedClass;
 
     /**
      * HBox contenant les boutons de la classe sélectionnée
@@ -51,7 +46,6 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet d'ajouter un observateur
-     *
      * @param o Observateur
      */
     public void ajouterObservateur(Observateur o) {
@@ -60,7 +54,6 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de supprimer un observateur
-     *
      * @param o Observateur
      */
     public void supprimerObservateur(Observateur o) {
@@ -76,35 +69,36 @@ public class Model implements Sujet {
         }
     }
 
-    public void notifierObservateur(String selection) {
-        switch (selection) {
+    public void notifierObservateur(String selection){
+        switch(selection){
             case "selection":
                 this.currentClickedClass.actualiserBordure();
-                break;
+            break;
             case "deplacement selection":
                 this.currentClickedClass.actualiserPosition();
+            break;
+            case "classe selection complete":
+                this.currentClickedClass.afficherClasse();
                 break;
         }
     }
 
     /**
      * Méthode qui permet d'ajouter une relation
-     *
      * @param classe Classe
      * @param fleche Flèche
      */
-    public void ajouterRelation(ClasseEntiere classe, Fleche fleche) {
+    public void ajouterRelation(ClasseEntiere classe, Relation relation) {
         if (relations.containsKey(classe)) {
-            relations.get(classe).add(fleche);
+            relations.get(classe).add(relation);
         } else {
             relations.put(classe, new ArrayList<>());
-            relations.get(classe).add(fleche);
+            relations.get(classe).add(relation);
         }
     }
 
     /**
      * Méthode qui permet de supprimer une relation
-     *
      * @param classe Classe
      * @param fleche Flèche
      */
@@ -116,7 +110,6 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet d'ajouter une Classe au model
-     *
      * @param classe Classe
      */
     public void ajouterClasse(ClasseEntiere classe) {
@@ -124,13 +117,12 @@ public class Model implements Sujet {
             int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
-            relations.put(classe, new ArrayList<>());
+            relations.put(classe, new ArrayList<>(classe.getRelations()));
         }
     }
 
     /**
      * Méthode qui permet de supprimer une Classe du model
-     *
      * @param classe Classe
      */
     public void supprimerClasse(ClasseEntiere classe) {
@@ -139,7 +131,6 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de récupérer la liste des classes
-     *
      * @return Liste des classes
      */
     public ArrayList<ClasseEntiere> getClasses() {
@@ -149,35 +140,32 @@ public class Model implements Sujet {
 
     /**
      * Retourne la liste des flèches d'une classe
-     *
      * @param classe Classe
      * @return Liste des flèches
      */
-    public ArrayList<Fleche> getRelations(ClasseEntiere classe) {
+    public ArrayList<Relation> getRelations(ClasseEntiere classe) {
         return relations.get(classe);
     }
 
     /**
      * Méthode qui permet de récupérer la classe sélectionnée
-     *
      * @return Classe sélectionnée
      */
-    public ClasseAffichage getCurrentClickedClass() {
+    public VueClasseAffichage getCurrentClickedClass() {
         return currentClickedClass;
     }
 
     /**
      * Méthode qui permet de définir la classe sélectionnée
-     *
      * @param currentClickedClass Classe sélectionnée
      */
-    public void setCurrentClickedClass(ClasseAffichage currentClickedClass) {
-        if (this.currentClickedClass != null) {
+    public void setCurrentClickedClass(VueClasseAffichage currentClickedClass) {
+        if(this.currentClickedClass != null) {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
         }
-        this.currentClickedClass = currentClickedClass;
-        this.currentClickedClass.classeSelectionnee();
+       this.currentClickedClass =  currentClickedClass;
+       this.currentClickedClass.classeSelectionnee();
         this.notifierObservateur("selection");
                /*(Objects.equals(currentClickedClass, this.currentClickedClass))
                                     ? ""
@@ -186,7 +174,6 @@ public class Model implements Sujet {
 
     /**
      * Retourne la classe grâce à son nom
-     *
      * @param nom Le nom de la classe
      * @return La classe correspondante
      */
@@ -205,6 +192,14 @@ public class Model implements Sujet {
     }
 
     /**
+     * Methode qui permet de changer la possibilité d'afficher les attributs d'une classe spécifique
+     */
+    public void afficherAttributsSelection() {
+        this.currentClickedClass.getClasseEntiere().setAttributEstAffiche(this.currentClickedClass.getClasseEntiere().isAttributEstAffiche());
+        notifierObservateur("classe selection complete");
+    }
+
+    /**
      * Methode qui permet de changer la possibilité d'afficher les méthodes
      */
     public void afficherMethodes() {
@@ -215,7 +210,15 @@ public class Model implements Sujet {
     }
 
     /**
-     * Methode qui permet de changer la possibilité d'afficher les paramètres
+     * Methode qui permet de changer la possibilité d'afficher les méthodes d'une classe spécifique
+     */
+    public void afficherMethodesSelection() {
+        this.currentClickedClass.getClasseEntiere().setMethodsEstAffiche(this.currentClickedClass.getClasseEntiere().isMethodsEstAffiche());
+        notifierObservateur("classe selection complete");
+    }
+
+    /**
+     * Methode qui permet de changer la possibilité d'afficher les constructeurs
      */
     public void afficherConstructeurs() {
         getClasses().forEach(c -> {
@@ -225,11 +228,20 @@ public class Model implements Sujet {
     }
 
     /**
+     * Methode qui permet de changer la possibilité d'afficher les constructeurs d'une classe spécifique
+     */
+    public void afficherConstructeursSelection() {
+        this.currentClickedClass.getClasseEntiere().setConstructeurEstAffiche(this.currentClickedClass.getClasseEntiere().isConstructeurEstAffiche());
+        notifierObservateur("classe selection complete");
+    }
+
+    /**
      * Methode qui permet de deplacer une classe
      */
     public void deplacerClasse(int x, int y) {
-        this.getCurrentClickedClass().getClasseEntiere().deplacer(x, y);
+        this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
         notifierObservateur("deplacement selection");
+
     }
 
     public void afficherButtonBarClasse() {

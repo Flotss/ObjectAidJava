@@ -47,6 +47,8 @@ public class ObjectAidApplication extends Application {
         ClasseEntiere c8 = new ClasseEntiere("org.teamtree.objectaid.Entite.Interface");
         model.ajouterClasse(c8);
 
+//        ClasseEntiere c9 = new ClasseEntiere("org.teamtree.objectaid.Etat.Etat");
+//        model.ajouterClasse(c9);
 
         VueClasse vue = new VueClasse(model);
         model.ajouterObservateur(vue);

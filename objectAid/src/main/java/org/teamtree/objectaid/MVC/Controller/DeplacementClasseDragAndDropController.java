@@ -2,10 +2,7 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import org.teamtree.objectaid.Classe.ClasseAffichage;
-import org.teamtree.objectaid.Classe.ClasseEntiere;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 /**
@@ -31,7 +28,7 @@ public class DeplacementClasseDragAndDropController implements EventHandler<Mous
      */
     @Override
     public void handle(MouseEvent event) {
-        ClasseAffichage classe = (ClasseAffichage) event.getSource();
+        VueClasseAffichage classe = (VueClasseAffichage) event.getSource();
         if(model.getCurrentClickedClass() != null) {
             if (model.getCurrentClickedClass().getNom().equals(classe.getNom()) && event.isPrimaryButtonDown()) {
                 int x = (int) event.getSceneX();
