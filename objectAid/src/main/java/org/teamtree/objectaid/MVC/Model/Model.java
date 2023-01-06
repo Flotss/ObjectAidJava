@@ -26,6 +26,7 @@ public class Model implements Sujet {
     /** Classe sélectionnée */
     private VueClasseAffichage currentClickedClass;
 
+    /** Barre de boutons spécifique */
     private boolean barreBoutonsSpecifique;
 
     /**
@@ -63,6 +64,11 @@ public class Model implements Sujet {
         }
     }
 
+    /**
+     * Méthode qui permet de notifier les observateurs correspondant à une selection donnée en paramètre
+     * @param selection String
+     */
+
     public void notifierObservateur(String selection){
         switch(selection){
             case "selection":
@@ -83,14 +89,6 @@ public class Model implements Sujet {
                     }
                 }
                 break;
-        }
-    }
-
-    public void notifierObservateurs(String vue){
-        for (Observateur observateur : observateurs) {
-            if (observateur.getClass().getSimpleName().equals(vue)){
-                observateur.actualiser();
-            }
         }
     }
 
@@ -259,6 +257,11 @@ public class Model implements Sujet {
         notifierObservateur("deplacement selection");
     }
 
+    /**
+     * Methode qui permet de retourner la VueClasseAffichage d'une classe en donnant le nom en paramètre
+     * @param nom Le nom de la classe
+     */
+
     public VueClasseAffichage getVueClasseAffichage(String nom){
         for(Observateur observateur: this.observateurs){
             if(observateur instanceof VueClasse){
@@ -268,9 +271,18 @@ public class Model implements Sujet {
         return null;
     }
 
+    /**
+     * Methode qui permet de changer le booleen permettant de savoir si les boutons d'affichage d'une classe doit etre affichés
+     */
+
     public void setBarreBoutonsSpecifique(){
         this.barreBoutonsSpecifique = this.currentClickedClass!=null;
     }
+
+    /**
+     * Methode qui permet de retourner le booleen permettant de savoir si les boutons d'affichage d'une classe doit etre affichés
+     * @return Le booleen permettant de savoir si les boutons d'affichage d'une classe doit etre affichés
+     */
 
     public boolean getBarreBoutonsSpecifique(){
         return this.barreBoutonsSpecifique;
