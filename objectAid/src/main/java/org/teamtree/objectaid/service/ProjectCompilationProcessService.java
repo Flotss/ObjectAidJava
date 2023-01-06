@@ -7,27 +7,17 @@ import java.util.Objects;
 
 public class ProjectCompilationProcessService {
     public void compileProject(final File file) {
-        if (file.isFile()) {
-            throw new IllegalArgumentException("Le fichier passé en paramètre n'est pas un dossier");
-        }
-
-        final var processBuilder = new ProcessBuilder();
-        processBuilder.directory(file.getParentFile());
-        processBuilder.inheritIO();
-
-        Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(f -> {
-            if (f.isDirectory()) {
-                compileProject(f);
-            }
-
-            if (f.getName().endsWith(".java")) {
-                processBuilder.command().add(f.getAbsolutePath());
+        if (file.isDirectory()) {
+            Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(this::compileProject);
+        } else {
+            if (file.getName().endsWith(".java")) {
                 try {
-                    processBuilder.start();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    final var process = Runtime.getRuntime().exec("javac " + file.getAbsolutePath());
+                    process.waitFor();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-        });
+        }
     }
 }
