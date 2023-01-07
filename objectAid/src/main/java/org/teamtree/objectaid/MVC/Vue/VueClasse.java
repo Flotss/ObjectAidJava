@@ -63,6 +63,9 @@ public class VueClasse extends Pane implements Observateur {
         // Pour chaque relation
         for (ClasseEntiere classEntiere : model.getClasses()) {
             for (Relation relation : model.getRelations(classEntiere)) {
+
+                // Si la relation n'est pas possible, on ne l'affiche pas
+                // Exemple : la classe en relation n'est pas dans le diagramme
                 if (model.getVueClasseAffichage(relation.getDestination()) == null) continue;
 
                 // Relation
@@ -80,6 +83,9 @@ public class VueClasse extends Pane implements Observateur {
     public void actualiser() {
         for (VueClasseAffichage classe : classes.values()) {
             classe.afficherClasse();
+        }
+        for (Fleche fleche : fleches) {
+            fleche.actualiser();
         }
     }
 

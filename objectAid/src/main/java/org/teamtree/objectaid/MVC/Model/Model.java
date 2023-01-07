@@ -92,15 +92,15 @@ public class Model implements Sujet {
                     }
                 }
                 break;
-                case "actualisation fleches":
-                    for(Observateur observateur: this.observateurs){
-                        if(observateur instanceof VueClasse){
-                            System.out.println("actualisation fleches");
-                            ((VueClasse) observateur).actualiserFleches();
-                            return;
-                        }
+            case "actualisation fleches":
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueClasse){
+                        System.out.println("actualisation fleches");
+                        ((VueClasse) observateur).actualiserFleches();
+                        return;
                     }
-                    break;
+                }
+                break;
         }
     }
 

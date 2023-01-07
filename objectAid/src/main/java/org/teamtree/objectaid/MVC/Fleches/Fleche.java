@@ -8,31 +8,61 @@ import org.teamtree.objectaid.MVC.Vue.Observateur;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Point;
 
-public class Fleche extends Group implements Observateur {
-    private final VueClasseAffichage classeDepart;
-    private final VueClasseAffichage classeArrivee;
-    private final Relation relation;
-    private final Model model;
 
+/**
+ * Classe qui permet de créer une flèche pour une relation
+ */
+public class Fleche extends Group implements Observateur {
+
+    /**
+     * Vue de la classe de départ
+     */
+    private final VueClasseAffichage classeDepart;
+
+    /**
+     * Vue de la classe d'arrivée
+     */
+    private final VueClasseAffichage classeArrivee;
+
+    /**
+     * Line qui représente le trait de la flèche
+     */
     protected final Line line;
+
+    /**
+     * Line qui représente une partie de la pointe de la flèche
+     */
     protected final Line arrow1;
+
+    /**
+     * Line qui représente l'autre partie de la pointe de la flèche
+     */
     protected final Line arrow2;
 
+
+    /**
+     * Constructeur de la classe
+     * @param model Le model de l'application
+     * @param relation La relation entre les deux classes
+     */
     public Fleche(Model model, Relation relation){
-        this.model = model;
-        this.relation = relation;
+        // Recherche des vues des classes de départ et d'arrivée
         this.classeDepart = model.getVueClasseAffichage(relation.getDepart());
         this.classeArrivee = model.getVueClasseAffichage(relation.getDestination());
 
+        // Création des lignes
         line = new Line();
         arrow1 = new Line();
         arrow2 = new Line();
-
         this.getChildren().addAll(line, arrow1, arrow2);
 
+        // Actualisation des positions pour former la ligne
         actualiserLesPoints();
     }
 
+    /**
+     * Méthode qui permet de mettre à jour les points de la flèche
+     */
     public Point[] emplacementFleche(VueClasseAffichage classeDepart, VueClasseAffichage classeArrivee){
         Point start = new Point((int) (classeDepart.getLayoutX() + classeDepart.getWidth()/2), (int) (classeDepart.getLayoutY() + classeDepart.getHeight()/2));
         Point end = new Point((int) (classeArrivee.getLayoutX() + classeArrivee.getWidth()/2), (int) (classeArrivee.getLayoutY() + classeArrivee.getHeight()/2));
