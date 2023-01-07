@@ -5,6 +5,61 @@
 - Bernard Julien
 - Grossmann Jérémy
 
+# Contenu itération V3
+
+## Contenu du dépot (A)
+
+A quoi sert Wrapper ?
+
+## Liste fonctionnalites (A)
+
+La liste de fonctionnalité V3 n'est pas complète, par contre la liste de fonctionnalité V2 est trés claire et détaillée.
+Cela me semble la bonne manière de faire.
+
+## Trello (A)
+
+Ok pour le trello
+Trés bon descriptif des fonctionnalités (cf liste fonctionnalités)
+
+Attention, certaines taches restent en "EnCours" malgré la fin de l'iteration.
+
+##  Conception
+### diag classes (C-D)
+
+- penser à generer un diagramme de classe en png avec le fichier puml
+- on a du mal à savoir si votre diagramme est un diagramme de l'iteration en cours ou le diagramme final
+
+- generer aussi un diagramme de classe avec intellij pour comparer
+(a) votre conception initiale
+(b) le diagramme de classe de votre code 
+dans le but de vérifier si votre code est conforme aux attentes.
+
+N'hesitez pas à ajouter des couleur à votre diagramme
+- pour faire ressortir des patrons
+- pour mettre en évidence les nouvelles parties de cette itération
+
+
+### diag sequence (F)
+
+Pas de diagramme de sequence iteration 3
+
+## Démonstration (F)
+
+Y a t il une démonstrarion v3 ?
+
+## Sources (A-B)
+
+Code clair, commente et facile à suivre
+
+## Tests (B)
+
+Ok, mais pas évident à suivre
+
+## Bilan (A-B)
+
+pas de bilan v3
+bilan v2 OK.
+
 # Contenu itération V1
 
 ## Contenu du dépot (B)
