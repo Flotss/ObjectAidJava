@@ -91,8 +91,16 @@ public class Model implements Sujet {
                         return;
                     }
                 }
-
                 break;
+                case "actualisation fleches":
+                    for(Observateur observateur: this.observateurs){
+                        if(observateur instanceof VueClasse){
+                            System.out.println("actualisation fleches");
+                            ((VueClasse) observateur).actualiserFleches();
+                            return;
+                        }
+                    }
+                    break;
         }
     }
 
@@ -205,8 +213,8 @@ public class Model implements Sujet {
     public void afficherAttributs(boolean affiche) {
         getClasses().forEach(c -> {
             c.setAttributEstAffiche(affiche);
-            notifierObservateur();
         });
+        notifierObservateur();
     }
 
     /**
@@ -223,8 +231,8 @@ public class Model implements Sujet {
     public void afficherMethodes(boolean affiche) {
         getClasses().forEach(c -> {
             c.setMethodsEstAffiche(affiche);
-            notifierObservateur();
         });
+        notifierObservateur();
     }
 
     /**
@@ -241,8 +249,16 @@ public class Model implements Sujet {
     public void afficherConstructeurs(boolean affiche) {
         getClasses().forEach(c -> {
             c.setConstructeurEstAffiche(affiche);
-            notifierObservateur();
         });
+        notifierObservateur();
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                System.out.println("vgyftfgytbh");
+                ((VueClasse) observateur).actualiserFleches();
+                return;
+            }
+        }
+
     }
 
     /**

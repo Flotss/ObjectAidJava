@@ -81,7 +81,6 @@ public class VueClasse extends Pane implements Observateur {
         for (VueClasseAffichage classe : classes.values()) {
             classe.afficherClasse();
         }
-
     }
 
 //    /**

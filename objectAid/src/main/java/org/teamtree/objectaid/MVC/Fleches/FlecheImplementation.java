@@ -8,6 +8,8 @@ public class FlecheImplementation extends Fleche {
 
     public FlecheImplementation(Model model, Relation relation){
         super(model, relation);
-        this.setStroke(Color.GREEN);
+        this.line.setStroke(Color.GREEN);
+        this.arrow1.setStroke(Color.GREEN);
+        this.arrow2.setStroke(Color.GREEN);
     }
 }

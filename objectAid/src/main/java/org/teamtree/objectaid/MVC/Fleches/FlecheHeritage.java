@@ -8,6 +8,8 @@ public class FlecheHeritage extends Fleche {
 
     public FlecheHeritage(Model model, Relation relation){
         super(model, relation);
-        this.setStroke(Color.RED);
+        this.line.setStroke(Color.RED);
+        this.arrow1.setStroke(Color.RED);
+        this.arrow2.setStroke(Color.RED);
     }
 }

@@ -55,5 +55,7 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 model.afficherConstructeursSelection();
                 break;
         }
+
+        model.notifierObservateur("actualisation fleches");
     }
 }
