@@ -54,6 +54,9 @@ public class Fleche extends Group implements Observateur {
         line = new Line();
         arrow1 = new Line();
         arrow2 = new Line();
+        arrow1.setStrokeWidth(2);
+        arrow2.setStrokeWidth(2);
+
         this.getChildren().addAll(line, arrow1, arrow2);
 
         // Actualisation des positions pour former la ligne
@@ -66,6 +69,39 @@ public class Fleche extends Group implements Observateur {
     public Point[] emplacementFleche(VueClasseAffichage classeDepart, VueClasseAffichage classeArrivee){
         Point start = new Point((int) (classeDepart.getLayoutX() + classeDepart.getWidth()/2), (int) (classeDepart.getLayoutY() + classeDepart.getHeight()/2));
         Point end = new Point((int) (classeArrivee.getLayoutX() + classeArrivee.getWidth()/2), (int) (classeArrivee.getLayoutY() + classeArrivee.getHeight()/2));
+
+
+        // Si le centre des deux classes est à la hauteur des deux classes
+        if (end.getY() <= start.getY() + classeDepart.getHeight()/2 && end.getY() >= start.getY() - classeDepart.getHeight()/2){
+            // Si la classe de départ est à gauche de la classe d'arrivée
+            if (end.getX() > start.getX()){
+                start.setX((int) (start.getX() + classeDepart.getWidth()/2));
+                end.setX((int) (end.getX() - classeArrivee.getWidth()/2));
+            }
+            // Si la classe de départ est à droite de la classe d'arrivée
+            else{
+                start.setX((int) (start.getX() - classeDepart.getWidth()/2));
+                end.setX((int) (end.getX() + classeArrivee.getWidth()/2));
+            }
+            return new Point[]{start, end};
+        }
+
+        // Si le centre des deux classes est à la largeur des deux classes
+        if (end.getX() <= start.getX() + classeDepart.getWidth()/2 && end.getX() >= start.getX() - classeDepart.getWidth()/2){
+            // Si la classe de départ est en haut de la classe d'arrivée
+            if (end.getY() > start.getY()){
+                start.setY((int) (start.getY() + classeDepart.getHeight()/2));
+                end.setY((int) (end.getY() - classeArrivee.getHeight()/2));
+            }
+            // Si la classe de départ est en bas de la classe d'arrivée
+            else{
+                start.setY((int) (start.getY() - classeDepart.getHeight()/2));
+                end.setY((int) (end.getY() + classeArrivee.getHeight()/2));
+            }
+            return new Point[]{start, end};
+        }
+
+
 
         // Si le départ est a gauche de la fin : point vers la droite
         if (start.getX() < end.getX()){
@@ -86,6 +122,9 @@ public class Fleche extends Group implements Observateur {
             start.setY((int) (start.getY() - classeDepart.getHeight()/2));
             end.setY((int) (end.getY() + classeArrivee.getHeight()/2));
         }
+
+
+
 
         return new Point[]{start, end};
     }
@@ -116,7 +155,7 @@ public class Fleche extends Group implements Observateur {
 
 
         // Les flèches sont dessinées à 45° par rapport à la ligne
-        double arrowAngle = start.getX() >= end.getX() ? Math.toRadians(45) : -Math.toRadians(225);
+        double arrowAngle = start.getX() >= end.getX() ? Math.toRadians(45) : Math.toRadians(225);
 
         // Première flèche ligne
         this.arrow1.setStartX(end.getX());
