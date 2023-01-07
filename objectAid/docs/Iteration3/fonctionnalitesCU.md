@@ -49,6 +49,7 @@ C'est à dire la création d'associations, d'héritage et d'implémentations pou
 ### Etat :
 Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
 Les association s'affichent sur le rendu, mais sans sens et sans type de relation.
+Pour pouvoir différencier les relations, les fleches ont des couleurs : Héritage = rouge, Implémentation = vert, Association = bleu.
 
 
 ## Fonctionnalité 3 : Afficher/Cacher les Attributs classe sélectionnée
