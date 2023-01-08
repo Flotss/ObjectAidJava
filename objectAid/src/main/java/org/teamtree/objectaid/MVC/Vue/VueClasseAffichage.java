@@ -197,13 +197,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
         }
     }
 
-    /**
-     * Méthode qui permet de créer l'affichage de la classe
-     */
-    public void actualiserPosition(){
-        this.setLayoutX(classeEntiere.getX());
-        this.setLayoutY(classeEntiere.getY());
-    }
+
 
     /**
      * Méthode qui permet de créer l'affichage de la classe
@@ -297,9 +291,16 @@ public class VueClasseAffichage extends VBox implements Observateur {
         super.setStyle("-fx-border-color: "+this.couleur+ " ; -fx-border-width: 1px;");
     }
 
+    /**
+     * Méthode qui permet de créer l'affichage de la classe
+     */
+    public void actualiserPosition(){
+        this.setLayoutX(classeEntiere.getX());
+        this.setLayoutY(classeEntiere.getY());
+    }
+
 
     @Override
     public void actualiser() {
-
     }
 }

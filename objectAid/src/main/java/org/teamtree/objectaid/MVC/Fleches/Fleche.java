@@ -66,7 +66,7 @@ public class Fleche extends Group implements Observateur {
     /**
      * Méthode qui permet de mettre à jour les points de la flèche
      */
-    public Point[] emplacementFleche(VueClasseAffichage classeDepart, VueClasseAffichage classeArrivee){
+    private Point[] emplacementFleche(VueClasseAffichage classeDepart, VueClasseAffichage classeArrivee){
         Point start = new Point((int) (classeDepart.getLayoutX() + classeDepart.getWidth()/2), (int) (classeDepart.getLayoutY() + classeDepart.getHeight()/2));
         Point end = new Point((int) (classeArrivee.getLayoutX() + classeArrivee.getWidth()/2), (int) (classeArrivee.getLayoutY() + classeArrivee.getHeight()/2));
 
@@ -123,9 +123,6 @@ public class Fleche extends Group implements Observateur {
             end.setY((int) (end.getY() + classeArrivee.getHeight()/2));
         }
 
-
-
-
         return new Point[]{start, end};
     }
 
@@ -135,7 +132,7 @@ public class Fleche extends Group implements Observateur {
     }
 
 
-    protected void actualiserLesPoints(){
+    private void actualiserLesPoints(){
         Point[] points = emplacementFleche(classeDepart, classeArrivee);
         Point start = points[0];
         Point end = points[1];
@@ -154,7 +151,7 @@ public class Fleche extends Group implements Observateur {
         double lineAngle = Math.atan(slope);
 
 
-        // Les flèches sont dessinées à 45° par rapport à la ligne
+        // Les flèches sont dessinées à 30° par rapport à la ligne
         double arrowAngle = start.getX() >= end.getX() ? Math.toRadians(45) : Math.toRadians(225);
 
         // Première flèche ligne

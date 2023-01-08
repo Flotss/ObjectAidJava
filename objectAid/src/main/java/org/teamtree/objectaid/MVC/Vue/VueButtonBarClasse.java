@@ -20,12 +20,12 @@ public class VueButtonBarClasse extends HBox implements Observateur {
     /** Attribut qui represente le booleen permettant de savoir quand la vue est censée afficher les boutons */
     private boolean afficherButtonBarClasse;
 
-    /** Attribut qui represente le modele */
+    /** Attribut qui represente le model */
     private Model model;
 
     /**
      * Constructeur de la classe
-     * @param model modele
+     * @param model model
      */
     public VueButtonBarClasse(Model model) {
         this.model = model;

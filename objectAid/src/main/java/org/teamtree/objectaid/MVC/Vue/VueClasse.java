@@ -86,21 +86,6 @@ public class VueClasse extends Pane implements Observateur {
         }
     }
 
-//    /**
-//     * Méthode qui permet de mettre la couleur de la bordure de la classe
-//     * @param node ClasseAffichage à mettre en couleur
-//     */
-//    public void setBorderColor(final ClasseAffichage node) {
-//        final String color = model.getCurrentClickedClass().equals(node.getNom()) ? "blue" : "black";
-//        final var builderStyle = new StringBuilder();
-//        builderStyle.append(node.getStyle());
-//        builderStyle.append("-fx-border-color: ");
-//        builderStyle.append(color);
-//        builderStyle.append("; -fx-border-width: 1px;");
-//
-//        node.setStyle(builderStyle.toString());
-//    }
-
     /**
      * Méthode qui permet de retourner la classe affichage correspondant au nom de la classe dans la liste des classes
      * @param nom String

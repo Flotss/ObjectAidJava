@@ -160,6 +160,15 @@ public class Model implements Sujet {
     }
 
     /**
+     * Retourne la classe grâce à son nom
+     * @param nom Le nom de la classe
+     * @return La classe correspondante
+     */
+    public Optional<ClasseEntiere> getClasse(String nom) {
+        return getClasses().stream().filter(classe -> classe.getNom().equals(nom)).findFirst();
+    }
+
+    /**
      * Retourne la liste des flèches d'une classe
      * @param classe Classe
      * @return Liste des flèches
@@ -196,15 +205,6 @@ public class Model implements Sujet {
                 this.notifierObservateur("selection");
             }
         }
-    }
-
-    /**
-     * Retourne la classe grâce à son nom
-     * @param nom Le nom de la classe
-     * @return La classe correspondante
-     */
-    public Optional<ClasseEntiere> getClasse(String nom) {
-        return getClasses().stream().filter(classe -> classe.getNom().equals(nom)).findFirst();
     }
 
     /**

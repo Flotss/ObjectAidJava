@@ -14,7 +14,7 @@ public class FlecheAssociation extends Fleche {
     /**
      * Le label qui représente le nom de l'association
      */
-    private Label label;
+    private Label nomFleche;
 
     /**
      * La cardinalité de la classe de départ
@@ -42,7 +42,7 @@ public class FlecheAssociation extends Fleche {
         // Création du label pour le nom de l'association
         Association association = (Association) relation;
         Label label = new Label(association.getAttribut().getNom());
-        this.label = label;
+        this.nomFleche = label;
         this.getChildren().add(label);
 
         // Création des labels pour les cardinalités
@@ -58,16 +58,16 @@ public class FlecheAssociation extends Fleche {
     @Override
     public void actualiser(){
         super.actualiser();
-        actualiserLeLabel();
+        actualiserNom();
         actualiserCardinalite();
     }
 
     /**
      * Méthode qui permet d'actualiser la position du label
      */
-    public void actualiserLeLabel(){
-        label.setLayoutX((line.getStartX() + line.getEndX())/2);
-        label.setLayoutY((line.getStartY() + line.getEndY())/2);
+    public void actualiserNom(){
+        nomFleche.setLayoutX((line.getStartX() + line.getEndX())/2);
+        nomFleche.setLayoutY((line.getStartY() + line.getEndY())/2);
     }
 
     /**
