@@ -1,0 +1,422 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+TOTO: completer
+
+package "MVC"{
+
+    interface Sujet{
+        +ajouterObservateur(Observateur)
+        +supprimerObservateur(Observateur)
+        +notifierObservateurs()
+    }
+
+    class Model implements Sujet{
+        - relation : Map<ClasseEntiere, ArrayList<Fleche>>
+        - currentClickedClass : String
+        - barreBoutonsSpecifique : boolean
+        + Model()
+
+        + afficherAttributs()
+        + afficherAttributsSelection()
+        + afficherConstructeurs()
+        + afficherConstructeursSelection()
+        + afficherMethodes()
+        + afficherMethodesSelection()
+
+        + ajouterClasse(ClasseEntiere)
+        + supprimerClasse(ClasseEntiere)
+        + ajouterRelation(ClasseEntiere, Fleche)
+        + supprimerRelation(ClasseEntiere, Fleche)
+
+        + deplacerClasse(int x, int y)
+
+        + getClasses() : Set<ClasseEntiere>
+        + getClasse(String) : Optional<ClasseEntiere>
+        + getRelations(ClasseEntiere) : ArrayList<Fleche>
+        + getCurrentClickedClass(): String
+        + getVueClasseAffichee(nom : String) : VueClasseAffichage
+        + getBarreBoutonsSpecifique() : boolean
+
+        + setCurrentClickedClass(VueClasseAffichage currentClickedClass)
+        + setBarreBoutonsSpecifique()
+
+        + ajouterObservateur(Observateur)
+        + supprimerObservateur(Observateur)
+        + notifierObservateurs()
+        + notifierObservateurs(selection : String)
+    }
+
+    'Observateurs'
+
+    interface Observateur{
+        +actualiser(Sujet)
+    }
+
+    class VueClasse implements Observateur{
+        + classes : HashMap<String, VueClasseAffichage>
+        +VueClasse(model : Model)
+        +actualiser()
+        +actualiserFleches()
+        +getClasseAffichage(nom : String) : VueClasseAffichage
+    }
+
+    class VueClasseAffichage implements Observateur{
+        -nom : String
+        -definition : HBox
+        -constructeur : VBox
+        -attributs : VBox
+        -methodes : VBox
+        -couleur : String
+
+        +VueClasseAffichage(classeEntiere : ClasseEntiere, model : Model)
+
+        +setDefinition() : HBox
+        +setConstructeur() : VBox
+        +setAttributs() : VBox
+        +setMethodes() : VBox
+        +updateAttributsRelation()
+
+        +afficherClasse()
+        +actualiser()
+        +actualiserBordure()
+        +actualiserPosition()
+
+        +classeDeSelectionnee()
+        +classeSelectionnee()
+
+        +getNom() : String
+        +getDefinition() : HBox
+        +getConstructeur() : VBox
+        +getAttributs() : VBox
+        +getMethodes() : VBox
+        +getClasseEntiere() : ClasseEntiere
+    }
+
+    class VueButtonBarClasse implements Observateur{
+        -buttonAttributs : Button
+        -buttonConstructeurs : Button
+        -buttonMethodes : Button
+        -afficherButtonBarClasse : boolean
+        +VueButtonBarClasse(model : Model)
+        +actualiser()
+    }
+
+    'Controlleurs'
+
+    class ControllerButtonGeneral{
+        +{static} attributGenerauxAffiche : boolean
+        +{static} constructeurGenerauxAffiche : boolean
+        +{static} methodeGenerauxAffiche : boolean
+        +ControllerButon(model : Model)
+        +handle(ActionEvent)
+    }
+
+    class DeplacementClasseDragAndDropController {
+        + DeplacementClasseDragAndDropController(model : Model)
+        + handle(MouseEvent) : void
+    }
+
+    class ClasseEntiereClickedController{
+        + ClasseEntiereClickedController(Model)
+        + addClickedEffect(ClasseAffichage)
+        +handle(MouseEvent)
+    }
+
+    interface ClasseEntiereTitleIcon{
+        getIcon() : Image
+    }
+
+    class AbstractClasseTitleIcon implements ClasseEntiereTitleIcon{
+        +getIcon() : Image
+    }
+
+    class ClassEntiereTitleIcon implements ClasseEntiereTitleIcon{
+        +getIcon() : Image
+    }
+
+    class InterfaceTitleIcon implements ClasseEntiereTitleIcon{
+        +getIcon() : Image
+    }
+
+    class RecordTitleIcon implements ClasseEntiereTitleIcon{
+        +getIcon() : Image
+    }
+
+    class Fleche implements Observateur {
+        - {final} line : Line
+        - {final} arrow1 : Line
+        - {final} arrow2 : Line
+
+        + Fleche(model : Model, relation : Relation)
+        + actualiser()
+        - emplacementFleche(classeDepart : ClasseEntiere, classeArrivee : ClasseEntiere) : Point[]
+        - actualiserLesPoints()
+    }
+
+    class FlecheAssociation extends Fleche {
+        - nomFleche : Label
+        - cardinaliteDepart : Label
+        - cardinaliteArrivee : Label
+
+        + FlecheAssociation(model : Model, relation : Relation)
+        + actualiser()
+        + actualiserCardinalite()
+        + actualiserNom()
+    }
+
+    class FlecheHeritage extends Fleche {
+        - arrowFermeture : Line
+
+        + FlecheHeritage(model : Model, relation : Relation)
+        + actualiser()
+    }
+
+    class FlecheImplementation extends Fleche {
+        - arrowFermeture : Line
+
+        + FlecheImplementation(model : Model, relation : Relation)
+        + actualiser()
+    }
+
+}
+'Classes'
+
+package "Other"{
+class ClasseEntiere{
+    -ConstructeurEstAffiche : boolean
+    -AttributEstAffiche : boolean
+    -ConstructeurEstAffiche : boolean
+    -MethodeEstAffiche : boolean
+    +setAffichageConstructeurs()
+    +setAffichageMethods()
+    +setAffichageAttributs()
+    +ClasseEntiere(path : String)
+    +deplacer(int, int)
+    +getAttributs() : ArrayList<Attribut>
+    +getConstructeurs() : ArrayList<Constructeur>
+    +getMethods() : ArrayList<Methode>
+    +getDefinition() : DefinitionClasse
+    +getNom() : String
+    +getX() : int
+    +getY() : int
+    +isAttributEstAffiche(): boolean
+    +isConstructeurEstAffiche(): boolean
+    +isMethodsEstAffiche(): boolean
+}
+
+interface Entite{
+    +getEntite() : String
+}
+
+class Classe implements Entite{
+    +getEntite() : String
+}
+
+class Interface implements Entite{
+    +getEntite() : String
+}
+
+class Enum implements Entite{
+    +getEntite() : String
+}
+
+class Record implements Entite{
+    +getEntite() : String
+}
+
+
+
+interface Accessibilite{
+    +getAcces() : String
+}
+
+class Public implements Accessibilite{
+    +getAcces() : String
+}
+
+class Private implements Accessibilite{
+    +getAcces() : String
+}
+
+class Protected implements Accessibilite{
+    +getAcces() : String
+}
+
+class Default implements Accessibilite{
+    +getAcces() : String
+}
+
+interface Etat{
+    +getEtat() : String
+}
+
+class Abstract implements Etat{
+    +getEtat() : String
+}
+
+class Final implements Etat{
+    +getEtat() : String
+}
+
+class Static implements Etat{
+    +getEtat() : String
+}
+
+class DefinitionClasse{
+    -nomClasse : String
+
+    +DefinitionClasse(classe : Class<?>)
+    +getNom() : String
+    +getAccessibilite() : String
+    +getEtat() : ArrayList<Etat>
+    +getEntite() : String
+}
+
+class Attribut{
+    -type : String
+    -nom : String
+    +Attribut(attr : Field)
+    +getAccessibilite() : String
+    +getEtat() : ArrayList<Etat>
+    +getType() : String
+    +getNom() : String
+}
+
+class Methode{
+    -typeRetourne : String
+    -nom : String
+
+    +Methode(m : Method)
+    +getNom() : String
+    +getTypeRetourne() : String
+    +getAccessibilite() : String
+    +getEtat() : ArrayList<Etat>
+    +getParametres() : ArrayList<Parametre>
+}
+
+class Constructeur {
+    - nom : String
+    + Constructeur(c : Constructor<?>)
+    + getNom() : String
+    + getAccessibilite() : String
+    + getParametres() : ArrayList<Parametre>
+}
+
+class Parametre{
+    +Parametre(param : Parameter)
+    -type : String
+    -nom : String
+    +getType() : String
+    +getNom() : String
+}
+
+class Point{
+    - x : int
+    - y : int
+    + getX() : int
+    + getY() : int
+}
+
+abstract class Relation {
+    - nom : String
+
+    + Relation(nom : String)
+    + getNom() : String
+
+    {abstract} + toString() : String
+}
+
+class Association extends Relation {
+    - cardinalite1 : String
+    - cardinalite2 : String
+
+    + Association(nom : String, card1 : String, card2 : String, attribut : Attribut)
+    + getAttribut() : Attribut
+    + getCardinalite1() : String
+    + getCardinalite2() : String
+    + toString() : String
+}
+
+class Heritage extends Relation {
+    + Heritage(nom : String)
+    + toString() : String
+}
+
+class Implementation extends Relation {
+    + Implementation(nom : String)
+    + toString() : String
+}
+
+class FabriqueAccessibilite {
+    + FabriqueAccessibilite()
+    + getAccessibilite(access : int) : Accessibilite
+}
+
+class FabriqueAffichage {
+    + FabriqueAffichage(ClasseEntiere)
+    + setAffichage():ClasseAffichage
+    + {static}fabriqueAcces(String): String
+    + {static}fabriqueIcon(): ClasseEntiereTitleIcon
+}
+
+class FabriqueEtat {
+    + FabriqueEtat()
+    + getEtat(modifiers : int) : ArrayList<Etat>
+}
+
+class FabriqueEntite {
+    + FabriqueEntite()
+    + getEntite(classe : Class<?>) : Entite
+}
+
+class FabriqueAffichageFleche {
+    + {static} creerAffichageFleche(Model, Relation) : AffichageFleche
+}
+
+
+'-----------------------------------'
+'Associations'
+
+Model "1" --> "*" Observateur : -observateurs
+Model "1" -> "1" VueClasseAffichage : -currentClickedClass
+
+Attribut "1" --> "0..1" Accessibilite : -accessibilite
+Attribut "1" --> "*" Etat : -etats
+
+DefinitionClasse "1" --> "0..1" Accessibilite : -accessibilite
+DefinitionClasse "1" --> "0..*" Etat : -etats
+DefinitionClasse "1" --> "0..1" Entite : -entite
+
+Constructeur "1" --> "0..1" Accessibilite : -accessibilite
+Constructeur "1" --> "*" Parametre : -parametres
+
+Methode "1" --> "0..1" Accessibilite : -accessibilite
+Methode "1" --> "*" Etat : etats
+Methode "1" --> "*" Parametre : parametres
+
+'ClasseEntiere <-- FabriqueAffichageClasse :-Classe
+ClasseEntiere "1" --> "1" DefinitionClasse : definitionClasse
+ClasseEntiere "1" --> "*" Attribut : attributs
+ClasseEntiere "1" --> "*" Methode : methodes
+ClasseEntiere "1" --> "*" Constructeur : constructeurs
+ClasseEntiere "1" --> "1" Point : -coordonnees
+ClasseEntiere "1" --> "*" Relation : -relations
+ClasseEntiere "1" --> "1" VueClasseAffichage : -classeAffichage
+ClasseEntiere "1" <-- "1" VueClasseAffichage : -classeEntiere
+
+DeplacementClasseDragAndDropController "*" --> "1" Model : -model
+ClasseEntiereClickedController "*" --> "1" Model : -model
+ControllerButtonGeneral "*" --> "1" Model : -model
+
+VueButtonBarClasse "1" -> "1" Model : -model
+VueClasse "*" -> "1" Model : -model
+VueClasseAffichage "*" -> "1" Model : -model
+
+FabriqueAffichage --> "1" ClasseEntiere : -classeEntiere
+Association "1" --> "1" Attribut : -attribut
+Fleche "*" --> "1" ClasseEntiere : -classeDepart
+Fleche "*" --> "1" ClasseEntiere : -classeArrivee
+
+
+@enduml

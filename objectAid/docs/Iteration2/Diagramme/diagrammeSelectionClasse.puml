@@ -5,17 +5,25 @@ autonumber
 participant "Utilisateur" as user
 participant ClasseEntiereClickedController as controller
 participant Model as model
+participant "currentClickedClass: VueClasseAffichage" as classe
 
 activate user
 user -> controller : handle(MouseEvent: event)
 activate controller
-controller -> model : getClasseEntiere()
-activate model
-model --> controller : classeEntiere
-deactivate model
 controller -> controller : addClickedEffect(source);
-controller -> model : setCurrentClickedClass(source.getNom());
+controller -> model : setCurrentClickedClass(event.getSource());
 activate model
+model -> model : verification des differents cas
+model -> model : notifierObservateur("selection")
+
+model -> classe : actualiserBordure()
+activate classe
+classe -> classe : setStyle("...")
+
+
+classe --> model
+deactivate classe
+
 model --> controller :
 deactivate model
 controller --> user
