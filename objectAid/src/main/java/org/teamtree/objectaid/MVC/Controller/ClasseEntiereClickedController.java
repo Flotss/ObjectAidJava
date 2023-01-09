@@ -41,8 +41,4 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
         model.setCurrentClickedClass(source);
     }
 
-    private void afficherBoutonsSpecifiques() {
-        model.setBarreBoutonsSpecifique();
-        model.notifierObservateur("barre");
-    }
 }
