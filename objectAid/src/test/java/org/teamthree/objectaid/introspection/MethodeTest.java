@@ -32,10 +32,10 @@ class MethodeTest {
     void testAccessibilite() {
         for (Methode methode : methodes) {
             switch (methode.getNom()) {
-                case "methodeAbstraiteProtected" -> assertEquals("protected", methode.getAccessibilite());
-                case "MethodepublicAbstract" -> assertEquals("public", methode.getAccessibilite());
-                case "methodePrivee" -> assertEquals("private", methode.getAccessibilite());
-                case "methodeAvecParametresDefault" -> assertEquals("default", methode.getAccessibilite());
+                case "methodeAbstraiteProtected" -> assertEquals("protected", methode.getAccessibilite().getAcces());
+                case "MethodepublicAbstract" -> assertEquals("public", methode.getAccessibilite().getAcces());
+                case "methodePrivee" -> assertEquals("private", methode.getAccessibilite().getAcces());
+                case "methodeAvecParametresDefault" -> assertEquals("default", methode.getAccessibilite().getAcces());
                 default -> {
                 }
             }

@@ -72,7 +72,10 @@ public class ObjectAidApplication extends Application {
         final var constructorsDisplayButton = new Button("Afficher les constructeurs");
         constructorsDisplayButton.setOnAction(controllerButtonGeneral);
 
-        buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton);
+        final var relationsDisplayButton = new Button("Afficher les relations");
+        relationsDisplayButton.setOnAction(controllerButtonGeneral);
+
+        buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton, relationsDisplayButton);
 
         VueButtonBarClasse buttonBarClasse = new VueButtonBarClasse(model);
         model.ajouterObservateur(buttonBarClasse);

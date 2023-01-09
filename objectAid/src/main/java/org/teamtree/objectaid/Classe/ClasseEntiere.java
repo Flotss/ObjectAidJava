@@ -52,6 +52,9 @@ public class ClasseEntiere {
     /** Methodes sont afficher ou non */
     private boolean methodsEstAffiche;
 
+    /** Relations sont afficher ou non */
+    private boolean relationsEstAffiche;
+
     /** Relation entre classe */
     private final List<Relation> relations;
 
@@ -141,10 +144,11 @@ public class ClasseEntiere {
 
 
 
-        // Partie affichage des attributs, constructeurs et méthodes
+        // Partie affichage des attributs, constructeurs, méthodes et relations
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
         this.constructeurEstAffiche = true;
+        this.relationsEstAffiche = false;
 
         System.out.println("-----------------\n");
         for (Relation relation : this.relations) {
@@ -360,5 +364,22 @@ public class ClasseEntiere {
 
     public List<Relation> getRelations(){
         return relations;
+    }
+
+    /**
+     * Set la possibilite d'afficher les relations
+     * @param relationsEstAffiche Boolean vrai pour afficher les relations sinon faux
+     */
+    public void setRelationsEstAffiche(boolean relationsEstAffiche) {
+        this.relationsEstAffiche = relationsEstAffiche;
+    }
+
+
+    /**
+     * Retourne la possibilite d'afficher les attributs
+     * @return Vrai si les attributs sont affichés : boolean
+     */
+    public boolean isRelationsEstAffiche() {
+        return attributEstAffiche;
     }
 }

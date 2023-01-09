@@ -26,6 +26,9 @@ public class Model implements Sujet {
     /** Barre de boutons spécifique */
     private boolean barreBoutonsSpecifique;
 
+    /** Affichage relations */
+    private boolean affichageRelations;
+
     /**
      * Constructeur du model
      */
@@ -34,6 +37,7 @@ public class Model implements Sujet {
         this.relations = new HashMap<>();
         this.currentClickedClass = null;
         this.barreBoutonsSpecifique= false;
+        this.affichageRelations = true;
     }
 
     /**
@@ -104,10 +108,12 @@ public class Model implements Sujet {
             case "totalite des classes":
                 for(Observateur observateur: this.observateurs){
                     if(observateur instanceof VueClasse){
-                        ((VueClasse) observateur).actualiser();
-                        return;
+                        observateur.actualiser();
+                        break;
                     }
                 }
+                this.notifierObservateur("actualisation fleches");
+                break;
         }
     }
 
@@ -218,8 +224,8 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les attributs
      */
     public void afficherAttributs(boolean affiche) {
-        getClasses().forEach(c -> {
-            c.setAttributEstAffiche(affiche);
+        getClasses().forEach(classeEntiere -> {
+            classeEntiere.setAttributEstAffiche(affiche);
         });
         notifierObservateur("totalite des classes");
     }
@@ -236,8 +242,8 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les méthodes
      */
     public void afficherMethodes(boolean affiche) {
-        getClasses().forEach(c -> {
-            c.setMethodsEstAffiche(affiche);
+        getClasses().forEach(classeEntiere -> {
+            classeEntiere.setMethodsEstAffiche(affiche);
         });
         notifierObservateur("totalite des classes");
     }
@@ -254,18 +260,10 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les constructeurs
      */
     public void afficherConstructeurs(boolean affiche) {
-        getClasses().forEach(c -> {
-            c.setConstructeurEstAffiche(affiche);
+        getClasses().forEach(classeEntiere -> {
+            classeEntiere.setConstructeurEstAffiche(affiche);
         });
         notifierObservateur("totalite des classes");
-//        for(Observateur observateur: this.observateurs){
-//            if(observateur instanceof VueClasse){
-//                System.out.println("vgyftfgytbh");
-//                ((VueClasse) observateur).actualiserFleches();
-//                return;
-//            }
-//        }
-
     }
 
     /**

@@ -94,8 +94,8 @@ public class Methode {
      * Retourne l'accessibilité de la méthode
      * @return Accessibilité de la méthode : Accessibilite
      */
-    public String getAccessibilite() {
-        return accessibilite.getAcces();
+    public Accessibilite getAccessibilite() {
+        return accessibilite;
     }
 
     @Override

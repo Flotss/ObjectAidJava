@@ -88,8 +88,8 @@ public class Attribut {
      * Retourne l'accessibilité de l'attribut
      * @return Accessibilité de l'attribut : Accessibilite
      */
-    public String getAccessibilite() {
-        return accessibilite.getAcces();
+    public Accessibilite getAccessibilite() {
+        return accessibilite;
     }
 
     @Override
