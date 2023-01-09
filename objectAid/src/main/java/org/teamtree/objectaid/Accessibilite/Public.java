@@ -19,7 +19,7 @@ public class Public implements Accessibilite {
         Circle cercle = new Circle(2.5);
         cercle.setFill(Color.GREEN);
         cercle.setStroke(Color.GREENYELLOW);
-        cercle.setTranslateY(5);
+        cercle.setTranslateY(7);
         cercle.setTranslateX(-3);
         return cercle;
     }

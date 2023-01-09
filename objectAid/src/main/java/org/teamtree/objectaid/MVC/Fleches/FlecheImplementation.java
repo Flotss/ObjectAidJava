@@ -32,6 +32,7 @@ public class FlecheImplementation extends Fleche {
         this.arrow1.setStroke(Color.GREEN);
         this.arrow2.setStroke(Color.GREEN);
         this.arrowFermeture.setStroke(Color.GREEN);
+        this.arrowFermeture.setStrokeWidth(2);
 
 
 

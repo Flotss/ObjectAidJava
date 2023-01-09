@@ -38,16 +38,11 @@ public class FlecheAssociation extends Fleche {
     public FlecheAssociation(Model model, Relation relation){
         super(model, relation);
 
-        // Changement de la couleur de la flèche pour l'association : bleu
-        this.line.setStroke(Color.BLUE);
-        this.arrow1.setStroke(Color.BLUE);
-        this.arrow2.setStroke(Color.BLUE);
-
         // Création du label pour le nom de l'association
         Association association = (Association) relation;
         this.nomFleche = new HBox();
 
-        Shape logoAccess = getAccessibiliteIcone(association.getAttribut().getAccessibilite());
+        Shape logoAccess = ((Association) relation).getAttribut().getAccessibilite().getShape();
         this.nomFleche.getChildren().add(logoAccess);
 
         Label label = new Label(association.getAttribut().getNom());
@@ -98,11 +93,5 @@ public class FlecheAssociation extends Fleche {
             cardinaliteDepart.setLayoutY(line.getStartY()-10);
             cardinaliteArrivee.setLayoutY(line.getEndY()+10);
         }
-    }
-
-
-    private Shape getAccessibiliteIcone(Accessibilite acces){
-        Shape logoAccess = acces.getShape();
-        return logoAccess;
     }
 }
