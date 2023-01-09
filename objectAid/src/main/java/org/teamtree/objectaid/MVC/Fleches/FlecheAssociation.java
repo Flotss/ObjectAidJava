@@ -1,7 +1,10 @@
 package org.teamtree.objectaid.MVC.Fleches;
 
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.*;
+import org.teamtree.objectaid.Accessibilite.*;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -14,7 +17,7 @@ public class FlecheAssociation extends Fleche {
     /**
      * Le label qui représente le nom de l'association
      */
-    private Label nomFleche;
+    private HBox nomFleche;
 
     /**
      * La cardinalité de la classe de départ
@@ -41,9 +44,14 @@ public class FlecheAssociation extends Fleche {
 
         // Création du label pour le nom de l'association
         Association association = (Association) relation;
+        this.nomFleche = new HBox();
+
+        Shape logoAccess = getAccessibiliteIcone(association.getAttribut().getAccessibilite());
+        this.nomFleche.getChildren().add(logoAccess);
+
         Label label = new Label(association.getAttribut().getNom());
-        this.nomFleche = label;
-        this.getChildren().add(label);
+        this.nomFleche.getChildren().add(label);
+        this.getChildren().add(nomFleche);
 
         // Création des labels pour les cardinalités
         Label cardinaliteDepart = new Label(association.getCardinalite1());
@@ -92,4 +100,48 @@ public class FlecheAssociation extends Fleche {
     }
 
 
+    private Shape getAccessibiliteIcone(String acces){
+        Shape logoAccess = null;
+        switch (acces){
+            case "private":
+                // Création d'un carré
+                Rectangle rectangle = new Rectangle(5, 5);
+                rectangle.setFill(Color.WHITE);
+                rectangle.setStroke(Color.RED);
+                logoAccess = rectangle;
+                break;
+            case "protected":
+                // Création d'un losange jaune
+                Polygon losange = new Polygon();
+                losange.getPoints().addAll(   0.0, 5.0,
+                                                        5.0, 0.0,
+                                                        10.0, 5.0,
+                                                        5.0, 10.0);
+                losange.setFill(Color.YELLOW);
+                losange.setStroke(Color.YELLOWGREEN);
+                logoAccess = losange;
+                break;
+            case "public":
+                // Création d'un cercle vert
+                Circle cercle = new Circle(5);
+                cercle.setFill(Color.GREEN);
+                cercle.setStroke(Color.GREENYELLOW);
+                logoAccess = cercle;
+                break;
+            case "default":
+                // Création d'un triangle bleu
+                Polygon triangle = new Polygon();
+                triangle.getPoints().addAll(  0.0, 0.0,
+                                                        10.0, 0.0,
+                                                        5.0, 10.0);
+                triangle.setFill(Color.BLUE);
+                triangle.setStroke(Color.BLUEVIOLET);
+                logoAccess = triangle;
+                break;
+            default:
+        }
+        logoAccess.setTranslateY(7);
+        logoAccess.setTranslateX(-3);
+        return logoAccess;
+    }
 }
