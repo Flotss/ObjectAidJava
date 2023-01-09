@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
+import org.teamtree.objectaid.MVC.Controller.ClickDroitController;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Model.Model;
 
@@ -29,11 +30,11 @@ public class VueButtonBarClasse extends ContextMenu implements Observateur {
     public VueButtonBarClasse(Model model) {
         this.model = model;
         buttonAttributs = new MenuItem("Attributs");
-        buttonAttributs.setOnAction(new ControllerButtonGeneral(model));
+        buttonAttributs.setOnAction(new ClickDroitController(model));
         buttonMethodes = new MenuItem("Méthodes");
-        buttonMethodes.setOnAction(new ControllerButtonGeneral(model));
+        buttonMethodes.setOnAction(new ClickDroitController(model));
         buttonConstructeurs = new MenuItem("Constructeurs");
-        buttonConstructeurs.setOnAction(new ControllerButtonGeneral(model));
+        buttonConstructeurs.setOnAction(new ClickDroitController(model));
         this.getItems().addAll(buttonAttributs, buttonMethodes, buttonConstructeurs);
     }
 

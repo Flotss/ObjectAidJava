@@ -30,9 +30,6 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
         final var source = (VueClasseAffichage) event.getSource();
         if (event.getButton().toString().equals("PRIMARY")) {
             addClickedEffect(source);
-        } else if(event.getButton().toString().equals("SECONDARY")) {
-            addClickedEffect(source);
-            afficherBoutonsSpecifiques();
         }
     }
 

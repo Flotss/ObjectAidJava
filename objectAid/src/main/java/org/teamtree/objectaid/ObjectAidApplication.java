@@ -79,11 +79,6 @@ public class ObjectAidApplication extends Application {
         VueButtonBarClasse buttonBarClasse = new VueButtonBarClasse(model);
         model.ajouterObservateur(buttonBarClasse);
 
-
-        ContextMenu contextMenu = new ContextMenu();
-        contextMenu.getItems().addAll(new MenuItem("aaaaaa"));
-        vueClass.setOnContextMenuRequested(event -> contextMenu.show(vueClass, event.getScreenX(), event.getScreenY()));
-
         applicationLayout.getChildren().addAll(buttonBar, vueClass);
 
 

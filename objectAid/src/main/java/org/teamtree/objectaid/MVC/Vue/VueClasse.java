@@ -84,7 +84,9 @@ public class VueClasse extends Pane implements Observateur {
             //tooltip pour le nom de la classe
             ((Label)classe.getDefinition().getChildren().get(1)).setTooltip(new Tooltip(((Label)classe.getDefinition().getChildren().get(1)).getText()));
 
-            classe.setOnContextMenuRequested(new VueButtonBarClasse(model));
+            classe.setOnContextMenuRequested(event -> {
+               new VueButtonBarClasse(model).show(classe, event.getScreenX(), event.getScreenY());
+            });
 
             classes.put(classe.getNom(),classe);
         }
