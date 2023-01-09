@@ -63,8 +63,6 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         final var vueClasse = new VueClasse(model);
         vbox.getChildren().addAll(vueClasse);
 
-        vbox.setStyle("-fx-background-color: purple;");
-
         vbox.setOnDragOver(event -> {
             if (event.getGestureSource() != vbox && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.MOVE);
