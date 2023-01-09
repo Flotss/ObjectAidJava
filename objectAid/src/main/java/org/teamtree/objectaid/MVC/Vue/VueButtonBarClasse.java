@@ -1,11 +1,8 @@
 package org.teamtree.objectaid.MVC.Vue;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.HBox;
-import org.teamtree.objectaid.MVC.Controller.ClickDroitController;
-import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
+import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 /** Vue utilisée pour les boutons d'affichage d'une classe */
@@ -23,19 +20,22 @@ public class VueButtonBarClasse extends ContextMenu implements Observateur {
     /** Attribut qui represente le model */
     private Model model;
 
+    private VueClasseAffichage classe;
+
     /**
      * Constructeur de la classe
      * @param model model
      */
-    public VueButtonBarClasse(Model model) {
+    public VueButtonBarClasse(Model model, VueClasseAffichage classe) {
         this.model = model;
         buttonAttributs = new MenuItem("Attributs");
-        buttonAttributs.setOnAction(new ClickDroitController(model));
+        buttonAttributs.setOnAction(new MenuItemController(model));
         buttonMethodes = new MenuItem("Méthodes");
-        buttonMethodes.setOnAction(new ClickDroitController(model));
+        buttonMethodes.setOnAction(new MenuItemController(model));
         buttonConstructeurs = new MenuItem("Constructeurs");
-        buttonConstructeurs.setOnAction(new ClickDroitController(model));
+        buttonConstructeurs.setOnAction(new MenuItemController(model));
         this.getItems().addAll(buttonAttributs, buttonMethodes, buttonConstructeurs);
+        this.classe = classe;
     }
 
     /**
@@ -44,5 +44,9 @@ public class VueButtonBarClasse extends ContextMenu implements Observateur {
     @Override
     public void actualiser() {
 
+    }
+
+    public VueClasseAffichage getClasse() {
+        return classe;
     }
 }

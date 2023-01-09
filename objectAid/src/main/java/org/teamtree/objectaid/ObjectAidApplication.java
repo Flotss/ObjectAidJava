@@ -79,9 +79,6 @@ public class ObjectAidApplication extends Application {
 
         buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton, relationsDisplayButton);
 
-        VueButtonBarClasse buttonBarClasse = new VueButtonBarClasse(model);
-        model.ajouterObservateur(buttonBarClasse);
-
         applicationLayout.getChildren().addAll(buttonBar, vueClass);
 
 
