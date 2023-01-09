@@ -9,7 +9,7 @@ Participant :
 ## Description
 
 Ce project a pour but de faire une application similaire à [ObjectAid UML Explorer](https://marketplace.eclipse.org/content/objectaid-uml-explorer) en Java.
-Pour exécuter la démo, veuillez lancer le fichier ObjectAidApplication se trouvant dans le dossier: ObjectAid/src/main/org/teamtree/objectaid.
+<br>Pour exécuter la démo, veuillez lancer le fichier ObjectAidApplication se trouvant dans le dossier: [ObjectAid/src/main/org/teamtree/objectaid](https://github.com/Flotss/ObjectAidJava/blob/main/objectAid/src/main/java/org/teamtree/objectaid/ObjectAidApplication.java).
 
 ## Exemple
 
