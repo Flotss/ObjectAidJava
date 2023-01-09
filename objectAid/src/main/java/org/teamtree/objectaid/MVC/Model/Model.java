@@ -3,7 +3,6 @@ package org.teamtree.objectaid.MVC.Model;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
-import org.teamtree.objectaid.service.ProjectCompilationProcessService;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -47,9 +46,6 @@ public class Model implements Sujet {
     }
 
     public void setCurrentProject(Path currentProject) {
-        final var service = new ProjectCompilationProcessService(this);
-
-        service.compileProject(currentProject);
         this.currentProject = currentProject;
 
         System.out.println("Set current project to " + currentProject);
@@ -69,7 +65,7 @@ public class Model implements Sujet {
         return applicationState;
     }
 
-    private void setApplicationState(final ApplicationState applicationState) {
+    public void setApplicationState(final ApplicationState applicationState) {
         this.applicationState = applicationState;
 
         notifierObservateur();
