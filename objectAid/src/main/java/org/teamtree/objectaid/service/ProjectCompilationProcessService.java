@@ -1,5 +1,6 @@
 package org.teamtree.objectaid.service;
 
+import javafx.scene.effect.Reflection;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.util.FileExtension;
 
@@ -8,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,7 +29,27 @@ public class ProjectCompilationProcessService {
 
                 compile(path, temporaryOutputDirectory);
 
-                System.out.println(Arrays.stream(Objects.requireNonNull(tempFile.listFiles())).count() + " classes compiled");
+                final var files = Arrays.stream(Objects.requireNonNull(path.toFile().listFiles())).filter(File::isFile).filter(FileExtension::isClassFile).toList();
+
+                files.forEach(file -> {
+                    // sout current dir
+                    System.out.println("Current dir: " + file.getAbsolutePath());
+                    // sout current file
+                    System.out.println("Current file: " + file.getName());
+
+                    // get relative path from path
+                    final var relativePath = path.relativize(file.toPath());
+
+                    try {
+                        Class.forName(relativePath.toString()).newInstance();
+                    } catch (InstantiationException e) {
+                        throw new RuntimeException(e);
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -42,78 +62,20 @@ public class ProjectCompilationProcessService {
         // clear target dir
         target.toFile().deleteOnExit();
 
-        // Search for settings.gradle in the source directory
-        final var isGradleProject = Files.exists(source.resolve("settings.gradle"));
+        final var start = System.currentTimeMillis();
 
+        try {
+            final var javaFiles = Files.walk(source).filter(Files::isRegularFile).filter(p -> p.getFileName().toString().endsWith(FileExtension.JAVA_EXTENSION)).map(Path::toAbsolutePath).map(Path::toString).toList();
 
-        if (isGradleProject) {
-
-            try {
-                // compile all java files, and put the compiled classes in the target directory with gradle
-                final var processes = ProcessBuilder.startPipeline(List.of(
-                        new ProcessBuilder("./gradlew", "compileJava")
-                                .directory(source.toFile())
-                                .inheritIO()
-                                .redirectOutput(ProcessBuilder.Redirect.PIPE)
-                ));
-
-                System.out.println("(GRADLE) Number of files compilated : " + target.toFile().listFiles().length);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            final List<Path> classFiles;
-            try {
-                classFiles = Files.walk(source)
-                        .filter(Files::isRegularFile)
-                        .filter(file -> file.toString().endsWith(FileExtension.CLASS_EXTENSION))
-                        .collect(Collectors.toList());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            System.out.println("(GRADLE) Number of files found : " + classFiles.size());
-
-            classFiles.forEach(file -> {
-                try {
-                    Files.move(file, target.resolve(file.getFileName()));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            System.out.println("(GRADLE) Number of files moved : " + target.toFile().listFiles().length);
-
-        }
-
-        if (!isGradleProject) {
-          try {
-            final var javaFiles = Files.walk(source)
-                    .filter(Files::isRegularFile)
-                    .filter(p -> p.getFileName().toString().endsWith(FileExtension.JAVA_EXTENSION))
-                    .map(Path::toAbsolutePath)
-                    .map(Path::toString)
-                    .toList();
-
-
-            List<String> args = Stream.concat(Stream.of("javac", "-d", target.toString()), javaFiles.stream())
-                    .collect(Collectors.toList());
-            Process process = new ProcessBuilder(args)
-                    .redirectErrorStream(true)
-                    .inheritIO()
-                    .start();
+            final var args = Stream.concat(Stream.of("javac", "-cp", source.toString()), javaFiles.stream()).toArray(String[]::new);
+            final var process = new ProcessBuilder(args).redirectErrorStream(true).inheritIO().start();
             process.waitFor();
-
-            System.out.println("Compiled " + target.toFile().listFiles().length + "/" + javaFiles.size() + " files");
 
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        }
-
-
-
     }
+
 
 }
