@@ -31,10 +31,10 @@ class ConstructeurTest {
     void testAccessibilite() {
         for (Constructeur constructeur : this.constructeur) {
             switch (constructeur.getParametre().size()) {
-                case 0 -> assertEquals("protected", constructeur.getAccessibilite());
-                case 1 -> assertEquals("private", constructeur.getAccessibilite());
-                case 2 -> assertEquals("public", constructeur.getAccessibilite());
-                case 3 -> assertEquals("default", constructeur.getAccessibilite());
+                case 0 -> assertEquals("protected", constructeur.getAccessibilite().getAcces());
+                case 1 -> assertEquals("private", constructeur.getAccessibilite().getAcces());
+                case 2 -> assertEquals("public", constructeur.getAccessibilite().getAcces());
+                case 3 -> assertEquals("default", constructeur.getAccessibilite().getAcces());
                 default -> {
                 }
             }
@@ -44,7 +44,7 @@ class ConstructeurTest {
     @Test
     void testParametre() {
         for (Constructeur construc : constructeur) {
-            switch (construc.getAccessibilite()) {
+            switch (construc.getAccessibilite().getAcces()) {
                 case "default" -> {
                     ArrayList<Parametre> parametres1 = construc.getParametre();
                     assertEquals(3, parametres1.size());

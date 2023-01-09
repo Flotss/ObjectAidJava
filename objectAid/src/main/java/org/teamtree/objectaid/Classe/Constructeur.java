@@ -49,8 +49,8 @@ public class Constructeur {
      * Retourne l'accessibilité du constructeur
      * @return Accessibilité du constructeur : Accessibilite
      */
-    public String getAccessibilite() {
-        return accessibilite.getAcces();
+    public Accessibilite getAccessibilite() {
+        return accessibilite;
     }
 
     /**

@@ -3,12 +3,15 @@ package org.teamtree.objectaid.MVC.Vue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import org.teamtree.objectaid.Classe.*;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Relation;
+import org.teamtree.objectaid.Etat.Abstract;
+import org.teamtree.objectaid.Etat.Etat;
+import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.MVC.Model.Model;
 
@@ -108,9 +111,20 @@ public class VueClasseAffichage extends VBox implements Observateur {
         }
         //Pour chaque attributs
         for (Attribut attributX: classeEntiere.getAttributs()) {
-            String att = FabriqueAffichage.fabriqueAcces(attributX.getAccessibilite()) + " " + attributX.getType() + " " + attributX.getNom();
+            HBox line = new HBox();
+            Shape icon = attributX.getAccessibilite().getShape();
+            String att = attributX.getType() + " " + attributX.getNom();
             Label attributLabel = new Label(att);
-            attributs.getChildren().add(attributLabel);
+
+            for (Etat etat : attributX.getEtats()) {
+                if (etat instanceof Static) {
+                    // Souligne le nom de la méthode
+                    attributLabel.setUnderline(true);
+                }
+            }
+
+            line.getChildren().addAll(icon, attributLabel);
+            attributs.getChildren().add(line);
         }
     }
 
@@ -132,9 +146,21 @@ public class VueClasseAffichage extends VBox implements Observateur {
                     attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
                     bordureAffichee = true;
                 }
-                String attRela = FabriqueAffichage.fabriqueAcces(association.getAttribut().getAccessibilite()) + " " + association.getAttribut().getType() + " " + association.getAttribut().getNom();
+
+                HBox line = new HBox();
+                Shape icon = association.getAttribut().getAccessibilite().getShape();
+                String attRela = association.getAttribut().getType() + " " + association.getAttribut().getNom();
                 Label attributRelationLabel = new Label(attRela);
-                attributsRelation.getChildren().add(attributRelationLabel);
+
+                for (Etat etat : ((Association) relation).getAttribut().getEtats()) {
+                    if (etat instanceof Static) {
+                        // Souligne le nom de la méthode
+                        attributRelationLabel.setUnderline(true);
+                    }
+                }
+
+                line.getChildren().addAll(icon, attributRelationLabel);
+                attributsRelation.getChildren().add(line);
             }
         }
     }
@@ -152,8 +178,13 @@ public class VueClasseAffichage extends VBox implements Observateur {
         }
         //Pour chaque Constructeurs
         for (Constructeur constructeurX: classeEntiere.getContructeurs()) {
+            HBox line = new HBox();
+
+            // Icon selon l'accessibilité
+            Shape icon = constructeurX.getAccessibilite().getShape();
+
             //Debut de la ligne (accesibilité, nom,...), du type : + Constructeur(
-            String constr = FabriqueAffichage.fabriqueAcces(constructeurX.getAccessibilite()) + " " + constructeurX.getNom() + "(";
+            String constr = constructeurX.getNom() + "(";
             int n = 0;
 
             //Pour chaque parametre du constructeur, on l'écrit dans l'affichage
@@ -169,7 +200,9 @@ public class VueClasseAffichage extends VBox implements Observateur {
             //On écrit la fin du constructeur puis on l'ajoute avec les autres constructeurs
             constr += ")";
             Label constrLabel = new Label(constr);
-            constructeur.getChildren().add(constrLabel);
+
+            line.getChildren().addAll(icon, constrLabel);
+            constructeur.getChildren().add(line);
         }
     }
 
@@ -185,7 +218,11 @@ public class VueClasseAffichage extends VBox implements Observateur {
         }
         for (int i = 0; i < classeEntiere.getMethods().size(); i++) {
             Methode methodeX = classeEntiere.getMethods().get(i);
-            String meth = FabriqueAffichage.fabriqueAcces(methodeX.getAccessibilite()) + " " + methodeX.getNom() + "(";
+
+            HBox line = new HBox();
+            Shape icon = methodeX.getAccessibilite().getShape();
+
+            String meth = methodeX.getNom() + "(";
             for (int j = 0; j < methodeX.getParametre().size(); j++) {
                 meth += methodeX.getParametre().get(j).getType() + " " + methodeX.getParametre().get(j).getNom();
                 if (j != methodeX.getParametre().size() - 1) {
@@ -194,7 +231,20 @@ public class VueClasseAffichage extends VBox implements Observateur {
             }
             meth += "): " + classeEntiere.getMethods().get(i).getTypeRetourne();
             Label methodeLabel = new Label(meth);
-            methodes.getChildren().add(methodeLabel);
+
+            for (Etat etat : methodeX.getEtats()) {
+                if (etat instanceof Abstract) {
+                    methodeLabel.setStyle("-fx-font-style: italic;");
+                }
+
+                if (etat instanceof Static) {
+                    // Souligne le nom de la méthode
+                    methodeLabel.setUnderline(true);
+                }
+            }
+
+            line.getChildren().addAll(icon, methodeLabel);
+            methodes.getChildren().add(line);
         }
     }
 

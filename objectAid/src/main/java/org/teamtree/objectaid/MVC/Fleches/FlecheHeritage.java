@@ -37,6 +37,7 @@ public class FlecheHeritage extends Fleche {
         this.arrow1.setStroke(Color.RED);
         this.arrow2.setStroke(Color.RED);
         this.arrowFermeture.setStroke(Color.RED);
+        this.arrowFermeture.setStrokeWidth(2);
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.teamtree.objectaid.MVC.Vue;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
@@ -63,22 +64,26 @@ public class VueClasse extends Pane implements Observateur {
 
             //tooltip pour les methodes
             for (Node methode : classe.getMethodes().getChildren()) {
-                ((Label)methode).setTooltip(new Tooltip(((Label)methode).getText()));
+                Node labelNode = ((HBox) methode).getChildren().get(1);
+                ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
             }
 
             //tooltip pour les attributs
             for (Node attribut : classe.getAttributs().getChildren()) {
-                ((Label)attribut).setTooltip(new Tooltip(((Label)attribut).getText()));
+                Node labelNode = ((HBox) attribut).getChildren().get(1);
+                ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
             }
 
             //tooltip pour les attributs avec relation de la classe
             for (Node attributRelation : classe.getAttributsRelation().getChildren()) {
-                ((Label)attributRelation).setTooltip(new Tooltip(((Label)attributRelation).getText()));
+                Node labelNode = ((HBox) attributRelation).getChildren().get(1);
+                ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
             }
 
             //tooltip pour les construteurs de la classe
             for (Node constructeur : classe.getConstructeur().getChildren()) {
-                ((Label)constructeur).setTooltip(new Tooltip(((Label)constructeur).getText()));
+                Node labelNode = ((HBox) constructeur).getChildren().get(1);
+                ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
             }
 
             //tooltip pour le nom de la classe
@@ -133,6 +138,12 @@ public class VueClasse extends Pane implements Observateur {
     public void actualiserFleches() {
         for (Fleche fleche : fleches) {
             fleche.actualiser();
+        }
+    }
+
+    public void definirVisibiliteFleches(boolean visibilite){
+        for (Fleche fleche : fleches) {
+            fleche.definirVisibilite(visibilite);
         }
     }
 }

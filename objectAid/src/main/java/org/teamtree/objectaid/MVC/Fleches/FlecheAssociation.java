@@ -1,7 +1,11 @@
 package org.teamtree.objectaid.MVC.Fleches;
 
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.*;
+import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Classe.Attribut;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -14,7 +18,7 @@ public class FlecheAssociation extends Fleche {
     /**
      * Le label qui représente le nom de l'association
      */
-    private Label nomFleche;
+    private HBox nomFleche;
 
     /**
      * La cardinalité de la classe de départ
@@ -34,16 +38,16 @@ public class FlecheAssociation extends Fleche {
     public FlecheAssociation(Model model, Relation relation){
         super(model, relation);
 
-        // Changement de la couleur de la flèche pour l'association : bleu
-        this.line.setStroke(Color.BLUE);
-        this.arrow1.setStroke(Color.BLUE);
-        this.arrow2.setStroke(Color.BLUE);
-
         // Création du label pour le nom de l'association
         Association association = (Association) relation;
+        this.nomFleche = new HBox();
+
+        Shape logoAccess = ((Association) relation).getAttribut().getAccessibilite().getShape();
+        this.nomFleche.getChildren().add(logoAccess);
+
         Label label = new Label(association.getAttribut().getNom());
-        this.nomFleche = label;
-        this.getChildren().add(label);
+        this.nomFleche.getChildren().add(label);
+        this.getChildren().add(nomFleche);
 
         // Création des labels pour les cardinalités
         Label cardinaliteDepart = new Label(association.getCardinalite1());
@@ -90,6 +94,4 @@ public class FlecheAssociation extends Fleche {
             cardinaliteArrivee.setLayoutY(line.getEndY()+10);
         }
     }
-
-
 }

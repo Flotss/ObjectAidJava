@@ -17,6 +17,7 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
     private static boolean attributGenerauxAffiche = true;
     private static boolean constructeurGenerauxAffiche = true;
     private static boolean methodesGenerauxAffiche = true;
+    private static boolean relationsGeneralesAffiche = true;
 
     /**
      * Constructeur
@@ -45,6 +46,10 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 constructeurGenerauxAffiche = !constructeurGenerauxAffiche;
                 model.afficherConstructeurs(constructeurGenerauxAffiche);
                 break;
+            case "Afficher les relations":
+                relationsGeneralesAffiche = !relationsGeneralesAffiche;
+                model.afficherRelations(relationsGeneralesAffiche);
+                break;
             case "Attributs":
                 model.afficherAttributsSelection();
                 break;
@@ -56,6 +61,5 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 break;
         }
 
-        model.notifierObservateur("actualisation fleches");
     }
 }
