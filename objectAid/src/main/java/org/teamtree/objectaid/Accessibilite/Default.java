@@ -19,11 +19,11 @@ public class Default implements Accessibilite {
         // Création d'un triangle bleu
         Polygon triangle = new Polygon();
         triangle.getPoints().addAll(  0.0, 0.0,
-                10.0, 0.0,
-                5.0, 10.0);
+                5.0, 0.0,
+                2.5, 5.0);
         triangle.setFill(Color.BLUE);
         triangle.setStroke(Color.BLUEVIOLET);
-        triangle.setTranslateY(7);
+        triangle.setTranslateY(5);
         triangle.setTranslateX(-3);
         return triangle;
     }

@@ -3,13 +3,15 @@ package org.teamtree.objectaid.MVC.Vue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import org.teamtree.objectaid.Classe.*;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Relation;
+import org.teamtree.objectaid.Etat.Abstract;
+import org.teamtree.objectaid.Etat.Etat;
+import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.MVC.Model.Model;
 
@@ -114,6 +116,13 @@ public class VueClasseAffichage extends VBox implements Observateur {
             String att = attributX.getType() + " " + attributX.getNom();
             Label attributLabel = new Label(att);
 
+            for (Etat etat : attributX.getEtats()) {
+                if (etat instanceof Static) {
+                    // Souligne le nom de la méthode
+                    attributLabel.setUnderline(true);
+                }
+            }
+
             line.getChildren().addAll(icon, attributLabel);
             attributs.getChildren().add(line);
         }
@@ -142,6 +151,14 @@ public class VueClasseAffichage extends VBox implements Observateur {
                 Shape icon = association.getAttribut().getAccessibilite().getShape();
                 String attRela = association.getAttribut().getType() + " " + association.getAttribut().getNom();
                 Label attributRelationLabel = new Label(attRela);
+
+                for (Etat etat : ((Association) relation).getAttribut().getEtats()) {
+                    if (etat instanceof Static) {
+                        // Souligne le nom de la méthode
+                        attributRelationLabel.setUnderline(true);
+                    }
+                }
+
                 line.getChildren().addAll(icon, attributRelationLabel);
                 attributsRelation.getChildren().add(line);
             }
@@ -214,6 +231,17 @@ public class VueClasseAffichage extends VBox implements Observateur {
             }
             meth += "): " + classeEntiere.getMethods().get(i).getTypeRetourne();
             Label methodeLabel = new Label(meth);
+
+            for (Etat etat : methodeX.getEtats()) {
+                if (etat instanceof Abstract) {
+                    methodeLabel.setStyle("-fx-font-style: italic;");
+                }
+
+                if (etat instanceof Static) {
+                    // Souligne le nom de la méthode
+                    methodeLabel.setUnderline(true);
+                }
+            }
 
             line.getChildren().addAll(icon, methodeLabel);
             methodes.getChildren().add(line);

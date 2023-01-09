@@ -4,7 +4,6 @@ import org.teamtree.objectaid.Accessibilite.Accessibilite;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Fabrique.FabriqueAccessibilite;
 import org.teamtree.objectaid.Fabrique.FabriqueEtat;
-import org.teamtree.objectaid.Point;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -80,7 +79,7 @@ public class Attribut {
      * Retourne la liste des états de l'attribut
      * @return Liste des états de l'attribut : ArrayList<Etat>
      */
-    public ArrayList<Etat> getEtat() {
+    public ArrayList<Etat> getEtats() {
         return etat;
     }
 
