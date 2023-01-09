@@ -1,0 +1,42 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant "controllerButtonGeneral : ControllerButtonGeneral" as controller
+participant "model: Model" as model
+participant "vueClasse: VueClasse" as classe
+participant "fleche: Fleche" as fleche
+
+
+activate user
+user -> controller : handle(MouseEvent: mouseEvent)
+activate controller
+controller -> model : afficherRelations(relationsGeneralesAffiche)
+activate model
+'foreach classes in model.getClasses() and do something
+model -> classe : definirVisibiliteFleches(affiche)
+activate classe
+classe --> model
+deactivate classe
+
+
+model -> model : notifierObservateur("actualisation fleches")
+
+model -> classe : actualiserFleches()
+activate classe
+loop
+activate fleche
+classe -> fleche : actualiser()
+fleche -> fleche : actualiserLesPoints()
+fleche --> classe
+deactivate fleche
+end loop
+classe --> model
+deactivate classe
+model --> controller
+deactivate model
+controller --> user
+deactivate controller
+
+@enduml

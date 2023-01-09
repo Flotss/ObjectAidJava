@@ -3,35 +3,34 @@
 autonumber
 
 participant "Utilisateur" as user
-participant "ControllerButtonGeneral" as controller
-participant "Model" as model
-participant "ClasseEntiere" as classe
-participant "ClasseAffichage" as classeAffichage
+participant "controllerButtonGeneral: ControllerButtonGeneral" as controller
+participant "model: Model" as model
+participant "vueClasseAffichage: VueClasseAffichage" as classe
 
 activate user
 user -> controller : handle(MouseEvent: mouseEvent)
 activate controller
 controller -> model : afficherAttributsSelection()
 activate model
-'foreach classes in model.getClasses() and do something
-model -> classe : setAttributEstAffiche()
+
+model -> classe : setAttributEstAffiche(boolean)
 activate classe
 classe --> model
 deactivate classe
 
 
 model -> model : notifierObservateur("classe selection complete")
-model -> classeAffichage : afficherClasse()
-activate classeAffichage
-classeAffichage -> classeAffichage : updateAttributsRelation()
-classeAffichage -> classeAffichage : getChildren().clear()
-classeAffichage -> classeAffichage : getChildren().add(definition)
+model -> classe : afficherClasse()
+activate classe
+classe -> classe : updateAttributsRelation()
+classe -> classe : getChildren().clear()
+classe -> classe : getChildren().add(definition)
 alt isAttributEstAffiche()
-classeAffichage -> classeAffichage : getChildren().add(attributs)
-classeAffichage -> classeAffichage : getChildren().add(attributsRelation)
+classe -> classe : getChildren().add(attributs)
+classe -> classe : getChildren().add(attributsRelation)
 end alt
-classeAffichage --> model
-deactivate classeAffichage
+classe --> model
+deactivate classe
 model --> controller
 deactivate model
 controller --> user
