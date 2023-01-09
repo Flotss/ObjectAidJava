@@ -28,8 +28,12 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
     @Override
     public void handle(MouseEvent event) {
         final var source = (VueClasseAffichage) event.getSource();
-
-        addClickedEffect(source);
+        if (event.getButton().toString().equals("PRIMARY")) {
+            addClickedEffect(source);
+        } else if(event.getButton().toString().equals("SECONDARY")) {
+            addClickedEffect(source);
+            afficherBoutonsSpecifiques();
+        }
     }
 
     /**
@@ -38,6 +42,9 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
      */
     private void addClickedEffect(final VueClasseAffichage source) {
         model.setCurrentClickedClass(source);
+    }
+
+    private void afficherBoutonsSpecifiques() {
         model.setBarreBoutonsSpecifique();
         model.notifierObservateur("barre");
     }

@@ -1,5 +1,8 @@
 package org.teamtree.objectaid.MVC.Vue;
 
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
@@ -55,6 +58,31 @@ public class VueClasse extends Pane implements Observateur {
 
             //on ajoute le drag and drop de la classe
             classe.setOnMouseDragged(new DeplacementClasseDragAndDropController(model));
+
+            //on ajoute les tooltip aux labels des classes pour voir tout le texte
+
+            //tooltip pour les methodes
+            for (Node methode : classe.getMethodes().getChildren()) {
+                ((Label)methode).setTooltip(new Tooltip(((Label)methode).getText()));
+            }
+
+            //tooltip pour les attributs
+            for (Node attribut : classe.getAttributs().getChildren()) {
+                ((Label)attribut).setTooltip(new Tooltip(((Label)attribut).getText()));
+            }
+
+            //tooltip pour les attributs avec relation de la classe
+            for (Node attributRelation : classe.getAttributsRelation().getChildren()) {
+                ((Label)attributRelation).setTooltip(new Tooltip(((Label)attributRelation).getText()));
+            }
+
+            //tooltip pour les construteurs de la classe
+            for (Node constructeur : classe.getConstructeur().getChildren()) {
+                ((Label)constructeur).setTooltip(new Tooltip(((Label)constructeur).getText()));
+            }
+
+            //tooltip pour le nom de la classe
+            ((Label)classe.getDefinition().getChildren().get(1)).setTooltip(new Tooltip(((Label)classe.getDefinition().getChildren().get(1)).getText()));
 
             classes.put(classe.getNom(),classe);
         }
