@@ -295,12 +295,4 @@ public class Model implements Sujet {
         return null;
     }
 
-    /**
-     * Methode qui permet de retourner le booleen permettant de savoir si les boutons d'affichage d'une classe doit etre affichés
-     * @return Le booleen permettant de savoir si les boutons d'affichage d'une classe doit etre affichés
-     */
-
-    public boolean getBarreBoutonsSpecifique(){
-        return this.barreBoutonsSpecifique;
-    }
 }
