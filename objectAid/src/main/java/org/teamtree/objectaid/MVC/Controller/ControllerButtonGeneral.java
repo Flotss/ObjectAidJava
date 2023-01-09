@@ -50,15 +50,6 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 relationsGeneralesAffiche = !relationsGeneralesAffiche;
                 model.afficherRelations(relationsGeneralesAffiche);
                 break;
-            case "Attributs":
-                model.afficherAttributsSelection();
-                break;
-            case "Méthodes":
-                model.afficherMethodesSelection();
-                break;
-            case "Constructeurs":
-                model.afficherConstructeursSelection();
-                break;
         }
 
     }

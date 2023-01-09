@@ -23,9 +23,6 @@ public class Model implements Sujet {
     /** Classe sélectionnée */
     private VueClasseAffichage currentClickedClass;
 
-    /** Barre de boutons spécifique */
-    private boolean barreBoutonsSpecifique;
-
     /** Affichage relations */
     private boolean affichageRelations;
 
@@ -36,7 +33,6 @@ public class Model implements Sujet {
         this.observateurs = new ArrayList<>();
         this.relations = new HashMap<>();
         this.currentClickedClass = null;
-        this.barreBoutonsSpecifique= false;
         this.affichageRelations = true;
     }
 
@@ -86,15 +82,6 @@ public class Model implements Sujet {
             break;
             case "classe selection complete":
                 this.currentClickedClass.afficherClasse();
-                break;
-            case "barre":
-                for(Observateur observateur: this.observateurs){
-                    if(observateur instanceof VueButtonBarClasse){
-                        this.setBarreBoutonsSpecifique();
-                        observateur.actualiser();
-                        return;
-                    }
-                }
                 break;
             case "actualisation fleches":
                 for(Observateur observateur: this.observateurs){
@@ -308,20 +295,4 @@ public class Model implements Sujet {
         return null;
     }
 
-    /**
-     * Methode qui permet de changer le booleen permettant de savoir si les boutons d'affichage d'une classe doit etre affichés
-     */
-
-    public void setBarreBoutonsSpecifique(){
-        this.barreBoutonsSpecifique = this.currentClickedClass!=null;
-    }
-
-    /**
-     * Methode qui permet de retourner le booleen permettant de savoir si les boutons d'affichage d'une classe doit etre affichés
-     * @return Le booleen permettant de savoir si les boutons d'affichage d'une classe doit etre affichés
-     */
-
-    public boolean getBarreBoutonsSpecifique(){
-        return this.barreBoutonsSpecifique;
-    }
 }
