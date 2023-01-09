@@ -33,15 +33,6 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         TreeItem<String> root = new TreeItem<>();
         Arrays.stream(Objects.requireNonNull(model.getCurrentProject().toFile().listFiles())).forEach(file -> createTree(file, root));
 
-        // create alert if no class file is found
-        final var classFiles = root.getChildren().stream().filter(item -> item.getValue().endsWith(FileExtension.CLASS_EXTENSION)).count();
-
-        if (classFiles == 0) {
-            final var alert = new Alert(Alert.AlertType.ERROR, "Aucun fichier .class n'a été trouvé dans le projet");
-            alert.show();
-
-            model.setApplicationState(ApplicationState.BOOTSTRAP);
-        }
 
         final var treeView = new TreeView<>(root);
 
