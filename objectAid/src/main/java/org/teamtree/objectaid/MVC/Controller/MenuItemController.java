@@ -4,16 +4,27 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.MVC.Vue.VueButtonBarClasse;
 
+/**
+ * Classe qui permet de gérer tous les MenuItem de l'application
+ */
 public class MenuItemController implements EventHandler<ActionEvent> {
 
+    /** Modèle */
     private Model model;
 
+    /**
+     * Constructeur
+     * @param model Modèle
+     */
     public MenuItemController(Model model) {
         this.model = model;
     }
 
+    /**
+     * Méthode qui permet de gérer les MenuItem de l'application
+     * @param event Evènement
+     */
     @Override
     public void handle(ActionEvent event) {
         switch (((MenuItem)event.getSource()).getText()){
@@ -27,6 +38,5 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 model.afficherConstructeursSelection();
                 break;
         }
-
     }
 }

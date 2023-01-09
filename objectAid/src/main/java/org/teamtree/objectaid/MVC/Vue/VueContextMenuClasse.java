@@ -6,19 +6,23 @@ import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 /** Vue utilisée pour les boutons d'affichage d'une classe */
-public class VueButtonBarClasse extends ContextMenu implements Observateur {
+public class VueContextMenuClasse extends ContextMenu implements Observateur {
 
     /** Attribut qui represente le bouton pour afficher/masquer les attributs de la classe */
-    private MenuItem buttonAttributs;
+    private MenuItem itemAttributs;
 
     /** Attribut qui represente le bouton pour afficher/masquer les methodes de la classe */
-    private MenuItem buttonMethodes;
+    private MenuItem itemMethodes;
 
     /** Attribut qui represente le bouton pour afficher/masquer les constructeurs de la classe */
-    private MenuItem buttonConstructeurs;
+    private MenuItem itemConstructeurs;
 
     /** Attribut qui represente le model */
     private Model model;
+
+    /**
+     * ClasseAffichage sur laquel s'appuie cette vue
+     */
 
     private VueClasseAffichage classe;
 
@@ -26,15 +30,15 @@ public class VueButtonBarClasse extends ContextMenu implements Observateur {
      * Constructeur de la classe
      * @param model model
      */
-    public VueButtonBarClasse(Model model, VueClasseAffichage classe) {
+    public VueContextMenuClasse(Model model, VueClasseAffichage classe) {
         this.model = model;
-        buttonAttributs = new MenuItem("Attributs");
-        buttonAttributs.setOnAction(new MenuItemController(model));
-        buttonMethodes = new MenuItem("Méthodes");
-        buttonMethodes.setOnAction(new MenuItemController(model));
-        buttonConstructeurs = new MenuItem("Constructeurs");
-        buttonConstructeurs.setOnAction(new MenuItemController(model));
-        this.getItems().addAll(buttonAttributs, buttonMethodes, buttonConstructeurs);
+        itemAttributs = new MenuItem("Attributs");
+        itemAttributs.setOnAction(new MenuItemController(model));
+        itemMethodes = new MenuItem("Méthodes");
+        itemMethodes.setOnAction(new MenuItemController(model));
+        itemConstructeurs = new MenuItem("Constructeurs");
+        itemConstructeurs.setOnAction(new MenuItemController(model));
+        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs);
         this.classe = classe;
     }
 
@@ -43,9 +47,12 @@ public class VueButtonBarClasse extends ContextMenu implements Observateur {
      */
     @Override
     public void actualiser() {
-
     }
 
+    /**
+     * Methode qui permet de retourner la classeAffichage de la vue
+     * @return buttonAttributs
+     */
     public VueClasseAffichage getClasse() {
         return classe;
     }

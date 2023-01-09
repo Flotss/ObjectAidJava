@@ -10,9 +10,8 @@ import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichageFleche;
 import org.teamtree.objectaid.MVC.Controller.ClasseEntiereClickedController;
-import org.teamtree.objectaid.MVC.Controller.ClickDroitController;
+import org.teamtree.objectaid.MVC.Controller.ClickDroitClasseController;
 import org.teamtree.objectaid.MVC.Controller.DeplacementClasseDragAndDropController;
-import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Model.Model;
 
@@ -91,7 +90,8 @@ public class VueClasse extends Pane implements Observateur {
             //tooltip pour le nom de la classe
             ((Label)classe.getDefinition().getChildren().get(1)).setTooltip(new Tooltip(((Label)classe.getDefinition().getChildren().get(1)).getText()));
 
-            classe.setOnContextMenuRequested(new ClickDroitController(model,classe));
+            //on ajoute le controller lorsqu'on clique droit sur la classe
+            classe.setOnContextMenuRequested(new ClickDroitClasseController(model,classe));
 
             classes.put(classe.getNom(),classe);
         }
