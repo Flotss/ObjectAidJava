@@ -3,6 +3,8 @@ package org.teamtree.objectaid;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -77,7 +79,12 @@ public class ObjectAidApplication extends Application {
         VueButtonBarClasse buttonBarClasse = new VueButtonBarClasse(model);
         model.ajouterObservateur(buttonBarClasse);
 
-        applicationLayout.getChildren().addAll(buttonBar,buttonBarClasse, vueClass);
+
+        ContextMenu contextMenu = new ContextMenu();
+        contextMenu.getItems().addAll(new MenuItem("aaaaaa"));
+        vueClass.setOnContextMenuRequested(event -> contextMenu.show(vueClass, event.getScreenX(), event.getScreenY()));
+
+        applicationLayout.getChildren().addAll(buttonBar, vueClass);
 
 
         Scene scene = new Scene(applicationLayout, 1024, 768);
