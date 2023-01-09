@@ -6,6 +6,9 @@ import org.teamtree.objectaid.util.FileExtension;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -38,14 +41,16 @@ public class ProjectCompilationProcessService {
                     System.out.println("Current file: " + file.getName());
 
                     // get relative path from path
-                    final var relativePath = path.relativize(file.toPath());
+                    final String relativePath;
+                    // url to file
 
                     try {
-                        Class.forName(relativePath.toString()).newInstance();
-                    } catch (InstantiationException e) {
-                        throw new RuntimeException(e);
-                    } catch (IllegalAccessException e) {
-                        throw new RuntimeException(e);
+                        final var loader = new CLoader();
+                        final var clazz = loader.loadClass(file.getAbsolutePath());
+
+                        System.out.println(clazz.getName());
+                        System.out.println(clazz.getModifiers());
+
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
