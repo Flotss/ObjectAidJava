@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.service.CLoader;
 import org.teamtree.objectaid.util.FileExtension;
 
 import java.io.File;
@@ -45,6 +46,8 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
             content.putString(itemContent);
             dragBoard.setContent(content);
 
+            System.out.println("Drag detected, content: " + itemContent);
+
             event.consume();
         });
 
@@ -73,6 +76,9 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         vbox.setOnDragDropped(event -> {
             final var dragBoard = event.getDragboard();
             var success = false;
+
+            System.out.println("dragBoard.getString() = " + dragBoard.getString());
+
             if (dragBoard.hasString()) {
                 final var itemContent = dragBoard.getString();
                 success = true;
@@ -80,15 +86,10 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
                 final var entrySearch = this.model.getClassesPath().entrySet().stream().filter(entry -> entry.getKey().equals(itemContent)).findFirst();
 
                 if (entrySearch.isPresent()) {
-                    System.out.println(entrySearch.get().getKey() + ", " + entrySearch.get().getValue());
+                    final var classeEntiere = new ClasseEntiere(entrySearch.get().getValue());
+                    this.model.ajouterClasse(classeEntiere);
 
-                    final ClasseEntiere classeEntiere;
-                    final var fqn = entrySearch.get().getValue();
-
-                    System.out.println(fqn.getCanonicalName());
-
-                    //classeEntiere = new ClasseEntiere(entrySearch.get().getValue());
-                    //this.model.ajouterClasse(classeEntiere);
+                    model.notifierObservateur();
                 } else {
                     System.out.println("not found for " + itemContent);
                     System.out.println(this.model.getClassesPath());
@@ -114,12 +115,20 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
             Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(f -> createTree(f, treeItem));
         } else {
 
+            final var name = FileExtension.isClassFile(file.getName()) ? file.getName().substring(0, file.getName().length() - 6) : file.getName();
             if (FileExtension.isJavaFile(file.getName())) {
                 return;
             }
 
+            if (FileExtension.isClassFile(file.getName())) {
+
+                final var service = new CLoader();
+
+                model.addClassPathEntry(name, service.loadFromFile(file));
+            }
+
             //todo: refactor it to a service
-            final var name = FileExtension.isClassFile(file.getName()) ? file.getName().substring(0, file.getName().length() - 6) : file.getName();
+
 
             final var checkBox = new CheckBoxTreeItem<>(name);
 

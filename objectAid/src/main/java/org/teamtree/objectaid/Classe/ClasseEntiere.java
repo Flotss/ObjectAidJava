@@ -21,38 +21,38 @@ public class ClasseEntiere {
      * Liste des constructeurs de la classe
      */
     private final List<Constructeur> contructeurs;
-
-    /**
-     * Liste des attributs de la classe
-     */
-    private List<Attribut> attributs;
-
-    /**
-     * Liste des méthodes de la classe
-     */
-    private List<Methode> methods;
-
-    /**
-     * Definition de la classe
-     */
-    private DefinitionClasse definition;
-
     /**
      * Coordonnées de la classe defini par un point
      */
     private final Point coordonnees;
-
-    /** Constructeur est afficher ou non */
-    private boolean constructeurEstAffiche;
-
-    /** Attributs sont afficher ou non */
-    private boolean attributEstAffiche;
-
-    /** Methodes sont afficher ou non */
-    private boolean methodsEstAffiche;
-
-    /** Relation entre classe */
+    /**
+     * Relation entre classe
+     */
     private final List<Relation> relations;
+    /**
+     * Liste des attributs de la classe
+     */
+    private List<Attribut> attributs;
+    /**
+     * Liste des méthodes de la classe
+     */
+    private List<Methode> methods;
+    /**
+     * Definition de la classe
+     */
+    private DefinitionClasse definition;
+    /**
+     * Constructeur est afficher ou non
+     */
+    private boolean constructeurEstAffiche;
+    /**
+     * Attributs sont afficher ou non
+     */
+    private boolean attributEstAffiche;
+    /**
+     * Methodes sont afficher ou non
+     */
+    private boolean methodsEstAffiche;
 
     /**
      * Constructeur de la classe
@@ -103,7 +103,7 @@ public class ClasseEntiere {
 
             // Si le type n'est pas primitif, c'est une association
             // Sinon, c'est un attribut
-            String [] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
+            String[] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
             boolean isPrimitive = false;
             for (String primitive : primitives) {
                 if (type.contains(primitive) && type.length() == primitive.length()) {
@@ -115,9 +115,9 @@ public class ClasseEntiere {
 
             // Ajout de la relation si l'attribut n'est pas primitif
             if (!isPrimitive) {
-                if (isCollection){
+                if (isCollection) {
                     this.relations.add(new Association(type, "*", "*"));
-                }else{
+                } else {
                     this.relations.add(new Association(type, "1", "*"));
                 }
             }
@@ -135,11 +135,89 @@ public class ClasseEntiere {
         }
 
 
-
         // Partie affichage des attributs, constructeurs et méthodes
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
         this.constructeurEstAffiche = true;
+    }
+
+    public ClasseEntiere(Class<?> clazz) {
+
+        if (clazz == null) {
+            throw new IllegalArgumentException("La classe ne peut pas être null");
+        }
+
+        // Création des types des attributs
+        this.attributs = new ArrayList<>();
+        this.contructeurs = new ArrayList<>();
+        this.methods = new ArrayList<>();
+        this.definition = new DefinitionClasse(clazz);
+        this.coordonnees = new Point(0, 0);
+        this.relations = new ArrayList<>();
+
+        // Interfaces
+        for (Class<?> inter : clazz.getInterfaces()) {
+            this.relations.add(new Implementation(inter.getSimpleName()));
+        }
+
+        // Classe parent
+        if (clazz.getSuperclass() != null) {
+            String nameParent = clazz.getSuperclass().getSimpleName();
+
+            // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
+            if (!nameParent.equals("Object")) {
+                this.relations.add(new Heritage(nameParent));
+            }
+        }
+
+// Attributs et Relations
+        for (Field field : clazz.getDeclaredFields()) {
+            // On cherche si l'attribut est une association donc s'il est primitif ou non
+            Attribut attribut = new Attribut(field);
+            String type = attribut.getType();
+            boolean isCollection = (type.contains("<") && type.contains(">"));
+
+            // Si c'est une collection, on récupère le type de la collection
+            if (isCollection) {
+                type = type.substring(type.indexOf("<") + 1, type.indexOf(">"));
+            }
+
+            // Si le type n'est pas primitif, c'est une association
+            // Sinon, c'est un attribut
+            String[] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
+            boolean isPrimitive = false;
+            for (String primitive : primitives) {
+                if (type.contains(primitive) && type.length() == primitive.length()) {
+                    this.attributs.add(attribut);
+                    isPrimitive = true;
+                    break;
+                }
+            }
+
+            // Ajout de la relation si l'attribut n'est pas primitif
+            if (!isPrimitive) {
+                if (isCollection) {
+                    this.relations.add(new Association(type, "*", "*"));
+                } else {
+                    this.relations.add(new Association(type, "1", "*"));
+                }
+            }
+        }
+
+        // Constructeurs
+        for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
+            this.contructeurs.add(new Constructeur(constructor));
+        }
+
+        // Methodes
+        for (Method method : clazz.getDeclaredMethods()) {
+            this.methods.add(new Methode(method));
+        }
+
+        // Partie affichage des attributs, constructeurs et méthodes
+        this.attributEstAffiche = true;
+        this.constructeurEstAffiche = true;
+        this.methodsEstAffiche = true;
     }
 
     /**
@@ -207,7 +285,7 @@ public class ClasseEntiere {
         this.methods = methods;
     }
 
-    public List<Constructeur> getContructeurs(){
+    public List<Constructeur> getContructeurs() {
         return contructeurs;
     }
 
@@ -282,6 +360,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne le nom de la classe
+     *
      * @return Le nom de la classe : String
      */
     public String getNom() {
@@ -290,6 +369,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la possibilite d'afficher le constructeur
+     *
      * @return Vrai si le constructeur est affiché : boolean
      */
     public boolean isConstructeurEstAffiche() {
@@ -298,6 +378,7 @@ public class ClasseEntiere {
 
     /**
      * Set la possibilite d'afficher le constructeur
+     *
      * @param constructeurEstAffiche Boolean vrai pour afficher le constructeur sinon faux
      */
     public void setConstructeurEstAffiche(boolean constructeurEstAffiche) {
@@ -306,6 +387,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la possibilite d'afficher les attributs
+     *
      * @return Vrai si les attributs sont affichés : boolean
      */
     public boolean isAttributEstAffiche() {
@@ -314,6 +396,7 @@ public class ClasseEntiere {
 
     /**
      * Set la possibilite d'afficher les attributs
+     *
      * @param attributEstAffiche Boolean vrai pour afficher les attributs sinon faux
      */
     public void setAttributEstAffiche(boolean attributEstAffiche) {
@@ -322,6 +405,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la possibilite d'afficher les méthodes
+     *
      * @return Vrai si les méthodes sont affichées : boolean
      */
     public boolean isMethodsEstAffiche() {
@@ -330,6 +414,7 @@ public class ClasseEntiere {
 
     /**
      * Set la possibilite d'afficher les méthodes
+     *
      * @param methodsEstAffiche Boolean vrai pour afficher les méthodes sinon faux
      */
     public void setMethodsEstAffiche(boolean methodsEstAffiche) {
