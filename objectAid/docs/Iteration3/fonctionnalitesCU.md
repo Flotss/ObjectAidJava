@@ -40,70 +40,61 @@ Il faudra donc générer des flèches et autres relations entre les classes.
 
 ### Critères de validation :
 - Bouton pour réaliser cet affichage. 
-- Les relations s'affichent / se désaffichent après avoir appuyé sur le boutonà l'écran principal pour pouvoir les afficher en tant que diagramme
+- Les relations s'affichent / se désaffichent après avoir appuyé sur le bouton à l'écran principal pour pouvoir les afficher en tant que diagramme
 
 #### Détail de la fonctionnalité :
 Cette fonctionnalité permet de créer des relations entre les classes.
 C'est à dire la création d'associations, d'héritage et d'implémentations pour chaque classe qui a été importé. De plus elle doit permettre de les afficher ou non dans l'affichage graphique de l'application grace à un bouton et des flèches.
 
 ### Etat :
-Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
-Les association s'affichent sur le rendu, mais sans sens et sans type de relation.
-Pour pouvoir différencier les relations, les fleches ont des couleurs : Héritage = rouge, Implémentation = vert, Association = bleu.
+Fonctionnalité achevée
+Les critères de validation ont été validé avec succès
 
-
-## Fonctionnalité 3 : Afficher/Cacher les Attributs classe sélectionnée
-##### Difficulté: 1
-
-En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les constructeurs d'une classe sélectionnée pour pouvoir dégager l’essentiel. Cet affichage se fera à l'aide d'un bouton.
+---
+## Fonctionnalité 3 : Perfection de l'apparence 
+##### Difficulté: 2
+Nous souhaitons améliorer l'apparence de l'affichage des classes et des relations.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
-- Bernard Julien
+- Mangin Florian
 - Grossmann Jérémy
 
+### Critère de validation : 
+- L'accessibilité doit être représenter par leur icones respectives
+- Les flèches doit avoir 3 point d'accroche par coté
+- Pour l'affichage spécifique d'une classe, doit fonctionné en fesant clic droit
 
-### Critère de validation :
-- Bouton pour réaliser cet affichage
-- Les attributs de la classe sélectionnée s'affichent / se désaffichent après avoir appuyé sur le bouton
-
-### Détail de la fonctionnalité :
-Nous avons ajouté des boutons avec des controleurs pour ces derniers et nous sommes servit de l'attribut boolean, dans la classe,
-correspondant à si cette partie doit être affichée ou non. Le controleur appelle le modele qui va changer
-cet attribut de la classe selectionnée, lors de l'actualisation de la classe, l'attribut sera controlé pour vérifié si les attributs doivent
-être affichés.
-
-#### Patron d'architecture utilisé :
-- MVC : Pour séparer le modèle, la vue et le contrôleur.
-
-#### Patron de conception utilisé :
-- Observer/Observé : Pour que la vue puisse observer le modèle et se mettre à jour en fonction des changements.
+#### Détail de la fonctionnalité : 
+Cette fonctionnalité permet d'avoir une affichage plus propre et plus lisible pour l'utilisateur.
+Pour cela nous avons ajouté des icones pour les différents types d'accès (public, private, protected, et par défaut) et nous avons ajouté des points d'accroche sur les flèches pour les rendre plus lisibles.
 
 ### Etat :
 Fonctionnalité achevée
 
 
-## Fonctionnalité 4-5 : Afficher les méthodes et les constructeurs de la classe selectionnée
-Même principe que pour la fonctionnalitée 3
+---
+## Fonctionnalité 4 : Afficher/Cacher des classes
+##### Difficulté: 3
 
-#### Les étudiants qui se sont occupés de ces partie sont :
-- Bernard Julien
-- Grossman Jérémy
-
-### Etat :
-Fonctionnalité achevée
-
-
-
-## Tâche supplémentaire : Correction des problèmes de performances
-
-Lors du sprint précédent, nous actualisions l'ensemble de l'affichage à chaque modification,
-que ce soit les bordures, les déplacements ou les modification de l'affichage généraux.
-Or, pour les 2 premiers cas, nous ne voulions actualiser l'affichage que de la classe 
-que nous modifions.
+En tant qu’étudiant, je souhaiterais pouvoir cacher des classes de mon projet. Cela permettra de ne pas afficher les classes que je ne souhaite pas voir.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
-- Bernard Julien
+- Mangin Florian
+
+### Critères de validation :
+- Bouton pour cacher les classes
+- Les classes sont cachées après avoir appuyé sur le bouton dans le menu contextuel du clic droit
+- Les flèches qui reliaient les classes cachées sont également cachées
+
+- Bouton pour afficher dans un déroulant les classes cachées
+- Les classes cachées sont affichées après avoir appuyé sur une de ces classes dans le déroulant
+
+#### Détail de la fonctionnalité :
+Cette fonctionnalité permet de cacher des classes et de les afficher à nouveau.
+
 
 ### Etat :
-Tâche terminée
+Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
+
+---
 
