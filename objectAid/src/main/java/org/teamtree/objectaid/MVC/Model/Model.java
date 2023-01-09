@@ -101,6 +101,13 @@ public class Model implements Sujet {
                     }
                 }
                 break;
+            case "totalite des classes":
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueClasse){
+                        ((VueClasse) observateur).actualiser();
+                        return;
+                    }
+                }
         }
     }
 
@@ -214,7 +221,7 @@ public class Model implements Sujet {
         getClasses().forEach(c -> {
             c.setAttributEstAffiche(affiche);
         });
-        notifierObservateur();
+        notifierObservateur("totalite des classes");
     }
 
     /**
@@ -232,7 +239,7 @@ public class Model implements Sujet {
         getClasses().forEach(c -> {
             c.setMethodsEstAffiche(affiche);
         });
-        notifierObservateur();
+        notifierObservateur("totalite des classes");
     }
 
     /**
@@ -250,14 +257,14 @@ public class Model implements Sujet {
         getClasses().forEach(c -> {
             c.setConstructeurEstAffiche(affiche);
         });
-        notifierObservateur();
-        for(Observateur observateur: this.observateurs){
-            if(observateur instanceof VueClasse){
-                System.out.println("vgyftfgytbh");
-                ((VueClasse) observateur).actualiserFleches();
-                return;
-            }
-        }
+        notifierObservateur("totalite des classes");
+//        for(Observateur observateur: this.observateurs){
+//            if(observateur instanceof VueClasse){
+//                System.out.println("vgyftfgytbh");
+//                ((VueClasse) observateur).actualiserFleches();
+//                return;
+//            }
+//        }
 
     }
 
