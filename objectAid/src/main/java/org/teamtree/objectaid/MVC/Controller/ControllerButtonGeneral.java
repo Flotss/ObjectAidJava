@@ -46,6 +46,10 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 constructeurGenerauxAffiche = !constructeurGenerauxAffiche;
                 model.afficherConstructeurs(constructeurGenerauxAffiche);
                 break;
+            case "Afficher les relations":
+                relationsGeneralesAffiche = !relationsGeneralesAffiche;
+                model.afficherRelations(relationsGeneralesAffiche);
+                break;
             case "Attributs":
                 model.afficherAttributsSelection();
                 break;

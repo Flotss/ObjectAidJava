@@ -39,6 +39,8 @@ public class Fleche extends Group implements Observateur {
      */
     protected final Line arrow2;
 
+    private boolean estAffiche;
+
 
     /**
      * Constructeur de la classe
@@ -58,6 +60,8 @@ public class Fleche extends Group implements Observateur {
         arrow2.setStrokeWidth(2);
 
         this.getChildren().addAll(line, arrow1, arrow2);
+
+        this.estAffiche=true;
 
         // Actualisation des positions pour former la ligne
         actualiserLesPoints();
@@ -126,6 +130,10 @@ public class Fleche extends Group implements Observateur {
         return new Point[]{start, end};
     }
 
+    public void definirVisibilite(boolean visibilite){
+        this.estAffiche = visibilite;
+    }
+
     @Override
     public void actualiser() {
         actualiserLesPoints();
@@ -133,6 +141,12 @@ public class Fleche extends Group implements Observateur {
 
 
     private void actualiserLesPoints(){
+
+        this.setVisible(estAffiche);
+        this.arrow1.setVisible(estAffiche);
+        this.arrow2.setVisible(estAffiche);
+        this.line.setVisible(estAffiche);
+
         Point[] points = emplacementFleche(classeDepart, classeArrivee);
         Point start = points[0];
         Point end = points[1];
@@ -166,4 +180,5 @@ public class Fleche extends Group implements Observateur {
         this.arrow2.setEndX(end.getX() + 10 * Math.cos(lineAngle + arrowAngle));
         this.arrow2.setEndY(end.getY() + 10 * Math.sin(lineAngle + arrowAngle));
     }
+
 }

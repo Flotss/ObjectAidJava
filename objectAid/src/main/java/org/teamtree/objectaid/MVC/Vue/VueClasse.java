@@ -136,4 +136,10 @@ public class VueClasse extends Pane implements Observateur {
             fleche.actualiser();
         }
     }
+
+    public void definirVisibiliteFleches(boolean visibilite){
+        for (Fleche fleche : fleches) {
+            fleche.definirVisibilite(visibilite);
+        }
+    }
 }

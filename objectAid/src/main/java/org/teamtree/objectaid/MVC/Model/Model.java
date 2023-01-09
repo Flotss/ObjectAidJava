@@ -99,7 +99,6 @@ public class Model implements Sujet {
             case "actualisation fleches":
                 for(Observateur observateur: this.observateurs){
                     if(observateur instanceof VueClasse){
-                        System.out.println("actualisation fleches");
                         ((VueClasse) observateur).actualiserFleches();
                         return;
                     }
@@ -272,6 +271,19 @@ public class Model implements Sujet {
     public void afficherConstructeursSelection() {
         this.currentClickedClass.getClasseEntiere().setConstructeurEstAffiche(!this.currentClickedClass.getClasseEntiere().isConstructeurEstAffiche());
         notifierObservateur("classe selection complete");
+    }
+
+    /**
+     * Methode qui permet de changer la possibilité d'afficher les relations
+     */
+    public void afficherRelations(boolean affiche) {
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                ((VueClasse) observateur).definirVisibiliteFleches(affiche);
+                break;
+            }
+        }
+        notifierObservateur("actualisation fleches");
     }
 
     /**
