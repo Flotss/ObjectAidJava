@@ -3,6 +3,7 @@ package org.teamtree.objectaid.MVC.Vue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.teamtree.objectaid.Classe.*;
@@ -268,6 +269,14 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
     public ClasseEntiere getClasseEntiere(){
         return this.classeEntiere;
+    }
+
+    /**
+     * Retourne les attributs avec une relation de la classe affichée
+     * @return les attributs avec une relation de la classe affichée : VBox
+     */
+    public VBox getAttributsRelation() {
+        return attributsRelation;
     }
 
     /**
