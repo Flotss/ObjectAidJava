@@ -113,6 +113,9 @@ public class Model implements Sujet {
                         return;
                     }
                 }
+            case "update visibilite classe selection":
+                this.currentClickedClass.actualiserVisibilite();
+                break;
         }
     }
 
@@ -281,15 +284,23 @@ public class Model implements Sujet {
         if (!this.hiddenClasses.contains(classe)){
             System.out.println("La classe " + classe.getNom() + " a été ajoutée à la liste des classes cachées");
             this.hiddenClasses.add(classe);
+            this.currentClickedClass.setClasseAffichee();
+            this.notifierObservateur("update visibilite classe selection");
+            this.notifierObservateur("update visibilite fleche");
             this.currentClickedClass = null;
+
         }
-        this.notifierObservateur();
+//        this.notifierObservateur();
+
     }
 
     public void supprimerClasseCachee(VueClasseAffichage classe) {
         if (this.hiddenClasses.contains(classe)) {
             System.out.println("La classe " + classe.getNom() + " a ete supprimee de la liste des classes cachees");
             this.hiddenClasses.remove(classe);
+            classe.setClasseAffichee();
+            classe.actualiserVisibilite();
+            this.notifierObservateur("update visibilite fleche");
         }
         this.notifierObservateur();
     }

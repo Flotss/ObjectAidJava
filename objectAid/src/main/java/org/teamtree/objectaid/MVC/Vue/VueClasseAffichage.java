@@ -67,6 +67,8 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
     private final Model model;
 
+    private boolean classeAffichee;
+
     /**
      * Constructeur de la classe
      * @param classeEntiere La classe à afficher
@@ -80,6 +82,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
         this.attributsRelation = new VBox();
         this.methodes = new VBox();
         this.model = model;
+        this.classeAffichee = true;
 
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     }
@@ -377,5 +380,19 @@ public class VueClasseAffichage extends VBox implements Observateur {
         if (o == null || getClass() != o.getClass()) return false;
         VueClasseAffichage that = (VueClasseAffichage) o;
         return Objects.equals(nom, that.nom);
+    }
+
+    public void setClasseAffichee(){
+        this.classeAffichee = !this.classeAffichee;
+    }
+
+
+    public void actualiserVisibilite(){
+        System.out.println("esjfnzejnf");
+        this.setVisible(classeAffichee);
+    }
+
+    public boolean getClasseAffichee(){
+        return this.classeAffichee;
     }
 }

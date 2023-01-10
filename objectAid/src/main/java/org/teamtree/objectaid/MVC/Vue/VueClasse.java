@@ -175,7 +175,7 @@ public class VueClasse extends Pane implements Observateur {
             VueClasseAffichage depart = fleche.getVueClasseDepart();
             VueClasseAffichage arrivee = fleche.getVueClasseArrivee();
 
-            fleche.definirVisibilite(!model.getHiddenClasses().contains(depart) && !model.getHiddenClasses().contains(arrivee));
+            fleche.definirVisibilite(depart.getClasseAffichee() && arrivee.getClasseAffichee());
             fleche.actualiserVisibilite();
         }
     }

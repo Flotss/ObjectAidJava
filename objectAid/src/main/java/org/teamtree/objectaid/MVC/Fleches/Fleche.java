@@ -177,7 +177,9 @@ public class Fleche extends Group implements Observateur {
      * @param visible true si la fleche doit etre visible, false sinon
      */
     public void definirVisibilite(boolean visible){
-        this.estAffiche = visible;
+
+        this.estAffiche = (this.classeDepart.getClasseAffichee() && this.classeArrivee.getClasseAffichee()) & visible;
+
         actualiserVisibilite();
     }
 
