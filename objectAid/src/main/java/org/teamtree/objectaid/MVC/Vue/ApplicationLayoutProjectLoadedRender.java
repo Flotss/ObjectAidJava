@@ -120,6 +120,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
         vbox.getChildren().addAll(buttonBar, vueClasse);
 
+
         base.setCenter(vbox);
     }
 

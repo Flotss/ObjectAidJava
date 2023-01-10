@@ -193,11 +193,11 @@ public class Model implements Sujet {
             classe.deplacer(x, y);
             relations.put(classe, new ArrayList<>(classe.getRelations()));
 
-            observateurs
-                    .stream()
-                    .filter(o -> o instanceof VueClasse)
-                    .map(o -> (VueClasse) o)
-                    .forEach(o -> o.ajouterClasse(classe));
+            for (Observateur obs : this.observateurs) {
+                if (obs instanceof VueClasse) {
+                    ((VueClasse)obs).temp();
+                }
+            }
         }
     }
 

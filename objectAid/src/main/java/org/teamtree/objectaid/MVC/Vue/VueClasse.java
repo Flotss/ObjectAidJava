@@ -32,12 +32,12 @@ public class VueClasse extends Pane implements Observateur {
     /**
      * HashMap qui represente la liste des classes à afficher, chaque classe possede comme clé le nom de la classe
      */
-    private final HashMap<String, VueClasseAffichage> classes;
+    private HashMap<String, VueClasseAffichage> classes;
 
     /**
      * Liste des fleches
      */
-    private final List<Fleche> fleches;
+    private List<Fleche> fleches;
 
 
     /**
@@ -156,6 +156,63 @@ public class VueClasse extends Pane implements Observateur {
     public void definirVisibiliteFleches(boolean visibilite) {
         for (Fleche fleche : fleches) {
             fleche.definirVisibilite(visibilite);
+        }
+    }
+
+    public void temp(){
+        this.classes = new HashMap<>();
+        this.fleches = new ArrayList<>();
+
+
+        // Pour chaque classe
+        for (ClasseEntiere classEntiere : model.getClasses()) {
+            // On creation de l'affichage de la classe
+            FabriqueAffichage f = new FabriqueAffichage(classEntiere, model);
+            VueClasseAffichage classe = f.affichage();
+
+//            setBorderColor(classe);
+
+            this.getChildren().add(classe);
+
+            // On ajoute le controller lorsqu'on clique sur la classe
+            classe.setOnMouseClicked(new ClasseEntiereClickedController(model));
+
+            //on ajoute le drag and drop de la classe
+            classe.setOnMouseDragged(new DeplacementClasseDragAndDropController(model));
+
+            //on ajoute les tooltip aux labels des classes pour voir tout le texte
+
+            //tooltip pour les methodes
+            for (Node methode : classe.getMethodes().getChildren()) {
+                Node labelNode = ((HBox) methode).getChildren().get(1);
+                ((Label) labelNode).setTooltip(new Tooltip(((Label) labelNode).getText()));
+            }
+
+            //tooltip pour les attributs
+            for (Node attribut : classe.getAttributs().getChildren()) {
+                Node labelNode = ((HBox) attribut).getChildren().get(1);
+                ((Label) labelNode).setTooltip(new Tooltip(((Label) labelNode).getText()));
+            }
+
+            //tooltip pour les attributs avec relation de la classe
+            for (Node attributRelation : classe.getAttributsRelation().getChildren()) {
+                Node labelNode = ((HBox) attributRelation).getChildren().get(1);
+                ((Label) labelNode).setTooltip(new Tooltip(((Label) labelNode).getText()));
+            }
+
+            //tooltip pour les construteurs de la classe
+            for (Node constructeur : classe.getConstructeur().getChildren()) {
+                Node labelNode = ((HBox) constructeur).getChildren().get(1);
+                ((Label) labelNode).setTooltip(new Tooltip(((Label) labelNode).getText()));
+            }
+
+            //tooltip pour le nom de la classe
+            ((Label) classe.getDefinition().getChildren().get(1)).setTooltip(new Tooltip(((Label) classe.getDefinition().getChildren().get(1)).getText()));
+
+            //on ajoute le controller lorsqu'on clique droit sur la classe
+            classe.setOnContextMenuRequested(new ClickDroitClasseController(model, classe));
+
+            classes.put(classe.getNom(), classe);
         }
     }
 

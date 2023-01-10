@@ -31,7 +31,7 @@ public class DeplacementClasseDragAndDropController implements EventHandler<Mous
         VueClasseAffichage classe = (VueClasseAffichage) event.getSource();
         if(model.getCurrentClickedClass() != null) {
             if (model.getCurrentClickedClass().getNom().equals(classe.getNom()) && event.isPrimaryButtonDown()) {
-                int x = (int) event.getSceneX();
+                int x = (int) event.getSceneX() - 250;
                 int y = (int) event.getSceneY() - 25;
                 model.deplacerClasse(x, y);
             }
