@@ -39,6 +39,7 @@ Il faudra donc générer des flèches et autres relations entre les classes.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Mangin Florian
+- Bernard Julien
 
 ### Critères de validation :
 - Bouton pour réaliser cet affichage. 
@@ -52,59 +53,4 @@ C'est à dire la création d'associations, d'héritage et d'implémentations pou
 Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
 Les association s'affichent sur le rendu, mais sans sens et sans type de relation.
 Pour pouvoir différencier les relations, les fleches ont des couleurs : Héritage = rouge, Implémentation = vert, Association = bleu.
-
-
-## Fonctionnalité 3 : Afficher/Cacher les Attributs classe sélectionnée
-##### Difficulté: 1
-
-En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les attributs d'une classe sélectionnée pour pouvoir dégager l’essentiel. Cet affichage se fera à l'aide d'un ContextMenu sur lequel il y aura un MenuItem où cliquer.
-
-#### Les étudiants qui se sont occupés de cette partie sont :
-- Bernard Julien
-- Grossmann Jérémy
-
-
-### Critère de validation :
-- ContextMenu avec un MenuItem pour réaliser cet affichage
-- L'affichage se fait lorsqu'on réalise un clique droit sur une classe
-- Les attributs de la classe sélectionnée s'affichent / se désaffichent après avoir appuyé sur le MenuItem
-
-### Détail de la fonctionnalité :
-Nous avons ajouté une vue qui extends de ContextMenu pour représenter l'affichage avec le MenuItem et nous nous sommes servit de l'event setOnContextMenuRequested pour chaque classe et donc nous avons créé un controleur pour gérer ce cas. Le controleur va donc
-afficher cette vue lorsqu'un clique droit est effectué sur une classe. Un autre controleur a été créé pour gérer l'action des MenuItem similaire à celui qui s'occupe des boutons.
-
-#### Patron d'architecture utilisé :
-- MVC : Pour séparer le modèle, la vue et le contrôleur.
-
-#### Patron de conception utilisé :
-- Observer/Observé : Pour que la vue puisse observer le modèle et se mettre à jour en fonction des changements.
-
-### Etat :
-Fonctionnalité achevée
-
-
-## Fonctionnalité 4-5 : Afficher les méthodes et les constructeurs de la classe selectionnée
-Même principe que pour la fonctionnalitée 3
-
-#### Les étudiants qui se sont occupés de ces partie sont :
-- Bernard Julien
-- Grossman Jérémy
-
-### Etat :
-Fonctionnalité achevée
-
-
-
-## Tâche supplémentaire : Correction des problèmes de performances
-
-Lors du sprint précédent, nous actualisions l'ensemble de l'affichage à chaque modification,
-que ce soit les bordures, les déplacements ou les modification de l'affichage généraux.
-Or, pour les 2 premiers cas, nous ne voulions actualiser l'affichage que de la classe 
-que nous modifions.
-
-#### Les étudiants qui se sont occupés de cette partie sont :
-- Bernard Julien
-
-### Etat :
-Tâche terminée
 
