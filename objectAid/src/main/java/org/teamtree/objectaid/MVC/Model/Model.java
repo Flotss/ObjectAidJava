@@ -4,17 +4,25 @@ import org.teamtree.objectaid.MVC.Vue.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
+import org.teamtree.objectaid.Fleche;
+import org.teamtree.objectaid.MVC.Vue.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+import java.nio.file.Path;
+import java.util.*;
 
 /**
  * Classe qui permet de gérer les données du diagramme de classe
  */
 public class Model implements Sujet {
 
-    /** Liste des observateurs */
+    private final Map<String, Class<?>> classesPath = new HashMap<>();
+
+    /**
+     * Liste des observateurs
+     */
     private final ArrayList<Observateur> observateurs;
 
     /** Liste des classes avec leurs flèches*/
@@ -26,6 +34,10 @@ public class Model implements Sujet {
     /** Affichage relations */
     private boolean affichageRelations;
 
+    private Path currentProject;
+
+    private ApplicationState applicationState;
+
     /**
      * Constructeur du model
      */
@@ -34,6 +46,38 @@ public class Model implements Sujet {
         this.relations = new HashMap<>();
         this.currentClickedClass = null;
         this.affichageRelations = true;
+        this.applicationState = ApplicationState.BOOTSTRAP;
+        this.currentProject = null;
+    }
+
+    public Path getCurrentProject() {
+        return currentProject;
+    }
+
+    public void setCurrentProject(Path currentProject) {
+        this.currentProject = currentProject;
+
+        System.out.println("Set current project to " + currentProject);
+
+        setApplicationState(ApplicationState.PROJECT_LOADED);
+    }
+
+    public Map<String, Class<?>> getClassesPath() {
+        return classesPath;
+    }
+
+    public void addClassPathEntry(String className, Class<?> clazz) {
+        classesPath.put(className, clazz);
+    }
+
+    public ApplicationState getApplicationState() {
+        return applicationState;
+    }
+
+    public void setApplicationState(final ApplicationState applicationState) {
+        this.applicationState = applicationState;
+
+        notifierObservateur();
     }
 
     /**
@@ -204,6 +248,16 @@ public class Model implements Sujet {
                 this.notifierObservateur("selection");
             }
         }
+    }
+
+    /**
+     * Retourne la classe grâce à son nom
+     *
+     * @param nom Le nom de la classe
+     * @return La classe correspondante
+     */
+    public Optional<ClasseEntiere> getClasse(String nom) {
+        return getClasses().stream().filter(classe -> classe.getNom().equals(nom)).findFirst();
     }
 
     /**

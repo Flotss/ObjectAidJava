@@ -22,7 +22,14 @@ public class ClasseEntiere {
      * Liste des constructeurs de la classe
      */
     private final List<Constructeur> contructeurs;
-
+    /**
+     * Coordonnées de la classe defini par un point
+     */
+    private final Point coordonnees;
+    /**
+     * Relation entre classe
+     */
+    private final List<Relation> relations;
     /**
      * Liste des attributs de la classe
      */
@@ -39,17 +46,16 @@ public class ClasseEntiere {
     private DefinitionClasse definition;
 
     /**
-     * Coordonnées de la classe defini par un point
+     * Constructeur est afficher ou non
      */
-    private final Point coordonnees;
-
-    /** Constructeur est afficher ou non */
     private boolean constructeurEstAffiche;
-
-    /** Attributs sont afficher ou non */
+    /**
+     * Attributs sont afficher ou non
+     */
     private boolean attributEstAffiche;
-
-    /** Methodes sont afficher ou non */
+    /**
+     * Methodes sont afficher ou non
+     */
     private boolean methodsEstAffiche;
 
     /** Relations sont afficher ou non */
@@ -111,7 +117,7 @@ public class ClasseEntiere {
 
             // Si le type n'est pas primitif, c'est une association
             // Sinon, c'est un attribut
-            String [] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
+            String[] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
             boolean isPrimitive = false;
             for (String primitive : primitives) {
                 if (destinationType.contains(primitive) && destinationType.length() == primitive.length()) {
@@ -154,6 +160,85 @@ public class ClasseEntiere {
         for (Relation relation : this.relations) {
             System.out.println(relation);
         }
+    }
+
+    public ClasseEntiere(Class<?> clazz) {
+
+        if (clazz == null) {
+            throw new IllegalArgumentException("La classe ne peut pas être null");
+        }
+
+        // Création des types des attributs
+        this.attributs = new ArrayList<>();
+        this.contructeurs = new ArrayList<>();
+        this.methods = new ArrayList<>();
+        this.definition = new DefinitionClasse(clazz);
+        this.coordonnees = new Point(0, 0);
+        this.relations = new ArrayList<>();
+
+        // Interfaces
+        for (Class<?> inter : clazz.getInterfaces()) {
+            this.relations.add(new Implementation(inter.getSimpleName()));
+        }
+
+        // Classe parent
+        if (clazz.getSuperclass() != null) {
+            String nameParent = clazz.getSuperclass().getSimpleName();
+
+            // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
+            if (!nameParent.equals("Object")) {
+                this.relations.add(new Heritage(nameParent));
+            }
+        }
+
+// Attributs et Relations
+        for (Field field : clazz.getDeclaredFields()) {
+            // On cherche si l'attribut est une association donc s'il est primitif ou non
+            Attribut attribut = new Attribut(field);
+            String type = attribut.getType();
+            boolean isCollection = (type.contains("<") && type.contains(">"));
+
+            // Si c'est une collection, on récupère le type de la collection
+            if (isCollection) {
+                type = type.substring(type.indexOf("<") + 1, type.indexOf(">"));
+            }
+
+            // Si le type n'est pas primitif, c'est une association
+            // Sinon, c'est un attribut
+            String[] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
+            boolean isPrimitive = false;
+            for (String primitive : primitives) {
+                if (type.contains(primitive) && type.length() == primitive.length()) {
+                    this.attributs.add(attribut);
+                    isPrimitive = true;
+                    break;
+                }
+            }
+
+            // Ajout de la relation si l'attribut n'est pas primitif
+            if (!isPrimitive) {
+                if (isCollection) {
+                    this.relations.add(new Association(type, "*", "*"));
+                } else {
+                    this.relations.add(new Association(type, "1", "*"));
+                }
+            }
+        }
+
+        // Constructeurs
+        for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
+            this.contructeurs.add(new Constructeur(constructor));
+        }
+
+        // Methodes
+        for (Method method : clazz.getDeclaredMethods()) {
+            this.methods.add(new Methode(method));
+        }
+
+        // Partie affichage des attributs, constructeurs et méthodes
+        this.attributEstAffiche = true;
+        this.constructeurEstAffiche = true;
+        this.methodsEstAffiche = true;
     }
 
     /**
