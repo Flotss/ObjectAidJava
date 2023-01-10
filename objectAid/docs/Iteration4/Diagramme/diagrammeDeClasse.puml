@@ -169,19 +169,23 @@ package "MVC"{
         - {final} line : Line
         - {final} arrow1 : Line
         - {final} arrow2 : Line
+        - estAffiche : boolean
 
         + Fleche(model : Model, relation : Relation)
+
+        + definirVisibilite(vivibilite : boolean)
         + actualiser()
         - emplacementFleche(classeDepart : ClasseEntiere, classeArrivee : ClasseEntiere) : Point[]
         - actualiserLesPoints()
     }
 
     class FlecheAssociation extends Fleche {
-        - nomFleche : Label
+        - nomFleche : HBox
         - cardinaliteDepart : Label
         - cardinaliteArrivee : Label
 
         + FlecheAssociation(model : Model, relation : Relation)
+
         + actualiser()
         + actualiserCardinalite()
         + actualiserNom()
@@ -198,6 +202,7 @@ package "MVC"{
         - arrowFermeture : Line
 
         + FlecheImplementation(model : Model, relation : Relation)
+
         + actualiser()
     }
 
@@ -206,25 +211,34 @@ package "MVC"{
 
 package "Other"{
 class ClasseEntiere{
-    -ConstructeurEstAffiche : boolean
-    -AttributEstAffiche : boolean
-    -ConstructeurEstAffiche : boolean
-    -MethodeEstAffiche : boolean
-    +setAffichageConstructeurs()
-    +setAffichageMethods()
-    +setAffichageAttributs()
-    +ClasseEntiere(path : String)
-    +deplacer(int, int)
-    +getAttributs() : ArrayList<Attribut>
-    +getConstructeurs() : ArrayList<Constructeur>
-    +getMethods() : ArrayList<Methode>
-    +getDefinition() : DefinitionClasse
-    +getNom() : String
-    +getX() : int
-    +getY() : int
-    +isAttributEstAffiche(): boolean
-    +isConstructeurEstAffiche(): boolean
-    +isMethodsEstAffiche(): boolean
+    - ConstructeurEstAffiche : boolean
+    - AttributEstAffiche : boolean
+    - ConstructeurEstAffiche : boolean
+    - MethodeEstAffiche : boolean
+    - relationsEstAffiche : boolean
+
+    + ClasseEntiere(path : String)
+
+    + deplacer(int, int)
+
+    + getAttributs() : ArrayList<Attribut>
+    + getConstructeurs() : ArrayList<Constructeur>
+    + getMethods() : ArrayList<Methode>
+    + getDefinition() : DefinitionClasse
+    + getNom() : String
+    + getX() : int
+    + getY() : int
+
+    + isAttributEstAffiche(): boolean
+    + isConstructeurEstAffiche(): boolean
+    + isMethodsEstAffiche(): boolean
+
+     + setAffichageConstructeurs()
+     + setAffichageMethods()
+     + setAffichageAttributs()
+     + setDefinition(definition : DefinitionClasse)
+     + setAttributs(attributs : List<Attribut>)
+     + setMethodes(methodes : List<Methode>)
 }
 
 interface Entite{
