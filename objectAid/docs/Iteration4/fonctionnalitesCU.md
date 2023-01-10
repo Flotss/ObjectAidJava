@@ -5,7 +5,9 @@ TODO
 
 En tant qu’étudiant, je souhaiterais pouvoir ajouter la fonctionnalité d'importation par un utilisateur :
 L'utilisateur pourra importer ses classes en fournissant le chemin de son fichier ou de son dossier.
-
+Pour éviter différents bugs dû à la précipitation, nous avons décidé de prolonger la tâche d'un
+sprint. En effet, cette fonctionnalité est terminée, mais la branche n'est pas encore Merge avec la branche
+principale. Nous préférons prendre notre temps pour merge, afin d'éviter tout gros bugs.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Gridel Alexis
