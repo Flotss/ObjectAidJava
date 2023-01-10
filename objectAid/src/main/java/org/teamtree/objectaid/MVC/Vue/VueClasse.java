@@ -121,6 +121,31 @@ public class VueClasse extends Pane implements Observateur {
         for (VueClasseAffichage classe : classes.values()) {
             classe.afficherClasse();
         }
+        for (Fleche fleche : fleches) {
+            fleche.actualiser();
+        }
+        actualiserFleche();
+    }
+
+    public void actualiserFleche(){
+        // Suppression des fleches
+        this.getChildren().removeAll(fleches);
+        this.fleches.clear();
+
+        // Pour chaque relation
+        for (ClasseEntiere classEntiere : model.getClasses()) {
+            for (Relation relation : model.getRelations(classEntiere)) {
+
+                // Si la relation n'est pas possible, on ne l'affiche pas
+                // Exemple : la classe en relation n'est pas dans le diagramme
+                if (model.getVueClasseAffichage(relation.getDestination()) == null) continue;
+
+                // Relation
+                Fleche fleche = FabriqueAffichageFleche.creerAffichageFleche(model, relation);
+                fleches.add(fleche);
+                this.getChildren().add(fleche);
+            }
+        }
     }
 
     /**
@@ -138,6 +163,19 @@ public class VueClasse extends Pane implements Observateur {
     public void actualiserFleches() {
         for (Fleche fleche : fleches) {
             fleche.actualiser();
+        }
+    }
+
+    /**
+     * Méthode qui permet de actualiser la visibilite des fleches
+     */
+    public void actualiserFlechesVisibilite() {
+        for (Fleche fleche : fleches) {
+            VueClasseAffichage depart = fleche.getVueClasseDepart();
+            VueClasseAffichage arrivee = fleche.getVueClasseArrivee();
+
+            fleche.definirVisibilite(!model.getHiddenClasses().contains(depart) && !model.getHiddenClasses().contains(arrivee));
+            fleche.actualiserVisibilite();
         }
     }
 

@@ -130,23 +130,14 @@ public class Fleche extends Group implements Observateur {
         return new Point[]{start, end};
     }
 
-    public void definirVisibilite(boolean visibilite){
-        this.estAffiche = visibilite;
-    }
-
     @Override
     public void actualiser() {
         actualiserLesPoints();
+        actualiserVisibilite();
     }
 
 
     private void actualiserLesPoints(){
-
-        this.setVisible(estAffiche);
-        this.arrow1.setVisible(estAffiche);
-        this.arrow2.setVisible(estAffiche);
-        this.line.setVisible(estAffiche);
-
         Point[] points = emplacementFleche(classeDepart, classeArrivee);
         Point start = points[0];
         Point end = points[1];
@@ -181,4 +172,26 @@ public class Fleche extends Group implements Observateur {
         this.arrow2.setEndY(end.getY() + 10 * Math.sin(lineAngle + arrowAngle));
     }
 
+    /**
+     * Méthode qui permet de definir la visibilite de la fleche
+     * @param visible true si la fleche doit etre visible, false sinon
+     */
+    public void definirVisibilite(boolean visible){
+        this.estAffiche = visible;
+    }
+
+    public void actualiserVisibilite(){
+        this.setVisible(estAffiche);
+        this.arrow1.setVisible(estAffiche);
+        this.arrow2.setVisible(estAffiche);
+        this.line.setVisible(estAffiche);
+    }
+
+    public VueClasseAffichage getVueClasseDepart(){
+        return this.classeDepart;
+    }
+
+    public VueClasseAffichage getVueClasseArrivee(){
+        return this.classeArrivee;
+    }
 }

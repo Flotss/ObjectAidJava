@@ -5,5 +5,5 @@ package org.teamtree.objectaid.Etat;
  * Exemple : Abstract, Final, Static
  */
 public interface Etat {
-    public String getEtat();
+    String getEtat();
 }

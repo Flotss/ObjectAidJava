@@ -254,12 +254,18 @@ public class VueClasseAffichage extends VBox implements Observateur {
      * Méthode qui permet de créer l'affichage de la classe
      */
     public void afficherClasse(){
+        this.getChildren().clear();
+
+//       Si la classe est est cachée, on ne l'affiche pas
+        if (model.getHiddenClasses().contains(this)) {
+            return;
+        }
+
         updateAttributsRelation();
 
         //On ajoute les différentes parties de la classe
-    //TODO: a renomé en actualiser (julien le fera)
-    //On ajoute les différentes parties de la classe
-        this.getChildren().clear();
+        //TODO: a renomé en actualiser (julien le fera)
+        //On ajoute les différentes parties de la classe
         this.getChildren().add(definition);
         if (classeEntiere.isAttributEstAffiche()) {
             this.getChildren().add(attributs);
