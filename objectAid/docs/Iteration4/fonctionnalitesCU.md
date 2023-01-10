@@ -54,3 +54,43 @@ Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
 Les association s'affichent sur le rendu, mais sans sens et sans type de relation.
 Pour pouvoir différencier les relations, les fleches ont des couleurs : Héritage = rouge, Implémentation = vert, Association = bleu.
 
+---
+## Fonctionnalité 2 : Afficher/cacher des classes
+##### Difficulté: 1
+
+En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les classes sélectionnés pour pouvoir dégager les cas les plus pertinents. Cet affichage se fera à l'aide d'un bouton.
+
+#### Les étudiants qui se sont occupés de cette partie sont :
+- Bernard Julien
+- Mangin Florian
+
+### Etat :
+Fonctionnalité achevée 
+
+---
+## Tâche supplémentaire : Perfection de l'apparence 
+##### Difficulté: 2
+
+En tant qu’étudiant, je souhaiterais pouvoir ajuster / améliorer, parfaire l’apparence de mon application.
+
+#### Les étudiants qui se sont occupés de cette partie sont :
+- Grossmann Jérémy
+- Bernard Julien
+
+### Critères de validation :
+- Centrer le titre de chaque classe
+- Pouvoir passer la souris sur une méthode/attribut/constructeur/nom pour voir le label complet(tooltip)
+- Réajuster l’application par rapport à la maquette (commencement)
+- Afficher un ContextMenu lors d'un clique droit sur une classe au lieu d'afficher des boutons 
+- Remplacer les boutons d'affichage spécifique par des MenuItem dans le ContextMenu
+- Ajouter couleurs pour les symboles
+
+#### Détail de la tâche supplémentaire :
+La tâche supplémentaire consiste à améliorer l'apparence de l'application.
+Nous avons choisi de changer l'affichage de l'application afin de rendre l'utilisation plus facile.
+Nous avons créé deux controleurs : un controleur pour gérer les MenuItem et un autre pour le click droit sur une classe.
+Le contenu d'une classe est maintenat plus lisible grâce aux tooltips rajoutés.
+
+
+### Etat :
+Tâche supplémentaire terminée
