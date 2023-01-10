@@ -1,6 +1,5 @@
 package org.teamtree.objectaid.MVC.Controller;
 
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import org.teamtree.objectaid.MVC.Model.Model;

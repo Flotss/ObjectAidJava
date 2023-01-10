@@ -3,12 +3,8 @@ package org.teamtree.objectaid.MVC.Model;
 import org.teamtree.objectaid.MVC.Vue.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
-import org.teamtree.objectaid.MVC.Fleches.Fleche;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Classe qui permet de gérer les données du diagramme de classe
@@ -24,9 +20,6 @@ public class Model implements Sujet {
     /** Classe sélectionnée */
     private VueClasseAffichage currentClickedClass;
 
-    /** Affichage relations */
-    private final boolean affichageRelations;
-
     /** Les classes cachées */
     private final List<VueClasseAffichage> hiddenClasses;
 
@@ -37,7 +30,6 @@ public class Model implements Sujet {
         this.observateurs = new ArrayList<>();
         this.relations = new HashMap<>();
         this.currentClickedClass = null;
-        this.affichageRelations = true;
         this.hiddenClasses = new ArrayList<>();
     }
 
@@ -184,7 +176,7 @@ public class Model implements Sujet {
         }else {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
-            if (currentClickedClass.getNom() == this.currentClickedClass.getNom()) {
+            if (Objects.equals(currentClickedClass.getNom(), this.currentClickedClass.getNom())) {
                 this.currentClickedClass = null;
             } else {
                 this.currentClickedClass = currentClickedClass;
@@ -198,9 +190,7 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les attributs
      */
     public void afficherAttributs(boolean affiche) {
-        getClasses().forEach(classeEntiere -> {
-            classeEntiere.setAttributEstAffiche(affiche);
-        });
+        getClasses().forEach(classeEntiere -> classeEntiere.setAttributEstAffiche(affiche));
         notifierObservateur("totalite des classes");
     }
 
@@ -258,7 +248,6 @@ public class Model implements Sujet {
                 break;
             }
         }
-        notifierObservateur("update visibilite fleche");
     }
 
     /**
