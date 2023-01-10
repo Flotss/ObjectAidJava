@@ -220,11 +220,14 @@ class ClasseEntiere{
     + ClasseEntiere(path : String)
 
     + deplacer(int, int)
+    + setX(int)
+    + setY(int)
 
     + getAttributs() : ArrayList<Attribut>
     + getConstructeurs() : ArrayList<Constructeur>
     + getMethods() : ArrayList<Methode>
     + getDefinition() : DefinitionClasse
+    + getRelations() : List<Relation>
     + getNom() : String
     + getX() : int
     + getY() : int
@@ -232,13 +235,18 @@ class ClasseEntiere{
     + isAttributEstAffiche(): boolean
     + isConstructeurEstAffiche(): boolean
     + isMethodsEstAffiche(): boolean
+    + isRelationsEstAffiche(): boolean
 
-     + setAffichageConstructeurs()
-     + setAffichageMethods()
-     + setAffichageAttributs()
-     + setDefinition(definition : DefinitionClasse)
-     + setAttributs(attributs : List<Attribut>)
-     + setMethodes(methodes : List<Methode>)
+    + setAffichageConstructeurs(boolean)
+    + setAffichageMethods(boolean)
+    + setAffichageAttributs(boolean)
+    + setRelationsEstAffiche(boolean)
+    + setDefinition(definition : DefinitionClasse)
+    + setAttributs(attributs : List<Attribut>)
+    + setMethodes(methodes : List<Methode>)
+    + setClasseAffichage(classeAffichage : ClasseAffichage)
+
+    + toString() : String
 }
 
 interface Entite{
