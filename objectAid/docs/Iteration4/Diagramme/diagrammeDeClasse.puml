@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-TOTO: completer
+'TOTO: completer
 
 package "MVC"{
 
@@ -14,15 +14,16 @@ package "MVC"{
     class Model implements Sujet{
         - relation : Map<ClasseEntiere, ArrayList<Fleche>>
         - currentClickedClass : String
-        - barreBoutonsSpecifique : boolean
+        - affichageRelations : boolean
         + Model()
 
-        + afficherAttributs()
+        + afficherAttributs(affiche : boolean)
         + afficherAttributsSelection()
-        + afficherConstructeurs()
+        + afficherConstructeurs(affiche : boolean)
         + afficherConstructeursSelection()
-        + afficherMethodes()
+        + afficherMethodes(affiche : boolean)
         + afficherMethodesSelection()
+        + afficherRelations(affiche : boolean
 
         + ajouterClasse(ClasseEntiere)
         + supprimerClasse(ClasseEntiere)
@@ -31,15 +32,13 @@ package "MVC"{
 
         + deplacerClasse(int x, int y)
 
-        + getClasses() : Set<ClasseEntiere>
+        + getClasses() : ArrayList<ClasseEntiere>
         + getClasse(String) : Optional<ClasseEntiere>
         + getRelations(ClasseEntiere) : ArrayList<Fleche>
         + getCurrentClickedClass(): String
-        + getVueClasseAffichee(nom : String) : VueClasseAffichage
-        + getBarreBoutonsSpecifique() : boolean
+        + getVueClasseAffichage(nom : String) : VueClasseAffichage
 
-        + setCurrentClickedClass(VueClasseAffichage currentClickedClass)
-        + setBarreBoutonsSpecifique()
+        + setCurrentClickedClass(currentClickedClass : VueClasseAffichage)
 
         + ajouterObservateur(Observateur)
         + supprimerObservateur(Observateur)
@@ -55,7 +54,9 @@ package "MVC"{
 
     class VueClasse implements Observateur{
         + classes : HashMap<String, VueClasseAffichage>
+
         +VueClasse(model : Model)
+
         +actualiser()
         +actualiserFleches()
         +getClasseAffichage(nom : String) : VueClasseAffichage
@@ -71,10 +72,10 @@ package "MVC"{
 
         +VueClasseAffichage(classeEntiere : ClasseEntiere, model : Model)
 
-        +setDefinition() : HBox
-        +setConstructeur() : VBox
-        +setAttributs() : VBox
-        +setMethodes() : VBox
+        +setDefinition()
+        +setConstructeur()
+        +setAttributs()
+        +setMethodes()
         +updateAttributsRelation()
 
         +afficherClasse()
@@ -91,15 +92,18 @@ package "MVC"{
         +getAttributs() : VBox
         +getMethodes() : VBox
         +getClasseEntiere() : ClasseEntiere
+        +getAttributsRelation() : VBox
     }
 
-    class VueButtonBarClasse implements Observateur{
-        -buttonAttributs : Button
-        -buttonConstructeurs : Button
-        -buttonMethodes : Button
-        -afficherButtonBarClasse : boolean
-        +VueButtonBarClasse(model : Model)
+    class VueContextMenuClasse implements Observateur{
+        -itemAttributs : MenuItem
+        -itemConstructeurs : MenuItem
+        -itemMethodes : MenuItem
+
+        +VueButtonBarClasse(model : Model, classe : VueClasseAffichage)
+
         +actualiser()
+        +getClasse() : VueClasseAffichage
     }
 
     'Controlleurs'
@@ -108,20 +112,38 @@ package "MVC"{
         +{static} attributGenerauxAffiche : boolean
         +{static} constructeurGenerauxAffiche : boolean
         +{static} methodeGenerauxAffiche : boolean
+
         +ControllerButon(model : Model)
+
         +handle(ActionEvent)
     }
 
     class DeplacementClasseDragAndDropController {
         + DeplacementClasseDragAndDropController(model : Model)
+
         + handle(MouseEvent) : void
     }
 
     class ClasseEntiereClickedController{
         + ClasseEntiereClickedController(Model)
+
         + addClickedEffect(ClasseAffichage)
         +handle(MouseEvent)
     }
+
+    class MenuItemController{
+        + MenuItemController(model : Model)
+
+        + handle(ActionEvent)
+    }
+
+    class ClickDroitClasseController{
+        + ClickDroitClasseController(model : Model, classe : VueClasseAffichage)
+
+        + handle(ContextMenuEvent)
+    }
+
+
 
     interface ClasseEntiereTitleIcon{
         getIcon() : Image
@@ -408,10 +430,17 @@ ClasseEntiere "1" <-- "1" VueClasseAffichage : -classeEntiere
 DeplacementClasseDragAndDropController "*" --> "1" Model : -model
 ClasseEntiereClickedController "*" --> "1" Model : -model
 ControllerButtonGeneral "*" --> "1" Model : -model
+MenuItemController "*" --> "1" Model : -model
+ClickDroitClasseController "*" --> "1" Model : -model
+ClickDroitClasseController "*" --> "1" VueClasseAffichage : -classe
 
 VueButtonBarClasse "1" -> "1" Model : -model
 VueClasse "*" -> "1" Model : -model
 VueClasseAffichage "*" -> "1" Model : -model
+VueContextMenuClasse "*" -> "1" Model : -model
+VueContextMenuClasse "*" -> "1" VueClasseAffichage : -classe
+
+
 
 FabriqueAffichage --> "1" ClasseEntiere : -classeEntiere
 Association "1" --> "1" Attribut : -attribut
