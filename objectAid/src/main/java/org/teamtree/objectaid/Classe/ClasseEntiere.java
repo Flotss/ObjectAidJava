@@ -26,10 +26,7 @@ public class ClasseEntiere {
      * Coordonnées de la classe defini par un point
      */
     private final Point coordonnees;
-    /**
-     * Relation entre classe
-     */
-    private final List<Relation> relations;
+
     /**
      * Liste des attributs de la classe
      */
@@ -103,6 +100,9 @@ public class ClasseEntiere {
             }
         }
 
+
+
+        // Constructeurs
         // Attributs et Relations
         for (Field field : classe.getDeclaredFields()) {
             // On cherche si l'attribut est une association donc s'il est primitif ou non
@@ -136,9 +136,6 @@ public class ClasseEntiere {
                 }
             }
         }
-
-
-        // Constructeurs
         for (Constructor<?> constructor : classe.getDeclaredConstructors()) {
             this.contructeurs.add(new Constructeur(constructor));
         }
@@ -178,7 +175,7 @@ public class ClasseEntiere {
 
         // Interfaces
         for (Class<?> inter : clazz.getInterfaces()) {
-            this.relations.add(new Implementation(inter.getSimpleName()));
+            this.relations.add(new Implementation(this.definition.getNom(), inter.getSimpleName()));
         }
 
         // Classe parent
@@ -187,20 +184,21 @@ public class ClasseEntiere {
 
             // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
             if (!nameParent.equals("Object")) {
-                this.relations.add(new Heritage(nameParent));
+                this.relations.add(new Heritage(this.definition.getNom(),nameParent));
             }
         }
 
 // Attributs et Relations
+        // Attributs et Relations
         for (Field field : clazz.getDeclaredFields()) {
             // On cherche si l'attribut est une association donc s'il est primitif ou non
             Attribut attribut = new Attribut(field);
-            String type = attribut.getType();
-            boolean isCollection = (type.contains("<") && type.contains(">"));
+            String destinationType = attribut.getType();
+            boolean isCollection = (destinationType.contains("<") && destinationType.contains(">"));
 
             // Si c'est une collection, on récupère le type de la collection
             if (isCollection) {
-                type = type.substring(type.indexOf("<") + 1, type.indexOf(">"));
+                destinationType = destinationType.substring(destinationType.indexOf("<") + 1, destinationType.indexOf(">"));
             }
 
             // Si le type n'est pas primitif, c'est une association
@@ -208,7 +206,7 @@ public class ClasseEntiere {
             String[] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
             boolean isPrimitive = false;
             for (String primitive : primitives) {
-                if (type.contains(primitive) && type.length() == primitive.length()) {
+                if (destinationType.contains(primitive) && destinationType.length() == primitive.length()) {
                     this.attributs.add(attribut);
                     isPrimitive = true;
                     break;
@@ -217,10 +215,10 @@ public class ClasseEntiere {
 
             // Ajout de la relation si l'attribut n'est pas primitif
             if (!isPrimitive) {
-                if (isCollection) {
-                    this.relations.add(new Association(type, "*", "*"));
-                } else {
-                    this.relations.add(new Association(type, "1", "*"));
+                if (isCollection){
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
+                }else{
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
                 }
             }
         }

@@ -4,7 +4,6 @@ import org.teamtree.objectaid.MVC.Vue.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
-import org.teamtree.objectaid.Fleche;
 import org.teamtree.objectaid.MVC.Vue.Observateur;
 
 import java.util.ArrayList;
@@ -202,14 +201,6 @@ public class Model implements Sujet {
 
     }
 
-    /**
-     * Retourne la classe grâce à son nom
-     * @param nom Le nom de la classe
-     * @return La classe correspondante
-     */
-    public Optional<ClasseEntiere> getClasse(String nom) {
-        return getClasses().stream().filter(classe -> classe.getNom().equals(nom)).findFirst();
-    }
 
     /**
      * Retourne la liste des flèches d'une classe

@@ -1,12 +1,12 @@
 package org.teamtree.objectaid;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.teamtree.objectaid.MVC.Controller.ControllerButton;
+
+import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.ApplicationLayoutView;
 
@@ -54,7 +54,7 @@ public class ObjectAidApplication extends Application {
  model.ajouterObservateur(vue);
  */
         HBox buttonBar = new HBox();
-        ControllerButton controllerButton = new ControllerButton(model);
+        ControllerButtonGeneral controllerButton = new ControllerButtonGeneral(model);
         final var attributesDisplayButton = new Button("Afficher les attributs");
         attributesDisplayButton.setOnAction(controllerButton);
 
