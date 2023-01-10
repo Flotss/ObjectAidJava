@@ -1,7 +1,5 @@
-TODO
-
 ## Fonctionnalité 1 : Importation
-##### Difficulté: 4
+##### Difficulté : 4
 
 En tant qu’étudiant, je souhaiterais pouvoir ajouter la fonctionnalité d'importation par un utilisateur :
 L'utilisateur pourra importer ses classes en fournissant le chemin de son fichier ou de son dossier.
@@ -65,6 +63,16 @@ En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les classes sélec
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Bernard Julien
 - Mangin Florian
+
+### Critère de validation :
+- Dans le menu contextuel du clic droit un bouton cacher classe
+- La classe se cache avec ses relations
+- Un bouton pour afficher les classes cachées
+- La possibilité de les réafficher en cliquant sur le nom d'une classe
+
+#### Détail de la fonctionnalité :
+Cette fonctionnalité permet de cacher des classes et de les réafficher.
+C'est à dire la création d'un bouton dans le menu contextuel du clic droit qui permet de cacher une classe et ses relations. De plus il faut pouvoir les réafficher en cliquant sur le nom d'une classe qui se trouve dans une nouvelle fenêtre.
 
 ### Etat :
 Fonctionnalité achevée 
