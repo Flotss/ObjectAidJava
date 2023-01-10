@@ -16,6 +16,7 @@ import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -367,5 +368,14 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     @Override
     public void actualiser() {
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VueClasseAffichage that = (VueClasseAffichage) o;
+        return Objects.equals(nom, that.nom);
     }
 }

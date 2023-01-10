@@ -121,10 +121,11 @@ public class VueClasse extends Pane implements Observateur {
         for (VueClasseAffichage classe : classes.values()) {
             classe.afficherClasse();
         }
+
+        actualiserFleche();
         for (Fleche fleche : fleches) {
             fleche.actualiser();
         }
-        actualiserFleche();
     }
 
     public void actualiserFleche(){

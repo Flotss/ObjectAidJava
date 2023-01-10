@@ -299,7 +299,7 @@ public class Model implements Sujet {
 
     public void supprimerClasseCachee(VueClasseAffichage classe) {
         if (this.hiddenClasses.contains(classe)) {
-            System.out.println("La classe " + classe.getNom() + " a été supprimée de la liste des classes cachées");
+            System.out.println("La classe " + classe.getNom() + " a ete supprimee de la liste des classes cachees");
             this.hiddenClasses.remove(classe);
         }
         this.notifierObservateur();

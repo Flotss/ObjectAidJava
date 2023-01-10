@@ -178,6 +178,7 @@ public class Fleche extends Group implements Observateur {
      */
     public void definirVisibilite(boolean visible){
         this.estAffiche = visible;
+        actualiserVisibilite();
     }
 
     public void actualiserVisibilite(){
