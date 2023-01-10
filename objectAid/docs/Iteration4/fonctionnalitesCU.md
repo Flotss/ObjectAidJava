@@ -57,7 +57,7 @@ Pour pouvoir différencier les relations, les fleches ont des couleurs : Hérita
 ## Fonctionnalité 3 : Afficher/Cacher les Attributs classe sélectionnée
 ##### Difficulté: 1
 
-En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les constructeurs d'une classe sélectionnée pour pouvoir dégager l’essentiel. Cet affichage se fera à l'aide d'un bouton.
+En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les attributs d'une classe sélectionnée pour pouvoir dégager l’essentiel. Cet affichage se fera à l'aide d'un ContextMenu sur lequel il y aura un MenuItem où cliquer.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Bernard Julien
@@ -65,14 +65,13 @@ En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les constructeurs 
 
 
 ### Critère de validation :
-- Bouton pour réaliser cet affichage
-- Les attributs de la classe sélectionnée s'affichent / se désaffichent après avoir appuyé sur le bouton
+- ContextMenu avec un MenuItem pour réaliser cet affichage
+- L'affichage se fait lorsqu'on réalise un clique droit sur une classe
+- Les attributs de la classe sélectionnée s'affichent / se désaffichent après avoir appuyé sur le MenuItem
 
 ### Détail de la fonctionnalité :
-Nous avons ajouté des boutons avec des controleurs pour ces derniers et nous sommes servit de l'attribut boolean, dans la classe,
-correspondant à si cette partie doit être affichée ou non. Le controleur appelle le modele qui va changer
-cet attribut de la classe selectionnée, lors de l'actualisation de la classe, l'attribut sera controlé pour vérifié si les attributs doivent
-être affichés.
+Nous avons ajouté une vue qui extends de ContextMenu pour représenter l'affichage avec le MenuItem et nous nous sommes servit de l'event setOnContextMenuRequested pour chaque classe et donc nous avons créé un controleur pour gérer ce cas. Le controleur va donc
+afficher cette vue lorsqu'un clique droit est effectué sur une classe. Un autre controleur a été créé pour gérer l'action des MenuItem similaire à celui qui s'occupe des boutons.
 
 #### Patron d'architecture utilisé :
 - MVC : Pour séparer le modèle, la vue et le contrôleur.
