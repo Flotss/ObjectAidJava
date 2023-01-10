@@ -4,7 +4,7 @@ import org.tonel.exception.GradeOutOfRangeException;
 
 import java.util.*;
 
-public class Etudiant implements Comparable<Etudiant> {
+public class Etudiant implements Comparable<Etudiant>, Entite {
 
     private static final int MAXIMUM_GRADE = 20;
     private static final int INFERIOR_GRADE = 0;
@@ -14,7 +14,7 @@ public class Etudiant implements Comparable<Etudiant> {
      */
     public static Comparator<Etudiant> ComparatorNom = new Comparator<Etudiant>() {
         @Override
-        public int compare(Etudiant e1, Etudiant e2) {
+        public int compare(final Etudiant e1, final Etudiant e2) {
             return e1.getIdentite().getNom().compareTo(e2.getIdentite().getNom());
         }
     };
@@ -34,21 +34,21 @@ public class Etudiant implements Comparable<Etudiant> {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (null == o || this.getClass() != o.getClass()) {
             return false;
         }
-        Etudiant etudiant = (Etudiant) o;
-        return Objects.equals(identite, etudiant.identite) && Objects.equals(
-            formation, etudiant.formation) && Objects.equals(resultats, etudiant.resultats);
+        final Etudiant etudiant = (Etudiant) o;
+        return Objects.equals(this.identite, etudiant.identite) && Objects.equals(
+                this.formation, etudiant.formation) && Objects.equals(this.resultats, etudiant.resultats);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(identite, formation, resultats);
+        return Objects.hash(this.identite, this.formation, this.resultats);
     }
 
     public void ajouterNote(final Matiere m, final Double i) throws NoSuchElementException, GradeOutOfRangeException {
@@ -56,7 +56,7 @@ public class Etudiant implements Comparable<Etudiant> {
 
         if (!bMatEstDedans) {
             throw new NoSuchElementException(
-                "Map matieres does not contain any matiere as provided : " + m);
+                    "Map matieres does not contain any matiere as provided : " + m);
         }
 
         if (INFERIOR_GRADE > i || MAXIMUM_GRADE < i) {
@@ -68,14 +68,14 @@ public class Etudiant implements Comparable<Etudiant> {
 
     public Integer calculerMoyenneMatiere(final Matiere m) {
         final var sum = this.resultats
-            .get(m)
-            .stream()
-            .mapToDouble(Double::doubleValue)
-            .sum();
+                .get(m)
+                .stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
 
         final var size = this.resultats.get(m).isEmpty()
-            ? 1
-            : this.resultats.get(m).size();
+                ? 1
+                : this.resultats.get(m).size();
 
         return (int) sum / size;
     }
@@ -104,11 +104,11 @@ public class Etudiant implements Comparable<Etudiant> {
     private double getSumOfCoefficient() {
         // return sum of all coefficient in resultats quand la liste n'est pas vide
         return this.resultats
-            .keySet()
-            .stream()
-            .filter(x -> !this.resultats.get(x).isEmpty())
-            .mapToDouble(this.formation::getCoefficient)
-            .sum();
+                .keySet()
+                .stream()
+                .filter(x -> !this.resultats.get(x).isEmpty())
+                .mapToDouble(this.formation::getCoefficient)
+                .sum();
     }
 
     public final Formation formation() {
@@ -120,7 +120,7 @@ public class Etudiant implements Comparable<Etudiant> {
     }
 
     @Override
-    public int compareTo(Etudiant o) {
-        return this.getIdentite().getNom().compareTo(o.getIdentite().getNom());
+    public int compareTo(final Etudiant o) {
+        return this.identite.getNom().compareTo(o.identite.getNom());
     }
 }
