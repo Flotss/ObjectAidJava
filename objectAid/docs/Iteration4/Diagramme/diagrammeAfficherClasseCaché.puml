@@ -1,0 +1,31 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant "ControllerButtonGeneral" as controller
+participant "ControllerHiddenClass" as controllerHiddenClass
+participant "Model" as model
+participant "ClasseAffichage" as classeAffichage
+
+activate user
+user -> controller : handle(event : ActionEvent)
+activate controller
+controller -> controller : affichageClasseCachee();
+controller --> user
+deactivate controller
+user -> controllerHiddenClass : handle(event: MouseEvent)
+activate controllerHiddenClass
+controllerHiddenClass -> model : supprimerClasseCachee(vueClassAffichage)
+activate model
+model -> classeAffichage : actualiser()
+activate classeAffichage
+classeAffichage --> model
+deactivate classeAffichage
+model --> controllerHiddenClass
+deactivate model
+controllerHiddenClass --> user
+deactivate controllerHiddenClass
+
+
+@enduml
