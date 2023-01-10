@@ -10,7 +10,7 @@ import org.teamtree.objectaid.MVC.Model.Model;
  */
 public class FlecheImplementation extends Fleche {
 
-    private Line arrowFermeture;
+    private final Line arrowFermeture;
 
     /**
      * Constructeur de la classe

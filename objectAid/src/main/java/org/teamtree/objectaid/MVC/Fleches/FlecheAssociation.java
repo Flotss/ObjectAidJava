@@ -2,10 +2,7 @@ package org.teamtree.objectaid.MVC.Fleches;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import org.teamtree.objectaid.Accessibilite.Accessibilite;
-import org.teamtree.objectaid.Classe.Attribut;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -18,17 +15,17 @@ public class FlecheAssociation extends Fleche {
     /**
      * Le label qui représente le nom de l'association
      */
-    private HBox nomFleche;
+    private final HBox nomFleche;
 
     /**
      * La cardinalité de la classe de départ
      */
-    private Label cardinaliteDepart;
+    private final Label cardinaliteDepart;
 
     /**
      * La cardinalité de la classe d'arrivée
      */
-    private Label cardinaliteArrivee;
+    private final Label cardinaliteArrivee;
 
     /**
      * Constructeur de la classe

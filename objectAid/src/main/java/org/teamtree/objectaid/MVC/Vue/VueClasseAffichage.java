@@ -16,6 +16,7 @@ import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -66,6 +67,8 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
     private final Model model;
 
+    private boolean classeAffichee;
+
     /**
      * Constructeur de la classe
      * @param classeEntiere La classe à afficher
@@ -79,6 +82,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
         this.attributsRelation = new VBox();
         this.methodes = new VBox();
         this.model = model;
+        this.classeAffichee = true;
 
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     }
@@ -254,12 +258,18 @@ public class VueClasseAffichage extends VBox implements Observateur {
      * Méthode qui permet de créer l'affichage de la classe
      */
     public void afficherClasse(){
+        this.getChildren().clear();
+
+//       Si la classe est est cachée, on ne l'affiche pas
+        if (model.getHiddenClasses().contains(this)) {
+            return;
+        }
+
         updateAttributsRelation();
 
         //On ajoute les différentes parties de la classe
-    //TODO: a renomé en actualiser (julien le fera)
-    //On ajoute les différentes parties de la classe
-        this.getChildren().clear();
+        //TODO: a renomé en actualiser (julien le fera)
+        //On ajoute les différentes parties de la classe
         this.getChildren().add(definition);
         if (classeEntiere.isAttributEstAffiche()) {
             this.getChildren().add(attributs);
@@ -361,5 +371,28 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     @Override
     public void actualiser() {
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VueClasseAffichage that = (VueClasseAffichage) o;
+        return Objects.equals(nom, that.nom);
+    }
+
+    public void setClasseAffichee(){
+        this.classeAffichee = !this.classeAffichee;
+    }
+
+
+    public void actualiserVisibilite(){
+        System.out.println("esjfnzejnf");
+        this.setVisible(classeAffichee);
+    }
+
+    public boolean getClasseAffichee(){
+        return this.classeAffichee;
     }
 }

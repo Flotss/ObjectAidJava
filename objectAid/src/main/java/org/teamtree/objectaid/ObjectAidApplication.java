@@ -74,7 +74,10 @@ public class ObjectAidApplication extends Application {
         final var relationsDisplayButton = new Button("Afficher les relations");
         relationsDisplayButton.setOnAction(controllerButtonGeneral);
 
-        buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton, relationsDisplayButton);
+        final var hideClassButton = new Button("Classe cachée");
+        hideClassButton.setOnAction(controllerButtonGeneral);
+
+        buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton, relationsDisplayButton, hideClassButton);
 
         applicationLayout.getChildren().addAll(buttonBar, vueClass);
 

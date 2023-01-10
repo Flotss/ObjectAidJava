@@ -12,11 +12,11 @@ public interface Accessibilite {
      * Méthode qui retourne l'accessibilité
      * @return L'accessibilité
      */
-    public String getAcces();
+    String getAcces();
 
     /**
      * Méthode qui retourne la forme de l'accessibilité
      * @return La forme de l'accessibilité
      */
-    public Shape getShape();
+    Shape getShape();
 }

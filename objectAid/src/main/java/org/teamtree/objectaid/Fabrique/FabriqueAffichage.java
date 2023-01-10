@@ -11,12 +11,12 @@ import org.teamtree.objectaid.MVC.diagramIcons.*;
 public class FabriqueAffichage {
 
     /** La classe à afficher */
-    private ClasseEntiere classeEntiere;
+    private final ClasseEntiere classeEntiere;
 
     /**
      Le model à associer
      */
-    private Model model;
+    private final Model model;
 
     /**
      * Constructeur de la classe
@@ -69,14 +69,13 @@ public class FabriqueAffichage {
      * @return ClasseEntiereTitleIcon icon
      */
     public static ClasseEntiereTitleIcon fabriqueIcon(ClasseEntiere c){
-        ClasseEntiereTitleIcon TitleIcon = switch (c.getDefinition().getEntite()) {
+        return switch (c.getDefinition().getEntite()) {
             case "class" -> new ClassTitleIcon();
             case "interface" -> new InterfaceTitleIcon();
             case "record" -> new RecordClassTitleIcon();
             case "abstract" -> new AbstractClassTitleIcon();
             default -> null;
         };
-        return TitleIcon;
 
     }
 
