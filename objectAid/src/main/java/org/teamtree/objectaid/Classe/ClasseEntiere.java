@@ -165,6 +165,7 @@ public class ClasseEntiere {
             throw new IllegalArgumentException("La classe ne peut pas être null");
         }
 
+
         // Création des types des attributs
         this.attributs = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
@@ -172,6 +173,8 @@ public class ClasseEntiere {
         this.definition = new DefinitionClasse(clazz);
         this.coordonnees = new Point(0, 0);
         this.relations = new ArrayList<>();
+        this.classeAffichage = null;
+
 
         // Interfaces
         for (Class<?> inter : clazz.getInterfaces()) {
@@ -188,7 +191,9 @@ public class ClasseEntiere {
             }
         }
 
-// Attributs et Relations
+
+
+        // Constructeurs
         // Attributs et Relations
         for (Field field : clazz.getDeclaredFields()) {
             // On cherche si l'attribut est une association donc s'il est primitif ou non
@@ -222,8 +227,6 @@ public class ClasseEntiere {
                 }
             }
         }
-
-        // Constructeurs
         for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
             this.contructeurs.add(new Constructeur(constructor));
         }
@@ -233,10 +236,18 @@ public class ClasseEntiere {
             this.methods.add(new Methode(method));
         }
 
-        // Partie affichage des attributs, constructeurs et méthodes
+
+
+        // Partie affichage des attributs, constructeurs, méthodes et relations
         this.attributEstAffiche = true;
-        this.constructeurEstAffiche = true;
         this.methodsEstAffiche = true;
+        this.constructeurEstAffiche = true;
+        this.relationsEstAffiche = false;
+
+        System.out.println("-----------------\n");
+        for (Relation relation : this.relations) {
+            System.out.println(relation);
+        }
     }
 
     /**

@@ -33,6 +33,8 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
+        System.out.println("Button general : " + ((Button)event.getSource()).getText());
+
         switch (((Button)event.getSource()).getText()){
             case "Afficher les attributs":
                 attributGenerauxAffiche = !attributGenerauxAffiche;

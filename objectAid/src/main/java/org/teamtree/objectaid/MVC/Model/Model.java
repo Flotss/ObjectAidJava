@@ -76,7 +76,7 @@ public class Model implements Sujet {
     public void setApplicationState(final ApplicationState applicationState) {
         this.applicationState = applicationState;
 
-        notifierObservateur();
+        notifierObservateur("app");
     }
 
     /**
@@ -100,6 +100,7 @@ public class Model implements Sujet {
      */
     public void notifierObservateur() {
         for (Observateur o : observateurs) {
+            System.out.println("Notifying " + o);
             o.actualiser();
         }
     }
@@ -110,7 +111,14 @@ public class Model implements Sujet {
      */
 
     public void notifierObservateur(String selection){
+
+        System.out.println("Notifying observers with selection " + selection);
+
         switch(selection){
+            case "app":
+                this.observateurs.stream().filter(o -> o instanceof ApplicationLayoutView)
+                        .findFirst().ifPresent(Observateur::actualiser);
+                break;
             case "selection":
                 this.currentClickedClass.actualiserBordure();
             break;
@@ -137,6 +145,9 @@ public class Model implements Sujet {
             case "totalite des classes":
                 for(Observateur observateur: this.observateurs){
                     if(observateur instanceof VueClasse){
+
+                        System.out.println("Notifying " + observateur);
+
                         observateur.actualiser();
                         break;
                     }
@@ -181,6 +192,12 @@ public class Model implements Sujet {
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
             relations.put(classe, new ArrayList<>(classe.getRelations()));
+
+            observateurs
+                    .stream()
+                    .filter(o -> o instanceof VueClasse)
+                    .map(o -> (VueClasse) o)
+                    .forEach(o -> o.ajouterClasse(classe));
         }
     }
 

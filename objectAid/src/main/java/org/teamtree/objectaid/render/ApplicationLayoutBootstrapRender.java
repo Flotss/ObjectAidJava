@@ -19,6 +19,7 @@ public class ApplicationLayoutBootstrapRender implements SceneFactory {
 
         //TODO: to be removed, replace by a controller
         button.setOnAction(event -> {
+            System.out.println("Button clicked");
             final var fileChooser = new DirectoryChooser();
             fileChooser.setTitle("Ouvrir un projet");
 
