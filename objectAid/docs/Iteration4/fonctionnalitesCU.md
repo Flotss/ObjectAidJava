@@ -55,7 +55,7 @@ Les association s'affichent sur le rendu, mais sans sens et sans type de relatio
 Pour pouvoir différencier les relations, les fleches ont des couleurs : Héritage = rouge, Implémentation = vert, Association = bleu.
 
 ---
-## Fonctionnalité 2 : Afficher/cacher des classes
+## Fonctionnalité 3 : Afficher/cacher des classes
 ##### Difficulté: 1
 
 En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les classes sélectionnés pour pouvoir dégager les cas les plus pertinents. Cet affichage se fera à l'aide d'un bouton.
