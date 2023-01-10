@@ -302,7 +302,6 @@ public class Model implements Sujet {
             classe.actualiserVisibilite();
             this.notifierObservateur("update visibilite fleche");
         }
-        this.notifierObservateur();
     }
 
     public List<VueClasseAffichage> getHiddenClasses() {
