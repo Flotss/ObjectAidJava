@@ -6,6 +6,7 @@ import org.teamtree.objectaid.Fabrique.SceneFactory;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Controller.TreeViewDragDetectedController;
+import org.teamtree.objectaid.MVC.Controller.VboxDragOverController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import javafx.scene.Scene;
@@ -16,7 +17,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -64,13 +64,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
         final var vueClasse = new VueClasse(model);
 
-        vbox.setOnDragOver(event -> {
-            if (event.getGestureSource() != vbox && event.getDragboard().hasString()) {
-                event.acceptTransferModes(TransferMode.MOVE);
-            }
-
-            event.consume();
-        });
+        vbox.setOnDragOver(new VboxDragOverController(model, vbox));
 
         vbox.setOnDragDropped(event -> {
             System.out.println("J'ai détecté un drop!");
