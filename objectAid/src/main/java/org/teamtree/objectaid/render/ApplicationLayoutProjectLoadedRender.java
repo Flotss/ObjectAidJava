@@ -5,6 +5,7 @@ import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
+import org.teamtree.objectaid.MVC.Controller.TreeViewDragDetectedController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import javafx.scene.Scene;
@@ -15,7 +16,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -51,19 +51,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
         final var treeView = new TreeView<>(root);
 
-        treeView.setOnDragDetected(event -> {
-            final var dragBoard = treeView.startDragAndDrop(TransferMode.ANY);
-            final var content = new ClipboardContent();
-            final var selectedItem = treeView.getSelectionModel().getSelectedItem();
-            final var itemContent = selectedItem.getValue();
-
-            content.putString(itemContent);
-            dragBoard.setContent(content);
-
-            System.out.println("Drag detected, content: " + itemContent);
-
-            event.consume();
-        });
+        treeView.setOnDragDetected(new TreeViewDragDetectedController(model, treeView));
 
         treeView.setShowRoot(false);
         scrollPane.setContent(treeView);
