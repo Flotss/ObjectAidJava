@@ -14,6 +14,7 @@ import java.util.Arrays;
  * à partir de fichiers de classes.
  */
 public class JavaProjectClassLoader extends ClassLoader {
+
     private final Path rootPath;
     private final StringBuffer packagePath;
 
@@ -31,22 +32,16 @@ public class JavaProjectClassLoader extends ClassLoader {
      * @param directory dossier à partir duquel charger les classes
      */
     public void loadClasses(final File directory) {
-        // On itère à travers tous les fichiers du dossier donné en paramètre.
         Arrays.stream(directory.listFiles()).forEach(file -> {
             System.out.println(file.getName());
             if (file.isDirectory()) {
-                // Si le dossier itéré est un dossier, on le parcourt récursivement en l'ajoutant au packagePath.
-                packagePath.append(file.getName()).append(".");
                 loadClasses(file);
             } else {
-
                 if (!FileExtension.isClassFile(file)) return;
 
                 final var className = file.getName().substring(0, file.getName().length() - 6);
-                final var fqn = packagePath + className;
-
+                final var fqn = getClassFQN(directory, file, className);
                 try {
-                    // On charge la classe à partir du path racine.
                     ClassLoader cl = new URLClassLoader(new java.net.URL[]{rootPath.toAbsolutePath().toUri().toURL()});
                     final var c = cl.loadClass(fqn);
 
@@ -59,5 +54,14 @@ public class JavaProjectClassLoader extends ClassLoader {
             }
         });
     }
+    private String getClassFQN(final File directory, final File file, final String className){
+        String packageName = directory.getAbsolutePath().substring(rootPath.toAbsolutePath().toString().length())
+            .replace(File.separator, ".");
+        if(packageName.startsWith(".")){
+            packageName = packageName.substring(1);
+        }
+        return packageName + "." + className;
+    }
+
 }
 
