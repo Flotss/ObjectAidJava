@@ -54,9 +54,11 @@ public class Model implements Sujet {
 
     public void setCurrentProject(Path currentProject) {
         this.currentProject = currentProject;
-        
+
         if (currentProject.resolve("src").toFile().exists()) {
             this.currentProject = currentProject.resolve("src");
+
+            System.out.println("A source folder was found, using it as root");
         }
 
         System.out.println("Set current project to " + currentProject);
