@@ -33,6 +33,7 @@ public class JavaProjectClassLoader extends ClassLoader {
     public void loadClasses(final File directory) {
         // On itère à travers tous les fichiers du dossier donné en paramètre.
         Arrays.stream(directory.listFiles()).forEach(file -> {
+            System.out.println(file.getName());
             if (file.isDirectory()) {
                 // Si le dossier itéré est un dossier, on le parcourt récursivement en l'ajoutant au packagePath.
                 packagePath.append(file.getName()).append(".");
