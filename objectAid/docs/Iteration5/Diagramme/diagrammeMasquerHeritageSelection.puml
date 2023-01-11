@@ -1,0 +1,65 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant "menuItemController: MenuItemController" as controller
+participant "model: Model" as model
+participant "vueClasse: VueClasse" as classe
+participant "fleche: Fleche" as fleche
+
+
+activate user
+user -> controller : handle(MouseEvent: mouseEvent)
+activate controller
+controller -> model : afficherInterfaceHeritageSelection("Heritage")
+activate model
+
+model -> classe : actualiserRelationsSpecifique(currentClickedClass, type)
+activate classe
+
+classe -> fleche: getVueClasseDepart
+activate fleche
+fleche --> classe: vueClasseDepart
+deactivate fleche
+
+classe -> fleche: getVueClasseArrivee
+activate fleche
+fleche --> classe: vueClasseArrivee
+deactivate fleche
+
+classe -> fleche: getType
+activate fleche
+fleche --> classe: type
+deactivate fleche
+
+classe -> model: ajouterClasseCachee(vueClasseArrivee)
+activate model
+'Masquage de la classe
+model -> model : notifierObservateur("update visibilite classe selection")
+model -> classe : actualiserVisibilite()
+activate classe
+classe -> classe : setVisibility(boolean)
+classe --> model
+deactivate classe
+
+model -> model : notifierObservateur("update visibilite fleche")
+'Partie déjà détaillé dans un diagramme
+
+model --> classe
+deactivate model
+
+
+classe --> model
+deactivate classe
+
+
+
+
+
+model --> controller
+deactivate model
+controller --> user
+deactivate controller
+
+@enduml
