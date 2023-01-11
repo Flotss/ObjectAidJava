@@ -1,0 +1,37 @@
+@startuml
+
+interface SceneFactory {
+    + getScene() : Scene
+}
+
+class ApplicationLayoutProjectLoadedRender implements SceneFactory{
+    - model: Model
+    - base: Pane
+    - menubar: MenuBar
+    --
+    + createTree(file: File, parent: TreeItem<String>) : void
+    + getScene(): Scene
+}
+
+class ApplicationLayoutBootstrapRender implements SceneFactory{
+    - model: Model
+    - base: BorderPane
+    --
+    + getScene(): Scene
+}
+
+class JavaProjectClassLoader extends ClassLoader{
+    + loadClasses(file: final File): void
+}
+
+class ApplicationLayoutView implements Observateur {
+- model: Model
+- stage: Stage
+--
+    + actualiser(): void
+    + run(): void
+}
+
+ApplicationLayoutView "1" --> "1" SceneFactory
+
+@enduml
