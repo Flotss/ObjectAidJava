@@ -21,6 +21,8 @@ import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
  */
 public class ObjectAidApplication extends Application {
 
+    public static final MenuBar menuBar = new MenuBar();
+
     /**
      * Methode qui permet de lancer l'application
      */
@@ -64,7 +66,7 @@ public class ObjectAidApplication extends Application {
 //        VueFleche vueFleche = new VueFleche(model);
 //        model.ajouterObservateur(vueFleche);
 
-        MenuBar menuBar = new MenuBar();
+
         Menu menuItem = new Menu("Afficher/cacher");
         Menu listeClasse = new Menu("Liste des classes");
         MenuItem afficher = new MenuItem("Afficher/Cacher");
