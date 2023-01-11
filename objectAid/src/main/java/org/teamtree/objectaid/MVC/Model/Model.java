@@ -329,16 +329,27 @@ public class Model implements Sujet {
         supprimerObservateur(classe);
     }
 
+    public void supprimerClassesAffichage(){
+        for (Observateur observateur: this.getObservateur("VueClasseAffichage")){
+            System.out.println(((VueClasseAffichage)observateur).getNom());
+            this.supprimerObservateur(observateur);
+        }
+        ((VueClasse)getObservateur("VueClasse").get(0)).supprimerFleches();
+        this.notifierObservateur("actualisation fleches");
+        this.currentClickedClass = null;
+    }
+
     public List<VueClasseAffichage> getHiddenClasses() {
         return hiddenClasses;
     }
 
-    public Observateur getObservateur(String nom){
+    public List<Observateur> getObservateur(String nom){
+        List<Observateur> observateurs = new ArrayList<>();
         for(Observateur observateur: this.observateurs){
             if(observateur.getClass().getSimpleName().equals(nom)){
-                return observateur;
+                observateurs.add(observateur);
             }
         }
-        return null;
+        return observateurs;
     }
 }
