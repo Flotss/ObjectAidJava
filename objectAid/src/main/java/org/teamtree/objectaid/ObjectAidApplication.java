@@ -94,7 +94,12 @@ public class ObjectAidApplication extends Application {
             listeClasse.getItems().add(nomClasseMenu);
         }
 
-        menuBar.getMenus().addAll(menuItem, listeClasse);
+        Menu generer = new Menu("Générer");
+        MenuItem genererSquelette = new MenuItem("Générer squelette");
+        genererSquelette.setOnAction(new MenuItemController(model));
+        generer.getItems().add(genererSquelette);
+
+        menuBar.getMenus().addAll(menuItem, listeClasse, generer);
 
         applicationLayout.getChildren().addAll(menuBar,vueClass);
 
