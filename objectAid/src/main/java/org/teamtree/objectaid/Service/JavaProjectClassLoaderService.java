@@ -37,12 +37,16 @@ public class JavaProjectClassLoaderService extends ClassLoader {
             if (file.isDirectory()) {
                 loadClasses(file);
             } else {
-                if (!FileExtension.isClassFile(file)) return;
+                if (!FileExtension.isClassFile(file)) {
+                    return;
+                }
 
+                final var service = new JavaClassFullQualifiedNameResolverService(rootPath);
                 final var className = file.getName().substring(0, file.getName().length() - 6);
-                final var fqn = getClassFQN(directory, file, className);
+                final var fqn = service.getClassFQN(directory, file, className);
                 try {
-                    ClassLoader cl = new URLClassLoader(new java.net.URL[]{rootPath.toAbsolutePath().toUri().toURL()});
+                    ClassLoader cl = new URLClassLoader(
+                        new java.net.URL[]{rootPath.toAbsolutePath().toUri().toURL()});
                     final var c = cl.loadClass(fqn);
 
                     model.addClassPathEntry(c.getSimpleName(), c);
@@ -53,14 +57,6 @@ public class JavaProjectClassLoaderService extends ClassLoader {
                 }
             }
         });
-    }
-    private String getClassFQN(final File directory, final File file, final String className){
-        String packageName = directory.getAbsolutePath().substring(rootPath.toAbsolutePath().toString().length())
-            .replace(File.separator, ".");
-        if(packageName.startsWith(".")){
-            packageName = packageName.substring(1);
-        }
-        return packageName + "." + className;
     }
 
 }
