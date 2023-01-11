@@ -37,16 +37,15 @@ public class MenuItemController implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         switch (((MenuItem)event.getSource()).getText()){
             case "Attributs":
-                    model.afficherAttributsSelection();
+                model.afficherAttributsSelection();
                 break;
-
             case "Méthodes":
-                    model.afficherMethodesSelection();
+                model.afficherMethodesSelection();
                 break;
-
             case "Constructeurs":
-                    model.afficherConstructeursSelection();
+                model.afficherConstructeursSelection();
                 break;
+            case "Cacher la classe":
 
             case "Cacher":
                 for (MenuItem m: ObjectAidApplication.menuBar.getMenus().get(1).getItems()) {

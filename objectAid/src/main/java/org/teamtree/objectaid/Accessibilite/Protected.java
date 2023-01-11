@@ -27,4 +27,8 @@ public class Protected implements Accessibilite {
         losange.setTranslateX(-3);
         return losange;
     }
+
+    public String toString(){
+        return "Protected";
+    }
 }

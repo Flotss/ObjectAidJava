@@ -18,6 +18,7 @@ import org.teamtree.objectaid.MVC.Model.Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Classe qui permet de représenter la vue des classes
@@ -28,7 +29,7 @@ public class VueClasse extends Pane implements Observateur {
     private final Model model;
 
     /** HashMap qui represente la liste des classes à afficher, chaque classe possede comme clé le nom de la classe */
-    private final HashMap<String, VueClasseAffichage> classes;
+    private final Map<String, VueClasseAffichage> classes;
 
     /** Liste des fleches */
     private final List<Fleche> fleches;

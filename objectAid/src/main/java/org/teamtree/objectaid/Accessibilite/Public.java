@@ -23,4 +23,8 @@ public class Public implements Accessibilite {
         cercle.setTranslateX(-3);
         return cercle;
     }
+
+    public String toString(){
+        return "Public";
+    }
 }
