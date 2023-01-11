@@ -80,6 +80,10 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             case "Cacher heritage":
                 model.afficherInterfaceHeritageSelection("Heritage");
                 break;
+            case "Supprimer les classes":
+                model.supprimerClassesAffichage();
+                ObjectAidApplication.menuBar.getMenus().get(1).getItems().clear();
+                break;
         }
     }
 }

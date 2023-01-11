@@ -49,56 +49,9 @@ public class VueClasse extends Pane implements Observateur {
         // Pour chaque classe
         for (ClasseEntiere classEntiere : model.getClasses()) {
             // On creation de l'affichage de la classe
-            FabriqueAffichage f = new FabriqueAffichage(classEntiere, model);
-            VueClasseAffichage classe = f.affichage();
-
-//            setBorderColor(classe);
-
-            this.getChildren().add(classe);
-
-            // On ajoute le controller lorsqu'on clique sur la classe
-            classe.setOnMouseClicked(new ClasseEntiereClickedController(model));
-
-            //on ajoute le drag and drop de la classe
-            classe.setOnMouseDragged(new DeplacementClasseDragAndDropController(model));
-
-            //on ajoute les tooltip aux labels des classes pour voir tout le texte
-
-            //tooltip pour les methodes
-            for (Node methode : classe.getMethodes().getChildren()) {
-                Node labelNode = ((HBox) methode).getChildren().get(1);
-                ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
-            }
-
-            //tooltip pour les attributs
-            for (Node attribut : classe.getAttributs().getChildren()) {
-                Node labelNode = ((HBox) attribut).getChildren().get(1);
-                ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
-            }
-
-            //tooltip pour les attributs avec relation de la classe
-            for (Node attributRelation : classe.getAttributsRelation().getChildren()) {
-                Node labelNode = ((HBox) attributRelation).getChildren().get(1);
-                ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
-            }
-
-            //tooltip pour les construteurs de la classe
-            for (Node constructeur : classe.getConstructeur().getChildren()) {
-                Node labelNode = ((HBox) constructeur).getChildren().get(1);
-                ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
-            }
-
-            //tooltip pour le nom de la classe
-            ((Label)classe.getDefinition().getChildren().get(1)).setTooltip(new Tooltip(((Label)classe.getDefinition().getChildren().get(1)).getText()));
-
-            //on ajoute le controller lorsqu'on clique droit sur la classe
-            classe.setOnContextMenuRequested(new ClickDroitClasseController(model,classe));
-
-            classes.put(classe.getNom(),classe);
-            classEntiere.setClasseAffichage(classe);
-            model.ajouterObservateur(classe);
+            ajouterClasse(classEntiere);
         }
-        model.ajouterObservateur(this);
+        this.model.ajouterObservateur(this);
 
         // Pour chaque relation
         for (ClasseEntiere classEntiere : model.getClasses()) {
@@ -121,10 +74,10 @@ public class VueClasse extends Pane implements Observateur {
      */
     @Override
     public void actualiser() {
-        for (VueClasseAffichage classe : getClasses()) {
-            classe.afficherClasse();
+        for (ClasseEntiere classe : model.getClasses()) {
+            classe.getClasseAffichage().afficherClasse();
         }
-
+        System.out.println(fleches.size());
         actualiserFleche();
         for (Fleche fleche : fleches) {
             fleche.actualiser();
@@ -136,9 +89,11 @@ public class VueClasse extends Pane implements Observateur {
         this.getChildren().removeAll(fleches);
         this.fleches.clear();
 
+
         // Pour chaque relation
         for (ClasseEntiere classEntiere : model.getClasses()) {
             for (Relation relation : model.getRelations(classEntiere)) {
+
 
                 // Si la relation n'est pas possible, on ne l'affiche pas
                 // Exemple : la classe en relation n'est pas dans le diagramme
@@ -208,7 +163,6 @@ public class VueClasse extends Pane implements Observateur {
         for (Fleche fleche : fleches) {
             VueClasseAffichage depart = fleche.getVueClasseDepart();
             VueClasseAffichage arrivee = fleche.getVueClasseArrivee();
-
             fleche.definirVisibilite(depart.getClasseAffichee() && arrivee.getClasseAffichee());
             fleche.actualiserVisibilite();
         }
@@ -228,5 +182,19 @@ public class VueClasse extends Pane implements Observateur {
 
     public void supprimerFleches(){
         this.fleches.clear();
+    }
+
+    public void supprimerTout(){
+        this.getChildren().clear();
+    }
+
+    public ClasseEntiere ajouterClasse(ClasseEntiere classeEntiere){
+        FabriqueAffichage f = new FabriqueAffichage(classeEntiere, model);
+        VueClasseAffichage classe = f.affichage();
+        classes.put(classe.getNom(),classe);
+        classeEntiere.setClasseAffichage(classe);
+        model.ajouterObservateur(classe);
+        this.getChildren().add(classe);
+        return classeEntiere;
     }
 }
