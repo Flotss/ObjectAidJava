@@ -96,6 +96,7 @@ public class VueClasse extends Pane implements Observateur {
 
             classes.put(classe.getNom(),classe);
             classEntiere.setClasseAffichage(classe);
+            model.ajouterObservateur(classe);
         }
         model.ajouterObservateur(this);
 
@@ -120,12 +121,7 @@ public class VueClasse extends Pane implements Observateur {
      */
     @Override
     public void actualiser() {
-
-        System.out.println("(VueClasse) refresh : " + classes.size());
-
-        for (VueClasseAffichage classe : classes.values()) {
-            System.out.println("(VueClasse) refresh: " + classe.getNom());
-
+        for (VueClasseAffichage classe : getClasses()) {
             classe.afficherClasse();
         }
 
@@ -161,7 +157,7 @@ public class VueClasse extends Pane implements Observateur {
      * @param nom String
      * @return classeAffichage
      */
-    public VueClasseAffichage getClasseAffichage(String nom) {
+    public VueClasseAffichage getClasseAffichage(String nom){
         return this.classes.get(nom);
     }
 
@@ -208,5 +204,9 @@ public class VueClasse extends Pane implements Observateur {
         ArrayList<VueClasseAffichage> classes = new ArrayList<>();
         this.classes.keySet().forEach(key -> classes.add(this.classes.get(key)));
         return classes;
+    }
+
+    public void supprimerFleches(){
+        this.fleches.clear();
     }
 }
