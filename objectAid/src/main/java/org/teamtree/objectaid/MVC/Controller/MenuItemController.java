@@ -78,7 +78,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 SqueletteService squeletteService = new SqueletteService();
                 squeletteService.genererSqueletteUniqueClasse(classeE);
                 break;
-            case "Générer squelette": //
+            case "Générer squelette":
                 SqueletteService squeletteService1 = new SqueletteService();
                 squeletteService1.genererSqueletteDiagramme(model.getClasses());
                 break;

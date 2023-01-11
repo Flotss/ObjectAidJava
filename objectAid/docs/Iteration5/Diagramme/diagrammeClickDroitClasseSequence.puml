@@ -1,0 +1,27 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant "controller : MenuItemController" as controller
+participant "service : SqueletteService" as service
+participant "model: Model" as model
+
+
+
+activate user
+user -> controller : handle(e : ActionEvent)
+activate controller
+controller -> service : new SqueletteService()
+activate service
+controller -> model : getClasses()
+activate model
+model --> controller : classes : List<ClasseEntiere>
+deactivate model
+controller -> service : genererSqueletteDiagramme(classes)
+service --> controller
+deactivate service
+controller --> user
+deactivate controller
+
+@enduml
