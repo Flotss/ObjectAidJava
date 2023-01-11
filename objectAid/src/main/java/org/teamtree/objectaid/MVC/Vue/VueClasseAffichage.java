@@ -13,6 +13,7 @@ import org.teamtree.objectaid.Etat.Abstract;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
+import org.teamtree.objectaid.MVC.Controller.ListenerModificationTailleClasse;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.List;
@@ -83,7 +84,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
         this.methodes = new VBox();
         this.model = model;
         this.classeAffichee = true;
-
+        this.heightProperty().addListener(new ListenerModificationTailleClasse(model, this));
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 

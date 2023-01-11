@@ -168,6 +168,17 @@ public class VueClasse extends Pane implements Observateur {
     }
 
     /**
+     * Méthode qui permet de actualiser la vue des fleches
+     */
+    public void actualiserFlechesSpecifique(VueClasseAffichage vueClasseAffichage) {
+        for (Fleche fleche : fleches) {
+            if(fleche.getVueClasseArrivee().getNom() == vueClasseAffichage.getNom() || fleche.getVueClasseDepart().getNom() == vueClasseAffichage.getNom()){
+                fleche.actualiser();
+            }
+        }
+    }
+
+    /**
      * Méthode qui permet de actualiser la visibilite des fleches
      */
     public void actualiserFlechesVisibilite() {
