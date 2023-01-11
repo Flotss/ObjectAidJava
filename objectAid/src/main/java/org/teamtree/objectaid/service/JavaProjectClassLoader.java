@@ -44,17 +44,12 @@ public class JavaProjectClassLoader extends ClassLoader {
                 final var className = file.getName().substring(0, file.getName().length() - 6);
                 final var fqn = packagePath + className;
 
-                System.out.println("Class name: " + className);
-                System.out.println("Class fqn: " + fqn);
-
                 try {
                     // On charge la classe à partir du path racine.
                     ClassLoader cl = new URLClassLoader(new java.net.URL[]{rootPath.toAbsolutePath().toUri().toURL()});
                     final var c = cl.loadClass(fqn);
 
                     model.addClassPathEntry(c.getSimpleName(), c);
-
-                    System.out.println(c.getConstructors());
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (MalformedURLException e) {

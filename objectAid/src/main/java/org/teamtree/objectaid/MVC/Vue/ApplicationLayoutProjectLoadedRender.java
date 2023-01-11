@@ -79,27 +79,38 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         });
 
         vbox.setOnDragDropped(event -> {
+            System.out.println("J'ai détecté un drop!");
             final var dragBoard = event.getDragboard();
             var success = false;
 
-            System.out.println("dragBoard.getString() = " + dragBoard.getString());
+            System.out.println("Contenu du drop : " + dragBoard.getString());
 
             if (dragBoard.hasString()) {
+
+                System.out.println("Le contenu a un colis !");
+
                 final var itemContent = dragBoard.getString();
                 success = true;
 
                 final var entrySearch = this.model.getClassesPath().entrySet().stream().filter(entry -> entry.getKey().equals(itemContent)).findFirst();
 
-                if (entrySearch.isPresent()) {
-                    final var classeEntiere = new ClasseEntiere(entrySearch.get().getValue());
-                    this.model.ajouterClasse(classeEntiere);
 
-                    model.notifierObservateur();
+                System.out.println("eTrny search : " + (entrySearch.isPresent() ? "Présent" : "Pas présent"));
+                if (entrySearch.isPresent()) {
+                    System.out.println("PRESENTTT");
+                    final var classeEntiere = new ClasseEntiere(entrySearch.get().getValue());
+                    System.out.println("PRESENTTT 2");
+                    this.model.ajouterClasse(classeEntiere);
+                    System.out.println("gvtygtyg!§ètf(§ètgèygè(fèrtf(§fg");
+                    new VueClasse(model);
+                    //model.notifierObservateur();
                 } else {
                     System.out.println("Content of classPath: " + this.model.getClassesPath());
                 }
 
 
+            }else {
+                System.out.println("I DONT HAVE STRING FDP s");
             }
 
             event.setDropCompleted(success);

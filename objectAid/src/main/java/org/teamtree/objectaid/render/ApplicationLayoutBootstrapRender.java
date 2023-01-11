@@ -25,6 +25,8 @@ public class ApplicationLayoutBootstrapRender implements SceneFactory {
 
             final var file = fileChooser.showDialog(null);
             model.setCurrentProject(file.toPath());
+
+            System.out.println("Current project set to : " + model.getCurrentProject());
         });
 
         base.setCenter(button);

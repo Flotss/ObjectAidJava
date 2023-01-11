@@ -91,7 +91,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 break;
             case "Supprimer les classes":
                 model.supprimerClassesAffichage();
-                ObjectAidApplication.menuBar.getMenus().get(1).getItems().clear();
+                ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
                 break;
         }
     }
