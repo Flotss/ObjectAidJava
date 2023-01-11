@@ -95,6 +95,7 @@ public class VueClasse extends Pane implements Observateur {
 
             classes.put(classe.getNom(),classe);
             classEntiere.setClasseAffichage(classe);
+            model.ajouterObservateur(classe);
         }
         model.ajouterObservateur(this);
 
@@ -119,7 +120,7 @@ public class VueClasse extends Pane implements Observateur {
      */
     @Override
     public void actualiser() {
-        for (VueClasseAffichage classe : classes.values()) {
+        for (VueClasseAffichage classe : getClasses()) {
             classe.afficherClasse();
         }
 
@@ -202,5 +203,9 @@ public class VueClasse extends Pane implements Observateur {
         ArrayList<VueClasseAffichage> classes = new ArrayList<>();
         this.classes.keySet().forEach(key -> classes.add(this.classes.get(key)));
         return classes;
+    }
+
+    public void supprimerFleches(){
+        this.fleches.clear();
     }
 }
