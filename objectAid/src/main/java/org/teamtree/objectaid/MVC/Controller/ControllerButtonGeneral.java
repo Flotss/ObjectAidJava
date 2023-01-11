@@ -43,6 +43,7 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         switch (((MenuItem)event.getSource()).getText()){
             case "Attributs":
+                System.out.println("gvvgyvyvygvy");
                 attributGenerauxAffiche = !attributGenerauxAffiche;
                 model.afficherAttributs(attributGenerauxAffiche);
                 break;

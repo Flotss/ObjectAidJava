@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
+import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.service.JavaProjectClassLoader;
@@ -113,13 +114,16 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         MenuItem afficher = new MenuItem("Afficher/Cacher");
         MenuItem supprimer = new MenuItem("Supprimer");
         MenuItem menuItem2 = new MenuItem("Constructeurs");
-        menuItem2.setOnAction(new MenuItemController(model));
+       
+        final var controllerBtnGeneral = new ControllerButtonGeneral(model);
+        
+        menuItem2.setOnAction(controllerBtnGeneral);
         MenuItem menuItem3 = new MenuItem("Attributs");
-        menuItem3.setOnAction(new MenuItemController(model));
+        menuItem3.setOnAction(new ControllerButtonGeneral(model));
         MenuItem menuItem4 = new MenuItem("Methodes");
-        menuItem4.setOnAction(new MenuItemController(model));
+        menuItem4.setOnAction(controllerBtnGeneral);
         MenuItem menuItem5 = new MenuItem("Relations");
-        menuItem5.setOnAction(new MenuItemController(model));
+        menuItem5.setOnAction(controllerBtnGeneral);
 
         Menu menuItem1 = new Menu("Supprimer");
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
@@ -145,6 +149,11 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
     }
 
 
+    /**
+     * Charge le TreeView récursivement
+     * @param file le fichier à charger
+     * @param parent le parent du fichier
+     */
     public void createTree(File file, TreeItem<String> parent) {
         if (file.isDirectory()) {
             final var treeItem = new CheckBoxTreeItem<>(file.getName());

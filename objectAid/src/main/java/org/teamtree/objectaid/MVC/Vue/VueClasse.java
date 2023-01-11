@@ -121,7 +121,9 @@ public class VueClasse extends Pane implements Observateur {
      */
     @Override
     public void actualiser() {
+        System.out.println("Taille de getClasses" + getClasses().size());
         for (VueClasseAffichage classe : getClasses()) {
+            System.out.println("classe refresh: " + classe.getNom());
             classe.afficherClasse();
         }
 
@@ -222,6 +224,7 @@ public class VueClasse extends Pane implements Observateur {
 
     public List<VueClasseAffichage> getClasses() {
         ArrayList<VueClasseAffichage> classes = new ArrayList<>();
+        System.out.println("VueClasse getVueClasse");
         this.classes.keySet().forEach(key -> classes.add(this.classes.get(key)));
         return classes;
     }

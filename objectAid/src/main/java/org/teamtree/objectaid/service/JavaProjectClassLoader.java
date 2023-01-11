@@ -4,13 +4,15 @@ import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.util.FileExtension;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.Arrays;
 
+/**
+ * Représente le chargeur de classe, s'occupant de la partie business de la création de classe
+ * à partir de fichiers de classes.
+ */
 public class JavaProjectClassLoader extends ClassLoader {
     private final Path rootPath;
     private final StringBuffer packagePath;
@@ -23,25 +25,16 @@ public class JavaProjectClassLoader extends ClassLoader {
         this.model = model;
     }
 
-    public Class<?> loadClass(String name) throws ClassNotFoundException {
-        try {
-            String path = name.replace('.', '/').concat(".class");
-            InputStream is = getResourceAsStream(path);
-            if (is == null) {
-                return super.loadClass(name);
-            }
-            byte[] b = new byte[is.available()];
-            is.read(b);
-            return defineClass(name, b, 0, b.length);
-        } catch (IOException e) {
-            throw new ClassNotFoundException(name);
-        }
-    }
-
+    /**
+     * Se charge de charger les classes de manière récursive à partir d'un dossier préalablement donné.
+     *
+     * @param directory dossier à partir duquel charger les classes
+     */
     public void loadClasses(final File directory) {
-        // It should finds the fqn
+        // On itère à travers tous les fichiers du dossier donné en paramètre.
         Arrays.stream(directory.listFiles()).forEach(file -> {
             if (file.isDirectory()) {
+                // Si le dossier itéré est un dossier, on le parcourt récursivement en l'ajoutant au packagePath.
                 packagePath.append(file.getName()).append(".");
                 loadClasses(file);
             } else {
@@ -49,12 +42,13 @@ public class JavaProjectClassLoader extends ClassLoader {
                 if (!FileExtension.isClassFile(file)) return;
 
                 final var className = file.getName().substring(0, file.getName().length() - 6);
-                final var fqn = packagePath.toString() + className;
+                final var fqn = packagePath + className;
 
                 System.out.println("Class name: " + className);
                 System.out.println("Class fqn: " + fqn);
 
                 try {
+                    // On charge la classe à partir du path racine.
                     ClassLoader cl = new URLClassLoader(new java.net.URL[]{rootPath.toAbsolutePath().toUri().toURL()});
                     final var c = cl.loadClass(fqn);
 
