@@ -1,5 +1,6 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import org.teamtree.objectaid.MVC.Vue.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Vue.*;
@@ -200,15 +201,19 @@ public class Model implements Sujet {
      * @param classe Classe
      */
     public void ajouterClasse(ClasseEntiere classe) {
-        System.out.println("Demande d'ajout de " + classe.getNom());
         if (!relations.containsKey(classe)) {
-            System.out.println("N'est pas présent, donc ajout toujours possible");
             int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
+            classe = ((VueClasse)getObservateur("VueClasse").get(0)).ajouterClasse(classe);
             relations.put(classe, new ArrayList<>(classe.getRelations()));
+            for(Observateur observateur: this.observateurs){
+                if(observateur instanceof VueClasse){
+                    ((VueClasse) observateur).actualiser();
+                }
+            }
         }
-        this.notifierObservateur();
+
     }
 
     /**
@@ -236,7 +241,7 @@ public class Model implements Sujet {
      * @param classe Classe
      * @return Liste des flèches
      */
-    public ArrayList<Relation> getRelations(ClasseEntiere classe) {
+    public List<Relation> getRelations(ClasseEntiere classe) {
         return relations.get(classe);
     }
 
@@ -251,15 +256,14 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de définir la classe sélectionnée
-     *
      * @param currentClickedClass Classe sélectionnée
      */
     public void setCurrentClickedClass(VueClasseAffichage currentClickedClass) {
-        if (this.currentClickedClass == null) {
+        if(this.currentClickedClass == null) {
             this.currentClickedClass = currentClickedClass;
             this.currentClickedClass.classeSelectionnee();
             this.notifierObservateur("selection");
-        } else {
+        }else {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
             if (Objects.equals(currentClickedClass.getNom(), this.currentClickedClass.getNom())) {
@@ -276,11 +280,8 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les attributs
      */
     public void afficherAttributs(boolean affiche) {
-        getClasses().forEach(classeEntiere -> {
-                    System.out.println("classeEntiere = " + classeEntiere);
-                    classeEntiere.setAttributEstAffiche(affiche);
-                });
-                notifierObservateur("totalite des classes");
+        getClasses().forEach(classeEntiere -> classeEntiere.setAttributEstAffiche(affiche));
+        notifierObservateur("totalite des classes");
     }
 
     /**
@@ -358,7 +359,7 @@ public class Model implements Sujet {
      * Methode qui permet de deplacer une classe
      */
     public void deplacerClasse(int x, int y) {
-        this.getCurrentClickedClass().getClasseEntiere().deplacer(x, y);
+        this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
         notifierObservateur("deplacement selection");
     }
 
@@ -414,16 +415,16 @@ public class Model implements Sujet {
         this.notifierObservateur("update visibilite fleche");
         this.currentClickedClass = null;
         supprimerObservateur(classe);
+        this.relations.remove(classe.getClasseEntiere());
     }
 
-    public void supprimerClassesAffichage() {
-        for (Observateur observateur : this.getObservateur("VueClasseAffichage")) {
-            System.out.println(((VueClasseAffichage) observateur).getNom());
-            this.supprimerObservateur(observateur);
+    public void supprimerClassesAffichage(){
+        for(Observateur observateur : getObservateur("VueClasseAffichage")){
+            supprimerClasseAffichage((VueClasseAffichage) observateur);
         }
-        ((VueClasse) getObservateur("VueClasse").get(0)).supprimerFleches();
-        this.notifierObservateur("actualisation fleches");
-        this.currentClickedClass = null;
+        ((VueClasse)getObservateur("VueClasse").get(0)).supprimerFleches();
+        ((VueClasse)getObservateur("VueClasse").get(0)).supprimerTout();
+        this.notifierObservateur("totalite des classes");
     }
 
     public List<VueClasseAffichage> getHiddenClasses() {

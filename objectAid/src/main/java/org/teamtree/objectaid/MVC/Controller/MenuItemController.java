@@ -3,10 +3,12 @@ package org.teamtree.objectaid.MVC.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
+import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.ObjectAidApplication;
+import org.teamtree.objectaid.Service.SqueletteService;
 
 /**
  * Classe qui permet de gérer tous les MenuItem de l'application
@@ -46,8 +48,6 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             case "Constructeurs":
                 model.afficherConstructeursSelection();
                 break;
-            case "Cacher la classe":
-
             case "Cacher":
                 for (MenuItem m: ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
                     if (m.getText().equals(model.getCurrentClickedClass().getNom())) {
@@ -56,7 +56,6 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 }
                 model.ajouterClasseCachee(model.getCurrentClickedClass());
                 break;
-
             case "Afficher/Cacher":
                 VueClasseAffichage classe = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
                 System.out.println(model.getCurrentClickedClass());
@@ -75,11 +74,24 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 model.supprimerClasseAffichage(classe1);
                 ((MenuItem) event.getSource()).getParentMenu().getParentMenu().getItems().remove(((MenuItem) event.getSource()).getParentMenu());
                 break;
+            case "Générer le squelette":
+                ClasseEntiere classeE = model.getCurrentClickedClass().getClasseEntiere();
+                SqueletteService squeletteService = new SqueletteService();
+                squeletteService.genererSqueletteUniqueClasse(classeE);
+                break;
+            case "Générer squelette":
+                SqueletteService squeletteService1 = new SqueletteService();
+                squeletteService1.genererSqueletteDiagramme(model.getClasses());
+                break;
             case "Cacher interface":
                 model.afficherInterfaceHeritageSelection("Implementation");
                 break;
             case "Cacher heritage":
                 model.afficherInterfaceHeritageSelection("Heritage");
+                break;
+            case "Supprimer les classes":
+                model.supprimerClassesAffichage();
+                ObjectAidApplication.menuBar.getMenus().get(1).getItems().clear();
                 break;
         }
     }
