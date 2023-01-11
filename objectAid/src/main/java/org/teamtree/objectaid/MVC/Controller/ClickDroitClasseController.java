@@ -37,7 +37,7 @@ public class ClickDroitClasseController implements EventHandler<ContextMenuEvent
     @Override
     public void handle(ContextMenuEvent event) {
         if (model.getCurrentClickedClass() == null || !model.getCurrentClickedClass().getNom().equals(classe.getNom())) model.setCurrentClickedClass(classe);
-        Observateur observateur = model.getObservateur("VueContextMenuClasse");
+        Observateur observateur = model.getObservateur("VueContextMenuClasse").get(0);
         ((VueContextMenuClasse) observateur).setClasse(classe);
         ((VueContextMenuClasse)observateur).setCoordonnees(event.getScreenX(), event.getScreenY());
         model.notifierObservateur("click droit");
