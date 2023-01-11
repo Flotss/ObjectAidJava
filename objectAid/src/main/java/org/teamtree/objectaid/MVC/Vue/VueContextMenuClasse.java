@@ -57,12 +57,11 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         itemSupprimerClasse.setOnAction(new MenuItemController(model));
         itemGenererSquelette = new MenuItem("Générer le squelette");
         itemGenererSquelette.setOnAction(new MenuItemController(model));
-        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse, itemSupprimerClasse, itemGenererSquelette);
         itemInterface = new MenuItem("Cacher interface");
         itemInterface.setOnAction(new MenuItemController(model));
         itemHeritage = new MenuItem("Cacher heritage");
         itemHeritage.setOnAction(new MenuItemController(model));
-        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse,itemInterface, itemHeritage);
+        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse, itemSupprimerClasse, itemInterface, itemHeritage, itemGenererSquelette);
         this.classe = null;
     }
 
