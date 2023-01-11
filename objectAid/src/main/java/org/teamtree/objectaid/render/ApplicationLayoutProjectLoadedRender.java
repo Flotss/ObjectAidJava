@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.MVC.Vue;
+package org.teamtree.objectaid.render;
 
 
 import org.teamtree.objectaid.Classe.ClasseEntiere;
@@ -20,6 +20,8 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+import org.teamtree.objectaid.MVC.Vue.VueClasse;
+import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 import org.teamtree.objectaid.Service.JavaProjectClassLoaderService;
 import org.teamtree.objectaid.util.FileExtension;
 

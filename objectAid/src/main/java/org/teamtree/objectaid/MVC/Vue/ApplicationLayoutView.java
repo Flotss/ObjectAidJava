@@ -4,6 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.render.ApplicationLayoutBootstrapRender;
+import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 
 /**
  * Représente le layout de l'application en tant qu'observateur du modèle.

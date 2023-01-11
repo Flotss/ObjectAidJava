@@ -5,10 +5,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.MVC.Vue.ApplicationLayoutProjectLoadedRender;
+import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
-import org.teamtree.objectaid.ObjectAidApplication;
 import org.teamtree.objectaid.Service.SqueletteService;
 
 /**
