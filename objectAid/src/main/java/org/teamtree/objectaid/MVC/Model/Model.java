@@ -154,7 +154,7 @@ public class Model implements Sujet {
      * Méthode qui permet de récupérer la liste des classes
      * @return Liste des classes
      */
-    public ArrayList<ClasseEntiere> getClasses() {
+    public List<ClasseEntiere> getClasses() {
         return new ArrayList<>(relations.keySet());
     }
 
@@ -172,7 +172,7 @@ public class Model implements Sujet {
      * @param classe Classe
      * @return Liste des flèches
      */
-    public ArrayList<Relation> getRelations(ClasseEntiere classe) {
+    public List<Relation> getRelations(ClasseEntiere classe) {
         return relations.get(classe);
     }
 
