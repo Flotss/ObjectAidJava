@@ -145,9 +145,15 @@ public class Model implements Sujet {
             int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
+            classe = ((VueClasse)getObservateur("VueClasse").get(0)).ajouterClasse(classe);
             relations.put(classe, new ArrayList<>(classe.getRelations()));
+            for(Observateur observateur: this.observateurs){
+                if(observateur instanceof VueClasse){
+                    ((VueClasse) observateur).actualiser();
+                }
+            }
         }
-        this.notifierObservateur();
+
     }
 
     /**
@@ -343,16 +349,16 @@ public class Model implements Sujet {
         this.notifierObservateur("update visibilite fleche");
         this.currentClickedClass = null;
         supprimerObservateur(classe);
+        this.relations.remove(classe.getClasseEntiere());
     }
 
     public void supprimerClassesAffichage(){
-        for (Observateur observateur: this.getObservateur("VueClasseAffichage")){
-            System.out.println(((VueClasseAffichage)observateur).getNom());
-            this.supprimerObservateur(observateur);
+        for(Observateur observateur : getObservateur("VueClasseAffichage")){
+            supprimerClasseAffichage((VueClasseAffichage) observateur);
         }
         ((VueClasse)getObservateur("VueClasse").get(0)).supprimerFleches();
-        this.notifierObservateur("actualisation fleches");
-        this.currentClickedClass = null;
+        ((VueClasse)getObservateur("VueClasse").get(0)).supprimerTout();
+        this.notifierObservateur("totalite des classes");
     }
 
     public List<VueClasseAffichage> getHiddenClasses() {

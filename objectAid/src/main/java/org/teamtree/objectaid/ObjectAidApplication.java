@@ -32,6 +32,9 @@ public class ObjectAidApplication extends Application {
         Model model = new Model();
         VBox applicationLayout = new VBox();
 
+        VueClasse vueClass = new VueClasse(model); // La vue se rajoute elle-même au modèle
+        model.ajouterObservateur(vueClass);
+
         ClasseEntiere c = new ClasseEntiere("org.teamtree.objectaid.Classe.ClasseEntiere");
         model.ajouterClasse(c);
 
@@ -62,8 +65,6 @@ public class ObjectAidApplication extends Application {
 //        ClasseEntiere c9 = new ClasseEntiere("org.teamtree.objectaid.Etat.Etat");
 //        model.ajouterClasse(c9);
 
-        VueClasse vueClass = new VueClasse(model); // La vue se rajoute elle-même au modèle
-
 //        VueFleche vueFleche = new VueFleche(model);
 //        model.ajouterObservateur(vueFleche);
 
@@ -81,7 +82,11 @@ public class ObjectAidApplication extends Application {
         MenuItem menuItem5 = new MenuItem("Relations");
         menuItem5.setOnAction(new ControllerButtonGeneral(model));
 
-        Menu menuItem1 = new Menu("Supprimer");
+        Menu supprimer_les_classes = new Menu("Supprimer les classes");
+        MenuItem supprimerClasses = new MenuItem("Supprimer les classes");
+        supprimerClasses.setOnAction(new MenuItemController(model));
+        supprimer_les_classes.getItems().add(supprimerClasses);
+
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
 
         for (ClasseEntiere ce: model.getClasses()) {
@@ -99,7 +104,7 @@ public class ObjectAidApplication extends Application {
         genererSquelette.setOnAction(new MenuItemController(model));
         generer.getItems().add(genererSquelette);
 
-        menuBar.getMenus().addAll(menuItem, listeClasse, generer);
+        menuBar.getMenus().addAll(menuItem, listeClasse, supprimer_les_classes, generer);
 
         applicationLayout.getChildren().addAll(menuBar,vueClass);
 
