@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Représente le chargeur de classe, s'occupant de la partie business de la création de classe
@@ -16,13 +17,12 @@ import java.util.Arrays;
 public class JavaProjectClassLoaderService extends ClassLoader {
 
     private final Path rootPath;
-    private final StringBuffer packagePath;
-
+    private final StringBuilder packagePath;
     private final Model model;
 
-    public JavaProjectClassLoaderService(Path rootPath, Model model) {
+    public JavaProjectClassLoaderService(final Path rootPath, final Model model) {
         this.rootPath = rootPath;
-        this.packagePath = new StringBuffer();
+        this.packagePath = new StringBuilder();
         this.model = model;
     }
 
@@ -32,8 +32,7 @@ public class JavaProjectClassLoaderService extends ClassLoader {
      * @param directory dossier à partir duquel charger les classes
      */
     public void loadClasses(final File directory) {
-        Arrays.stream(directory.listFiles()).forEach(file -> {
-            System.out.println(file.getName());
+        Arrays.stream(Objects.requireNonNull(directory.listFiles())).forEach(file -> {
             if (file.isDirectory()) {
                 loadClasses(file);
             } else {
@@ -45,7 +44,7 @@ public class JavaProjectClassLoaderService extends ClassLoader {
                 final var className = file.getName().substring(0, file.getName().length() - 6);
                 final var fqn = service.getClassFQN(directory, file, className);
                 try {
-                    ClassLoader cl = new URLClassLoader(
+                    final var cl = new URLClassLoader(
                         new java.net.URL[]{rootPath.toAbsolutePath().toUri().toURL()});
                     final var c = cl.loadClass(fqn);
 
