@@ -116,6 +116,13 @@ public class Model implements Sujet {
             case "update visibilite classe selection":
                 this.currentClickedClass.actualiserVisibilite();
                 break;
+            case "click droit":
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueContextMenuClasse){
+                        observateur.actualiser();
+                        return;
+                    }
+                }
         }
     }
 
@@ -304,7 +311,25 @@ public class Model implements Sujet {
         }
     }
 
+    public void supprimerClasseAffichage(VueClasseAffichage classe){
+        this.currentClickedClass = classe;
+        this.currentClickedClass.setClasseAffichee(false);
+        this.notifierObservateur("update visibilite classe selection");
+        this.notifierObservateur("update visibilite fleche");
+        this.currentClickedClass = null;
+        supprimerObservateur(classe);
+    }
+
     public List<VueClasseAffichage> getHiddenClasses() {
         return hiddenClasses;
+    }
+
+    public Observateur getObservateur(String nom){
+        for(Observateur observateur: this.observateurs){
+            if(observateur.getClass().getSimpleName().equals(nom)){
+                return observateur;
+            }
+        }
+        return null;
     }
 }

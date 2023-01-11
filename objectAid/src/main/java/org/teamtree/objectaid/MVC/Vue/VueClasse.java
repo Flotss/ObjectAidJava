@@ -94,6 +94,7 @@ public class VueClasse extends Pane implements Observateur {
             classe.setOnContextMenuRequested(new ClickDroitClasseController(model,classe));
 
             classes.put(classe.getNom(),classe);
+            classEntiere.setClasseAffichage(classe);
         }
         model.ajouterObservateur(this);
 
@@ -184,5 +185,11 @@ public class VueClasse extends Pane implements Observateur {
         for (Fleche fleche : fleches) {
             fleche.definirVisibilite(visibilite);
         }
+    }
+
+    public List<VueClasseAffichage> getClasses() {
+        ArrayList<VueClasseAffichage> classes = new ArrayList<>();
+        this.classes.keySet().forEach(key -> classes.add(this.classes.get(key)));
+        return classes;
     }
 }

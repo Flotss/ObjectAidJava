@@ -3,6 +3,7 @@ package org.teamtree.objectaid.MVC.Controller;
 import javafx.event.EventHandler;
 import javafx.scene.input.ContextMenuEvent;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.MVC.Vue.Observateur;
 import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 
@@ -36,6 +37,9 @@ public class ClickDroitClasseController implements EventHandler<ContextMenuEvent
     @Override
     public void handle(ContextMenuEvent event) {
         if (model.getCurrentClickedClass() == null || !model.getCurrentClickedClass().getNom().equals(classe.getNom())) model.setCurrentClickedClass(classe);
-        new VueContextMenuClasse(model,classe).show(classe,event.getScreenX(),event.getScreenY());
+        Observateur observateur = model.getObservateur("VueContextMenuClasse");
+        ((VueContextMenuClasse) observateur).setClasse(classe);
+        ((VueContextMenuClasse)observateur).setCoordonnees(event.getScreenX(), event.getScreenY());
+        model.notifierObservateur("click droit");
     }
 }

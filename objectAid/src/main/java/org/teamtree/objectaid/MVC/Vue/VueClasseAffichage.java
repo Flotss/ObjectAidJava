@@ -386,9 +386,12 @@ public class VueClasseAffichage extends VBox implements Observateur {
         this.classeAffichee = !this.classeAffichee;
     }
 
+    public void setClasseAffichee(boolean b){
+        this.classeAffichee = b;
+    }
+
 
     public void actualiserVisibilite(){
-        System.out.println("esjfnzejnf");
         this.setVisible(classeAffichee);
     }
 

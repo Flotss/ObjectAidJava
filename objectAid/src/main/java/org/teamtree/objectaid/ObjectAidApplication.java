@@ -3,13 +3,17 @@ package org.teamtree.objectaid;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
-import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
+import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
+import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 
 
 /**
@@ -60,27 +64,39 @@ public class ObjectAidApplication extends Application {
 //        VueFleche vueFleche = new VueFleche(model);
 //        model.ajouterObservateur(vueFleche);
 
-        HBox buttonBar = new HBox();
-        ControllerButtonGeneral controllerButtonGeneral = new ControllerButtonGeneral(model);
-        final var attributesDisplayButton = new Button("Afficher les attributs");
-        attributesDisplayButton.setOnAction(controllerButtonGeneral);
+        MenuBar menuBar = new MenuBar();
+        Menu menuItem = new Menu("Afficher/cacher");
+        Menu listeClasse = new Menu("Liste des classes");
+        MenuItem afficher = new MenuItem("Afficher/Cacher");
+        MenuItem supprimer = new MenuItem("Supprimer");
+        MenuItem menuItem2 = new MenuItem("Constructeurs");
+        menuItem2.setOnAction(new MenuItemController(model));
+        MenuItem menuItem3 = new MenuItem("Attributs");
+        menuItem3.setOnAction(new MenuItemController(model));
+        MenuItem menuItem4 = new MenuItem("Methodes");
+        menuItem4.setOnAction(new MenuItemController(model));
+        MenuItem menuItem5 = new MenuItem("Relations");
+        menuItem5.setOnAction(new MenuItemController(model));
 
-        final var methodsDisplayButton = new Button("Afficher les méthodes");
-        methodsDisplayButton.setOnAction(controllerButtonGeneral);
+        Menu menuItem1 = new Menu("Supprimer");
+        menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
 
-        final var constructorsDisplayButton = new Button("Afficher les constructeurs");
-        constructorsDisplayButton.setOnAction(controllerButtonGeneral);
+        for (ClasseEntiere ce: model.getClasses()) {
+            Menu nomClasseMenu = new Menu(ce.getClasseAffichage().getNom());
+            MenuItem afficherCacherClasse = new MenuItem("Afficher/Cacher");
+            afficherCacherClasse.setOnAction(new MenuItemController(model));
+            MenuItem supprimerClasse = new MenuItem("Supprimer");
+            supprimerClasse.setOnAction(new MenuItemController(model));
+            nomClasseMenu.getItems().addAll(afficherCacherClasse, supprimerClasse);
+            listeClasse.getItems().add(nomClasseMenu);
+        }
 
-        final var relationsDisplayButton = new Button("Afficher les relations");
-        relationsDisplayButton.setOnAction(controllerButtonGeneral);
+        menuBar.getMenus().addAll(menuItem, listeClasse);
 
-        final var hideClassButton = new Button("Classe cachée");
-        hideClassButton.setOnAction(controllerButtonGeneral);
+        applicationLayout.getChildren().addAll(menuBar,vueClass);
 
-        buttonBar.getChildren().addAll(attributesDisplayButton, methodsDisplayButton, constructorsDisplayButton, relationsDisplayButton, hideClassButton);
-
-        applicationLayout.getChildren().addAll(buttonBar, vueClass);
-
+        VueContextMenuClasse contextMenu = new VueContextMenuClasse(model);
+        model.ajouterObservateur(contextMenu);
 
         Scene scene = new Scene(applicationLayout, 1024, 768);
         stage.setScene(scene);
