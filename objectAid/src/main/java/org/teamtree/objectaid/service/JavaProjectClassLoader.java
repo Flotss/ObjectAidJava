@@ -58,7 +58,7 @@ public class JavaProjectClassLoader extends ClassLoader {
                     ClassLoader cl = new URLClassLoader(new java.net.URL[]{rootPath.toAbsolutePath().toUri().toURL()});
                     final var c = cl.loadClass(fqn);
 
-                    model.addClassPathEntry(c.getName(), c);
+                    model.addClassPathEntry(c.getSimpleName(), c);
 
                     System.out.println(c.getConstructors());
                 } catch (ClassNotFoundException e) {

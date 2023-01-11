@@ -87,7 +87,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
                 final var itemContent = dragBoard.getString();
                 success = true;
 
-                final var entrySearch = this.model.getClassesPath().entrySet().stream().filter(entry -> entry.getKey().contains(itemContent)).findFirst();
+                final var entrySearch = this.model.getClassesPath().entrySet().stream().filter(entry -> entry.getKey().equals(itemContent)).findFirst();
 
                 if (entrySearch.isPresent()) {
                     final var classeEntiere = new ClasseEntiere(entrySearch.get().getValue());
