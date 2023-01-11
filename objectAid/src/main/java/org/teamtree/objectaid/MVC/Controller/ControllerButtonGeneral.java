@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -39,22 +41,20 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Button general : " + ((Button)event.getSource()).getText());
-
-        switch (((Button)event.getSource()).getText()){
-            case "Afficher les attributs":
+        switch (((MenuItem)event.getSource()).getText()){
+            case "Attributs":
                 attributGenerauxAffiche = !attributGenerauxAffiche;
                 model.afficherAttributs(attributGenerauxAffiche);
                 break;
-            case "Afficher les méthodes":
+            case "Methodes":
                 methodesGenerauxAffiche = !methodesGenerauxAffiche;
                 model.afficherMethodes(methodesGenerauxAffiche);
                 break;
-            case "Afficher les constructeurs":
+            case "Constructeurs":
                 constructeurGenerauxAffiche = !constructeurGenerauxAffiche;
                 model.afficherConstructeurs(constructeurGenerauxAffiche);
                 break;
-            case "Afficher les relations":
+            case "Relations":
                 relationsGeneralesAffiche = !relationsGeneralesAffiche;
                 model.afficherRelations(relationsGeneralesAffiche);
                 break;

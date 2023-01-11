@@ -182,6 +182,16 @@ public class Model implements Sujet {
         }
     }
 
+    public void notifierObservateurFlecheSpecifique(VueClasseAffichage vueClasseAffichage){
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                //TODO: ne modifier que les points
+                ((VueClasse) observateur).actualiserFlechesSpecifique(vueClasseAffichage);
+                return;
+            }
+        }
+    }
+
     /**
      * Méthode qui permet d'ajouter une Classe au model
      * @param classe Classe
@@ -204,6 +214,14 @@ public class Model implements Sujet {
         return new ArrayList<>(relations.keySet());
     }
 
+    /**
+     * Retourne la classe grâce à son nom
+     * @param nom Le nom de la classe
+     * @return La classe correspondante
+     */
+    public Optional<ClasseEntiere> getClasse(String nom) {
+        return getClasses().stream().filter(classe -> classe.getNom().equals(nom)).findFirst();
+    }
 
     /**
      * Retourne la liste des flèches d'une classe
@@ -309,6 +327,21 @@ public class Model implements Sujet {
     }
 
     /**
+     * Methode qui permet de changer la possibilité d'afficher les interfaces d'une classe spécifique
+     */
+    public void afficherInterfaceHeritageSelection(String type) {
+//        this.currentClickedClass.getClasseEntiere().setConstructeurEstAffiche(!this.currentClickedClass.getClasseEntiere().isConstructeurEstAffiche());
+//        notifierObservateur("classe selection complete");
+
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                ((VueClasse) observateur).actualiserRelationsSpecifique(this.currentClickedClass, type);
+                return;
+            }
+        }
+    }
+
+    /**
      * Methode qui permet de deplacer une classe
      */
     public void deplacerClasse(int x, int y) {
@@ -339,6 +372,7 @@ public class Model implements Sujet {
         if (!this.hiddenClasses.contains(classe)){
             System.out.println("La classe " + classe.getNom() + " a ete ajoutee à la liste des classes cachees");
             this.hiddenClasses.add(classe);
+            this.currentClickedClass = classe;
             this.currentClickedClass.setClasseAffichee();
             this.notifierObservateur("update visibilite classe selection");
             //TODO: A modifier: ne pas mettre à jour toutes les fleches
@@ -391,18 +425,13 @@ public class Model implements Sujet {
         return observateurs;
     }
 
-    public Optional<ClasseEntiere> getClasse(String destination) {
-        return getClasses().stream().filter(classeEntiere -> classeEntiere.getNom().equals(destination)).findFirst();
-    }
-
-    public void notifierObservateurFlecheSpecifique(VueClasseAffichage vueClasseAffichage){
-        for(Observateur observateur: this.observateurs){
-            if(observateur instanceof VueClasse){
-                //TODO: ne modifier que les points
-                ((VueClasse) observateur).actualiserFlechesSpecifique(vueClasseAffichage);
-                return;
+    public boolean classeMasquee(VueClasseAffichage vueClasseAffichage1){
+        for (VueClasseAffichage vueClasseAffichage2: hiddenClasses){
+            if(vueClasseAffichage2.getNom() == vueClasseAffichage1.getNom()){
+                return true;
             }
         }
+        return false;
     }
 
 }

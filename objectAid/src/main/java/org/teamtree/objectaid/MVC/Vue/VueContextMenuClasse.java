@@ -23,6 +23,10 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
     /** Attribut qui represente le bouton pour supprimer la classe */
     private final MenuItem itemSupprimerClasse;
 
+    private final MenuItem itemInterface;
+
+    private final MenuItem itemHeritage;
+
     /** Attribut qui represente le model */
     private final Model model;
 
@@ -48,7 +52,11 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         itemCacherClasse.setOnAction(new MenuItemController(model));
         itemSupprimerClasse = new MenuItem("Supprimer");
         itemSupprimerClasse.setOnAction(new MenuItemController(model));
-        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse);
+        itemInterface = new MenuItem("Cacher interface");
+        itemInterface.setOnAction(new MenuItemController(model));
+        itemHeritage = new MenuItem("Cacher heritage");
+        itemHeritage.setOnAction(new MenuItemController(model));
+        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse,itemInterface, itemHeritage);
         this.classe = null;
     }
 

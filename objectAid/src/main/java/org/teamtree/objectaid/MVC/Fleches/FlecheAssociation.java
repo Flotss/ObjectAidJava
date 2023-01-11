@@ -91,4 +91,8 @@ public class FlecheAssociation extends Fleche {
             cardinaliteArrivee.setLayoutY(line.getEndY()+10);
         }
     }
+
+    public String getType(){
+        return "Association";
+    }
 }

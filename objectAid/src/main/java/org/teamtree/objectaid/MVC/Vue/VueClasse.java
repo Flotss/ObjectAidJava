@@ -182,6 +182,26 @@ public class VueClasse extends Pane implements Observateur {
     }
 
     /**
+     * Méthode qui permet de actualiser la vue des fleches
+     */
+    public void actualiserRelationsSpecifique(VueClasseAffichage vueClasseAffichage, String relation) {
+        for (Fleche fleche : fleches) {
+            if(fleche.getVueClasseDepart().getNom() == vueClasseAffichage.getNom() && fleche.getType()==relation ){
+                VueClasseAffichage arrivee = fleche.getVueClasseArrivee();
+                System.out.println(arrivee.getNom());
+
+
+                if(model.classeMasquee(arrivee)){
+                    model.supprimerClasseCachee(arrivee);
+                }else {
+                    model.ajouterClasseCachee(arrivee);
+                }
+
+            }
+        }
+    }
+
+    /**
      * Méthode qui permet de actualiser la visibilite des fleches
      */
     public void actualiserFlechesVisibilite() {

@@ -48,4 +48,8 @@ public class FlecheHeritage extends Fleche {
         this.arrowFermeture.setEndX(arrow2.getEndX());
         this.arrowFermeture.setEndY(arrow2.getEndY());
     }
+
+    public String getType(){
+        return "Heritage";
+    }
 }
