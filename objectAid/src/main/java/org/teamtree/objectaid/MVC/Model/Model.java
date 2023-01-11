@@ -96,9 +96,9 @@ public class Model implements Sujet {
                         break;
                     }
                 }
-                this.notifierObservateur("actualisation fleches");
                 break;
             case "update hidden classes":
+                //TODO: A modifier --> ne s'occuper que de la visibilitée
                 for(Observateur observateur: this.observateurs){
                     if(observateur instanceof VueClasse){
                         observateur.actualiser();
@@ -123,6 +123,16 @@ public class Model implements Sujet {
                         return;
                     }
                 }
+        }
+    }
+
+    public void notifierObservateurFlecheSpecifique(VueClasseAffichage vueClasseAffichage){
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                //TODO: ne modifier que les points
+                ((VueClasse) observateur).actualiserFlechesSpecifique(vueClasseAffichage);
+                return;
+            }
         }
     }
 
@@ -293,6 +303,7 @@ public class Model implements Sujet {
             this.hiddenClasses.add(classe);
             this.currentClickedClass.setClasseAffichee();
             this.notifierObservateur("update visibilite classe selection");
+            //TODO: A modifier: ne pas mettre à jour toutes les fleches
             this.notifierObservateur("update visibilite fleche");
             this.currentClickedClass = null;
 
