@@ -271,6 +271,21 @@ public class Model implements Sujet {
     }
 
     /**
+     * Methode qui permet de changer la possibilité d'afficher les interfaces d'une classe spécifique
+     */
+    public void afficherInterfaceHeritageSelection(String type) {
+//        this.currentClickedClass.getClasseEntiere().setConstructeurEstAffiche(!this.currentClickedClass.getClasseEntiere().isConstructeurEstAffiche());
+//        notifierObservateur("classe selection complete");
+
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                ((VueClasse) observateur).actualiserRelationsSpecifique(this.currentClickedClass, type);
+                return;
+            }
+        }
+    }
+
+    /**
      * Methode qui permet de deplacer une classe
      */
     public void deplacerClasse(int x, int y) {
@@ -301,6 +316,7 @@ public class Model implements Sujet {
         if (!this.hiddenClasses.contains(classe)){
             System.out.println("La classe " + classe.getNom() + " a ete ajoutee à la liste des classes cachees");
             this.hiddenClasses.add(classe);
+            this.currentClickedClass = classe;
             this.currentClickedClass.setClasseAffichee();
             this.notifierObservateur("update visibilite classe selection");
             //TODO: A modifier: ne pas mettre à jour toutes les fleches
@@ -351,5 +367,14 @@ public class Model implements Sujet {
             }
         }
         return observateurs;
+    }
+
+    public boolean classeMasquee(VueClasseAffichage vueClasseAffichage1){
+        for (VueClasseAffichage vueClasseAffichage2: hiddenClasses){
+            if(vueClasseAffichage2.getNom() == vueClasseAffichage1.getNom()){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -74,6 +74,12 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 model.supprimerClasseAffichage(classe1);
                 ((MenuItem) event.getSource()).getParentMenu().getParentMenu().getItems().remove(((MenuItem) event.getSource()).getParentMenu());
                 break;
+            case "Cacher interface":
+                model.afficherInterfaceHeritageSelection("Implementation");
+                break;
+            case "Cacher heritage":
+                model.afficherInterfaceHeritageSelection("Heritage");
+                break;
         }
     }
 }

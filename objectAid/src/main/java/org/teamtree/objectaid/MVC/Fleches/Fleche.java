@@ -198,4 +198,8 @@ public class Fleche extends Group implements Observateur {
     public VueClasseAffichage getVueClasseArrivee(){
         return this.classeArrivee;
     }
+
+    public String getType(){
+        return "fleche";
+    }
 }
