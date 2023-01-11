@@ -122,12 +122,33 @@ En tant qu’étudiant, je souhaiterais pouvoir supprimer des classes de mon dia
 ### Critères de validation :
 - Après un clic droit sur une classe, il y a la possibilité de supprimer cette classe avec un MenuItem
 - Un MenuItem doit etre ajouté afin de supprimer toutes les classes présentes dans le diagramme
+- lors d'une supression, les relations qui sont liées à la classe sont supprimées aussi 
 
 ### Etat :
 Fonctionnalité achevée
 
 
 #### Détail de la fonctionnalité :
-La fonctionnalité permet de supprimer une classe seléctionnée ou toutes les classes. 
+La fonctionnalité permet de supprimer une classe seléctionnée ou toutes les classes.
+
+
+## Tâche supplémentaire : Refonte du menu
+##### Difficulté : 2
+
+#### Les étudiants qui se sont occupés de cette partie sont :
+- Grossmann Jérémy
+
+### Critères de validation :
+- Le haut de l'application est maintenant un MenuBar et non un HBox
+- Le MenuBar possède des Menu
+- Les Menu possède/nt un/des MenuItem ou un autre Menu
+
+### Detail de la fonctionnalité :
+La fonctionnalité permet de refaire le menu de l'application afin de le rendre plus lisible et plus ergonomique.
+Un seul controleur gère tous les MenuItem du menu.
+
+### Etat :
+Tâche achevée
+
 
 
