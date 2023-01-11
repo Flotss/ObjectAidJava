@@ -379,4 +379,19 @@ public class Model implements Sujet {
         }
         return null;
     }
+
+    public Optional<ClasseEntiere> getClasse(String destination) {
+        return getClasses().stream().filter(classeEntiere -> classeEntiere.getNom().equals(destination)).findFirst();
+    }
+
+    public void notifierObservateurFlecheSpecifique(VueClasseAffichage vueClasseAffichage){
+        for(Observateur observateur: this.observateurs){
+            if(observateur instanceof VueClasse){
+                //TODO: ne modifier que les points
+                ((VueClasse) observateur).actualiserFlechesSpecifique(vueClasseAffichage);
+                return;
+            }
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.MVC.Vue.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.ObjectAidApplication;
 
@@ -48,7 +49,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             case "Cacher la classe":
 
             case "Cacher":
-                for (MenuItem m: ObjectAidApplication.menuBar.getMenus().get(1).getItems()) {
+                for (MenuItem m: ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
                     if (m.getText().equals(model.getCurrentClickedClass().getNom())) {
                         m.setStyle("-fx-text-fill: red");
                     }

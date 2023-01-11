@@ -26,6 +26,8 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
     private final Model model;
     private final BorderPane base;
 
+    public static MenuBar menubar;
+
     public ApplicationLayoutProjectLoadedRender(Model model) {
         this.model = model;
         this.base = new BorderPane();
@@ -66,7 +68,6 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         final var vbox = new VBox();
 
         final var vueClasse = new VueClasse(model);
-        vbox.getChildren().addAll(vueClasse);
 
         vbox.setOnDragOver(event -> {
             if (event.getGestureSource() != vbox && event.getDragboard().hasString()) {
@@ -104,6 +105,41 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
             event.consume();
         });
+
+        ApplicationLayoutProjectLoadedRender.menubar = new MenuBar();
+
+        Menu menuItem = new Menu("Afficher/cacher");
+        Menu listeClasse = new Menu("Liste des classes");
+        MenuItem afficher = new MenuItem("Afficher/Cacher");
+        MenuItem supprimer = new MenuItem("Supprimer");
+        MenuItem menuItem2 = new MenuItem("Constructeurs");
+        menuItem2.setOnAction(new MenuItemController(model));
+        MenuItem menuItem3 = new MenuItem("Attributs");
+        menuItem3.setOnAction(new MenuItemController(model));
+        MenuItem menuItem4 = new MenuItem("Methodes");
+        menuItem4.setOnAction(new MenuItemController(model));
+        MenuItem menuItem5 = new MenuItem("Relations");
+        menuItem5.setOnAction(new MenuItemController(model));
+
+        Menu menuItem1 = new Menu("Supprimer");
+        menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
+
+        for (ClasseEntiere ce: model.getClasses()) {
+            Menu nomClasseMenu = new Menu(ce.getClasseAffichage().getNom());
+            MenuItem afficherCacherClasse = new MenuItem("Afficher/Cacher");
+            afficherCacherClasse.setOnAction(new MenuItemController(model));
+            MenuItem supprimerClasse = new MenuItem("Supprimer");
+            supprimerClasse.setOnAction(new MenuItemController(model));
+            nomClasseMenu.getItems().addAll(afficherCacherClasse, supprimerClasse);
+            listeClasse.getItems().add(nomClasseMenu);
+        }
+
+        menubar.getMenus().addAll(menuItem, listeClasse);
+
+        vbox.getChildren().addAll(menubar, vueClasse);
+
+        VueContextMenuClasse contextMenu = new VueContextMenuClasse(model);
+        model.ajouterObservateur(contextMenu);
 
         base.setCenter(vbox);
     }
