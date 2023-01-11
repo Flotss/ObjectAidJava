@@ -12,12 +12,12 @@ import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 public class ClickDroitClasseController implements EventHandler<ContextMenuEvent> {
 
     /** Modèle */
-    private Model model;
+    private final Model model;
 
     /**
      * ClasseAffichage qui est concernée par le clic droit
      */
-    private VueClasseAffichage classe;
+    private final VueClasseAffichage classe;
 
     /**
      * Constructeur

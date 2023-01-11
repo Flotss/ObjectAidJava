@@ -6,25 +6,28 @@ import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 /** Vue utilisée pour les boutons d'affichage d'une classe */
-public class VueContextMenuClasse extends ContextMenu implements Observateur {
+public class VueContextMenuClasse extends ContextMenu  {
 
     /** Attribut qui represente le bouton pour afficher/masquer les attributs de la classe */
-    private MenuItem itemAttributs;
+    private final MenuItem itemAttributs;
 
     /** Attribut qui represente le bouton pour afficher/masquer les methodes de la classe */
-    private MenuItem itemMethodes;
+    private final MenuItem itemMethodes;
 
     /** Attribut qui represente le bouton pour afficher/masquer les constructeurs de la classe */
-    private MenuItem itemConstructeurs;
+    private final MenuItem itemConstructeurs;
+
+    /** Attribut qui represente le bouton pour cacher la classe */
+    private final MenuItem itemCacherClasse;
 
     /** Attribut qui represente le model */
-    private Model model;
+    private final Model model;
 
     /**
      * ClasseAffichage sur laquel s'appuie cette vue
      */
 
-    private VueClasseAffichage classe;
+    private final VueClasseAffichage classe;
 
     /**
      * Constructeur de la classe
@@ -38,15 +41,10 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         itemMethodes.setOnAction(new MenuItemController(model));
         itemConstructeurs = new MenuItem("Constructeurs");
         itemConstructeurs.setOnAction(new MenuItemController(model));
-        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs);
+        itemCacherClasse = new MenuItem("Cacher la classe");
+        itemCacherClasse.setOnAction(new MenuItemController(model));
+        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse);
         this.classe = classe;
-    }
-
-    /**
-     * Methode qui permet de mettre à jour la vue
-     */
-    @Override
-    public void actualiser() {
     }
 
     /**

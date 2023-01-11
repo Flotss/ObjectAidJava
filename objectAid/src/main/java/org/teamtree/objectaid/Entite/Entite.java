@@ -6,5 +6,5 @@ package org.teamtree.objectaid.Entite;
  * Exemple : Classe, Interface, Enumération
  */
 public interface Entite {
-    public String getEntite();
+    String getEntite();
 }

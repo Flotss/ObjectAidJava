@@ -11,7 +11,7 @@ import org.teamtree.objectaid.MVC.Model.Model;
 public class MenuItemController implements EventHandler<ActionEvent> {
 
     /** Modèle */
-    private Model model;
+    private final Model model;
 
     /**
      * Constructeur
@@ -36,6 +36,9 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 break;
             case "Constructeurs":
                 model.afficherConstructeursSelection();
+                break;
+            case "Cacher la classe":
+                model.ajouterClasseCachee(model.getCurrentClickedClass());
                 break;
         }
     }

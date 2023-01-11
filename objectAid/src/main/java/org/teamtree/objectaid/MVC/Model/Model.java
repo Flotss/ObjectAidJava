@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.*;
 
 /**
  * Classe qui permet de gérer les données du diagramme de classe
@@ -30,8 +31,8 @@ public class Model implements Sujet {
     /** Classe sélectionnée */
     private VueClasseAffichage currentClickedClass;
 
-    /** Affichage relations */
-    private boolean affichageRelations;
+    /** Les classes cachées */
+    private final List<VueClasseAffichage> hiddenClasses;
 
     private Path currentProject;
 
@@ -44,7 +45,7 @@ public class Model implements Sujet {
         this.observateurs = new ArrayList<>();
         this.relations = new HashMap<>();
         this.currentClickedClass = null;
-        this.affichageRelations = true;
+        this.hiddenClasses = new ArrayList<>();
         this.applicationState = ApplicationState.BOOTSTRAP;
         this.currentProject = null;
     }
@@ -133,6 +134,7 @@ public class Model implements Sujet {
             break;
             case "classe selection complete":
                 this.currentClickedClass.afficherClasse();
+                notifierObservateur("actualisation fleches");
                 break;
             case "actualisation fleches":
                 for(Observateur observateur: this.observateurs){
@@ -154,31 +156,24 @@ public class Model implements Sujet {
                 }
                 this.notifierObservateur("actualisation fleches");
                 break;
-        }
-    }
-
-    /**
-     * Méthode qui permet d'ajouter une relation
-     * @param classe Classe
-     * @param relation Relation
-     */
-    public void ajouterRelation(ClasseEntiere classe, Relation relation) {
-        if (relations.containsKey(classe)) {
-            relations.get(classe).add(relation);
-        } else {
-            relations.put(classe, new ArrayList<>());
-            relations.get(classe).add(relation);
-        }
-    }
-
-    /**
-     * Méthode qui permet de supprimer une relation
-     * @param classe Classe
-     * @param fleche Flèche
-     */
-    public void supprimerRelation(ClasseEntiere classe, Fleche fleche) {
-        if (relations.containsKey(classe)) {
-            relations.get(classe).remove(fleche);
+            case "update hidden classes":
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueClasse){
+                        observateur.actualiser();
+                        break;
+                    }
+                }
+                break;
+            case "update visibilite fleche" :
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueClasse){
+                        ((VueClasse) observateur).actualiserFlechesVisibilite();
+                        return;
+                    }
+                }
+            case "update visibilite classe selection":
+                this.currentClickedClass.actualiserVisibilite();
+                break;
         }
     }
 
@@ -192,21 +187,8 @@ public class Model implements Sujet {
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
             relations.put(classe, new ArrayList<>(classe.getRelations()));
-
-            for (Observateur obs : this.observateurs) {
-                if (obs instanceof VueClasse) {
-                    ((VueClasse)obs).temp();
-                }
-            }
         }
-    }
-
-    /**
-     * Méthode qui permet de supprimer une Classe du model
-     * @param classe Classe
-     */
-    public void supprimerClasse(ClasseEntiere classe) {
-        relations.remove(classe);
+        this.notifierObservateur();
     }
 
     /**
@@ -215,7 +197,6 @@ public class Model implements Sujet {
      */
     public ArrayList<ClasseEntiere> getClasses() {
         return new ArrayList<>(relations.keySet());
-
     }
 
 
@@ -248,7 +229,7 @@ public class Model implements Sujet {
         }else {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
-            if (currentClickedClass.getNom() == this.currentClickedClass.getNom()) {
+            if (Objects.equals(currentClickedClass.getNom(), this.currentClickedClass.getNom())) {
                 this.currentClickedClass = null;
             } else {
                 this.currentClickedClass = currentClickedClass;
@@ -259,22 +240,10 @@ public class Model implements Sujet {
     }
 
     /**
-     * Retourne la classe grâce à son nom
-     *
-     * @param nom Le nom de la classe
-     * @return La classe correspondante
-     */
-    public Optional<ClasseEntiere> getClasse(String nom) {
-        return getClasses().stream().filter(classe -> classe.getNom().equals(nom)).findFirst();
-    }
-
-    /**
      * Methode qui permet de changer la possibilité d'afficher les attributs
      */
     public void afficherAttributs(boolean affiche) {
-        getClasses().forEach(classeEntiere -> {
-            classeEntiere.setAttributEstAffiche(affiche);
-        });
+        getClasses().forEach(classeEntiere -> classeEntiere.setAttributEstAffiche(affiche));
         notifierObservateur("totalite des classes");
     }
 
@@ -332,7 +301,6 @@ public class Model implements Sujet {
                 break;
             }
         }
-        notifierObservateur("actualisation fleches");
     }
 
     /**
@@ -357,4 +325,36 @@ public class Model implements Sujet {
         return null;
     }
 
+
+    /**
+     * Methode qui permet d'ajouter une classeCachée
+     * @param classe La classeCachée à ajouter
+     */
+    public void ajouterClasseCachee(VueClasseAffichage classe){
+        if (!this.hiddenClasses.contains(classe)){
+            System.out.println("La classe " + classe.getNom() + " a été ajoutée à la liste des classes cachées");
+            this.hiddenClasses.add(classe);
+            this.currentClickedClass.setClasseAffichee();
+            this.notifierObservateur("update visibilite classe selection");
+            this.notifierObservateur("update visibilite fleche");
+            this.currentClickedClass = null;
+
+        }
+//        this.notifierObservateur();
+
+    }
+
+    public void supprimerClasseCachee(VueClasseAffichage classe) {
+        if (this.hiddenClasses.contains(classe)) {
+            System.out.println("La classe " + classe.getNom() + " a ete supprimee de la liste des classes cachees");
+            this.hiddenClasses.remove(classe);
+            classe.setClasseAffichee();
+            classe.actualiserVisibilite();
+            this.notifierObservateur("update visibilite fleche");
+        }
+    }
+
+    public List<VueClasseAffichage> getHiddenClasses() {
+        return hiddenClasses;
+    }
 }

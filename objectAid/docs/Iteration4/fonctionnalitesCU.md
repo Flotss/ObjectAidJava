@@ -1,11 +1,11 @@
-TODO
-
 ## Fonctionnalité 1 : Importation
-##### Difficulté: 4
+##### Difficulté : 4
 
 En tant qu’étudiant, je souhaiterais pouvoir ajouter la fonctionnalité d'importation par un utilisateur :
 L'utilisateur pourra importer ses classes en fournissant le chemin de son fichier ou de son dossier.
-
+Pour éviter différents bugs dû à la précipitation, nous avons décidé de prolonger la tâche d'un
+sprint. En effet, cette fonctionnalité est terminée, mais la branche n'est pas encore Merge avec la branche
+principale. Nous préférons prendre notre temps pour merge, afin d'éviter tout gros bugs.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Gridel Alexis
@@ -39,6 +39,7 @@ Il faudra donc générer des flèches et autres relations entre les classes.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Mangin Florian
+- Bernard Julien
 
 ### Critères de validation :
 - Bouton pour réaliser cet affichage. 
@@ -53,59 +54,53 @@ Fonctionnalité inachevée --> sera prolongé dans le sprint suivant
 Les association s'affichent sur le rendu, mais sans sens et sans type de relation.
 Pour pouvoir différencier les relations, les fleches ont des couleurs : Héritage = rouge, Implémentation = vert, Association = bleu.
 
-
-## Fonctionnalité 3 : Afficher/Cacher les Attributs classe sélectionnée
+---
+## Fonctionnalité 3 : Afficher/cacher des classes
 ##### Difficulté: 1
 
-En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les constructeurs d'une classe sélectionnée pour pouvoir dégager l’essentiel. Cet affichage se fera à l'aide d'un bouton.
+En tant qu’étudiant, je souhaiterais pouvoir cacher ou non les classes sélectionnés pour pouvoir dégager les cas les plus pertinents. Cet affichage se fera à l'aide d'un bouton.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Bernard Julien
-- Grossmann Jérémy
-
+- Mangin Florian
 
 ### Critère de validation :
-- Bouton pour réaliser cet affichage
-- Les attributs de la classe sélectionnée s'affichent / se désaffichent après avoir appuyé sur le bouton
+- Dans le menu contextuel du clic droit un bouton cacher classe
+- La classe se cache avec ses relations
+- Un bouton pour afficher les classes cachées
+- La possibilité de les réafficher en cliquant sur le nom d'une classe
 
-### Détail de la fonctionnalité :
-Nous avons ajouté des boutons avec des controleurs pour ces derniers et nous sommes servit de l'attribut boolean, dans la classe,
-correspondant à si cette partie doit être affichée ou non. Le controleur appelle le modele qui va changer
-cet attribut de la classe selectionnée, lors de l'actualisation de la classe, l'attribut sera controlé pour vérifié si les attributs doivent
-être affichés.
-
-#### Patron d'architecture utilisé :
-- MVC : Pour séparer le modèle, la vue et le contrôleur.
-
-#### Patron de conception utilisé :
-- Observer/Observé : Pour que la vue puisse observer le modèle et se mettre à jour en fonction des changements.
+#### Détail de la fonctionnalité :
+Cette fonctionnalité permet de cacher des classes et de les réafficher.
+C'est à dire la création d'un bouton dans le menu contextuel du clic droit qui permet de cacher une classe et ses relations. De plus il faut pouvoir les réafficher en cliquant sur le nom d'une classe qui se trouve dans une nouvelle fenêtre.
 
 ### Etat :
-Fonctionnalité achevée
+Fonctionnalité achevée 
 
+---
+## Tâche supplémentaire : Perfection de l'apparence 
+##### Difficulté: 2
 
-## Fonctionnalité 4-5 : Afficher les méthodes et les constructeurs de la classe selectionnée
-Même principe que pour la fonctionnalitée 3
-
-#### Les étudiants qui se sont occupés de ces partie sont :
-- Bernard Julien
-- Grossman Jérémy
-
-### Etat :
-Fonctionnalité achevée
-
-
-
-## Tâche supplémentaire : Correction des problèmes de performances
-
-Lors du sprint précédent, nous actualisions l'ensemble de l'affichage à chaque modification,
-que ce soit les bordures, les déplacements ou les modification de l'affichage généraux.
-Or, pour les 2 premiers cas, nous ne voulions actualiser l'affichage que de la classe 
-que nous modifions.
+En tant qu’étudiant, je souhaiterais pouvoir ajuster / améliorer, parfaire l’apparence de mon application.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
+- Grossmann Jérémy
 - Bernard Julien
 
-### Etat :
-Tâche terminée
+### Critères de validation :
+- Centrer le titre de chaque classe
+- Pouvoir passer la souris sur une méthode/attribut/constructeur/nom pour voir le label complet(tooltip)
+- Réajuster l’application par rapport à la maquette (commencement)
+- Afficher un ContextMenu lors d'un clique droit sur une classe au lieu d'afficher des boutons 
+- Remplacer les boutons d'affichage spécifique par des MenuItem dans le ContextMenu
+- Ajouter couleurs pour les symboles
 
+#### Détail de la tâche supplémentaire :
+La tâche supplémentaire consiste à améliorer l'apparence de l'application.
+Nous avons choisi de changer l'affichage de l'application afin de rendre l'utilisation plus facile.
+Nous avons créé deux controleurs : un controleur pour gérer les MenuItem et un autre pour le click droit sur une classe.
+Le contenu d'une classe est maintenat plus lisible grâce aux tooltips rajoutés.
+
+
+### Etat :
+Tâche supplémentaire terminée

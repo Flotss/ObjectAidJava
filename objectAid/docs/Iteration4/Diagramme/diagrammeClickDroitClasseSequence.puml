@@ -1,0 +1,43 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant "clickDroitClasseController : ClickDroitClasseController" as controller
+participant "model: Model" as model
+participant "currentClickedClass: VueClasseAffichage" as classe
+participant "vueContextMenuClasse: VueContextMenuClasse" as context
+
+
+
+activate user
+user -> controller : handle(ContextMenuEvent: event)
+activate controller
+
+alt CurrentClass == null or CurrentClass.getNom().equals(classe.getNom())
+
+controller -> model : setCurrentClass(Classe: classe)
+activate model
+model -> model : verification des différents cas
+model -> model : notifierObservateur("selection")
+model -> classe : actualiserBordure()
+
+activate classe
+classe -> classe : setStyle("...")
+classe --> model
+deactivate classe
+
+model --> controller
+deactivate model
+end alt
+controller -> context : show(VueClasseAffichage: classe, double: x, double: y)
+activate context
+context --> controller
+deactivate context
+controller --> user
+
+
+deactivate controller
+deactivate user
+
+@enduml

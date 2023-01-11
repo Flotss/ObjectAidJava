@@ -13,7 +13,7 @@ public class FlecheHeritage extends Fleche {
     /**
      * Line qui représente la fermeture de la flèche
      */
-    private Line arrowFermeture;
+    private final Line arrowFermeture;
 
     /**
      * Constructeur de la classe

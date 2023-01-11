@@ -5,6 +5,10 @@ import javafx.stage.Stage;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.ApplicationLayoutView;
 
+
+/**
+ * Classe principale de l'application
+ */
 public class ObjectAidApplication extends Application {
     public static void main(String[] args) {
         launch();
