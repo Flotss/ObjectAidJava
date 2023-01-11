@@ -109,3 +109,25 @@ Importation avec succès, manque plus qu'à merge avec la branche principale.
 
 Reste à fixer le bug lors du merge main -> branche qui s'est imposé.
 + Voir si on peut modulariser l'importation d'un quelconque projet.
+
+
+## Fonctionnalité 5 : Supprimer des classes
+##### Difficulté : 1
+
+En tant qu’étudiant, je souhaiterais pouvoir supprimer des classes de mon diagramme pour pouvoir permettre une personnalisation adéquate du projet.
+
+#### Les étudiants qui se sont occupés de cette partie sont :
+- Grossmann Jérémy
+
+### Critères de validation :
+- Après un clic droit sur une classe, il y a la possibilité de supprimer cette classe avec un MenuItem
+- Un MenuItem doit etre ajouté afin de supprimer toutes les classes présentes dans le diagramme
+
+### Etat :
+Fonctionnalité achevée
+
+
+#### Détail de la fonctionnalité :
+La fonctionnalité permet de supprimer une classe seléctionnée ou toutes les classes. 
+
+
