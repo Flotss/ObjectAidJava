@@ -77,3 +77,6 @@ Une fois les classes à gauche dans l'arborescence, on peut glisser-déposer (dr
 
 ### Avancement par rapport aux autres itérations :
 Importation avec succès, manque plus qu'à merge avec la branche principale.
+
+Reste à fixer le bug lors du merge main -> branche qui s'est imposé.
++ Voir si on peut modulariser l'importation d'un quelconque projet.
