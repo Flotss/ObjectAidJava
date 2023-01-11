@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.service;
+package org.teamtree.objectaid.Service;
 
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.util.FileExtension;
@@ -13,14 +13,14 @@ import java.util.Arrays;
  * Représente le chargeur de classe, s'occupant de la partie business de la création de classe
  * à partir de fichiers de classes.
  */
-public class JavaProjectClassLoader extends ClassLoader {
+public class JavaProjectClassLoaderService extends ClassLoader {
 
     private final Path rootPath;
     private final StringBuffer packagePath;
 
     private final Model model;
 
-    public JavaProjectClassLoader(Path rootPath, Model model) {
+    public JavaProjectClassLoaderService(Path rootPath, Model model) {
         this.rootPath = rootPath;
         this.packagePath = new StringBuffer();
         this.model = model;

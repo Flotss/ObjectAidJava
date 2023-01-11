@@ -1,27 +1,31 @@
 package org.teamtree.objectaid.MVC.Vue;
 
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.service.JavaProjectClassLoader;
+
+import javafx.scene.Scene;
+import javafx.scene.control.CheckBoxTreeItem;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+
+import org.teamtree.objectaid.Service.JavaProjectClassLoaderService;
 import org.teamtree.objectaid.util.FileExtension;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Objects;
-import java.util.Queue;
 
 public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
     private final Model model;
@@ -37,7 +41,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
         TreeItem<String> root = new TreeItem<>();
 
-        final var classLoader = new JavaProjectClassLoader(model.getCurrentProject(), model);
+        final var classLoader = new JavaProjectClassLoaderService(model.getCurrentProject(), model);
         classLoader.loadClasses(model.getCurrentProject().toFile());
 
         Arrays.stream(Objects.requireNonNull(model.getCurrentProject().toFile().listFiles())).forEach(file -> createTree(file, root));
