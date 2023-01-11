@@ -7,6 +7,7 @@ import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
+import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 import org.teamtree.objectaid.ObjectAidApplication;
 import org.teamtree.objectaid.Service.SqueletteService;
 
@@ -70,9 +71,22 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 break;
 
             case "Supprimer":
-                VueClasseAffichage classe1 = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
-                model.supprimerClasseAffichage(classe1);
-                ((MenuItem) event.getSource()).getParentMenu().getParentMenu().getItems().remove(((MenuItem) event.getSource()).getParentMenu());
+                if(((MenuItem) event.getSource()).getParentMenu() != null){
+                    VueClasseAffichage classe1 = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
+                    model.supprimerClasseAffichage(classe1);
+                    ((MenuItem) event.getSource()).getParentMenu().getParentMenu().getItems().remove(((MenuItem) event.getSource()).getParentMenu());
+                } else {
+                    VueClasseAffichage classe1 = ((VueContextMenuClasse) ((MenuItem) event.getSource()).getParentPopup()).getClasse();
+                    model.supprimerClasseAffichage(classe1);
+                    for (MenuItem m: ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
+                        if (m.getText().equals(classe1.getNom())) {
+                            ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().remove(m);
+                            break;
+                        }
+                    }
+                }
+
+
                 break;
             case "Générer le squelette":
                 ClasseEntiere classeE = model.getCurrentClickedClass().getClasseEntiere();

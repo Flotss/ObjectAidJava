@@ -1,5 +1,6 @@
 package org.teamtree.objectaid.Service;
 
+import javafx.scene.control.Alert;
 import javafx.stage.DirectoryChooser;
 import org.teamtree.objectaid.Classe.Attribut;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
@@ -25,9 +26,12 @@ public class SqueletteService {
 
         if (f == null) return;
 
+        String messageAlert = "";
         for (ClasseEntiere classe : classes) {
-            genererSquelette(f, classe);
+           messageAlert += genererSquelette(f, classe) + "\n";
         }
+
+        alert(messageAlert);
     }
 
 
@@ -38,11 +42,13 @@ public class SqueletteService {
 
         if (f == null) return;
 
-        genererSquelette(f, classe);
+        alert(genererSquelette(f, classe));
     }
 
 
-    private void genererSquelette(File f, ClasseEntiere classe) {
+    private String genererSquelette(File f, ClasseEntiere classe) {
+        String message = "Erreur lors de la génération du squelette de la classe " + classe.getNom() + " !";
+
         BufferedWriter bw = null;
         try {
             String squeletteContenu = "";
@@ -117,17 +123,27 @@ public class SqueletteService {
             FileWriter fw = new FileWriter(file);
             bw = new BufferedWriter(fw);
             bw.write(squeletteContenu);
-            System.out.println("Squelette de classe de : " + classe.getNom() + " genere avec succes");
-
+            message = "Squelette de classe de : " + classe.getNom() + " genere avec succes";
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } finally {
             try {
-                if (bw != null)
+                if (bw != null) {
                     bw.close();
+                }
             } catch (Exception ex) {
                 System.out.println("Erreur dans la fermeture de BufferedWriter" + ex);
             }
         }
+        return message;
+    }
+
+
+    private void alert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
