@@ -8,4 +8,9 @@ public class Abstract implements Etat{
     public String getEtat(){
         return "abstract";
     }
+
+    @Override
+    public String getUml(){
+        return "{abstract}";
+    }
 }

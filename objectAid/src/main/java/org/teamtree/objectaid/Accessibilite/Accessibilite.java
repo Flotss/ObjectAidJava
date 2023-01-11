@@ -19,4 +19,10 @@ public interface Accessibilite {
      * @return La forme de l'accessibilité
      */
     Shape getShape();
+
+    /**
+     * Méthode qui retourne le chaine de caractère de l'accessibilité en Uml
+     * @return La chaine de caractère de l'accessibilité en Uml
+     */
+    String getUml();
 }

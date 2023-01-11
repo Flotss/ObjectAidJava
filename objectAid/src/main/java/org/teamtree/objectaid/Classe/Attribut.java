@@ -102,4 +102,19 @@ public class Attribut {
         info += " " + type + " " + nom;
         return info + "\n";
     }
+
+    /**
+     * Retourne l'uml de l'attribut
+     * @return L'uml de l'attribut
+     */
+    public String getUml() {
+        String info = accessibilite.getUml();
+        if (etat.size() > 0) {
+            for (Etat etat : etat) {
+                info += " " + etat.getEtat();
+            }
+        }
+        info += " " + nom + " : " + type;
+        return info;
+    }
 }

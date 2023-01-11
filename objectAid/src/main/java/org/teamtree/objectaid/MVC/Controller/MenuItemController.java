@@ -9,6 +9,7 @@ import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 import org.teamtree.objectaid.ObjectAidApplication;
 import org.teamtree.objectaid.Service.SqueletteService;
+import org.teamtree.objectaid.Service.UmlService;
 
 /**
  * Classe qui permet de gérer tous les MenuItem de l'application
@@ -95,6 +96,10 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             case "Générer squelette":
                 SqueletteService squeletteService1 = new SqueletteService();
                 squeletteService1.genererSqueletteDiagramme(model.getClasses());
+                break;
+            case "Générer UML":
+                UmlService umlService = new UmlService();
+                umlService.genererUmltoFile(model.getClasses());
                 break;
             case "Cacher interface":
                 model.afficherInterfaceHeritageSelection("Implementation");

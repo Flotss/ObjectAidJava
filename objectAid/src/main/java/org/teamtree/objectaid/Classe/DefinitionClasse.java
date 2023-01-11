@@ -81,15 +81,31 @@ public class DefinitionClasse {
 
     @Override
     public String toString() {
-        String info = accessibilite.getAcces();
+        String info = "";
         if (etats.size() > 0) {
             for (Etat etat : etats) {
-                info += " " + etat.getEtat();
+                info += " " + etat.getEtat().replace("{", "").replace("}", "");
             }
         }
         info += " " + entite.getEntite() + " " + nomClasse;
         return info + "\n";
     }
+
+
+    /**
+        * Retourne l'uml de la classe
+        * @return L'uml de la classe
+        */
+         public String getUml() {
+             String uml = "";
+             if (etats.size() > 0 && ! entite.getEntite().equals("interface")) {
+                 for (Etat etat : etats) {
+                     uml += etat.getUml().replace("{", "").replace("}", "") + " ";
+                 }
+             }
+             uml += entite.getEntite() + " " + nomClasse;
+             return uml;
+         }
 
 
 }

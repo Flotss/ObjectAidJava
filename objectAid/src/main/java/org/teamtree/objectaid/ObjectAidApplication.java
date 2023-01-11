@@ -102,7 +102,9 @@ public class ObjectAidApplication extends Application {
         Menu generer = new Menu("Générer");
         MenuItem genererSquelette = new MenuItem("Générer squelette");
         genererSquelette.setOnAction(new MenuItemController(model));
-        generer.getItems().add(genererSquelette);
+        MenuItem genererUml = new MenuItem("Générer UML");
+        genererUml.setOnAction(new MenuItemController(model));
+        generer.getItems().addAll(genererSquelette, genererUml);
 
         menuBar.getMenus().addAll(menuItem, listeClasse, supprimer_les_classes, generer);
 

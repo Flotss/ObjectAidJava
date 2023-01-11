@@ -31,4 +31,8 @@ public class Default implements Accessibilite {
     public String toString(){
         return "Default";
     }
+
+    public String getUml(){
+        return "";
+    }
 }

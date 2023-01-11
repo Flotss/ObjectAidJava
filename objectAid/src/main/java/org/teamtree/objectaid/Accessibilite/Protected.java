@@ -31,4 +31,8 @@ public class Protected implements Accessibilite {
     public String toString(){
         return "Protected";
     }
+
+    public String getUml(){
+        return "#";
+    }
 }

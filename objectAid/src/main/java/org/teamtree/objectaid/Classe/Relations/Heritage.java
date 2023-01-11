@@ -18,4 +18,13 @@ public class Heritage extends Relation {
     public String toString() {
         return "Heritage: " + getDepart() + " -> " + getDestination();
     }
+
+    /**
+     * Méthode qui retourne l'uml de la relation
+     * @return L'uml de la relation
+     */
+    @Override
+    public String getUml() {
+        return getDestination() + " <|-- " + getDepart();
+    }
 }

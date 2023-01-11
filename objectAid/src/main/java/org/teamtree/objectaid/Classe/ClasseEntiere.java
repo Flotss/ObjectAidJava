@@ -382,4 +382,37 @@ public class ClasseEntiere {
     public boolean isRelationsEstAffiche() {
         return attributEstAffiche;
     }
+
+
+    /**
+     * Retourne l'uml de la classe entiere
+     * @return L'uml de la classe entiere : String
+     */
+    public String getUml() {
+        StringBuilder uml = new StringBuilder();
+        uml.append(definition.getUml() + "{\n");
+        if (attributs.size() > 0) {
+            for (Attribut attribut : attributs) {
+                uml.append("\t\t").append(attribut.getUml() + "\n");
+            }
+        }
+        if (contructeurs.size() > 0) {
+            for (Constructeur constructeur : contructeurs) {
+                uml.append("\t\t").append(constructeur.getUml() + "\n");
+            }
+        }
+        if (methods.size() > 0) {
+            for (Methode methode : methods) {
+                uml.append("\t\t").append(methode.getUml() + "\n");
+            }
+        }
+        uml.append("}\n\n");
+        if (relations.size() > 0) {
+            for (Relation relation : relations) {
+                uml.append(relation.getUml() + "\n");
+            }
+        }
+        uml.append("\n");
+        return uml.toString();
+    }
 }
