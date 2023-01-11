@@ -65,8 +65,6 @@ public class ObjectAidApplication extends Application {
 //        ClasseEntiere c9 = new ClasseEntiere("org.teamtree.objectaid.Etat.Etat");
 //        model.ajouterClasse(c9);
 
-
-
 //        VueFleche vueFleche = new VueFleche(model);
 //        model.ajouterObservateur(vueFleche);
 
@@ -91,7 +89,6 @@ public class ObjectAidApplication extends Application {
 
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
 
-        System.out.println(model.getClasses().size());
         for (ClasseEntiere ce: model.getClasses()) {
             Menu nomClasseMenu = new Menu(ce.getClasseAffichage().getNom());
             MenuItem afficherCacherClasse = new MenuItem("Afficher/Cacher");
@@ -103,6 +100,12 @@ public class ObjectAidApplication extends Application {
         }
 
         menuBar.getMenus().addAll(menuItem, listeClasse, supprimer_les_classes);
+        Menu generer = new Menu("Générer");
+        MenuItem genererSquelette = new MenuItem("Générer squelette");
+        genererSquelette.setOnAction(new MenuItemController(model));
+        generer.getItems().add(genererSquelette);
+
+        menuBar.getMenus().addAll(menuItem, listeClasse, generer);
 
         applicationLayout.getChildren().addAll(menuBar,vueClass);
 
