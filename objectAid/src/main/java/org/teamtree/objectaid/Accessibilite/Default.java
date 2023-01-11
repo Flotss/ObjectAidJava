@@ -27,4 +27,8 @@ public class Default implements Accessibilite {
         triangle.setTranslateX(-3);
         return triangle;
     }
+
+    public String toString(){
+        return "Default";
+    }
 }

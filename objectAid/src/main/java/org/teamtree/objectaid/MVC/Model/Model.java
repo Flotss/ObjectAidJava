@@ -12,10 +12,10 @@ import java.util.*;
 public class Model implements Sujet {
 
     /** Liste des observateurs */
-    private final ArrayList<Observateur> observateurs;
+    private final List<Observateur> observateurs;
 
     /** Liste des classes avec leurs flèches*/
-    private final HashMap<ClasseEntiere, ArrayList<Relation>> relations;
+    private final Map<ClasseEntiere, ArrayList<Relation>> relations;
 
     /** Classe sélectionnée */
     private VueClasseAffichage currentClickedClass;
@@ -299,7 +299,7 @@ public class Model implements Sujet {
      */
     public void ajouterClasseCachee(VueClasseAffichage classe){
         if (!this.hiddenClasses.contains(classe)){
-            System.out.println("La classe " + classe.getNom() + " a été ajoutée à la liste des classes cachées");
+            System.out.println("La classe " + classe.getNom() + " a ete ajoutee à la liste des classes cachees");
             this.hiddenClasses.add(classe);
             this.currentClickedClass.setClasseAffichee();
             this.notifierObservateur("update visibilite classe selection");
@@ -308,8 +308,6 @@ public class Model implements Sujet {
             this.currentClickedClass = null;
 
         }
-//        this.notifierObservateur();
-
     }
 
     public void supprimerClasseCachee(VueClasseAffichage classe) {

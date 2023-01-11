@@ -261,11 +261,6 @@ public class VueClasseAffichage extends VBox implements Observateur {
     public void afficherClasse(){
         this.getChildren().clear();
 
-//       Si la classe est est cachée, on ne l'affiche pas
-        if (model.getHiddenClasses().contains(this)) {
-            return;
-        }
-
         updateAttributsRelation();
 
         //On ajoute les différentes parties de la classe
@@ -362,7 +357,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
     }
 
     /**
-     * Méthode qui permet de créer l'affichage de la classe
+     * Méthode qui permet de mettre a jour la position de la classe affiché
      */
     public void actualiserPosition(){
         this.setLayoutX(classeEntiere.getX());
