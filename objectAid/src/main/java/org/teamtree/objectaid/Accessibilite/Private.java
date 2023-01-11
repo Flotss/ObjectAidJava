@@ -23,4 +23,8 @@ public class Private implements Accessibilite {
         rectangle.setTranslateX(-3);
         return rectangle;
     }
+
+    public String toString(){
+        return "Private";
+    }
 }

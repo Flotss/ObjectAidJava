@@ -13,6 +13,7 @@ import org.teamtree.objectaid.Etat.Abstract;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
+import org.teamtree.objectaid.MVC.Controller.ListenerModificationTailleClasse;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.List;
@@ -83,7 +84,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
         this.methodes = new VBox();
         this.model = model;
         this.classeAffichee = true;
-
+        this.heightProperty().addListener(new ListenerModificationTailleClasse(model, this));
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
@@ -260,11 +261,6 @@ public class VueClasseAffichage extends VBox implements Observateur {
     public void afficherClasse(){
         this.getChildren().clear();
 
-//       Si la classe est est cachée, on ne l'affiche pas
-        if (model.getHiddenClasses().contains(this)) {
-            return;
-        }
-
         updateAttributsRelation();
 
         //On ajoute les différentes parties de la classe
@@ -361,7 +357,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
     }
 
     /**
-     * Méthode qui permet de créer l'affichage de la classe
+     * Méthode qui permet de mettre a jour la position de la classe affiché
      */
     public void actualiserPosition(){
         this.setLayoutX(classeEntiere.getX());
@@ -386,9 +382,12 @@ public class VueClasseAffichage extends VBox implements Observateur {
         this.classeAffichee = !this.classeAffichee;
     }
 
+    public void setClasseAffichee(boolean b){
+        this.classeAffichee = b;
+    }
+
 
     public void actualiserVisibilite(){
-        System.out.println("esjfnzejnf");
         this.setVisible(classeAffichee);
     }
 

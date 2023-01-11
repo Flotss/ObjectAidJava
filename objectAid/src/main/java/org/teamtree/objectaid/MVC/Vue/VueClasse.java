@@ -18,6 +18,7 @@ import org.teamtree.objectaid.MVC.Model.Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Classe qui permet de représenter la vue des classes
@@ -28,7 +29,7 @@ public class VueClasse extends Pane implements Observateur {
     private final Model model;
 
     /** HashMap qui represente la liste des classes à afficher, chaque classe possede comme clé le nom de la classe */
-    private final HashMap<String, VueClasseAffichage> classes;
+    private final Map<String, VueClasseAffichage> classes;
 
     /** Liste des fleches */
     private final List<Fleche> fleches;
@@ -94,6 +95,7 @@ public class VueClasse extends Pane implements Observateur {
             classe.setOnContextMenuRequested(new ClickDroitClasseController(model,classe));
 
             classes.put(classe.getNom(),classe);
+            classEntiere.setClasseAffichage(classe);
         }
         model.ajouterObservateur(this);
 
@@ -173,6 +175,17 @@ public class VueClasse extends Pane implements Observateur {
     }
 
     /**
+     * Méthode qui permet de actualiser la vue des fleches
+     */
+    public void actualiserFlechesSpecifique(VueClasseAffichage vueClasseAffichage) {
+        for (Fleche fleche : fleches) {
+            if(fleche.getVueClasseArrivee().getNom() == vueClasseAffichage.getNom() || fleche.getVueClasseDepart().getNom() == vueClasseAffichage.getNom()){
+                fleche.actualiser();
+            }
+        }
+    }
+
+    /**
      * Méthode qui permet de actualiser la visibilite des fleches
      */
     public void actualiserFlechesVisibilite() {
@@ -189,5 +202,11 @@ public class VueClasse extends Pane implements Observateur {
         for (Fleche fleche : fleches) {
             fleche.definirVisibilite(visibilite);
         }
+    }
+
+    public List<VueClasseAffichage> getClasses() {
+        ArrayList<VueClasseAffichage> classes = new ArrayList<>();
+        this.classes.keySet().forEach(key -> classes.add(this.classes.get(key)));
+        return classes;
     }
 }

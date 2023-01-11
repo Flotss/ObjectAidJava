@@ -132,6 +132,7 @@ public class Fleche extends Group implements Observateur {
 
     @Override
     public void actualiser() {
+        //TODO: a séparé en LesPoints et en Visibilite
         actualiserLesPoints();
         actualiserVisibilite();
     }

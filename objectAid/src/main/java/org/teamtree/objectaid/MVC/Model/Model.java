@@ -20,13 +20,11 @@ public class Model implements Sujet {
 
     private final Map<String, Class<?>> classesPath = new HashMap<>();
 
-    /**
-     * Liste des observateurs
-     */
-    private final ArrayList<Observateur> observateurs;
+    /** Liste des observateurs */
+    private final List<Observateur> observateurs;
 
     /** Liste des classes avec leurs flèches*/
-    private final HashMap<ClasseEntiere, ArrayList<Relation>> relations;
+    private final Map<ClasseEntiere, ArrayList<Relation>> relations;
 
     /** Classe sélectionnée */
     private VueClasseAffichage currentClickedClass;
@@ -154,9 +152,9 @@ public class Model implements Sujet {
                         break;
                     }
                 }
-                this.notifierObservateur("actualisation fleches");
                 break;
             case "update hidden classes":
+                //TODO: A modifier --> ne s'occuper que de la visibilitée
                 for(Observateur observateur: this.observateurs){
                     if(observateur instanceof VueClasse){
                         observateur.actualiser();
@@ -174,6 +172,13 @@ public class Model implements Sujet {
             case "update visibilite classe selection":
                 this.currentClickedClass.actualiserVisibilite();
                 break;
+            case "click droit":
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueContextMenuClasse){
+                        observateur.actualiser();
+                        return;
+                    }
+                }
         }
     }
 
@@ -332,16 +337,15 @@ public class Model implements Sujet {
      */
     public void ajouterClasseCachee(VueClasseAffichage classe){
         if (!this.hiddenClasses.contains(classe)){
-            System.out.println("La classe " + classe.getNom() + " a été ajoutée à la liste des classes cachées");
+            System.out.println("La classe " + classe.getNom() + " a ete ajoutee à la liste des classes cachees");
             this.hiddenClasses.add(classe);
             this.currentClickedClass.setClasseAffichee();
             this.notifierObservateur("update visibilite classe selection");
+            //TODO: A modifier: ne pas mettre à jour toutes les fleches
             this.notifierObservateur("update visibilite fleche");
             this.currentClickedClass = null;
 
         }
-//        this.notifierObservateur();
-
     }
 
     public void supprimerClasseCachee(VueClasseAffichage classe) {
@@ -354,7 +358,25 @@ public class Model implements Sujet {
         }
     }
 
+    public void supprimerClasseAffichage(VueClasseAffichage classe){
+        this.currentClickedClass = classe;
+        this.currentClickedClass.setClasseAffichee(false);
+        this.notifierObservateur("update visibilite classe selection");
+        this.notifierObservateur("update visibilite fleche");
+        this.currentClickedClass = null;
+        supprimerObservateur(classe);
+    }
+
     public List<VueClasseAffichage> getHiddenClasses() {
         return hiddenClasses;
+    }
+
+    public Observateur getObservateur(String nom){
+        for(Observateur observateur: this.observateurs){
+            if(observateur.getClass().getSimpleName().equals(nom)){
+                return observateur;
+            }
+        }
+        return null;
     }
 }
