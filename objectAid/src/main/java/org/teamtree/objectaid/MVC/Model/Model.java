@@ -60,11 +60,7 @@ public class Model implements Sujet {
 
         if (currentProject.resolve("src").toFile().exists()) {
             this.currentProject = currentProject.resolve("src");
-
-            System.out.println("A source folder was found, using it as root");
         }
-
-        System.out.println("Set current project to " + currentProject);
 
         setApplicationState(ApplicationState.PROJECT_LOADED);
     }
@@ -128,9 +124,6 @@ public class Model implements Sujet {
      */
 
     public void notifierObservateur(String selection) {
-
-        System.out.println("Notifying observers with selection " + selection);
-
         switch (selection) {
             case "app":
                 this.observateurs.stream().filter(o -> o instanceof ApplicationLayoutView).findFirst().ifPresent(Observateur::actualiser);
@@ -411,7 +404,6 @@ public class Model implements Sujet {
      */
     public void ajouterClasseCachee(VueClasseAffichage classe) {
         if (!this.hiddenClasses.contains(classe)) {
-            System.out.println("La classe " + classe.getNom() + " a ete ajoutee à la liste des classes cachees");
             this.hiddenClasses.add(classe);
             this.currentClickedClass = classe;
             this.currentClickedClass.setClasseAffichee();
@@ -425,7 +417,6 @@ public class Model implements Sujet {
 
     public void supprimerClasseCachee(VueClasseAffichage classe) {
         if (this.hiddenClasses.contains(classe)) {
-            System.out.println("La classe " + classe.getNom() + " a ete supprimee de la liste des classes cachees");
             this.hiddenClasses.remove(classe);
             classe.setClasseAffichee();
             classe.actualiserVisibilite();
@@ -466,6 +457,12 @@ public class Model implements Sujet {
         return observateurs;
     }
 
+    /**
+     * Methode qui permet de tester si la vue en parametre est une vueClasseAffichage qui est cachée
+     * @param vueClasseAffichage1 La vue à tester
+     * @return booleen qui indique si la vue est cachée
+     */
+
     public boolean classeMasquee(VueClasseAffichage vueClasseAffichage1) {
         for (VueClasseAffichage vueClasseAffichage2 : hiddenClasses) {
             if (vueClasseAffichage2.getNom() == vueClasseAffichage1.getNom()) {
@@ -474,6 +471,15 @@ public class Model implements Sujet {
         }
         return false;
     }
+
+    /**
+     * Methode qui permet d'ajouter une methode à une classe
+     * @param accessibilite L'accessibilité de la méthode
+     * @param modifiers Liste des etats de la méthode
+     * @param nom Le nom de la méthode
+     * @param type Le type de retour de la méthode
+     * @param param paramètres de la méthode
+     */
 
     public void ajouterMethode(Accessibilite accessibilite, ArrayList<Etat> modifiers, String nom, String type, String param){
         this.currentClickedClass.getClasseEntiere().ajouterMethode(new Methode(nom,type,accessibilite,param,modifiers));
