@@ -3,11 +3,7 @@ package org.teamtree.objectaid.render;
 
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
-import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
-import org.teamtree.objectaid.MVC.Controller.MenuItemController;
-import org.teamtree.objectaid.MVC.Controller.TreeViewDragDetectedController;
-import org.teamtree.objectaid.MVC.Controller.VboxDragDroppedController;
-import org.teamtree.objectaid.MVC.Controller.VboxDragOverController;
+import org.teamtree.objectaid.MVC.Controller.*;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import javafx.scene.Scene;
@@ -74,8 +70,6 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
         Menu menuItem = new Menu("Afficher/cacher");
         final var listeClasse = new VueListeClasse("Liste des classes", model);
-        MenuItem afficher = new MenuItem("Afficher/Cacher");
-        MenuItem supprimer = new MenuItem("Supprimer");
         MenuItem menuItem2 = new MenuItem("Constructeurs");
        
         final var controllerBtnGeneral = new ControllerButtonGeneral(model);
@@ -101,7 +95,15 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
             listeClasse.getItems().add(nomClasseMenu);
         }
 
-        menubar.getMenus().addAll(menuItem, listeClasse);
+        Menu menuGeneration = new Menu("Générer");
+        MenuItem itemGenererUml = new MenuItem("Générer UML");
+        itemGenererUml.setOnAction(new GenererButtonController(model));
+        MenuItem itemGenererSquelette = new MenuItem("Générer squelette");
+        itemGenererSquelette.setOnAction(new GenererButtonController(model));
+        menuGeneration.getItems().addAll(itemGenererUml, itemGenererSquelette);
+
+
+        menubar.getMenus().addAll(menuItem, listeClasse, menuGeneration);
 
         vbox.getChildren().addAll(menubar, vueClasse);
 
