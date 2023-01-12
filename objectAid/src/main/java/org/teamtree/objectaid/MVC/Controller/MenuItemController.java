@@ -69,9 +69,9 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 break;
 
             case "Supprimer":
-                VueClasseAffichage classe1 = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
+                VueClasseAffichage classe1 = model.getCurrentClickedClass();
                 model.supprimerClasseAffichage(classe1);
-                ((MenuItem) event.getSource()).getParentMenu().getParentMenu().getItems().remove(((MenuItem) event.getSource()).getParentMenu());
+                ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().removeIf(m -> m.getText().equals(model.getCurrentClickedClass().getNom()));
                 break;
             case "Générer le squelette":
                 ClasseEntiere classeE = model.getCurrentClickedClass().getClasseEntiere();
