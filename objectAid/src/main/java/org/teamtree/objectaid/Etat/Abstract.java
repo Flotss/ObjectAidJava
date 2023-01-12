@@ -13,4 +13,9 @@ public class Abstract implements Etat{
     public String getUml(){
         return "{abstract}";
     }
+
+    @Override
+    public String toString(){
+        return "Abstract";
+    }
 }

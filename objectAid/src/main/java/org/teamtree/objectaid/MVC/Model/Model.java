@@ -1,5 +1,8 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Classe.Methode;
+import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.MVC.Vue.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
@@ -107,7 +110,6 @@ public class Model implements Sujet {
      */
     public void notifierObservateur() {
         for (Observateur o : observateurs) {
-            System.out.println("Notifying " + o);
             o.actualiser();
         }
     }
@@ -158,11 +160,8 @@ public class Model implements Sujet {
                 }
                 break;
             case "totalite des classes":
-                for (Observateur observateur : this.observateurs) {
-                    if (observateur instanceof VueClasse) {
-
-                        System.out.println("Notifying " + observateur);
-
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueClasse){
                         observateur.actualiser();
                         break;
                     }
@@ -170,8 +169,8 @@ public class Model implements Sujet {
                 break;
             case "update hidden classes":
                 //TODO: A modifier --> ne s'occuper que de la visibilitée
-                for (Observateur observateur : this.observateurs) {
-                    if (observateur instanceof VueClasse) {
+                for(Observateur observateur: this.observateurs){
+                    if(observateur instanceof VueClasse){
                         observateur.actualiser();
                         break;
                     }
@@ -472,4 +471,9 @@ public class Model implements Sujet {
         return false;
     }
 
+    public void ajouterMethode(Accessibilite accessibilite, ArrayList<Etat> modifiers, String nom, String type, String param){
+        this.currentClickedClass.getClasseEntiere().ajouterMethode(new Methode(nom,type,accessibilite,param,modifiers));
+        this.currentClickedClass.setMethodes();
+        this.notifierObservateur("classe selection complete");
+    }
 }

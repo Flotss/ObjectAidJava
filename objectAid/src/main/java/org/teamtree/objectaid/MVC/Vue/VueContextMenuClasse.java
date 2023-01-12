@@ -1,6 +1,7 @@
 package org.teamtree.objectaid.MVC.Vue;
 
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -61,7 +62,12 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         itemInterface.setOnAction(new MenuItemController(model));
         itemHeritage = new MenuItem("Cacher heritage");
         itemHeritage.setOnAction(new MenuItemController(model));
-        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse, itemSupprimerClasse, itemInterface, itemHeritage, itemGenererSquelette);
+        Menu itemAjouter = new Menu("Ajouter");
+        MenuItem itemAjouterAttribut = new MenuItem("Méthode");
+        itemAjouterAttribut.setId("ajouterMethode");
+        itemAjouterAttribut.setOnAction(new MenuItemController(model));
+        itemAjouter.getItems().add(itemAjouterAttribut);
+        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse, itemSupprimerClasse, itemInterface, itemHeritage, itemGenererSquelette, itemAjouter);
         this.classe = null;
     }
 
