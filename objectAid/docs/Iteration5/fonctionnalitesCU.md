@@ -44,9 +44,6 @@ Pour ce faire, lors du clic sur le bouton correspondant, on récupère les relat
 d'implémentation de la classe correspondante et on masque la classe qu'elle extend
 (avec les relation allant avec)
 
-<<<<<<< HEAD
-## Fonctionnalité 3 : Importation
-=======
 ---
 ## Fonctionnalité 3 : Générer le squelette d'une classe ou de plusieurs classes
 ##### Difficulté : 2
@@ -76,7 +73,6 @@ La fonctionnalité utilise un service de génération de squelette de classe. Lo
 
 
 ## Fonctionnalité 4 : Importation
->>>>>>> origin/main
 ##### Difficulté : 4
 
 En tant qu’étudiant, je souhaiterais pouvoir ajouter la fonctionnalité d'importation par un utilisateur :
@@ -112,9 +108,6 @@ Une fois les classes à gauche dans l'arborescence, on peut glisser-déposer (dr
 Importation avec succès, manque plus qu'à merge avec la branche principale.
 
 Reste à fixer le bug lors du merge main -> branche qui s'est imposé.
-<<<<<<< HEAD
-+ Voir si on peut modulariser l'importation d'un quelconque projet.
-=======
 + Voir si on peut modulariser l'importation d'un quelconque projet.
 
 
@@ -156,7 +149,3 @@ Un seul controleur gère tous les MenuItem du menu.
 
 ### Etat :
 Tâche achevée
-
-
-
->>>>>>> origin/main
