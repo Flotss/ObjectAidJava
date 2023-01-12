@@ -58,7 +58,7 @@ public class FabriqueAffichage {
         classe.setMethodes();
 
         //ajout des parties de la classe
-        classe.afficherClasse();
+        classe.actualiser();
 
         //coordonees de la classe
         classe.actualiserPosition();

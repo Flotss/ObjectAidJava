@@ -68,7 +68,7 @@ public class VueClasse extends Pane implements Observateur {
     @Override
     public void actualiser() {
         for (ClasseEntiere classe : model.getClasses()) {
-            classe.getClasseAffichage().afficherClasse();
+            classe.getClasseAffichage().actualiser();
         }
         System.out.println(fleches.size());
         actualiserFleche();

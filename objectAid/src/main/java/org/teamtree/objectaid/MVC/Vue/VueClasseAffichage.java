@@ -259,32 +259,6 @@ public class VueClasseAffichage extends VBox implements Observateur {
         }
     }
 
-
-
-    /**
-     * Méthode qui permet de créer l'affichage de la classe
-     */
-    public void afficherClasse(){
-        this.getChildren().clear();
-
-        updateAttributsRelation();
-
-        //On ajoute les différentes parties de la classe
-        //TODO: a renomé en actualiser (julien le fera)
-        //On ajoute les différentes parties de la classe
-        this.getChildren().add(definition);
-        if (classeEntiere.isAttributEstAffiche()) {
-            this.getChildren().add(attributs);
-            this.getChildren().add(attributsRelation);
-        }
-        if (classeEntiere.isConstructeurEstAffiche()) {
-            this.getChildren().add(constructeur);
-        }
-        if (classeEntiere.isMethodsEstAffiche()) {
-            this.getChildren().add(methodes);
-        }
-    }
-
     /**
      * Retourne le nom de la classe affichée
      * @return le nom de la classe affichée : String
@@ -370,9 +344,29 @@ public class VueClasseAffichage extends VBox implements Observateur {
         this.setLayoutY(classeEntiere.getY());
     }
 
-
+    /**
+     * Méthode qui permet de créer l'affichage de la classe
+     */
     @Override
     public void actualiser() {
+        this.getChildren().clear();
+
+        updateAttributsRelation();
+
+        //On ajoute les différentes parties de la classe
+        //TODO: a renomé en actualiser (julien le fera)
+        //On ajoute les différentes parties de la classe
+        this.getChildren().add(definition);
+        if (classeEntiere.isAttributEstAffiche()) {
+            this.getChildren().add(attributs);
+            this.getChildren().add(attributsRelation);
+        }
+        if (classeEntiere.isConstructeurEstAffiche()) {
+            this.getChildren().add(constructeur);
+        }
+        if (classeEntiere.isMethodsEstAffiche()) {
+            this.getChildren().add(methodes);
+        }
     }
 
 

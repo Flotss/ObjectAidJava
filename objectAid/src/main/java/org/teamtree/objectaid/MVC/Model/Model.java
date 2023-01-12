@@ -180,7 +180,7 @@ public class Model implements Sujet {
                 }
                 break;
             case "classe selection complete":
-                this.currentClickedClass.afficherClasse();
+                this.currentClickedClass.actualiser();
                 notifierObservateur("actualisation fleches");
                 break;
             case "actualisation fleches":
