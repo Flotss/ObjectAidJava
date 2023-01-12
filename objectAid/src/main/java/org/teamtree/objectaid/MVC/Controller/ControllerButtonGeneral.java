@@ -13,6 +13,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.ObjectAidApplication;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
+import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
+import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 
 /**
  * Classe qui permet de gérer tous les boutons de l'application
@@ -60,10 +63,21 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 relationsGeneralesAffiche = !relationsGeneralesAffiche;
                 model.afficherRelations(relationsGeneralesAffiche);
                 break;
-            case "Supprimer les classes":
+            case "Supprimer" :
+                VueClasseAffichage classe1 = ((VueContextMenuClasse) ((MenuItem) event.getSource()).getParentPopup()).getClasse();
+                model.supprimerClasseAffichage(classe1);
+                for (MenuItem m: ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
+                    if (m.getText().equals(classe1.getNom())) {
+                        ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().remove(m);
+                        break;
+                    }
+                }
+                break;
+                 case "Supprimer les classes":
                 model.supprimerClassesAffichage();
-                ObjectAidApplication.menuBar.getMenus().get(1).getItems().clear();
+                ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
                 break;
         }
     }
-}
+
+        }
