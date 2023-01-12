@@ -8,6 +8,7 @@ import org.teamtree.objectaid.Fabrique.FabriqueEtat;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Classe qui représente un attribut d'une classe
@@ -21,7 +22,7 @@ public class Attribut {
     private final String type;
 
     /** Liste des états de l'attribut */
-    private final ArrayList<Etat> etat;
+    private final List<Etat> etat;
 
     /** Accessibilité de l'attribut */
     private final Accessibilite accessibilite;
@@ -61,9 +62,12 @@ public class Attribut {
 
     /**
      * Constructeur de l'attribut
-     *
+     * @param nom Nom de l'attribut
+     * @param type Type de l'attribut
+     * @param modifiers Modificateurs de l'attribut
+     * @param accessibilite Accessibilité de l'attribut
      */
-    public Attribut(String nom, String type, ArrayList<Etat> modifiers, Accessibilite accessibilite ) {
+    public Attribut(String nom, String type, List<Etat> modifiers, Accessibilite accessibilite ) {
         // Est-ce que le type hérite de Collection
 //        if(type!= "boolean"&&type!="byte"&&type!="short"&&type!="int"&&type!="long"&&type!="float"&&type!="double"&&type!="char"&&type!="String"){
 //            // Si oui, on récupère le type de la collection
@@ -114,7 +118,7 @@ public class Attribut {
      * Retourne la liste des états de l'attribut
      * @return Liste des états de l'attribut : ArrayList<Etat>
      */
-    public ArrayList<Etat> getEtats() {
+    public List<Etat> getEtats() {
         return etat;
     }
 

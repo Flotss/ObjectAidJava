@@ -93,19 +93,17 @@ public class DefinitionClasse {
 
 
     /**
-        * Retourne l'uml de la classe
-        * @return L'uml de la classe
-        */
-         public String getUml() {
-             StringBuilder uml = new StringBuilder();
-             if (etats.size() > 0 && ! entite.getEntite().equals("interface")) {
-                 for (Etat etat : etats) {
-                     uml.append(etat.getUml().replace("{", "").replace("}", "")).append(" ");
-                 }
-             }
-             uml.append(entite.getEntite()).append(" ").append(nomClasse);
-             return uml.toString();
-         }
-
-
+     * Retourne l'uml de la classe
+     * @return L'uml de la classe
+     */
+    public String getUml() {
+        StringBuilder uml = new StringBuilder();
+        if (etats.size() > 0 && ! entite.getEntite().equals("interface")) {
+            for (Etat etat : etats) {
+                uml.append(etat.getUml().replace("{", "").replace("}", "")).append(" ");
+            }
+        }
+        uml.append(entite.getEntite()).append(" ").append(nomClasse);
+        return uml.toString();
+     }
 }

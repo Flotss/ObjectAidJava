@@ -75,6 +75,9 @@ public class FlecheAssociation extends Fleche {
      * Méthode qui permet d'actualiser la position des cardinalités
      */
     public void actualiserCardinalite(){
+
+        // Si la destination est à gauche alors la cardinalité doit être un peu plus vers la droite
+        // Sinon inversement
         if (line.getStartX() < line.getEndX()){
             cardinaliteDepart.setLayoutX(line.getStartX()+10);
             cardinaliteArrivee.setLayoutX(line.getEndX()-10);
@@ -83,6 +86,8 @@ public class FlecheAssociation extends Fleche {
             cardinaliteArrivee.setLayoutX(line.getEndX()+10);
         }
 
+        // Si la destination est en haut alors la cardinalité doit être un peu plus vers le bas
+        // Sinon inversement
         if (line.getStartY() < line.getEndY()){
             cardinaliteDepart.setLayoutY(line.getStartY()+10);
             cardinaliteArrivee.setLayoutY(line.getEndY()-10);
@@ -92,6 +97,7 @@ public class FlecheAssociation extends Fleche {
         }
     }
 
+    @Override
     public String getType(){
         return "Association";
     }

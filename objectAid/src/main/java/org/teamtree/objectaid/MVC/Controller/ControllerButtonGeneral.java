@@ -8,7 +8,7 @@ import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 
 /**
- * Classe qui permet de gérer tous les boutons de l'application
+ * Classe qui permet de gérer les boutons d'affichage et de masquage
  */
 public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
 
@@ -37,7 +37,6 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         switch (((MenuItem) event.getSource()).getText()) {
             case "Attributs" -> {
-                System.out.println("gvvgyvyvygvy");
                 attributGenerauxAffiche = !attributGenerauxAffiche;
                 model.afficherAttributs(attributGenerauxAffiche);
             }

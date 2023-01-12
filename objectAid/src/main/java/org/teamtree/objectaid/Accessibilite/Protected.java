@@ -28,10 +28,18 @@ public class Protected implements Accessibilite {
         return losange;
     }
 
+    /**
+     * Méthode qui retroune la chaine d'information
+     * @return La chaine d'information
+     */
     public String toString(){
         return "Protected";
     }
 
+    /**
+     * Méthode qui retourne la chaine de caractère de l'accessibilité en Uml
+     * @return La chaine de caractère de l'accessibilité en Uml
+     */
     public String getUml(){
         return "#";
     }

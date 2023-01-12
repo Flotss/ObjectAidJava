@@ -48,6 +48,7 @@ public class FlecheImplementation extends Fleche {
         this.arrowFermeture.setEndY(arrow2.getEndY());
     }
 
+    @Override
     public String getType(){
         return "Implementation";
     }

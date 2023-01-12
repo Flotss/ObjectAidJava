@@ -5,10 +5,19 @@ import javafx.scene.shape.Polygon;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Model.Model;
 
+/**
+ * Classe qui permet de créer une flèche de composition
+ */
 public class FlecheComposition extends FlecheAssociation {
 
+    /** Le losange qui représente la composition */
     private final Polygon losange;
 
+    /**
+     * Constructeur de la flèche de composition
+     * @param model Le model de l'application
+     * @param relation La relation entre les deux classes
+     */
     public FlecheComposition(Model model, Relation relation) {
         super(model, relation);
 
@@ -30,7 +39,9 @@ public class FlecheComposition extends FlecheAssociation {
         actualiserLosange();
     }
 
-
+    /**
+     * Méthode d'actualisation de la position du losange et de sa rotation
+     */
     private void actualiserLosange() {
         // L'angle de la fleche
         double angle = Math.atan2(line.getEndY() - line.getStartY(), line.getEndX() - line.getStartX());
@@ -41,6 +52,11 @@ public class FlecheComposition extends FlecheAssociation {
         // Position du losange
         losange.setTranslateX(line.getStartX() - 10);
         losange.setTranslateY(line.getStartY() - 10);
+    }
+
+    @Override
+    public String getType(){
+        return "Composition";
     }
 
 }

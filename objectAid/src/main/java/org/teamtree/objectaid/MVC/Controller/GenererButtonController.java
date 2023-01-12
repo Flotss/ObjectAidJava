@@ -7,6 +7,9 @@ import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.Service.SqueletteService;
 import org.teamtree.objectaid.Service.UmlService;
 
+/**
+ * Classe qui permet de gérer le clic sur le menu "Générer"
+ */
 public class GenererButtonController implements EventHandler<ActionEvent> {
 
     /** Modèle */

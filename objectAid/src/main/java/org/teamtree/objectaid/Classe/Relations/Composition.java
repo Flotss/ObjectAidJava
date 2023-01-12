@@ -29,6 +29,11 @@ public class Composition extends Association {
         return getDepart() + " *--> " + getDestination() + " : " + attribut.getAccessibilite().getUml() + " " + attribut.getNom();
     }
 
+
+    /**
+     * Méthode qui retrourne les informations de l'association
+     * @return Les informations de l'association
+     */
     @Override
     public String toString() {
         return "Composition : " + getDepart() + " *--> " + getDestination() + " : " + attribut.getAccessibilite().getUml() + " " + attribut.getNom();

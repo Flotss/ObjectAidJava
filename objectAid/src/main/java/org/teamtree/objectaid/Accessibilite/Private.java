@@ -24,10 +24,19 @@ public class Private implements Accessibilite {
         return rectangle;
     }
 
+    /**
+     * Méthode qui retroune la chaine d'information
+     * @return La chaine d'information
+     */
+    @Override
     public String toString(){
         return "Private";
     }
 
+    /**
+     * Méthode qui retourne la chaine de caractère de l'accessibilité en Uml
+     * @return La chaine de caractère de l'accessibilité en Uml
+     */
     public String getUml(){
         return "-";
     }

@@ -184,6 +184,9 @@ public class Fleche extends Group implements Observateur {
         actualiserVisibilite();
     }
 
+    /**
+     * Méthode qui permet d'actualiser la visibilite de la fleche
+     */
     public void actualiserVisibilite(){
         this.setVisible(estAffiche);
         this.arrow1.setVisible(estAffiche);
@@ -191,14 +194,26 @@ public class Fleche extends Group implements Observateur {
         this.line.setVisible(estAffiche);
     }
 
+    /**
+     * Méthode qui permet de récupérer la classe de départ
+     * @return la classe de départ
+     */
     public VueClasseAffichage getVueClasseDepart(){
         return this.classeDepart;
     }
 
+    /**
+     * Méthode qui permet de récupérer la classe d'arrivée
+     * @return la classe d'arrivée
+     */
     public VueClasseAffichage getVueClasseArrivee(){
         return this.classeArrivee;
     }
 
+    /**
+     * Méthode qui permet de récupérer le type de la flèche
+     * @return le type de la flèche
+     */
     public String getType(){
         return "fleche";
     }

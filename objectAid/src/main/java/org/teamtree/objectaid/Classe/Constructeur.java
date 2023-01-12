@@ -37,11 +37,16 @@ public class Constructeur {
         }
     }
 
-    public Constructeur (String nom, Accessibilite accesibilite, String parametres) {
+    /**
+     * Constructeur à partir de paramètres
+     * @param nom Nom du constructeur
+     * @param accessibilite Accessibilité du constructeur
+     * @param parametres Liste des paramètres du constructeur
+     */
+    public Constructeur (String nom, Accessibilite accessibilite, String parametres) {
         this.nom = nom;
 
-
-        this.accessibilite = accesibilite;
+        this.accessibilite = accessibilite;
 
         this.parametre = new ArrayList<>();
         String[] suiteDeParametre = parametres.split(",");

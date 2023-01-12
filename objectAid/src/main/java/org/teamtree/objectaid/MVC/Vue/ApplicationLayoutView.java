@@ -1,5 +1,6 @@
 package org.teamtree.objectaid.MVC.Vue;
 
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -43,6 +44,11 @@ public class ApplicationLayoutView extends Pane implements Observateur {
             case BOOTSTRAP -> new ApplicationLayoutBootstrapRender(model);
             case PROJECT_LOADED -> new ApplicationLayoutProjectLoadedRender(model);
         };
+
+        stage.setTitle("ObjectAid");
+
+        // Icone à partir d'une image
+        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/5396/5396942.png"));
 
         stage.setScene(scene.getScene());
         stage.show();
