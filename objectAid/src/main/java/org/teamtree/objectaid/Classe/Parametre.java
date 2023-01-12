@@ -28,6 +28,22 @@ public class Parametre {
     }
 
     /**
+     * Constructeur du paramètre
+     * @param param Le paramètre de la méthode/constructeur
+     */
+    public Parametre(String nom, String type) {
+        if (type.contains("<")) {
+            String [] typeRetourneSplit = type.split("<");
+            String part1 = typeRetourneSplit[0].substring(typeRetourneSplit[0].lastIndexOf(".") + 1);
+            String part2 = typeRetourneSplit[1].substring(typeRetourneSplit[1].lastIndexOf(".")+1, typeRetourneSplit[1].length() - 1);
+            this.type = part1 + "<" + part2 + ">";
+        } else {
+            this.type = type.substring(type.lastIndexOf(".") + 1);
+        }
+        this.nom = nom;
+    }
+
+    /**
      * Retourne le type du paramètre
      * @return Type du paramètre : String
      */

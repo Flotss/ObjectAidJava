@@ -13,4 +13,9 @@ public class Static implements Etat{
     public String getUml(){
         return "{static}";
     }
+
+    @Override
+    public String toString(){
+        return "Static";
+    }
 }

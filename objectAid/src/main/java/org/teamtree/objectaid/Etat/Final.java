@@ -13,4 +13,9 @@ public class Final implements Etat{
     public String getUml(){
         return "{final}";
     }
+
+    @Override
+    public String toString(){
+        return "Final";
+    }
 }

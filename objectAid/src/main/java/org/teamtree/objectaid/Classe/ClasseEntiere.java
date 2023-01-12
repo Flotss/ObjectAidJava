@@ -509,4 +509,13 @@ public class ClasseEntiere {
         uml.append("\n");
         return uml.toString();
     }
+
+
+    public void ajouterMethode(Methode methode){
+        this.methods.add(methode);
+    }
+
+    public void ajouterConstructeur(Constructeur constructeur){
+        this.contructeurs.add(constructeur);
+    }
 }

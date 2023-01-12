@@ -56,7 +56,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
     /**
      * VBox qui contient les méthodes de la classe
      */
-    private final VBox methodes;
+    private VBox methodes;
 
     /**
      Couleur de la bordure
@@ -216,8 +216,8 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
     public void setMethodes(){
         //partie methodes
+        this.methodes = new VBox();
         methodes.setPadding(new Insets(0, 5, 0, 5));
-
         if (classeEntiere.getMethods().size() != 0) {
             methodes.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
         }
