@@ -106,6 +106,12 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
             listeClasse.getItems().add(nomClasseMenu);
         }
 
+        // Ajouter une classe
+        MenuItem ajouterClasse = new MenuItem("Ajouter une classe");
+        ajouterClasse.setId("ajouterClasse");
+        ajouterClasse.setOnAction(new MenuItemController(model));
+        listeClasse.getItems().add(ajouterClasse);
+
         Menu menuGeneration = new Menu("Générer");
         MenuItem itemGenererUml = new MenuItem("Générer UML");
         itemGenererUml.setOnAction(new GenererButtonController(model));

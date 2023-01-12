@@ -180,6 +180,7 @@ public class ComponentAddClass {
 
         ChoiceBox<Entite> entiteChoiceBox = new ChoiceBox<>();
         entiteChoiceBox.getItems().addAll(new Classe(), new Interface(), new Enum(), new Record());
+        entiteChoiceBox.setValue(new Classe());
 
         ChoiceBox<Etat> staticChoiceBox = new ChoiceBox<>();
         staticChoiceBox.getItems().addAll( new Static(),  null);
@@ -219,7 +220,7 @@ public class ComponentAddClass {
             stage.close();
         });
 
-        hBox.getChildren().addAll(accessibiliteChoiceBox, staticChoiceBox, abstractChoiceBox, finalChoiceBox, nomTextField, ajouterButton);
+        hBox.getChildren().addAll(entiteChoiceBox, accessibiliteChoiceBox, staticChoiceBox, abstractChoiceBox, finalChoiceBox, nomTextField, nomParentTextField, interfacesTextField, ajouterButton);
         Scene scene = new Scene(hBox);
 
         stage.setScene(scene);

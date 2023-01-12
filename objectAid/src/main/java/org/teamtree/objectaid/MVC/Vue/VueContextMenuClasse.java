@@ -34,9 +34,7 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         MenuItem itemConstructeurs = new MenuItem("Constructeurs");
         itemConstructeurs.setOnAction(new MenuItemController(model));
 
-        // Pouvoir cacher une classe
-        MenuItem itemCacherClasse = new MenuItem("Cacher");
-        itemCacherClasse.setOnAction(new MenuItemController(model));
+
 
         // Pouvoir supprimer une classe
         MenuItem itemSupprimerClasse = new MenuItem("Supprimer");
@@ -46,13 +44,20 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         MenuItem itemGenererSquelette = new MenuItem("Générer le squelette");
         itemGenererSquelette.setOnAction(new MenuItemController(model));
 
+
+        Menu menuCache = new Menu("Cacher");
+        // Pouvoir cacher une classe
+        MenuItem itemCacherClasse = new MenuItem("Cacher la classe");
+        itemCacherClasse.setOnAction(new MenuItemController(model));
         // Pouvoir cacher l'interface parent
         MenuItem itemInterface = new MenuItem("Cacher interface");
         itemInterface.setOnAction(new MenuItemController(model));
 
+
         // Pouvoir cacher la classe parent
         MenuItem itemHeritage = new MenuItem("Cacher heritage");
         itemHeritage.setOnAction(new MenuItemController(model));
+        menuCache.getItems().addAll(itemCacherClasse, itemInterface, itemHeritage);
 
         // Ajouter quelque chose dans une classe
         Menu itemAjouter = new Menu("Ajouter");
@@ -78,7 +83,7 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
 
 
         // Ajout de tous ces items dans le menu contextuel
-        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse, itemSupprimerClasse, itemInterface, itemHeritage, itemGenererSquelette, itemAjouter);
+        this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, menuCache, itemSupprimerClasse, itemGenererSquelette, itemAjouter);
         this.classe = null;
     }
 

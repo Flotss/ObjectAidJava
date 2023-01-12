@@ -51,14 +51,6 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             case "Attributs" -> model.afficherAttributsSelection();
             case "Méthodes" -> model.afficherMethodesSelection();
             case "Constructeurs" -> model.afficherConstructeursSelection();
-            case "Cacher" -> {
-                for (MenuItem m : ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
-                    if (m.getText().equals(model.getCurrentClickedClass().getNom())) {
-                        m.setStyle("-fx-text-fill: red");
-                    }
-                }
-                model.ajouterClasseCachee(model.getCurrentClickedClass());
-            }
             case "Afficher/Cacher" -> {
                 VueClasseAffichage classe = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
                 if (!model.getHiddenClasses().contains(classe)) {
@@ -80,6 +72,14 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 SqueletteService squeletteService = new SqueletteService();
                 squeletteService.genererSqueletteUniqueClasse(classeE);
             }
+            case "Cacher la classe" -> {
+                for (MenuItem m : ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
+                    if (m.getText().equals(model.getCurrentClickedClass().getNom())) {
+                        m.setStyle("-fx-text-fill: red");
+                    }
+                }
+                model.ajouterClasseCachee(model.getCurrentClickedClass());
+            }
             case "Cacher interface" -> model.afficherInterfaceHeritageSelection("Implementation");
             case "Cacher heritage" -> model.afficherInterfaceHeritageSelection("Heritage");
             case "Supprimer les classes" -> {
@@ -92,6 +92,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
         if(((MenuItem)event.getSource()).getId() != null) {
             ComponentAddClass componentAddClass = new ComponentAddClass(model);
             switch (((MenuItem) event.getSource()).getId()) {
+                case "ajouterClasse" -> componentAddClass.ajouterClasse();
                 case "ajouterAttribut" -> componentAddClass.ajouterAttribut();
                 case "ajouterConstructeur" -> componentAddClass.ajouterContructeur();
                 case "ajouterMethode" -> componentAddClass.ajouterMethode();
