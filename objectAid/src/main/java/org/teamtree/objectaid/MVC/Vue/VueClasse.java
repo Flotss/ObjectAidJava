@@ -190,4 +190,10 @@ public class VueClasse extends Pane implements Observateur {
         this.getChildren().add(classe);
         return classeEntiere;
     }
+
+    public void rechargerMethodes(){
+        for(VueClasseAffichage vueClasseAffichage : this.classes.values()){
+            vueClasseAffichage.setMethodes();
+        }
+    }
 }

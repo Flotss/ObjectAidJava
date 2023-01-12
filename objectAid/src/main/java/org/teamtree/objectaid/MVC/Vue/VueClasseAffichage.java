@@ -70,6 +70,8 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     private boolean classeAffichee;
 
+    public static boolean setIsGetAffichee = true;
+
     /**
      * Constructeur de la classe
      * @param classeEntiere La classe à afficher
@@ -146,7 +148,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
         List<Relation> relations = this.classeEntiere.getRelations();
         for (Relation relation : relations) {
             Optional<ClasseEntiere> classeEntiereDestination = model.getClasse(relation.getDestination());
-            if (classeEntiereDestination.isEmpty() && relation instanceof Association association) {
+            if (! classeEntiereDestination.isPresent() && relation instanceof Association association) {
                 if(!bordureAffichee){
                     attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
                     bordureAffichee = true;
@@ -189,22 +191,22 @@ public class VueClasseAffichage extends VBox implements Observateur {
             Shape icon = constructeurX.getAccessibilite().getShape();
 
             //Debut de la ligne (accesibilité, nom,...), du type : + Constructeur(
-            StringBuilder constr = new StringBuilder(constructeurX.getNom() + "(");
+            String constr = constructeurX.getNom() + "(";
             int n = 0;
 
             //Pour chaque parametre du constructeur, on l'écrit dans l'affichage
             //exemple : + Constructeur(int a, int b)
             for(Parametre parametreX: constructeurX.getParametre()){
-                constr.append(parametreX.getType()).append(" ").append(parametreX.getNom());
+                constr += parametreX.getType() + " " + parametreX.getNom();
                 if (n != constructeurX.getParametre().size() - 1) {
-                    constr.append(", ");
+                    constr += ", ";
                 }
                 n++;
             }
 
             //On écrit la fin du constructeur puis on l'ajoute avec les autres constructeurs
-            constr.append(")");
-            Label constrLabel = new Label(constr.toString());
+            constr += ")";
+            Label constrLabel = new Label(constr);
 
             line.getChildren().addAll(icon, constrLabel);
             constructeur.getChildren().add(line);
@@ -218,14 +220,14 @@ public class VueClasseAffichage extends VBox implements Observateur {
         //partie methodes
         this.methodes = new VBox();
         methodes.setPadding(new Insets(0, 5, 0, 5));
-        if (classeEntiere.getMethods().size() != 0) {
-            methodes.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
-        }
+
+        boolean bordure = false;
         for (int i = 0; i < classeEntiere.getMethods().size(); i++) {
             Methode methodeX = classeEntiere.getMethods().get(i);
-
-            HBox line = new HBox();
-            Shape icon = methodeX.getAccessibilite().getShape();
+            if(!((methodeX.getNom().indexOf("set")==0||methodeX.getNom().indexOf("get")==0||methodeX.getNom().indexOf("is")==0)&&!setIsGetAffichee)) {
+                bordure = true;
+                HBox line = new HBox();
+                Shape icon = methodeX.getAccessibilite().getShape();
 
             StringBuilder meth = new StringBuilder(methodeX.getNom() + "(");
             for (int j = 0; j < methodeX.getParametre().size(); j++) {
@@ -237,19 +239,23 @@ public class VueClasseAffichage extends VBox implements Observateur {
             meth.append("): ").append(classeEntiere.getMethods().get(i).getTypeRetourne());
             Label methodeLabel = new Label(meth.toString());
 
-            for (Etat etat : methodeX.getEtats()) {
-                if (etat instanceof Abstract) {
-                    methodeLabel.setStyle("-fx-font-style: italic;");
+                for (Etat etat : methodeX.getEtats()) {
+                    if (etat instanceof Abstract) {
+                        methodeLabel.setStyle("-fx-font-style: italic;");
+                    }
+
+                    if (etat instanceof Static) {
+                        // Souligne le nom de la méthode
+                        methodeLabel.setUnderline(true);
+                    }
                 }
 
-                if (etat instanceof Static) {
-                    // Souligne le nom de la méthode
-                    methodeLabel.setUnderline(true);
-                }
+                line.getChildren().addAll(icon, methodeLabel);
+                methodes.getChildren().add(line);
             }
-
-            line.getChildren().addAll(icon, methodeLabel);
-            methodes.getChildren().add(line);
+        }
+        if (bordure) {
+            methodes.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
         }
     }
 

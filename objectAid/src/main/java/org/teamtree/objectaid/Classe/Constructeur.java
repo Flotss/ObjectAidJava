@@ -47,7 +47,9 @@ public class Constructeur {
         String[] suiteDeParametre = parametres.split(",");
         for (String parameter : suiteDeParametre) {
             String[] parametreUnique = parameter.split(":");
-            this.parametre.add(new Parametre(parametreUnique[0], parametreUnique[1]));
+            if(parametreUnique.length==2) {
+                this.parametre.add(new Parametre(parametreUnique[0], parametreUnique[1]));
+            }
         }
     }
 

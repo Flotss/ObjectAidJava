@@ -80,13 +80,16 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         MenuItem menuItem5 = new MenuItem("Relations");
         menuItem5.setOnAction(controllerBtnGeneral);
 
+        MenuItem menuItem6 = new MenuItem("set is get");
+        menuItem6.setOnAction(controllerBtnGeneral);
+
         Menu supprimerClasseMenu = new Menu("Supprimer les classes");
         MenuItem supprimerClasseMenuitem = new MenuItem("Supprimer les classes");
         supprimerClasseMenuitem.setOnAction(new MenuItemController(model));
 
         supprimerClasseMenu.getItems().add(supprimerClasseMenuitem);
 
-        menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
+        menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5, menuItem6);
 
         for (ClasseEntiere ce: model.getClasses()) {
             Menu nomClasseMenu = new Menu(ce.getClasseAffichage().getNom());

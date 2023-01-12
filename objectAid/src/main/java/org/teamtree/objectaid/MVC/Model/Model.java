@@ -188,6 +188,17 @@ public class Model implements Sujet {
                     }
                 }
                 break;
+            case "recharger methodes":
+                System.out.println("arrive ici");
+                for (Observateur observateur : this.observateurs) {
+                    if (observateur instanceof VueClasse) {
+                        ((VueClasse) observateur).rechargerMethodes();
+                        observateur.actualiser();
+                        ((VueClasse) observateur).actualiserFleches();
+                        return;
+                    }
+                }
+                break;
         }
     }
 
@@ -484,6 +495,11 @@ public class Model implements Sujet {
         this.currentClickedClass.getClasseEntiere().ajouterAttribut(nom,type,modifiers,accessibilite);
         this.currentClickedClass.setMethodes();
         this.notifierObservateur("classe selection complete");
+    }
+
+    public void inverserAffichageGetIsSet(){
+        VueClasseAffichage.setIsGetAffichee = !VueClasseAffichage.setIsGetAffichee;
+        this.notifierObservateur("recharger methodes");
     }
 
 }
