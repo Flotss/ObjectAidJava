@@ -69,7 +69,6 @@ public class VueClasse extends Pane implements Observateur {
         for (ClasseEntiere classe : model.getClasses()) {
             classe.getClasseAffichage().actualiser();
         }
-        System.out.println(fleches.size());
         actualiserFleche();
         for (Fleche fleche : fleches) {
             fleche.actualiser();
@@ -135,7 +134,6 @@ public class VueClasse extends Pane implements Observateur {
         for (Fleche fleche : fleches) {
             if(fleche.getVueClasseDepart().getNom().equals(vueClasseAffichage.getNom()) && fleche.getType().equals(relation)){
                 VueClasseAffichage arrivee = fleche.getVueClasseArrivee();
-                System.out.println(arrivee.getNom());
 
 
                 if(model.classeMasquee(arrivee)){

@@ -228,7 +228,6 @@ public class Model implements Sujet {
                 }
                 break;
             case "recharger methodes":
-                System.out.println("arrive ici");
                 for (Observateur observateur : this.observateurs) {
                     if (observateur instanceof VueClasse) {
                         ((VueClasse) observateur).rechargerMethodes();

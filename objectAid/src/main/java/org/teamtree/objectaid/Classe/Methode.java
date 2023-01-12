@@ -47,7 +47,6 @@ public class Methode {
         } else {
             this.typeRetourne = typeRetourne.substring(typeRetourne.lastIndexOf(".") + 1);
         }
-        System.out.println("Type de retour : " + this.typeRetourne);
 
 
 

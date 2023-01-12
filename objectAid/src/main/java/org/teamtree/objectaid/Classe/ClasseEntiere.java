@@ -234,11 +234,6 @@ public class ClasseEntiere {
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
         this.constructeurEstAffiche = true;
-
-        System.out.println("-----------------\n");
-        for (Relation relation : this.relations) {
-            System.out.println(relation);
-        }
     }
 
     /**
