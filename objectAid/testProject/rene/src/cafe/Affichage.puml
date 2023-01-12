@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Main as m
+participant Expresso
+participant BoissonChantily
+
+activate m
+m -> Expresso: new Expresso()
+activate Expresso
+Expresso --> m: Expresso
+deactivate Expresso
+
+m -> BoissonChantily: new BoissonChantily(Expresso)
+activate BoissonChantily
+BoissonChantily --> m: BoissonChantily
+deactivate BoissonChantily
+m -> BoissonChantily : toString()
+activate BoissonChantily
+BoissonChantily --> m: "Chantilly Expresso cout : 2.45 euros"
+deactivate BoissonChantily
+
+
+
+
+
+@enduml
