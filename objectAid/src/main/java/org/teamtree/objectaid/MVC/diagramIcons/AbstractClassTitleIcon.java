@@ -15,7 +15,7 @@ public class AbstractClassTitleIcon implements ClasseEntiereTitleIcon {
     public Node getIcon() {
         final var parent = new StackPane();
         final var stackCircle = new Circle(8);
-        stackCircle.setFill(Color.ORANGE);
+        stackCircle.setFill(Color.DARKRED);
         final var a = new Label("A");
 
         parent.getChildren().addAll(stackCircle, a);

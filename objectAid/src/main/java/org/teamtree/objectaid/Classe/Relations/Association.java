@@ -10,7 +10,7 @@ public class Association extends Relation {
     /**
      * L'attribut de l'association
      */
-    private final Attribut attribut;
+    protected final Attribut attribut;
 
     /**
      * Cardinalité n°1 de l'association
@@ -67,7 +67,6 @@ public class Association extends Relation {
     @Override
     public String toString() {
         return "Association: " + getDepart() + " -> " + getDestination() + " (" + attribut.getType() + ")" + " " + attribut.getNom();
-        //+ " (" + cardinalite1 + " - " + cardinalite2 + ")"; // TODO: Add cardinalities
     }
 
     /**

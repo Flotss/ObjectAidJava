@@ -131,15 +131,12 @@ public class ClasseEntiere {
             }
 
             // Ajout de la relation si l'attribut n'est pas primitif
-            if (!isPrimitive) {
-                if (isCollection){
-                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
-                }else{
-                    if (attribut.getType().contains(destinationType)) {
-                        this.relations.add(new Aggregation(this.definition.getNom(), destinationType, attribut, "1", "*"));
-                    }
-                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
-                }
+            if (isPrimitive) continue;
+
+            if (isCollection){
+                this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
+            }else{
+                this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
             }
         }
         for (Constructor<?> constructor : classe.getDeclaredConstructors()) {
@@ -229,7 +226,8 @@ public class ClasseEntiere {
                 if (isCollection){
                     this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
                 }else{
-                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
+                    if (! this.definition.getEntite().equals("enum"))
+                        this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
                 }
             }
         }
@@ -553,10 +551,7 @@ public class ClasseEntiere {
                 if (isCollection){
                     this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
                 }else{
-                    if (attribut.getType().contains(destinationType)) {
-                        this.relations.add(new Aggregation(this.definition.getNom(), destinationType, attribut, "1", "*"));
-                    }
-                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
+                    this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
                 }
             }
     }

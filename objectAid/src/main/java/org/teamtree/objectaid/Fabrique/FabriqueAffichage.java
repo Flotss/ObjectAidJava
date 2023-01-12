@@ -119,6 +119,7 @@ public class FabriqueAffichage {
             case "interface" -> new InterfaceTitleIcon();
             case "record" -> new RecordClassTitleIcon();
             case "abstract" -> new AbstractClassTitleIcon();
+            case "enum" -> new EnumTitleIcon();
             default -> null;
         };
 
