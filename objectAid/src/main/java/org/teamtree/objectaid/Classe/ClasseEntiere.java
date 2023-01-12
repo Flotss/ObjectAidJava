@@ -1,9 +1,6 @@
 package org.teamtree.objectaid.Classe;
 
-import org.teamtree.objectaid.Classe.Relations.Association;
-import org.teamtree.objectaid.Classe.Relations.Heritage;
-import org.teamtree.objectaid.Classe.Relations.Implementation;
-import org.teamtree.objectaid.Classe.Relations.Relation;
+import org.teamtree.objectaid.Classe.Relations.*;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Point;
 
@@ -132,6 +129,9 @@ public class ClasseEntiere {
                 if (isCollection){
                     this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
                 }else{
+                    if (attribut.getType().contains(destinationType)) {
+                        this.relations.add(new Aggregation(this.definition.getNom(), destinationType, attribut, "1", "*"));
+                    }
                     this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
                 }
             }
