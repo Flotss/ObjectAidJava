@@ -2,10 +2,14 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
-
-import javafx.scene.input.DragEvent;
 import org.teamtree.objectaid.MVC.Vue.VueListeClasse;
 
+import javafx.scene.input.DragEvent;
+
+/**
+ * Représente le controller qui gère le drag and drop sur la liste des classes.
+ * C'est-à-dire quand on détecte un drop dans le vbox.
+ */
 public class VboxDragDroppedController extends ControllerBase<DragEvent> {
 
     public VboxDragDroppedController(final Model model) {
@@ -27,15 +31,18 @@ public class VboxDragDroppedController extends ControllerBase<DragEvent> {
             final var itemContent = dragBoard.getString();
             success = true;
 
-            final var entrySearch = this.model.getClassesPath().entrySet().stream().filter(entry -> entry.getKey().equals(itemContent)).findFirst();
+            final var entrySearch = this.model.getClassesPath().entrySet().stream()
+                .filter(entry -> entry.getKey().equals(itemContent)).findFirst();
 
-            entrySearch.ifPresent(stringClassEntry -> model.getClasse(itemContent).ifPresentOrElse(classe -> {
-            }, () -> {
-                final var classeEntiere = new ClasseEntiere(stringClassEntry.getValue());
+            // Si on trouve le packet, on l'ajoute à la liste des classes en veillant à éviter les doublons dans la VueClasse
+            entrySearch.ifPresent(
+                stringClassEntry -> model.getClasse(itemContent).ifPresentOrElse(classe -> {
+                }, () -> {
+                    final var classeEntiere = new ClasseEntiere(stringClassEntry.getValue());
 
-                this.model.ajouterClasse(classeEntiere);
-                this.model.notifierObservateur(VueListeClasse.class);
-            }));
+                    this.model.ajouterClasse(classeEntiere);
+                    this.model.notifierObservateur(VueListeClasse.class);
+                }));
         }
 
         event.setDropCompleted(success);

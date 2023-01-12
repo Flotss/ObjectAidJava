@@ -7,6 +7,9 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
+/**
+ * Représente le contrôleur qui gère le drag and drop sur l'arbre.
+ */
 public class TreeViewDragDetectedController extends ControllerBase<MouseEvent> {
 
     private final TreeView<String> treeView;
@@ -17,6 +20,11 @@ public class TreeViewDragDetectedController extends ControllerBase<MouseEvent> {
         this.treeView = treeView;
     }
 
+    /**
+     * Méthode qui permet de gérer le drag and drop sur l'arbre
+     *
+     * @param event the event which occurred
+     */
     @Override
     public void handle(final MouseEvent event) {
         final var dragBoard = treeView.startDragAndDrop(TransferMode.ANY);

@@ -6,6 +6,10 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 
+/**
+ * Représente le contrôleur qui gère le drag and drop sur la VBox.
+ * Notamment, quand on passe sur la VBox, en détectant un drag and drop.
+ */
 public class VboxDragOverController extends ControllerBase<DragEvent> {
 
     private final VBox vbox;
