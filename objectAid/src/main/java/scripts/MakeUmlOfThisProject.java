@@ -10,9 +10,9 @@ import java.util.Objects;
 
 public class MakeUmlOfThisProject {
 
-    public static List<String> pathClasses = new ArrayList<>();
+    private static List<String> pathClasses = new ArrayList<>();
 
-    public static String findAllClasses(File file, String path) {
+    private static String findAllClasses(File file, String path) {
         if (file.isDirectory()) {
             path += file.getName() + ".";
             for (File f : Objects.requireNonNull(file.listFiles())) {

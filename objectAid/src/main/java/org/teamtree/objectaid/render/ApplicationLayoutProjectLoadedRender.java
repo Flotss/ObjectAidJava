@@ -111,9 +111,11 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         itemGenererUml.setOnAction(new GenererButtonController(model));
         MenuItem itemGenererSquelette = new MenuItem("Générer squelette");
         itemGenererSquelette.setOnAction(new GenererButtonController(model));
-        menuGeneration.getItems().addAll(itemGenererUml, itemGenererSquelette);
+        MenuItem itemGenererUMLImage = new MenuItem("Générer UML SVG");
+        itemGenererUMLImage.setOnAction(new GenererButtonController(model));
 
 
+        menuGeneration.getItems().addAll(itemGenererUml, itemGenererUMLImage, itemGenererSquelette);
         menubar.getMenus().addAll(menuItem, listeClasse, supprimerClasseMenu, menuGeneration);
 
         vbox.getChildren().addAll(menubar, vueClasse);

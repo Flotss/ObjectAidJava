@@ -1,10 +1,14 @@
 package org.teamtree.objectaid.Service;
 
 import javafx.stage.FileChooser;
+import net.sourceforge.plantuml.FileFormat;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
+import net.sourceforge.plantuml.FileFormatOption;
+import net.sourceforge.plantuml.SourceStringReader;
 
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -12,16 +16,32 @@ import java.util.List;
  */
 public class UmlService {
 
-    public void genererUmltoCompilation(List<ClasseEntiere> classes){
+    public void genererUmltoCompilation(List<ClasseEntiere> classes) {
         String uml = genererUml(classes);
-//        SourceStringReader reader = new SourceStringReader(source);
-//        final ByteArrayOutputStream os = new ByteArrayOutputStream();
-//        // Write the first image to "os"
-//        String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
-//        os.close();
-//
-//        // The XML is stored into svg
-//        final String svg = new String(os.toByteArray(), Charset.forName("UTF-8"));
+        SourceStringReader reader = new SourceStringReader(uml);
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        // Write the first image to "os"
+        try {
+            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
+            os.close();
+
+            // The XML is stored into svg
+            final String svg = os.toString(StandardCharsets.UTF_8);
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choisir un fichier");
+            File f = fileChooser.showSaveDialog(null);
+            if (f == null) {
+                return;
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+            writer.write(svg);
+            writer.close();
+
+            Alert.afficheAlert("Diagramme UML généré avec succès !");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void genererUmltoFile(List<ClasseEntiere> classes) {

@@ -34,6 +34,10 @@ public class GenererButtonController implements EventHandler<ActionEvent> {
                 UmlService umlService = new UmlService();
                 umlService.genererUmltoFile(model.getClasses());
             }
+            case "Générer UML SVG" -> {
+                UmlService umlService = new UmlService();
+                umlService.genererUmltoCompilation(model.getClasses());
+            }
         }
     }
 }
