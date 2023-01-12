@@ -37,11 +37,11 @@ public class Constructeur {
         }
     }
 
-    public Constructeur (String nom, String accesibilite, String parametres) {
+    public Constructeur (String nom, Accessibilite accesibilite, String parametres) {
         this.nom = nom;
 
-        FabriqueAccessibilite fabriqueAccess = new FabriqueAccessibilite();
-        this.accessibilite = fabriqueAccess.getAccessibilite(accesibilite);
+
+        this.accessibilite = accesibilite;
 
         this.parametre = new ArrayList<>();
         String[] suiteDeParametre = parametres.split(",");

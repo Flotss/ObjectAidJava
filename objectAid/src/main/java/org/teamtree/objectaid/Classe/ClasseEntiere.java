@@ -1,9 +1,11 @@
 package org.teamtree.objectaid.Classe;
 
+import org.teamtree.objectaid.Accessibilite.Accessibilite;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Heritage;
 import org.teamtree.objectaid.Classe.Relations.Implementation;
 import org.teamtree.objectaid.Classe.Relations.Relation;
+import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Point;
 
@@ -517,5 +519,38 @@ public class ClasseEntiere {
 
     public void ajouterConstructeur(Constructeur constructeur){
         this.contructeurs.add(constructeur);
+    }
+
+    public void ajouterAttribut(String nom, String type, ArrayList<Etat> modifiers, Accessibilite accessibilite){
+            // On cherche si l'attribut est une association donc s'il est primitif ou non
+            Attribut attribut = new Attribut(nom,type,modifiers,accessibilite);
+            String destinationType = attribut.getType();
+            boolean isCollection = (destinationType.contains("<") && destinationType.contains(">"));
+
+            // Si c'est une collection, on récupère le type de la collection
+            if (isCollection) {
+                destinationType = destinationType.substring(destinationType.indexOf("<") + 1, destinationType.indexOf(">"));
+            }
+
+            // Si le type n'est pas primitif, c'est une association
+            // Sinon, c'est un attribut
+            String[] primitives = {"int", "double", "float", "long", "short", "byte", "char", "boolean", "String"};
+            boolean isPrimitive = false;
+            for (String primitive : primitives) {
+                if (destinationType.contains(primitive) && destinationType.length() == primitive.length()) {
+                    this.attributs.add(attribut);
+                    isPrimitive = true;
+                    break;
+                }
+            }
+
+            // Ajout de la relation si l'attribut n'est pas primitif
+            if (!isPrimitive) {
+                if (isCollection){
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
+                }else{
+                    this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
+                }
+            }
     }
 }

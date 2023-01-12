@@ -1,6 +1,7 @@
 package org.teamtree.objectaid.MVC.Model;
 
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Classe.Constructeur;
 import org.teamtree.objectaid.Classe.Methode;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.MVC.Vue.*;
@@ -486,4 +487,17 @@ public class Model implements Sujet {
         this.currentClickedClass.setMethodes();
         this.notifierObservateur("classe selection complete");
     }
+
+    public void ajouterConstructeur(Accessibilite accessibilite, String nom, String param){
+        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(new Constructeur(nom,accessibilite,param));
+        this.currentClickedClass.setConstructeur();
+        this.notifierObservateur("classe selection complete");
+    }
+
+    public void ajouterAttribut(Accessibilite accessibilite, ArrayList<Etat> modifiers, String nom, String type, String param){
+        this.currentClickedClass.getClasseEntiere().ajouterAttribut(nom,type,modifiers,accessibilite);
+        this.currentClickedClass.setMethodes();
+        this.notifierObservateur("classe selection complete");
+    }
+
 }
