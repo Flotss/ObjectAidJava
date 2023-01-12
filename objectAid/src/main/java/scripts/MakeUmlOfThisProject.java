@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.scripts;
+package scripts;
 
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Service.UmlService;
