@@ -27,13 +27,13 @@ public class VboxDragDroppedController extends ControllerBase<DragEvent> {
             final var itemContent = dragBoard.getString();
             success = true;
 
-            final var entrySearch = this.model.getClassesPath().entrySet().stream()
-                .filter(entry -> entry.getKey().equals(itemContent)).findFirst();
+            final var entrySearch = this.model.getClassesPath().entrySet().stream().filter(entry -> entry.getKey().equals(itemContent)).findFirst();
 
-            if (entrySearch.isPresent()) {
-                final var classeEntiere = new ClasseEntiere(entrySearch.get().getValue());
+            entrySearch.ifPresent(stringClassEntry -> model.getClasse(itemContent).ifPresentOrElse(classe -> {
+            }, () -> {
+                final var classeEntiere = new ClasseEntiere(stringClassEntry.getValue());
                 this.model.ajouterClasse(classeEntiere);
-            }
+            }));
         }
 
         event.setDropCompleted(success);
