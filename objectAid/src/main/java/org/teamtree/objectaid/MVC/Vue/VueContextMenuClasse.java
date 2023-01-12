@@ -57,11 +57,24 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         // Ajouter quelque chose dans une classe
         Menu itemAjouter = new Menu("Ajouter");
 
-        // Pouvoir une méthode dans une classe
-        MenuItem itemAjouterAttribut = new MenuItem("Méthode");
-        itemAjouterAttribut.setId("ajouterMethode");
+
+        // Pouvoir un attribut dans une classe
+        MenuItem itemAjouterAttribut = new MenuItem("Attribut");
+        itemAjouterAttribut.setId("ajouterAttribut");
         itemAjouterAttribut.setOnAction(new MenuItemController(model));
-        itemAjouter.getItems().add(itemAjouterAttribut);
+
+        // Pouvoir un constructeur dans une classe
+        MenuItem itemAjouterConstructeur = new MenuItem("Constructeur");
+        itemAjouterConstructeur.setId("ajouterConstructeur");
+        itemAjouterConstructeur.setOnAction(new MenuItemController(model));
+
+        // Pouvoir une méthode dans une classe
+        MenuItem itemAjouterMethode = new MenuItem("Méthode");
+        itemAjouterMethode.setId("ajouterMethode");
+        itemAjouterMethode.setOnAction(new MenuItemController(model));
+
+        itemAjouter.getItems().addAll(itemAjouterAttribut, itemAjouterConstructeur, itemAjouterMethode);
+
 
 
         // Ajout de tous ces items dans le menu contextuel
