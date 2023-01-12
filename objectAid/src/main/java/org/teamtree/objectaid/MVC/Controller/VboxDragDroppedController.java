@@ -32,7 +32,6 @@ public class VboxDragDroppedController extends ControllerBase<DragEvent> {
 
             entrySearch.ifPresent(stringClassEntry -> model.getClasse(itemContent).ifPresentOrElse(classe -> {
             }, () -> {
-                System.out.println("Ajout entrySearch");
                 final var classeEntiere = new ClasseEntiere(stringClassEntry.getValue());
 
                 this.model.ajouterClasse(classeEntiere);
