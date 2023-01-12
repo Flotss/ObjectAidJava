@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.MVC.Fleches;
+package org.teamtree.objectaid.MVC.Vue;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Line;

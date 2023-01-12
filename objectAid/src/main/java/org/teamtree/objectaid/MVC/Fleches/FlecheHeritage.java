@@ -4,6 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.MVC.Vue.Fleche;
 
 /**
  * Cette classe représente une flèche d'héritage.

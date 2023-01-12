@@ -6,6 +6,7 @@ import javafx.scene.shape.*;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.MVC.Vue.Fleche;
 
 /**
  * Classe qui permet de créer une flèche pour une association

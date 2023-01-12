@@ -3,6 +3,7 @@ package org.teamtree.objectaid.Fabrique;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Fleches.*;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.MVC.Vue.Fleche;
 
 /**
  * Cette classe permet de créer une fleche en fonction de la relation

@@ -5,7 +5,6 @@ import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichageFleche;
-import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.ArrayList;
