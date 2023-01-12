@@ -1,6 +1,7 @@
 package org.teamtree.objectaid.Classe;
 
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Entite.Entite;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Classe.Relations.*;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
@@ -238,6 +239,48 @@ public class ClasseEntiere {
         for (Relation relation : this.relations) {
             System.out.println(relation);
         }
+    }
+
+    /**
+     * Constructeur permettant de crée une classe à partir de l'application
+     * @param nom nom de la classe
+     * @param nomExtend nom de la classe qu'elle extend
+     * @param nomImplemente nom de la classe qu'elle implémente
+     * @param accessibilite accesibilite de la classe
+     * @param etats etats de la classe
+     * @param entite entitée de la classe
+     */
+    public ClasseEntiere(String nom, String nomImplemente, String nomExtend, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
+        // Récupération de la classe
+
+        // Création des types des attributs
+        this.attributs = new ArrayList<>();
+        this.contructeurs = new ArrayList<>();
+        this.methods = new ArrayList<>();
+        this.definition = new DefinitionClasse(nom, accessibilite, etats, entite);
+        this.coordonnees = new Point(0, 0);
+        this.relations = new ArrayList<>();
+        this.classeAffichage = null;
+
+
+        // Interfaces
+        if(nomImplemente != null){
+            this.relations.add(new Implementation(this.definition.getNom(),nomImplemente));
+        }
+
+        // Classe parent
+        if (nomExtend != null) {
+
+            // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
+            if (!nomImplemente.equals("Object")) {
+                this.relations.add(new Heritage(this.definition.getNom(),nomExtend));
+            }
+        }
+
+        // Partie affichage des attributs, constructeurs, méthodes et relations
+        this.attributEstAffiche = true;
+        this.methodsEstAffiche = true;
+        this.constructeurEstAffiche = true;
     }
 
     /**

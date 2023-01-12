@@ -3,6 +3,7 @@ package org.teamtree.objectaid.MVC.Model;
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
 import org.teamtree.objectaid.Classe.Constructeur;
 import org.teamtree.objectaid.Classe.Methode;
+import org.teamtree.objectaid.Entite.Entite;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.MVC.Vue.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
@@ -564,7 +565,23 @@ public class Model implements Sujet {
     public void ajouterAttribut(Accessibilite accessibilite, List<Etat> modifiers, String nom, String type){
         this.currentClickedClass.getClasseEntiere().ajouterAttribut(nom,type,modifiers,accessibilite);
         this.currentClickedClass.setMethodes();
+        this.relations.put(this.currentClickedClass.getClasseEntiere(), new ArrayList<>(this.currentClickedClass.getClasseEntiere().getRelations()));
         this.notifierObservateur("classe selection complete");
+    }
+
+    /**
+     * Méthode permettant d'ajouter une classe vierge dans le graphique
+     * @param nom nom de la classe
+     * @param nomExtend nom de la classe qu'elle extend
+     * @param nomImplemente nom de la classe qu'elle implémente
+     * @param accessibilite accesibilite de la classe
+     * @param etats etats de la classe
+     * @param entite entitée de la classe
+     */
+    public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
+        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite);
+        this.ajouterClasse(classe);
+
     }
 
     /**

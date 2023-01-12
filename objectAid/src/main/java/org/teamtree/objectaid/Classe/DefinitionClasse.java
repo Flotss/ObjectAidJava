@@ -48,6 +48,21 @@ public class DefinitionClasse {
     }
 
     /**
+     * Constructeur permettant de crée une définition de classe à partir de l'application
+     * @param nomClasse nom de la classe
+     * @param accessibilite accesibilite de la classe
+     * @param etats etats de la classe
+     * @param entite entite de la classe
+     */
+    public DefinitionClasse(String nomClasse, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
+
+        this.nomClasse = nomClasse;
+        this.accessibilite = accessibilite;
+        this.etats = etats;
+        this.entite = entite;
+    }
+
+    /**
      * Retourne le nom de la classe
      * @return Nom de la classe : String
      */
