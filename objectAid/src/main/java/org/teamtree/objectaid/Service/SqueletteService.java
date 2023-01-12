@@ -1,6 +1,7 @@
 package org.teamtree.objectaid.Service;
 
-import javafx.stage.DirectoryChooser;
+import static org.teamtree.objectaid.Service.Alert.afficheAlert;
+
 import org.teamtree.objectaid.Classe.Attribut;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Constructeur;
@@ -16,8 +17,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import static org.teamtree.objectaid.Service.Alert.afficheAlert;
+import javafx.stage.DirectoryChooser;
 
+/**
+ * Service s'occupant de générer le squelette d'une classe java à partir d'une liste de classe entière.
+ */
 public class SqueletteService {
 
     public void genererSqueletteDiagramme(List<ClasseEntiere> classes) {
@@ -25,11 +29,13 @@ public class SqueletteService {
         directoryChooser.setTitle("Choisir un dossier");
         File f = directoryChooser.showDialog(null);
 
-        if (f == null) return;
+        if (f == null) {
+            return;
+        }
 
         StringBuilder messageAlert = new StringBuilder();
         for (ClasseEntiere classe : classes) {
-           messageAlert.append(genererSquelette(f, classe)).append("\n");
+            messageAlert.append(genererSquelette(f, classe)).append("\n");
         }
 
         afficheAlert(messageAlert.toString());
@@ -41,30 +47,39 @@ public class SqueletteService {
         directoryChooser.setTitle("Choisir un dossier");
         File f = directoryChooser.showDialog(null);
 
-        if (f == null) return;
+        if (f == null) {
+            return;
+        }
 
         Alert.afficheAlert(genererSquelette(f, classe));
     }
 
 
     private String genererSquelette(File f, ClasseEntiere classe) {
-        String message = "Erreur lors de la génération du squelette de la classe " + classe.getNom() + " !";
+        String message =
+            "Erreur lors de la génération du squelette de la classe " + classe.getNom() + " !";
 
         BufferedWriter bw = null;
         try {
             StringBuilder squeletteContenu = new StringBuilder();
 
             // Signature de la classe
-            squeletteContenu.append(classe.getDefinition().getAccessibilite()).append(" ").append(classe.getDefinition().getEntite()).append(" ").append(classe.getDefinition().getNom());
+            squeletteContenu.append(classe.getDefinition().getAccessibilite()).append(" ")
+                .append(classe.getDefinition().getEntite()).append(" ")
+                .append(classe.getDefinition().getNom());
 
             // Hérédité
-            Heritage heritage = classe.getRelations().stream().filter(relation -> relation instanceof Heritage).map(relation -> (Heritage) relation).findFirst().orElse(null);
+            Heritage heritage = classe.getRelations().stream()
+                .filter(relation -> relation instanceof Heritage)
+                .map(relation -> (Heritage) relation).findFirst().orElse(null);
             if (heritage != null) {
                 squeletteContenu.append(" extends ").append(heritage.getDestination());
             }
 
             // Implémentations
-            Implementation[] implementations = classe.getRelations().stream().filter(relation -> relation instanceof Implementation).map(relation -> (Implementation) relation).toArray(Implementation[]::new);
+            Implementation[] implementations = classe.getRelations().stream()
+                .filter(relation -> relation instanceof Implementation)
+                .map(relation -> (Implementation) relation).toArray(Implementation[]::new);
             if (implementations.length > 0) {
                 squeletteContenu.append(" implements ");
                 for (int i = 0; i < implementations.length; i++) {
@@ -78,27 +93,33 @@ public class SqueletteService {
 
             // Attributs
             for (Attribut attr : classe.getAttributs()) {
-                squeletteContenu.append("\t").append(attr.getAccessibilite().getAcces()).append(" ").append(attr.getType()).append(" ").append(attr.getNom()).append(";\n\n");
+                squeletteContenu.append("\t").append(attr.getAccessibilite().getAcces()).append(" ")
+                    .append(attr.getType()).append(" ").append(attr.getNom()).append(";\n\n");
             }
 
             // Attributs avec Relation
             for (Relation relation : classe.getRelations()) {
-                if (!(relation instanceof Association)) continue;
+                if (!(relation instanceof Association)) {
+                    continue;
+                }
 
                 Attribut attr = ((Association) relation).getAttribut();
 
                 String acces = "";
-                if ( ! attr.getAccessibilite().getAcces().equals("default")) {
+                if (!attr.getAccessibilite().getAcces().equals("default")) {
                     acces = attr.getAccessibilite().getAcces();
                 }
-                squeletteContenu.append("\t").append(acces).append(" ").append(attr.getType()).append(" ").append(attr.getNom()).append(";\n\n");
+                squeletteContenu.append("\t").append(acces).append(" ").append(attr.getType())
+                    .append(" ").append(attr.getNom()).append(";\n\n");
             }
 
             // Constructeurs
             for (Constructeur constructeur : classe.getContructeurs()) {
-                squeletteContenu.append("\t").append(constructeur.getAccessibilite().getAcces()).append(" ").append(constructeur.getNom()).append("(");
+                squeletteContenu.append("\t").append(constructeur.getAccessibilite().getAcces())
+                    .append(" ").append(constructeur.getNom()).append("(");
                 for (int i = 0; i < constructeur.getParametre().size(); i++) {
-                    squeletteContenu.append(constructeur.getParametre().get(i).getType()).append(" ").append(constructeur.getParametre().get(i).getNom());
+                    squeletteContenu.append(constructeur.getParametre().get(i).getType())
+                        .append(" ").append(constructeur.getParametre().get(i).getNom());
                     if (i != constructeur.getParametre().size() - 1) {
                         squeletteContenu.append(", ");
                     }
@@ -108,9 +129,12 @@ public class SqueletteService {
 
             // Methodes
             for (Methode methode : classe.getMethods()) {
-                squeletteContenu.append("\t").append(methode.getAccessibilite().getAcces()).append(" ").append(methode.getTypeRetourne()).append(" ").append(methode.getNom()).append("(");
+                squeletteContenu.append("\t").append(methode.getAccessibilite().getAcces())
+                    .append(" ").append(methode.getTypeRetourne()).append(" ")
+                    .append(methode.getNom()).append("(");
                 for (int i = 0; i < methode.getParametre().size(); i++) {
-                    squeletteContenu.append(methode.getParametre().get(i).getType()).append(" ").append(methode.getParametre().get(i).getNom());
+                    squeletteContenu.append(methode.getParametre().get(i).getType()).append(" ")
+                        .append(methode.getParametre().get(i).getNom());
                     if (i != methode.getParametre().size() - 1) {
                         squeletteContenu.append(", ");
                     }

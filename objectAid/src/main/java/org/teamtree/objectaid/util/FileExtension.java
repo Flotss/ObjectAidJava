@@ -2,6 +2,9 @@ package org.teamtree.objectaid.util;
 
 import java.io.File;
 
+/**
+ * Classe utilitaire pour les fichiers dans un contexte de projet java.
+ */
 public class FileExtension {
 
     public static final String JAVA_EXTENSION = ".java";

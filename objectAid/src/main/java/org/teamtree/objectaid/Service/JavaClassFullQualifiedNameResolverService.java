@@ -3,6 +3,10 @@ package org.teamtree.objectaid.Service;
 import java.io.File;
 import java.nio.file.Path;
 
+/**
+ * Service s'occupant de récupérer le fqn (full qualified name) à partir d'un fichier.
+ * eg: org.teamtree.objectaid.Service.JavaClassFullQualifiedNameResolverService
+ */
 public class JavaClassFullQualifiedNameResolverService {
 
     public static final char SEPARATOR = '.';

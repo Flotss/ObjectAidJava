@@ -8,6 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * Représente le rendu de l'application au stade initial.
+ *
+ * @see org.teamtree.objectaid.MVC.Model.ApplicationState
+ */
 public class ApplicationLayoutBootstrapRender implements SceneFactory {
 
     private final BorderPane base;
