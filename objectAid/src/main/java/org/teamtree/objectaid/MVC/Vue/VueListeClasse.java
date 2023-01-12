@@ -2,6 +2,7 @@ package org.teamtree.objectaid.MVC.Vue;
 
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
@@ -34,7 +35,7 @@ public class VueListeClasse extends Menu implements Observateur {
             final var menuItemMethodes = new MenuItem("Supprimer");
 
             menuItemAttribut.setOnAction(new MenuItemController(model));
-            menuItemMethodes.setOnAction(new MenuItemController(model));
+            menuItemMethodes.setOnAction(new ControllerButtonGeneral(model));
 
             menuItem.getItems().addAll(menuItemAttribut, menuItemMethodes);
 

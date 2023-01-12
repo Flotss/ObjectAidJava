@@ -4,9 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -64,16 +62,11 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 model.afficherRelations(relationsGeneralesAffiche);
                 break;
             case "Supprimer" :
-                VueClasseAffichage classe1 = ((VueContextMenuClasse) ((MenuItem) event.getSource()).getParentPopup()).getClasse();
+                VueClasseAffichage classe1 = model.getVueClasseAffichage(((MenuItem) event.getSource()).getParentMenu().getText());
                 model.supprimerClasseAffichage(classe1);
-                for (MenuItem m: ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
-                    if (m.getText().equals(classe1.getNom())) {
-                        ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().remove(m);
-                        break;
-                    }
-                }
+                ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().remove(((MenuItem) event.getSource()).getParentMenu());
                 break;
-                 case "Supprimer les classes":
+            case "Supprimer les classes":
                 model.supprimerClassesAffichage();
                 ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
                 break;
