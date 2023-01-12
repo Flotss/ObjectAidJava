@@ -225,7 +225,11 @@ public class Model implements Sujet {
             int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
-            classe = ((VueClasse) getObservateur("VueClasse").get(0)).ajouterClasse(classe);
+
+            //Verification permettant l'execution du main MainBootstrap (car
+            if(getObservateur("VueClasse").size() != 0) {
+                classe = ((VueClasse) getObservateur("VueClasse").get(0)).ajouterClasse(classe);
+            }
             relations.put(classe, new ArrayList<>(classe.getRelations()));
             for (Observateur observateur : this.observateurs) {
                 if (observateur instanceof VueClasse) {

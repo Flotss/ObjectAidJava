@@ -104,12 +104,12 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
                 break;
         }
-
-        switch (((MenuItem)event.getSource()).getId()){
-            case "ajouterMethode":
-                System.out.println("POURQUOI TU VAS ICI CONNARDDDD");
-                ajouterMethode();
-                break;
+        if(((MenuItem)event.getSource()).getId() != null) {
+            switch (((MenuItem) event.getSource()).getId()) {
+                case "ajouterMethode":
+                    ajouterMethode();
+                    break;
+            }
         }
     }
 
