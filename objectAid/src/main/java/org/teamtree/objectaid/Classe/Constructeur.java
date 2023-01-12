@@ -37,6 +37,20 @@ public class Constructeur {
         }
     }
 
+    public Constructeur (String nom, String accesibilite, String parametres) {
+        this.nom = nom;
+
+        FabriqueAccessibilite fabriqueAccess = new FabriqueAccessibilite();
+        this.accessibilite = fabriqueAccess.getAccessibilite(accesibilite);
+
+        this.parametre = new ArrayList<>();
+        String[] suiteDeParametre = parametres.split(",");
+        for (String parameter : suiteDeParametre) {
+            String[] parametreUnique = parameter.split(":");
+            this.parametre.add(new Parametre(parametreUnique[0], parametreUnique[1]));
+        }
+    }
+
     /**
      * Retourne le nom du constructeur
      * @return Nom du constructeur : String
