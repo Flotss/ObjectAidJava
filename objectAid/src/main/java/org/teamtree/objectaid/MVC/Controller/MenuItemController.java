@@ -115,6 +115,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
 
         switch (((MenuItem)event.getSource()).getId()){
             case "ajouterMethode":
+                System.out.println("POURQUOI TU VAS ICI CONNARDDDD");
                 ajouterMethode();
                 break;
         }
@@ -158,7 +159,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
 
         Button ajouterButton = new Button("Ajouter");
         ajouterButton.setOnAction(event -> {
-            List<Etat> etats = new ArrayList<>();
+            ArrayList<Etat> etats = new ArrayList<>();
             if (staticChoiceBox.getValue() != null) {
                 etats.add(staticChoiceBox.getValue());
             }
@@ -170,7 +171,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             }
 
 
-//          model.ajouterMethode(accessibiliteChoiceBox.getValue(), etats, nomTextField.getText(), typeTextField.getText(), parametresTextField.getText());
+          model.ajouterMethode(accessibiliteChoiceBox.getValue(), etats, nomTextField.getText(), typeTextField.getText(), parametresTextField.getText());
             stage.close();
         });
 

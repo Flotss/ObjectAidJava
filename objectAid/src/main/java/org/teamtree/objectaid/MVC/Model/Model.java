@@ -1,5 +1,8 @@
 package org.teamtree.objectaid.MVC.Model;
 
+import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Classe.Methode;
+import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.MVC.Vue.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
@@ -382,5 +385,11 @@ public class Model implements Sujet {
             }
         }
         return false;
+    }
+
+    public void ajouterMethode(Accessibilite accessibilite, ArrayList<Etat> modifiers, String nom, String type, String param){
+        this.currentClickedClass.getClasseEntiere().ajouterMethode(new Methode(nom,type,accessibilite,param,modifiers));
+        this.currentClickedClass.setMethodes();
+        this.notifierObservateur("classe selection complete");
     }
 }

@@ -72,7 +72,7 @@ public class Methode {
      * Constructeur de la méthode
      *
      */
-    public Methode(String nom, String typeRetourne, String accesibilite, String parametres, ArrayList<Etat> modifiers) {
+    public Methode(String nom, String typeRetourne, Accessibilite accesibilite, String parametres, ArrayList<Etat> modifiers) {
         // Nom de la methode
         this.nom = nom;
 
@@ -88,8 +88,7 @@ public class Methode {
         System.out.println("Type de retour : " + this.typeRetourne);
 
         // Accessibilite : public, private, protected, default
-        FabriqueAccessibilite fabriqueAccessibilite = new FabriqueAccessibilite();
-        this.accessibilite = fabriqueAccessibilite.getAccessibilite(accesibilite);
+        this.accessibilite = accesibilite;
 
         // Parametres de la methode
         this.parametre = new ArrayList<>();
