@@ -34,6 +34,11 @@ public class ProjectDirectoryChooserController extends ControllerBase<ActionEven
         final var fileChooser = new DirectoryChooser();
         final var file = fileChooser.showDialog(null);
 
+        if (file == null) {
+            LOGGER.log(Level.ERROR, "Aucun répertoire n'a été sélectionné !");
+            return;
+        }
+
         model.setCurrentProject(file.toPath());
 
         LOGGER.log(Level.INFO, "Current project set to " + model.getCurrentProject());
