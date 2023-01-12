@@ -2,14 +2,28 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import org.teamtree.objectaid.Accessibilite.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
+import org.teamtree.objectaid.Etat.Abstract;
+import org.teamtree.objectaid.Etat.Etat;
+import org.teamtree.objectaid.Etat.Final;
+import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 import org.teamtree.objectaid.ObjectAidApplication;
 import org.teamtree.objectaid.Service.SqueletteService;
-import org.teamtree.objectaid.Service.UmlService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe qui permet de gérer tous les MenuItem de l'application
@@ -98,5 +112,72 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 model.afficherInterfaceHeritageSelection("Heritage");
                 break;
         }
+
+        switch (((MenuItem)event.getSource()).getId()){
+            case "ajouterMethode":
+                ajouterMethode();
+                break;
+        }
+    }
+
+
+    /**
+     * Méthode qui permet de gérer la modification du classe
+     */
+    private void ajouterMethode() {
+        Stage stage = new Stage();
+        stage.setTitle("Ajouter une methode");
+
+        HBox hBox = new HBox();
+        hBox.setPadding(new Insets(10));
+
+        ChoiceBox<Accessibilite> accessibiliteChoiceBox = new ChoiceBox<>();
+        accessibiliteChoiceBox.getItems().addAll(new Public(), new Private(), new Default(), new Protected());
+        accessibiliteChoiceBox.setValue(new Public());
+
+        ChoiceBox<Etat> staticChoiceBox = new ChoiceBox<>();
+        staticChoiceBox.getItems().addAll( new Static(),  null);
+        staticChoiceBox.setValue(null);
+
+        ChoiceBox<Etat> finalChoiceBox = new ChoiceBox<>();
+        finalChoiceBox.getItems().addAll( new Final(),  null);
+        finalChoiceBox.setValue(null);
+
+        ChoiceBox<Etat> abstractChoiceBox = new ChoiceBox<>();
+        abstractChoiceBox.getItems().addAll( new Abstract(),  null);
+        abstractChoiceBox.setValue(null);
+
+        TextField nomTextField = new TextField();
+        nomTextField.setPromptText("Nom de la methode");
+
+        TextField typeTextField = new TextField();
+        typeTextField.setPromptText("Type de retour");
+
+        TextField parametresTextField = new TextField();
+        parametresTextField.setPromptText("Parametres ex  nom : String");
+
+        Button ajouterButton = new Button("Ajouter");
+        ajouterButton.setOnAction(event -> {
+            List<Etat> etats = new ArrayList<>();
+            if (staticChoiceBox.getValue() != null) {
+                etats.add(staticChoiceBox.getValue());
+            }
+            if (finalChoiceBox.getValue() != null) {
+                etats.add(finalChoiceBox.getValue());
+            }
+            if (abstractChoiceBox.getValue() != null) {
+                etats.add(abstractChoiceBox.getValue());
+            }
+
+
+//          model.ajouterMethode(accessibiliteChoiceBox.getValue(), etats, nomTextField.getText(), typeTextField.getText(), parametresTextField.getText());
+            stage.close();
+        });
+
+        hBox.getChildren().addAll(accessibiliteChoiceBox, staticChoiceBox, abstractChoiceBox, finalChoiceBox, typeTextField, nomTextField, parametresTextField, ajouterButton);
+        Scene scene = new Scene(hBox);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }
