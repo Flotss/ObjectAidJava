@@ -69,6 +69,42 @@ public class Methode {
     }
 
     /**
+     * Constructeur de la méthode
+     *
+     */
+    public Methode(String nom, String typeRetourne, String accesibilite, String parametres, ArrayList<Etat> modifiers) {
+        // Nom de la methode
+        this.nom = nom;
+
+        // Type de retour
+        if (typeRetourne.contains("<")) {
+            String [] typeRetourneSplit = typeRetourne.split("<");
+            String part1 = typeRetourneSplit[0].substring(typeRetourneSplit[0].lastIndexOf(".") + 1);
+            String part2 = typeRetourneSplit[1].substring(typeRetourneSplit[1].lastIndexOf(".")+1, typeRetourneSplit[1].length() - 1);
+            this.typeRetourne = part1 + "<" + part2 + ">";
+        } else {
+            this.typeRetourne = typeRetourne.substring(typeRetourne.lastIndexOf(".") + 1);
+        }
+        System.out.println("Type de retour : " + this.typeRetourne);
+
+        // Accessibilite : public, private, protected, default
+        FabriqueAccessibilite fabriqueAccessibilite = new FabriqueAccessibilite();
+        this.accessibilite = fabriqueAccessibilite.getAccessibilite(accesibilite);
+
+        // Parametres de la methode
+        this.parametre = new ArrayList<>();
+        String[] suiteDeParametre = parametres.split(",");
+        for (String parameter : suiteDeParametre) {
+            String[] parametreUnique = parameter.split(":");
+            this.parametre.add(new Parametre(parametreUnique[0], parametreUnique[1]));
+        }
+
+
+        // Etats de la methode : static, final, abstract
+        this.etats = modifiers;
+    }
+
+    /**
      * Retourne le type de retour de la méthode
      * @return Type de retour de la méthode : String
      */
