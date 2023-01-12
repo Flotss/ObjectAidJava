@@ -2,7 +2,6 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.MVC.Vue.VueClasse;
 
 import javafx.scene.input.DragEvent;
 import org.teamtree.objectaid.MVC.Vue.VueListeClasse;

@@ -124,18 +124,4 @@ public class FabriqueAffichage {
         };
 
     }
-
-    /**
-     * Methode permetant de retourner le symbole de l'accesibitilé
-     * @param acces String correspondant à l'accesibilité
-     * @return symbole de cette accesibilité
-     */
-    public static String fabriqueAcces(String acces){
-        return switch (acces) {
-            case "public" -> "+";
-            case "private" -> "-";
-            case "protected" -> "#";
-            default -> "";
-        };
-    }
 }

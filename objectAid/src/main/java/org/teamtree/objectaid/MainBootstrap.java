@@ -2,11 +2,9 @@ package org.teamtree.objectaid;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
@@ -58,19 +56,11 @@ public class MainBootstrap extends Application {
         ClasseEntiere c8 = new ClasseEntiere("org.teamtree.objectaid.Entite.Interface");
         model.ajouterClasse(c8);
 
-//        ClasseEntiere c9 = new ClasseEntiere("org.teamtree.objectaid.Etat.Etat");
-//        model.ajouterClasse(c9);
-
         VueClasse vueClass = new VueClasse(model); // La vue se rajoute elle-même au modèle
-
-//        VueFleche vueFleche = new VueFleche(model);
-//        model.ajouterObservateur(vueFleche);
 
 
         Menu menuItem = new Menu("Afficher/cacher");
         Menu listeClasse = new Menu("Liste des classes");
-        MenuItem afficher = new MenuItem("Afficher/Cacher");
-        MenuItem supprimer = new MenuItem("Supprimer");
         MenuItem menuItem2 = new MenuItem("Constructeurs");
         menuItem2.setOnAction(new MenuItemController(model));
         MenuItem menuItem3 = new MenuItem("Attributs");
@@ -80,7 +70,6 @@ public class MainBootstrap extends Application {
         MenuItem menuItem5 = new MenuItem("Relations");
         menuItem5.setOnAction(new MenuItemController(model));
 
-        Menu menuItem1 = new Menu("Supprimer");
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
 
         for (ClasseEntiere ce: model.getClasses()) {

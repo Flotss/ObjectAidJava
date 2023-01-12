@@ -1,17 +1,10 @@
 package org.teamtree.objectaid.MVC.Vue;
 
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichage;
 import org.teamtree.objectaid.Fabrique.FabriqueAffichageFleche;
-import org.teamtree.objectaid.MVC.Controller.ClasseEntiereClickedController;
-import org.teamtree.objectaid.MVC.Controller.ClickDroitClasseController;
-import org.teamtree.objectaid.MVC.Controller.DeplacementClasseDragAndDropController;
 import org.teamtree.objectaid.MVC.Fleches.Fleche;
 import org.teamtree.objectaid.MVC.Model.Model;
 
@@ -130,7 +123,7 @@ public class VueClasse extends Pane implements Observateur {
      */
     public void actualiserFlechesSpecifique(VueClasseAffichage vueClasseAffichage) {
         for (Fleche fleche : fleches) {
-            if(fleche.getVueClasseArrivee().getNom() == vueClasseAffichage.getNom() || fleche.getVueClasseDepart().getNom() == vueClasseAffichage.getNom()){
+            if(fleche.getVueClasseArrivee().getNom().equals(vueClasseAffichage.getNom()) || fleche.getVueClasseDepart().getNom().equals(vueClasseAffichage.getNom())){
                 fleche.actualiser();
             }
         }
@@ -141,7 +134,7 @@ public class VueClasse extends Pane implements Observateur {
      */
     public void actualiserRelationsSpecifique(VueClasseAffichage vueClasseAffichage, String relation) {
         for (Fleche fleche : fleches) {
-            if(fleche.getVueClasseDepart().getNom() == vueClasseAffichage.getNom() && fleche.getType()==relation ){
+            if(fleche.getVueClasseDepart().getNom().equals(vueClasseAffichage.getNom()) && fleche.getType().equals(relation)){
                 VueClasseAffichage arrivee = fleche.getVueClasseArrivee();
                 System.out.println(arrivee.getNom());
 

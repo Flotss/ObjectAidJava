@@ -10,11 +10,9 @@ import javafx.scene.layout.BorderPane;
 
 public class ApplicationLayoutBootstrapRender implements SceneFactory {
 
-    private final Model model;
     private final BorderPane base;
 
     public ApplicationLayoutBootstrapRender(final Model model) {
-        this.model = model;
         this.base = new BorderPane();
 
         final var button = new Button("Charger un projet");

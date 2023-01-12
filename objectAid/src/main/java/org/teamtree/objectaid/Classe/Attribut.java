@@ -128,13 +128,13 @@ public class Attribut {
 
     @Override
     public String toString() {
-        String info = accessibilite.getAcces();
+        StringBuilder info = new StringBuilder(accessibilite.getAcces());
         if (etat.size() > 0) {
             for (Etat etat : etat) {
-                info += " " + etat.getEtat();
+                info.append(" ").append(etat.getEtat());
             }
         }
-        info += " " + type + " " + nom;
+        info.append(" ").append(type).append(" ").append(nom);
         return info + "\n";
     }
 
@@ -143,13 +143,13 @@ public class Attribut {
      * @return L'uml de l'attribut
      */
     public String getUml() {
-        String info = accessibilite.getUml();
+        StringBuilder info = new StringBuilder(accessibilite.getUml());
         if (etat.size() > 0) {
             for (Etat etat : etat) {
-                info += " " + etat.getEtat();
+                info.append(" ").append(etat.getEtat());
             }
         }
-        info += " " + nom + " : " + type;
-        return info;
+        info.append(" ").append(nom).append(" : ").append(type);
+        return info.toString();
     }
 }

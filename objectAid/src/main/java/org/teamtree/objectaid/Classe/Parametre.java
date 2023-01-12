@@ -29,7 +29,8 @@ public class Parametre {
 
     /**
      * Constructeur du paramètre
-     * @param param Le paramètre de la méthode/constructeur
+     * @param nom Le nom du paramètre de la méthode/constructeur
+     * @param type Le type du paramètre de la méthode/constructeur
      */
     public Parametre(String nom, String type) {
         if (type.contains("<")) {

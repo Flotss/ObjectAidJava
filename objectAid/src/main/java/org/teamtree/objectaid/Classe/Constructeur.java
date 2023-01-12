@@ -77,15 +77,15 @@ public class Constructeur {
 
     @Override
     public String toString() {
-        String info = accessibilite.getAcces();
-        info += " " + nom + "(";
+        StringBuilder info = new StringBuilder(accessibilite.getAcces());
+        info.append(" ").append(nom).append("(");
         if (parametre.size() > 0) {
             for (Parametre param : parametre) {
-                info += param.toString() + ", ";
+                info.append(param.toString()).append(", ");
             }
-            info = info.substring(0, info.length() - 2);
+            info = new StringBuilder(info.substring(0, info.length() - 2));
         }
-        info += ")";
+        info.append(")");
         return info + "\n";
     }
 
@@ -94,16 +94,16 @@ public class Constructeur {
      * @return Forme UML du constructeur : String
      */
     public String getUml() {
-        String info = accessibilite.getUml();
-        info += " " + nom + "(";
+        StringBuilder info = new StringBuilder(accessibilite.getUml());
+        info.append(" ").append(nom).append("(");
         if (parametre.size() > 0) {
             for (Parametre param : parametre) {
-                info += param.getUml() + ", ";
+                info.append(param.getUml()).append(", ");
             }
-            info = info.substring(0, info.length() - 2);
+            info = new StringBuilder(info.substring(0, info.length() - 2));
         }
-        info += ")";
-        return info;
+        info.append(")");
+        return info.toString();
     }
 
 }

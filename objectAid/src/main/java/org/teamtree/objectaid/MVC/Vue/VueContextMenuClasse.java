@@ -9,31 +9,6 @@ import org.teamtree.objectaid.MVC.Model.Model;
 /** Vue utilisée pour les boutons d'affichage d'une classe */
 public class VueContextMenuClasse extends ContextMenu implements Observateur {
 
-    /** Attribut qui represente le bouton pour afficher/masquer les attributs de la classe */
-    private final MenuItem itemAttributs;
-
-    /** Attribut qui represente le bouton pour afficher/masquer les methodes de la classe */
-    private final MenuItem itemMethodes;
-
-    /** Attribut qui represente le bouton pour afficher/masquer les constructeurs de la classe */
-    private final MenuItem itemConstructeurs;
-
-    /** Attribut qui represente le bouton pour cacher la classe */
-    private final MenuItem itemCacherClasse;
-
-    /** Attribut qui represente le bouton pour supprimer la classe */
-    private final MenuItem itemSupprimerClasse;
-
-    /** Attribut qui represente le bouton pour generer le squelette d'une classe */
-    private final MenuItem itemGenererSquelette;
-
-    private final MenuItem itemInterface;
-
-    private final MenuItem itemHeritage;
-
-    /** Attribut qui represente le model */
-    private final Model model;
-
     /**
      * ClasseAffichage sur laquel s'appuie cette vue
      */
@@ -45,35 +20,58 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
      * @param model model
      */
     public VueContextMenuClasse(Model model) {
-        this.model = model;
-        itemAttributs = new MenuItem("Attributs");
+        /* Attribut qui represente le model */
+
+        // Pouvoir afficher les attributs
+        MenuItem itemAttributs = new MenuItem("Attributs");
         itemAttributs.setOnAction(new MenuItemController(model));
-        itemMethodes = new MenuItem("Méthodes");
+
+        // Pouvoir afficher les methodes
+        MenuItem itemMethodes = new MenuItem("Méthodes");
         itemMethodes.setOnAction(new MenuItemController(model));
-        itemConstructeurs = new MenuItem("Constructeurs");
+
+        // Pouvoir afficher les constructeurs
+        MenuItem itemConstructeurs = new MenuItem("Constructeurs");
         itemConstructeurs.setOnAction(new MenuItemController(model));
-        itemCacherClasse = new MenuItem("Cacher");
+
+        // Pouvoir cacher une classe
+        MenuItem itemCacherClasse = new MenuItem("Cacher");
         itemCacherClasse.setOnAction(new MenuItemController(model));
-        itemSupprimerClasse = new MenuItem("Supprimer");
+
+        // Pouvoir supprimer une classe
+        MenuItem itemSupprimerClasse = new MenuItem("Supprimer");
         itemSupprimerClasse.setOnAction(new MenuItemController(model));
-        itemGenererSquelette = new MenuItem("Générer le squelette");
+
+        // Pouvoir générer le squelette de classe
+        MenuItem itemGenererSquelette = new MenuItem("Générer le squelette");
         itemGenererSquelette.setOnAction(new MenuItemController(model));
-        itemInterface = new MenuItem("Cacher interface");
+
+        // Pouvoir cacher l'interface parent
+        MenuItem itemInterface = new MenuItem("Cacher interface");
         itemInterface.setOnAction(new MenuItemController(model));
-        itemHeritage = new MenuItem("Cacher heritage");
+
+        // Pouvoir cacher la classe parent
+        MenuItem itemHeritage = new MenuItem("Cacher heritage");
         itemHeritage.setOnAction(new MenuItemController(model));
+
+        // Ajouter quelque chose dans une classe
         Menu itemAjouter = new Menu("Ajouter");
+
+        // Pouvoir une méthode dans une classe
         MenuItem itemAjouterAttribut = new MenuItem("Méthode");
         itemAjouterAttribut.setId("ajouterMethode");
         itemAjouterAttribut.setOnAction(new MenuItemController(model));
         itemAjouter.getItems().add(itemAjouterAttribut);
+
+
+        // Ajout de tous ces items dans le menu contextuel
         this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, itemCacherClasse, itemSupprimerClasse, itemInterface, itemHeritage, itemGenererSquelette, itemAjouter);
         this.classe = null;
     }
 
     /**
      * Methode qui permet de retourner la classeAffichage de la vue
-     * @return buttonAttributs
+     * @return La classeAffichage de la vue
      */
     public VueClasseAffichage getClasse() {
         return classe;

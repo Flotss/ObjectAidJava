@@ -27,12 +27,12 @@ public class SqueletteService {
 
         if (f == null) return;
 
-        String messageAlert = "";
+        StringBuilder messageAlert = new StringBuilder();
         for (ClasseEntiere classe : classes) {
-           messageAlert += genererSquelette(f, classe) + "\n";
+           messageAlert.append(genererSquelette(f, classe)).append("\n");
         }
 
-        afficheAlert(messageAlert);
+        afficheAlert(messageAlert.toString());
     }
 
 
@@ -52,33 +52,33 @@ public class SqueletteService {
 
         BufferedWriter bw = null;
         try {
-            String squeletteContenu = "";
+            StringBuilder squeletteContenu = new StringBuilder();
 
             // Signature de la classe
-            squeletteContenu += classe.getDefinition().getAccessibilite() + " " + classe.getDefinition().getEntite() + " " + classe.getDefinition().getNom();
+            squeletteContenu.append(classe.getDefinition().getAccessibilite()).append(" ").append(classe.getDefinition().getEntite()).append(" ").append(classe.getDefinition().getNom());
 
             // Hérédité
             Heritage heritage = classe.getRelations().stream().filter(relation -> relation instanceof Heritage).map(relation -> (Heritage) relation).findFirst().orElse(null);
             if (heritage != null) {
-                squeletteContenu += " extends " + heritage.getDestination();
+                squeletteContenu.append(" extends ").append(heritage.getDestination());
             }
 
             // Implémentations
             Implementation[] implementations = classe.getRelations().stream().filter(relation -> relation instanceof Implementation).map(relation -> (Implementation) relation).toArray(Implementation[]::new);
             if (implementations.length > 0) {
-                squeletteContenu += " implements ";
+                squeletteContenu.append(" implements ");
                 for (int i = 0; i < implementations.length; i++) {
-                    squeletteContenu += implementations[i].getDestination();
+                    squeletteContenu.append(implementations[i].getDestination());
                     if (i != implementations.length - 1) {
-                        squeletteContenu += ", ";
+                        squeletteContenu.append(", ");
                     }
                 }
             }
-            squeletteContenu += " {\n";
+            squeletteContenu.append(" {\n");
 
             // Attributs
             for (Attribut attr : classe.getAttributs()) {
-                squeletteContenu += "\t" + attr.getAccessibilite().getAcces() + " " + attr.getType() + " " + attr.getNom() + ";\n\n";
+                squeletteContenu.append("\t").append(attr.getAccessibilite().getAcces()).append(" ").append(attr.getType()).append(" ").append(attr.getNom()).append(";\n\n");
             }
 
             // Attributs avec Relation
@@ -91,33 +91,33 @@ public class SqueletteService {
                 if ( ! attr.getAccessibilite().getAcces().equals("default")) {
                     acces = attr.getAccessibilite().getAcces();
                 }
-                squeletteContenu += "\t" + acces + " " + attr.getType() + " " + attr.getNom() + ";\n\n";
+                squeletteContenu.append("\t").append(acces).append(" ").append(attr.getType()).append(" ").append(attr.getNom()).append(";\n\n");
             }
 
             // Constructeurs
             for (Constructeur constructeur : classe.getContructeurs()) {
-                squeletteContenu += "\t" + constructeur.getAccessibilite().getAcces() + " " + constructeur.getNom() + "(";
+                squeletteContenu.append("\t").append(constructeur.getAccessibilite().getAcces()).append(" ").append(constructeur.getNom()).append("(");
                 for (int i = 0; i < constructeur.getParametre().size(); i++) {
-                    squeletteContenu += constructeur.getParametre().get(i).getType() + " " + constructeur.getParametre().get(i).getNom();
+                    squeletteContenu.append(constructeur.getParametre().get(i).getType()).append(" ").append(constructeur.getParametre().get(i).getNom());
                     if (i != constructeur.getParametre().size() - 1) {
-                        squeletteContenu += ", ";
+                        squeletteContenu.append(", ");
                     }
                 }
-                squeletteContenu += ") {\n\t\t\n\t}\n\n";
+                squeletteContenu.append(") {\n\t\t\n\t}\n\n");
             }
 
             // Methodes
             for (Methode methode : classe.getMethods()) {
-                squeletteContenu += "\t" + methode.getAccessibilite().getAcces() + " " + methode.getTypeRetourne() + " " + methode.getNom() + "(";
+                squeletteContenu.append("\t").append(methode.getAccessibilite().getAcces()).append(" ").append(methode.getTypeRetourne()).append(" ").append(methode.getNom()).append("(");
                 for (int i = 0; i < methode.getParametre().size(); i++) {
-                    squeletteContenu += methode.getParametre().get(i).getType() + " " + methode.getParametre().get(i).getNom();
+                    squeletteContenu.append(methode.getParametre().get(i).getType()).append(" ").append(methode.getParametre().get(i).getNom());
                     if (i != methode.getParametre().size() - 1) {
-                        squeletteContenu += ", ";
+                        squeletteContenu.append(", ");
                     }
                 }
-                squeletteContenu += ") {\n\t\t\n\t}\n\n";
+                squeletteContenu.append(") {\n\t\t\n\t}\n\n");
             }
-            squeletteContenu += "}";
+            squeletteContenu.append("}");
 
             File file = new File(f.getPath() + "\\" + classe.getNom() + ".java");
 
@@ -128,7 +128,7 @@ public class SqueletteService {
 
             FileWriter fw = new FileWriter(file);
             bw = new BufferedWriter(fw);
-            bw.write(squeletteContenu);
+            bw.write(squeletteContenu.toString());
             message = "Squelette de classe de : " + classe.getNom() + " genere avec succes";
         } catch (IOException ioe) {
             ioe.printStackTrace();

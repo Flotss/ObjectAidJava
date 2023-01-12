@@ -28,13 +28,11 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
-    private final Model model;
     private final BorderPane base;
 
     public static MenuBar menubar;
 
     public ApplicationLayoutProjectLoadedRender(Model model) {
-        this.model = model;
         this.base = new BorderPane();
 
         final var scrollPane = new ScrollPane();

@@ -17,12 +17,10 @@ import java.util.Objects;
 public class JavaProjectClassLoaderService extends ClassLoader {
 
     private final Path rootPath;
-    private final StringBuilder packagePath;
     private final Model model;
 
     public JavaProjectClassLoaderService(final Path rootPath, final Model model) {
         this.rootPath = rootPath;
-        this.packagePath = new StringBuilder();
         this.model = model;
     }
 

@@ -13,7 +13,6 @@ public class ListenerModificationTailleClasse implements ChangeListener {
     public ListenerModificationTailleClasse(Model model, VueClasseAffichage vueClasseAffichage) {
         this.model = model;
         this.vueClasseAffichage = vueClasseAffichage;
-
     }
 
     @Override

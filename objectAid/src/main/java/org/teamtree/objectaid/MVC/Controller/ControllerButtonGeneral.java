@@ -2,17 +2,9 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.ObjectAidApplication;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
-import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 
 /**
@@ -43,33 +35,33 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
-        switch (((MenuItem)event.getSource()).getText()){
-            case "Attributs":
+        switch (((MenuItem) event.getSource()).getText()) {
+            case "Attributs" -> {
                 System.out.println("gvvgyvyvygvy");
                 attributGenerauxAffiche = !attributGenerauxAffiche;
                 model.afficherAttributs(attributGenerauxAffiche);
-                break;
-            case "Methodes":
+            }
+            case "Methodes" -> {
                 methodesGenerauxAffiche = !methodesGenerauxAffiche;
                 model.afficherMethodes(methodesGenerauxAffiche);
-                break;
-            case "Constructeurs":
+            }
+            case "Constructeurs" -> {
                 constructeurGenerauxAffiche = !constructeurGenerauxAffiche;
                 model.afficherConstructeurs(constructeurGenerauxAffiche);
-                break;
-            case "Relations":
+            }
+            case "Relations" -> {
                 relationsGeneralesAffiche = !relationsGeneralesAffiche;
                 model.afficherRelations(relationsGeneralesAffiche);
-                break;
-            case "Supprimer" :
+            }
+            case "Supprimer" -> {
                 VueClasseAffichage classe1 = model.getVueClasseAffichage(((MenuItem) event.getSource()).getParentMenu().getText());
                 model.supprimerClasseAffichage(classe1);
                 ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().remove(((MenuItem) event.getSource()).getParentMenu());
-                break;
-            case "Supprimer les classes":
+            }
+            case "Supprimer les classes" -> {
                 model.supprimerClassesAffichage();
                 ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
-                break;
+            }
         }
     }
 

@@ -25,17 +25,4 @@ public class FabriqueAccessibilite {
             return new Default();
         }
     }
-
-    public Accessibilite getAccessibilite(String modificateur) {
-        switch (modificateur){
-            case "Public":
-                return new Public();
-            case "Protected":
-                return new Protected();
-            case "Private":
-                return new Private();
-            default:
-                return new Default();
-        }
-    }
 }

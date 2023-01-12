@@ -153,13 +153,6 @@ public class Model implements Sujet {
                 }
                 break;
             case "totalite des classes":
-                for(Observateur observateur: this.observateurs){
-                    if(observateur instanceof VueClasse){
-                        observateur.actualiser();
-                        break;
-                    }
-                }
-                break;
             case "update hidden classes":
                 //TODO: A modifier --> ne s'occuper que de la visibilitée
                 for(Observateur observateur: this.observateurs){
@@ -314,9 +307,7 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les méthodes
      */
     public void afficherMethodes(boolean affiche) {
-        getClasses().forEach(classeEntiere -> {
-            classeEntiere.setMethodsEstAffiche(affiche);
-        });
+        getClasses().forEach(classeEntiere -> classeEntiere.setMethodsEstAffiche(affiche));
         notifierObservateur("totalite des classes");
     }
 
@@ -332,9 +323,7 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les constructeurs
      */
     public void afficherConstructeurs(boolean affiche) {
-        getClasses().forEach(classeEntiere -> {
-            classeEntiere.setConstructeurEstAffiche(affiche);
-        });
+        getClasses().forEach(classeEntiere -> classeEntiere.setConstructeurEstAffiche(affiche));
         notifierObservateur("totalite des classes");
     }
 
@@ -362,8 +351,6 @@ public class Model implements Sujet {
      * Methode qui permet de changer la possibilité d'afficher les interfaces d'une classe spécifique
      */
     public void afficherInterfaceHeritageSelection(String type) {
-//        this.currentClickedClass.getClasseEntiere().setConstructeurEstAffiche(!this.currentClickedClass.getClasseEntiere().isConstructeurEstAffiche());
-//        notifierObservateur("classe selection complete");
 
         for (Observateur observateur : this.observateurs) {
             if (observateur instanceof VueClasse) {
@@ -465,7 +452,7 @@ public class Model implements Sujet {
 
     public boolean classeMasquee(VueClasseAffichage vueClasseAffichage1) {
         for (VueClasseAffichage vueClasseAffichage2 : hiddenClasses) {
-            if (vueClasseAffichage2.getNom() == vueClasseAffichage1.getNom()) {
+            if (vueClasseAffichage2.getNom().equals(vueClasseAffichage1.getNom())) {
                 return true;
             }
         }

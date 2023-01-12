@@ -145,20 +145,20 @@ public class Methode {
 
     @Override
     public String toString() {
-        String info = accessibilite.getAcces();
+        StringBuilder info = new StringBuilder(accessibilite.getAcces());
         if (etats.size() > 0){
             for (Etat etat : etats) {
-                info += " " + etat.getEtat();
+                info.append(" ").append(etat.getEtat());
             }
         }
-        info += " " + nom + "(";
+        info.append(" ").append(nom).append("(");
         if (parametre.size() > 0) {
             for (Parametre param : parametre) {
-                info += param.toString() + ", ";
+                info.append(param.toString()).append(", ");
             }
-            info = info.substring(0, info.length() - 2);
+            info = new StringBuilder(info.substring(0, info.length() - 2));
         }
-        info += ") : " + typeRetourne;
+        info.append(") : ").append(typeRetourne);
 
         return info + "\n";
     }
@@ -168,21 +168,21 @@ public class Methode {
      * @return Uml de la méthode : String
      */
     public String getUml() {
-        String info = accessibilite.getUml();
+        StringBuilder info = new StringBuilder(accessibilite.getUml());
         if (etats.size() > 0) {
             for (Etat etat : etats) {
-                info += " " + etat.getUml();
+                info.append(" ").append(etat.getUml());
             }
         }
-        info += " " + nom + "(";
+        info.append(" ").append(nom).append("(");
         if (parametre.size() > 0) {
             for (Parametre param : parametre) {
-                info += param.getUml() + ", ";
+                info.append(param.getUml()).append(", ");
             }
-            info = info.substring(0, info.length() - 2);
+            info = new StringBuilder(info.substring(0, info.length() - 2));
         }
-        info += ") : " + typeRetourne;
+        info.append(") : ").append(typeRetourne);
 
-        return info;
+        return info.toString();
     }
 }

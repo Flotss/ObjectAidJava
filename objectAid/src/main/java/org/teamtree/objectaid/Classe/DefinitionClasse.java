@@ -81,13 +81,13 @@ public class DefinitionClasse {
 
     @Override
     public String toString() {
-        String info = "";
+        StringBuilder info = new StringBuilder();
         if (etats.size() > 0) {
             for (Etat etat : etats) {
-                info += " " + etat.getEtat().replace("{", "").replace("}", "");
+                info.append(" ").append(etat.getEtat().replace("{", "").replace("}", ""));
             }
         }
-        info += " " + entite.getEntite() + " " + nomClasse;
+        info.append(" ").append(entite.getEntite()).append(" ").append(nomClasse);
         return info + "\n";
     }
 
@@ -97,14 +97,14 @@ public class DefinitionClasse {
         * @return L'uml de la classe
         */
          public String getUml() {
-             String uml = "";
+             StringBuilder uml = new StringBuilder();
              if (etats.size() > 0 && ! entite.getEntite().equals("interface")) {
                  for (Etat etat : etats) {
-                     uml += etat.getUml().replace("{", "").replace("}", "") + " ";
+                     uml.append(etat.getUml().replace("{", "").replace("}", "")).append(" ");
                  }
              }
-             uml += entite.getEntite() + " " + nomClasse;
-             return uml;
+             uml.append(entite.getEntite()).append(" ").append(nomClasse);
+             return uml.toString();
          }
 
 

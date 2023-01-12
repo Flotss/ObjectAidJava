@@ -19,22 +19,14 @@ import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
-import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 import org.teamtree.objectaid.Service.SqueletteService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe qui permet de gérer tous les MenuItem de l'application
  */
 public class MenuItemController implements EventHandler<ActionEvent> {
-
-    /** Booleens pour savoir l'etat de l'affichage des boutons de l'affichage general des classes */
-    private static boolean attributGenerauxAffiche = true;
-    private static boolean constructeurGenerauxAffiche = true;
-    private static boolean methodesGenerauxAffiche = true;
-    private static boolean relationsGeneralesAffiche = true;
 
     /** Modèle */
     private final Model model;
@@ -53,25 +45,19 @@ public class MenuItemController implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
-        switch (((MenuItem)event.getSource()).getText()){
-            case "Attributs":
-                model.afficherAttributsSelection();
-                break;
-            case "Méthodes":
-                model.afficherMethodesSelection();
-                break;
-            case "Constructeurs":
-                model.afficherConstructeursSelection();
-                break;
-            case "Cacher":
-                for (MenuItem m: ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
+        switch (((MenuItem) event.getSource()).getText()) {
+            case "Attributs" -> model.afficherAttributsSelection();
+            case "Méthodes" -> model.afficherMethodesSelection();
+            case "Constructeurs" -> model.afficherConstructeursSelection();
+            case "Cacher" -> {
+                for (MenuItem m : ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
                     if (m.getText().equals(model.getCurrentClickedClass().getNom())) {
                         m.setStyle("-fx-text-fill: red");
                     }
                 }
                 model.ajouterClasseCachee(model.getCurrentClickedClass());
-                break;
-            case "Afficher/Cacher":
+            }
+            case "Afficher/Cacher" -> {
                 VueClasseAffichage classe = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
                 if (!model.getHiddenClasses().contains(classe)) {
                     model.setCurrentClickedClass(classe);
@@ -81,36 +67,29 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                     model.supprimerClasseCachee(classe);
                     ((MenuItem) event.getSource()).getParentMenu().setStyle("-fx-text-fill: black");
                 }
-                break;
-
-            case "Supprimer":
+            }
+            case "Supprimer" -> {
                 VueClasseAffichage classe1 = model.getCurrentClickedClass();
                 model.supprimerClasseAffichage(classe1);
                 ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().removeIf(m -> m.getText().equals(model.getCurrentClickedClass().getNom()));
-                break;
-            case "Générer le squelette":
+            }
+            case "Générer le squelette" -> {
                 ClasseEntiere classeE = model.getCurrentClickedClass().getClasseEntiere();
                 SqueletteService squeletteService = new SqueletteService();
                 squeletteService.genererSqueletteUniqueClasse(classeE);
-                break;
-            case "Cacher interface":
-                model.afficherInterfaceHeritageSelection("Implementation");
-                break;
-            case "Cacher heritage":
-                model.afficherInterfaceHeritageSelection("Heritage");
-                break;
-            case "Supprimer les classes":
-                if(model.getClasses().size() > 0) {
+            }
+            case "Cacher interface" -> model.afficherInterfaceHeritageSelection("Implementation");
+            case "Cacher heritage" -> model.afficherInterfaceHeritageSelection("Heritage");
+            case "Supprimer les classes" -> {
+                if (model.getClasses().size() > 0) {
                     model.supprimerClassesAffichage();
                     ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
                 }
-                break;
+            }
         }
         if(((MenuItem)event.getSource()).getId() != null) {
             switch (((MenuItem) event.getSource()).getId()) {
-                case "ajouterMethode":
-                    ajouterMethode();
-                    break;
+                case "ajouterMethode" -> ajouterMethode();
             }
         }
     }

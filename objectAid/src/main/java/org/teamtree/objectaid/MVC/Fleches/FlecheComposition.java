@@ -1,12 +1,8 @@
 package org.teamtree.objectaid.MVC.Fleches;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import org.teamtree.objectaid.Classe.Relations.Relation;
-import org.teamtree.objectaid.MVC.Fleches.FlecheAssociation;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 public class FlecheComposition extends FlecheAssociation {

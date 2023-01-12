@@ -13,7 +13,7 @@ public class VueListeClasse extends Menu implements Observateur {
      * Constructs a Menu and sets the display text with the specified text.
      *
      * @param text  the text to display on the menu button
-     * @param model
+     * @param model Modèle
      */
     public VueListeClasse(final String text, final Model model) {
         super(text);

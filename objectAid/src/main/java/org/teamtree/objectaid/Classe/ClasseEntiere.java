@@ -1,10 +1,6 @@
 package org.teamtree.objectaid.Classe;
 
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
-import org.teamtree.objectaid.Classe.Relations.Association;
-import org.teamtree.objectaid.Classe.Relations.Heritage;
-import org.teamtree.objectaid.Classe.Relations.Implementation;
-import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Classe.Relations.*;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
@@ -57,9 +53,6 @@ public class ClasseEntiere {
      * Methodes sont afficher ou non
      */
     private boolean methodsEstAffiche;
-
-    /** Relations sont afficher ou non */
-    private boolean relationsEstAffiche;
 
     /** Relation entre classe */
     private final List<Relation> relations;
@@ -154,7 +147,6 @@ public class ClasseEntiere {
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
         this.constructeurEstAffiche = true;
-        this.relationsEstAffiche = false;
 
         System.out.println("-----------------\n");
         for (Relation relation : this.relations) {
@@ -246,7 +238,6 @@ public class ClasseEntiere {
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
         this.constructeurEstAffiche = true;
-        this.relationsEstAffiche = false;
 
         System.out.println("-----------------\n");
         for (Relation relation : this.relations) {
@@ -464,23 +455,6 @@ public class ClasseEntiere {
         return relations;
     }
 
-    /**
-     * Set la possibilite d'afficher les relations
-     * @param relationsEstAffiche Boolean vrai pour afficher les relations sinon faux
-     */
-    public void setRelationsEstAffiche(boolean relationsEstAffiche) {
-        this.relationsEstAffiche = relationsEstAffiche;
-    }
-
-
-    /**
-     * Retourne la possibilite d'afficher les attributs
-     * @return Vrai si les attributs sont affichés : boolean
-     */
-    public boolean isRelationsEstAffiche() {
-        return attributEstAffiche;
-    }
-
 
     /**
      * Retourne l'uml de la classe entiere
@@ -488,26 +462,26 @@ public class ClasseEntiere {
      */
     public String getUml() {
         StringBuilder uml = new StringBuilder();
-        uml.append(definition.getUml() + "{\n");
+        uml.append(definition.getUml()).append("{\n");
         if (attributs.size() > 0) {
             for (Attribut attribut : attributs) {
-                uml.append("\t\t").append(attribut.getUml() + "\n");
+                uml.append("\t\t").append(attribut.getUml()).append("\n");
             }
         }
         if (contructeurs.size() > 0) {
             for (Constructeur constructeur : contructeurs) {
-                uml.append("\t\t").append(constructeur.getUml() + "\n");
+                uml.append("\t\t").append(constructeur.getUml()).append("\n");
             }
         }
         if (methods.size() > 0) {
             for (Methode methode : methods) {
-                uml.append("\t\t").append(methode.getUml() + "\n");
+                uml.append("\t\t").append(methode.getUml()).append("\n");
             }
         }
         uml.append("}\n\n");
         if (relations.size() > 0) {
             for (Relation relation : relations) {
-                uml.append(relation.getUml() + "\n");
+                uml.append(relation.getUml()).append("\n");
             }
         }
         uml.append("\n");

@@ -38,7 +38,7 @@ public class UmlService {
         BufferedWriter bw = null;
         try {
             // Verification path
-            File file = null;
+            File file;
             if (! f.getPath().contains(".puml")){
                 file = new File(f.getPath() + ".puml");
             }else{
@@ -67,15 +67,15 @@ public class UmlService {
             }
         }
 
-        Alert.afficheAlert("UML généré avec succès !");
+        Alert.afficheAlert(message);
     }
 
     private String genererUml(List<ClasseEntiere> classes){
-        String contenu = "@startuml\n";
+        StringBuilder contenu = new StringBuilder("@startuml\n");
         for (ClasseEntiere classe : classes) {
-            contenu += classe.getUml() + "\n";
+            contenu.append(classe.getUml()).append("\n");
         }
-        contenu += "@enduml";
-        return contenu;
+        contenu.append("@enduml");
+        return contenu.toString();
     }
 }
