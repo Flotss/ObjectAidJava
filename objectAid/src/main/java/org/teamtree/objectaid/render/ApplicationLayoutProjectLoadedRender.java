@@ -82,7 +82,12 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         MenuItem menuItem5 = new MenuItem("Relations");
         menuItem5.setOnAction(controllerBtnGeneral);
 
-        Menu menuItem1 = new Menu("Supprimer");
+        Menu supprimerClasseMenu = new Menu("Supprimer les classes");
+        MenuItem supprimerClasseMenuitem = new MenuItem("Supprimer les classes");
+        supprimerClasseMenuitem.setOnAction(new MenuItemController(model));
+
+        supprimerClasseMenu.getItems().add(supprimerClasseMenuitem);
+
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
 
         for (ClasseEntiere ce: model.getClasses()) {
@@ -103,7 +108,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         menuGeneration.getItems().addAll(itemGenererUml, itemGenererSquelette);
 
 
-        menubar.getMenus().addAll(menuItem, listeClasse, menuGeneration);
+        menubar.getMenus().addAll(menuItem, listeClasse, supprimerClasseMenu, menuGeneration);
 
         vbox.getChildren().addAll(menubar, vueClasse);
 
