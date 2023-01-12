@@ -86,7 +86,12 @@ public class SqueletteService {
                 if (!(relation instanceof Association)) continue;
 
                 Attribut attr = ((Association) relation).getAttribut();
-                squeletteContenu += "\t" + attr.getAccessibilite().getAcces() + " " + attr.getType() + " " + attr.getNom() + ";\n\n";
+
+                String acces = "";
+                if ( ! attr.getAccessibilite().getAcces().equals("default")) {
+                    acces = attr.getAccessibilite().getAcces();
+                }
+                squeletteContenu += "\t" + acces + " " + attr.getType() + " " + attr.getNom() + ";\n\n";
             }
 
             // Constructeurs

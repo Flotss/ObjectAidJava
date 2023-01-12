@@ -42,4 +42,8 @@ public class VueListeClasse extends Menu implements Observateur {
             getItems().add(menuItem);
         });
     }
+
+    public void changerCouleurTexte() {
+        this.setStyle("-fx-text-fill: red;");
+    }
 }

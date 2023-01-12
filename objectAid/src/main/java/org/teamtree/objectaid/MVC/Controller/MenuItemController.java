@@ -100,8 +100,10 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 model.afficherInterfaceHeritageSelection("Heritage");
                 break;
             case "Supprimer les classes":
-                model.supprimerClassesAffichage();
-                ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
+                if(model.getClasses().size() > 0) {
+                    model.supprimerClassesAffichage();
+                    ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
+                }
                 break;
         }
         if(((MenuItem)event.getSource()).getId() != null) {

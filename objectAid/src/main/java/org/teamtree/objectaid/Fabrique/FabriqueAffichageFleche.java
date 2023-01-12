@@ -24,6 +24,7 @@ public class FabriqueAffichageFleche {
             case "Association" -> new FlecheAssociation(model, relation);
             case "Heritage" -> new FlecheHeritage(model, relation);
             case "Implementation" -> new FlecheImplementation(model, relation);
+            case "Aggregation" -> new FlecheAggregation(model, relation);
             default -> null;
         };
     }
