@@ -112,6 +112,13 @@ public class Model implements Sujet {
         }
     }
 
+    public <T extends Observateur> void notifierObservateur(final Class<T> observer) {
+        this.observateurs
+                .stream()
+                .filter(observer::isInstance)
+                .forEach(Observateur::actualiser);
+    }
+
     /**
      * Méthode qui permet de notifier les observateurs correspondant à une selection donnée en paramètre
      *
@@ -124,8 +131,7 @@ public class Model implements Sujet {
 
         switch (selection) {
             case "app":
-                this.observateurs.stream().filter(o -> o instanceof ApplicationLayoutView)
-                        .findFirst().ifPresent(Observateur::actualiser);
+                this.observateurs.stream().filter(o -> o instanceof ApplicationLayoutView).findFirst().ifPresent(Observateur::actualiser);
                 break;
             case "selection":
                 this.currentClickedClass.actualiserBordure();
@@ -188,6 +194,15 @@ public class Model implements Sujet {
                         return;
                     }
                 }
+                break;
+            case "listeClasse":
+                for (Observateur observateur : this.observateurs) {
+                    if (observateur instanceof VueListeClasse) {
+                        observateur.actualiser();
+                        return;
+                    }
+                }
+                break;
         }
     }
 
@@ -211,11 +226,11 @@ public class Model implements Sujet {
             int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
             int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
-            classe = ((VueClasse)getObservateur("VueClasse").get(0)).ajouterClasse(classe);
+            classe = ((VueClasse) getObservateur("VueClasse").get(0)).ajouterClasse(classe);
             relations.put(classe, new ArrayList<>(classe.getRelations()));
-            for(Observateur observateur: this.observateurs){
-                if(observateur instanceof VueClasse){
-                    ((VueClasse) observateur).actualiser();
+            for (Observateur observateur : this.observateurs) {
+                if (observateur instanceof VueClasse) {
+                    observateur.actualiser();
                 }
             }
         }
@@ -262,14 +277,15 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de définir la classe sélectionnée
+     *
      * @param currentClickedClass Classe sélectionnée
      */
     public void setCurrentClickedClass(VueClasseAffichage currentClickedClass) {
-        if(this.currentClickedClass == null) {
+        if (this.currentClickedClass == null) {
             this.currentClickedClass = currentClickedClass;
             this.currentClickedClass.classeSelectionnee();
             this.notifierObservateur("selection");
-        }else {
+        } else {
             this.currentClickedClass.classeDeSelectionnee();
             this.notifierObservateur("selection");
             if (Objects.equals(currentClickedClass.getNom(), this.currentClickedClass.getNom())) {
@@ -365,7 +381,7 @@ public class Model implements Sujet {
      * Methode qui permet de deplacer une classe
      */
     public void deplacerClasse(int x, int y) {
-        this.getCurrentClickedClass().getClasseEntiere().deplacer(x,y);
+        this.getCurrentClickedClass().getClasseEntiere().deplacer(x, y);
         notifierObservateur("deplacement selection");
     }
 
@@ -424,12 +440,12 @@ public class Model implements Sujet {
         this.relations.remove(classe.getClasseEntiere());
     }
 
-    public void supprimerClassesAffichage(){
-        for(Observateur observateur : getObservateur("VueClasseAffichage")){
+    public void supprimerClassesAffichage() {
+        for (Observateur observateur : getObservateur("VueClasseAffichage")) {
             supprimerClasseAffichage((VueClasseAffichage) observateur);
         }
-        ((VueClasse)getObservateur("VueClasse").get(0)).supprimerFleches();
-        ((VueClasse)getObservateur("VueClasse").get(0)).supprimerTout();
+        ((VueClasse) getObservateur("VueClasse").get(0)).supprimerFleches();
+        ((VueClasse) getObservateur("VueClasse").get(0)).supprimerTout();
         this.notifierObservateur("totalite des classes");
     }
 
