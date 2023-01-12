@@ -73,4 +73,4 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
         }
     }
 
-        }
+}
