@@ -95,7 +95,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
             MenuItem afficherCacherClasse = new MenuItem("Afficher/Cacher");
             afficherCacherClasse.setOnAction(new MenuItemController(model));
             MenuItem supprimerClasse = new MenuItem("Supprimer");
-            supprimerClasse.setOnAction(new MenuItemController(model));
+            supprimerClasse.setOnAction(new ControllerButtonGeneral(model));
             nomClasseMenu.getItems().addAll(afficherCacherClasse, supprimerClasse);
             listeClasse.getItems().add(nomClasseMenu);
         }

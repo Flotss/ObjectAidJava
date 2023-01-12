@@ -58,7 +58,6 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 break;
             case "Afficher/Cacher":
                 VueClasseAffichage classe = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
-                System.out.println(model.getCurrentClickedClass());
                 if (!model.getHiddenClasses().contains(classe)) {
                     model.setCurrentClickedClass(classe);
                     model.ajouterClasseCachee(classe);
@@ -70,22 +69,9 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 break;
 
             case "Supprimer":
-                if(((MenuItem) event.getSource()).getParentMenu() != null){
-                    VueClasseAffichage classe1 = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
-                    model.supprimerClasseAffichage(classe1);
-                    ((MenuItem) event.getSource()).getParentMenu().getParentMenu().getItems().remove(((MenuItem) event.getSource()).getParentMenu());
-                } else {
-                    VueClasseAffichage classe1 = ((VueContextMenuClasse) ((MenuItem) event.getSource()).getParentPopup()).getClasse();
-                    model.supprimerClasseAffichage(classe1);
-                    for (MenuItem m: ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
-                        if (m.getText().equals(classe1.getNom())) {
-                            ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().remove(m);
-                            break;
-                        }
-                    }
-                }
-
-
+                VueClasseAffichage classe1 = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
+                model.supprimerClasseAffichage(classe1);
+                ((MenuItem) event.getSource()).getParentMenu().getParentMenu().getItems().remove(((MenuItem) event.getSource()).getParentMenu());
                 break;
             case "Générer le squelette":
                 ClasseEntiere classeE = model.getCurrentClickedClass().getClasseEntiere();

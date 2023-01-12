@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
+import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
+import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 
 /**
  * Classe qui permet de gérer tous les boutons de l'application
@@ -59,33 +62,16 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 relationsGeneralesAffiche = !relationsGeneralesAffiche;
                 model.afficherRelations(relationsGeneralesAffiche);
                 break;
-            case "Classe cachée" :
-                afficherClasseCachee();
+            case "Supprimer" :
+                VueClasseAffichage classe1 = ((VueContextMenuClasse) ((MenuItem) event.getSource()).getParentPopup()).getClasse();
+                model.supprimerClasseAffichage(classe1);
+                for (MenuItem m: ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
+                    if (m.getText().equals(classe1.getNom())) {
+                        ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().remove(m);
+                        break;
+                    }
+                }
                 break;
         }
-    }
-
-    private void afficherClasseCachee(){
-        Stage stage = new Stage();
-        VBox vBox = new VBox();
-        for (var classe : model.getHiddenClasses()) {
-            Label label = new Label(classe.getNom());
-            label.setFont(new Font(20));
-            label.setPadding(new Insets(10));
-            label.setOnMouseClicked(new ControllerButtonClasseCachee(model, classe));
-            vBox.getChildren().add(label);
-        }
-        if (vBox.getChildren().isEmpty()) {
-            Label label = new Label("Aucune classe cachée");
-            label.setFont(new Font(20));
-            label.setPadding(new Insets(10));
-            vBox.getChildren().add(label);
-        }
-
-        stage.setScene(new Scene(vBox));
-        stage.setX(800);
-        stage.setAlwaysOnTop(true);
-        stage.setMaxWidth(300);
-        stage.show();
     }
 }
