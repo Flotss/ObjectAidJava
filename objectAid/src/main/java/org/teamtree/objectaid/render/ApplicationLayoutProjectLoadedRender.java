@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
+import org.teamtree.objectaid.MVC.Vue.VueListeClasse;
 import org.teamtree.objectaid.Service.JavaProjectClassLoaderService;
 import org.teamtree.objectaid.util.FileExtension;
 
@@ -72,7 +73,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         ApplicationLayoutProjectLoadedRender.menubar = new MenuBar();
 
         Menu menuItem = new Menu("Afficher/cacher");
-        Menu listeClasse = new Menu("Liste des classes");
+        final var listeClasse = new VueListeClasse("Liste des classes", model);
         MenuItem afficher = new MenuItem("Afficher/Cacher");
         MenuItem supprimer = new MenuItem("Supprimer");
         MenuItem menuItem2 = new MenuItem("Constructeurs");
@@ -106,6 +107,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
         VueContextMenuClasse contextMenu = new VueContextMenuClasse(model);
         model.ajouterObservateur(contextMenu);
+        model.ajouterObservateur(listeClasse);
 
         base.setCenter(vbox);
     }

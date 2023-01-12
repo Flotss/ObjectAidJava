@@ -5,6 +5,7 @@ import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
 
 import javafx.scene.input.DragEvent;
+import org.teamtree.objectaid.MVC.Vue.VueListeClasse;
 
 public class VboxDragDroppedController extends ControllerBase<DragEvent> {
 
@@ -32,7 +33,9 @@ public class VboxDragDroppedController extends ControllerBase<DragEvent> {
             entrySearch.ifPresent(stringClassEntry -> model.getClasse(itemContent).ifPresentOrElse(classe -> {
             }, () -> {
                 final var classeEntiere = new ClasseEntiere(stringClassEntry.getValue());
+
                 this.model.ajouterClasse(classeEntiere);
+                this.model.notifierObservateur(VueListeClasse.class);
             }));
         }
 
