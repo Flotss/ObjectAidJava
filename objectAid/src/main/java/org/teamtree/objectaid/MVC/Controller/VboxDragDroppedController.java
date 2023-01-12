@@ -33,7 +33,6 @@ public class VboxDragDroppedController extends ControllerBase<DragEvent> {
             }, () -> {
                 final var classeEntiere = new ClasseEntiere(stringClassEntry.getValue());
                 this.model.ajouterClasse(classeEntiere);
-                new VueClasse(model);
             }));
         }
 
