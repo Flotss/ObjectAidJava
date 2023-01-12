@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Logo {
+    # nomIm : String
+    # prix : double
+    + Logo(path : String, prix : int)
+    + {abstract} getLogo() : MyImage
+    + {abstract} combienCaCoute() : double
+}
+class Main
+class ReneLaTaupe extends Logo
+class CrazyFrog extends Logo
+class MyImage{
+    image : BufferedImage
+    size : Dimension
+    + MyImage(path : String)
+    # paintComponent(g : Graphics) : void
+    + display() : void
+    + paintOver(otherimage : String , x : int, y : int) : void
+    + textOver(txt : String, x : int, y : int) : void
+}
+
+class LogoDecorateur extends Logo{
+    - x : int
+    - y : int
+    + LogoDecorateur(i : Logo, path : String, x : int, y : int)
+    + getLogo() : MyImage
+    + combienCaCoute() : double
+}
+LogoDecorateur "*" *-- "1" Logo : #logo
+
+class DecorateurChapeau implements LogoDecorateur{
+    + DecorateurChapeau(i : Logo, x : int, y : int)
+}
+
+class DecorateurLunettes implements LogoDecorateur{
+    + DecorateurLunettes(i : Logo, x : int, y : int)
+}
+
+class DecorateurSmiley implements LogoDecorateur
+class DecorateurCandy implements LogoDecorateur
+
+class LogoText extends Logo{
+    - texte : String
+    - x : int
+    - y : int
+    + LogoText(i : Logo, prix : int, texte : String, x : int, y : int)
+    + getLogo() : MyImage
+    + combienCaCoute() : double
+}
+
+LogoText "*" *-- "1" Logo : #logo
+
+@enduml
