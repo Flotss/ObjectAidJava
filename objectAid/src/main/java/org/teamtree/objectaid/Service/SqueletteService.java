@@ -1,6 +1,5 @@
 package org.teamtree.objectaid.Service;
 
-import javafx.scene.control.Alert;
 import javafx.stage.DirectoryChooser;
 import org.teamtree.objectaid.Classe.Attribut;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
@@ -17,6 +16,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import static org.teamtree.objectaid.Service.Alert.afficheAlert;
+
 public class SqueletteService {
 
     public void genererSqueletteDiagramme(List<ClasseEntiere> classes) {
@@ -31,7 +32,7 @@ public class SqueletteService {
            messageAlert += genererSquelette(f, classe) + "\n";
         }
 
-        alert(messageAlert);
+        afficheAlert(messageAlert);
     }
 
 
@@ -42,7 +43,7 @@ public class SqueletteService {
 
         if (f == null) return;
 
-        alert(genererSquelette(f, classe));
+        Alert.afficheAlert(genererSquelette(f, classe));
     }
 
 
@@ -136,14 +137,5 @@ public class SqueletteService {
             }
         }
         return message;
-    }
-
-
-    private void alert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

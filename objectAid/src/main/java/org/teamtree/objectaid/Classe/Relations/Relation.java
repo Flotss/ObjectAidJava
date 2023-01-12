@@ -44,4 +44,11 @@ public abstract class Relation {
      * Méthode d'affichage de la relation
      */
     public abstract String toString();
+
+
+    /**
+     * Méthode qui retourne l'uml de la relation
+     * @return L'uml de la relation
+     */
+    public abstract String getUml();
 }

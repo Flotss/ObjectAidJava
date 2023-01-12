@@ -27,4 +27,8 @@ public class Private implements Accessibilite {
     public String toString(){
         return "Private";
     }
+
+    public String getUml(){
+        return "-";
+    }
 }

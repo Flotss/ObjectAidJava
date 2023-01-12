@@ -75,4 +75,21 @@ public class Constructeur {
         return info + "\n";
     }
 
+    /**
+     * Méthode qui retroune la forme UML du constructeur
+     * @return Forme UML du constructeur : String
+     */
+    public String getUml() {
+        String info = accessibilite.getUml();
+        info += " " + nom + "(";
+        if (parametre.size() > 0) {
+            for (Parametre param : parametre) {
+                info += param.getUml() + ", ";
+            }
+            info = info.substring(0, info.length() - 2);
+        }
+        info += ")";
+        return info;
+    }
+
 }

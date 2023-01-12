@@ -2,9 +2,6 @@ package org.teamtree.objectaid;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.teamtree.objectaid.Classe.ClasseEntiere;
-import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
-import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.ApplicationLayoutView;
 

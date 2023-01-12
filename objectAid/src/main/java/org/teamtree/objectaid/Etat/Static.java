@@ -8,4 +8,9 @@ public class Static implements Etat{
     public String getEtat() {
         return "static";
     }
+
+    @Override
+    public String getUml(){
+        return "{static}";
+    }
 }

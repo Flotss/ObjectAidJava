@@ -8,4 +8,9 @@ public class Final implements Etat{
     public String getEtat() {
         return "final";
     }
+
+    @Override
+    public String getUml(){
+        return "{final}";
+    }
 }

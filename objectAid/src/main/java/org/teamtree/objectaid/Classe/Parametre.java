@@ -15,7 +15,15 @@ public class Parametre {
      * @param param Le paramètre de la méthode/constructeur
      */
     public Parametre(Parameter param) {
-        this.type = param.getType().getSimpleName().trim();
+        String type = param.getType().toGenericString();
+        if (type.contains("<")) {
+            String [] typeRetourneSplit = type.split("<");
+            String part1 = typeRetourneSplit[0].substring(typeRetourneSplit[0].lastIndexOf(".") + 1);
+            String part2 = typeRetourneSplit[1].substring(typeRetourneSplit[1].lastIndexOf(".")+1, typeRetourneSplit[1].length() - 1);
+            this.type = part1 + "<" + part2 + ">";
+        } else {
+            this.type = type.substring(type.lastIndexOf(".") + 1);
+        }
         this.nom = param.getName();
     }
 
@@ -38,5 +46,13 @@ public class Parametre {
     @Override
     public String toString() {
         return type + " " + nom;
+    }
+
+    /**
+     * Retourne l'uml du paramètre
+     * @return Uml du paramètre : String
+     */
+    public String getUml() {
+        return nom + " : " + type;
     }
 }

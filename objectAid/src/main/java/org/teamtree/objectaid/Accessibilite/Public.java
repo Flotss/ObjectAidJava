@@ -27,4 +27,8 @@ public class Public implements Accessibilite {
     public String toString(){
         return "Public";
     }
+
+    public String getUml(){
+        return "+";
+    }
 }

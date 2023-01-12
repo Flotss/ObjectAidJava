@@ -69,5 +69,14 @@ public class Association extends Relation {
         return "Association: " + getDepart() + " -> " + getDestination() + " (" + attribut.getType() + ")" + " " + attribut.getNom();
         //+ " (" + cardinalite1 + " - " + cardinalite2 + ")"; // TODO: Add cardinalities
     }
+
+    /**
+     * Méthode qui retourne l'uml de l'association
+     * @return L'uml de l'association
+     */
+    @Override
+    public String getUml() {
+        return getDepart() + " --> " + getDestination() + " : " + attribut.getAccessibilite().getUml() + " " + attribut.getNom();
+    }
 }
 

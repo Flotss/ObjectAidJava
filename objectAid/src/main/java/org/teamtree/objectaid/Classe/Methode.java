@@ -38,7 +38,17 @@ public class Methode {
         this.nom = method.getName();
 
         // Type de retour
-        this.typeRetourne = method.getReturnType().getSimpleName();
+        String typeRetourne = method.getGenericReturnType().getTypeName();
+        if (typeRetourne.contains("<")) {
+            String [] typeRetourneSplit = typeRetourne.split("<");
+            String part1 = typeRetourneSplit[0].substring(typeRetourneSplit[0].lastIndexOf(".") + 1);
+            String part2 = typeRetourneSplit[1].substring(typeRetourneSplit[1].lastIndexOf(".")+1, typeRetourneSplit[1].length() - 1);
+            this.typeRetourne = part1 + "<" + part2 + ">";
+        } else {
+            this.typeRetourne = typeRetourne.substring(typeRetourne.lastIndexOf(".") + 1);
+        }
+        System.out.println("Type de retour : " + this.typeRetourne);
+
 
 
         // Accessibilite : public, private, protected, default
@@ -116,5 +126,28 @@ public class Methode {
         info += ") : " + typeRetourne;
 
         return info + "\n";
+    }
+
+    /**
+     * Retourne l'uml de la méthode
+     * @return Uml de la méthode : String
+     */
+    public String getUml() {
+        String info = accessibilite.getUml();
+        if (etats.size() > 0) {
+            for (Etat etat : etats) {
+                info += " " + etat.getUml();
+            }
+        }
+        info += " " + nom + "(";
+        if (parametre.size() > 0) {
+            for (Parametre param : parametre) {
+                info += param.getUml() + ", ";
+            }
+            info = info.substring(0, info.length() - 2);
+        }
+        info += ") : " + typeRetourne;
+
+        return info;
     }
 }
