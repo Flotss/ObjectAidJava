@@ -27,6 +27,11 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Représente le rendu de l'application au stade post-chargement de projet.
+ *
+ * @see org.teamtree.objectaid.MVC.Model.ApplicationState
+ */
 public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
     private final BorderPane base;
 

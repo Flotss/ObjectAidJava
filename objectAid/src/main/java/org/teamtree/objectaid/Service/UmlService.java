@@ -7,6 +7,9 @@ import org.teamtree.objectaid.Classe.ClasseEntiere;
 import java.io.*;
 import java.util.List;
 
+/**
+ * Service s'occupant de générer un diagramme UML à partir d'une liste de classes entières.
+ */
 public class UmlService {
 
     public void genererUmltoCompilation(List<ClasseEntiere> classes){
