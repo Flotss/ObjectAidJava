@@ -3,13 +3,23 @@ package org.teamtree.objectaid.Service;
 import javafx.stage.FileChooser;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.List;
 
 public class UmlService {
+
+    public void genererUmltoCompilation(List<ClasseEntiere> classes){
+        String uml = genererUml(classes);
+//        SourceStringReader reader = new SourceStringReader(source);
+//        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+//        // Write the first image to "os"
+//        String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
+//        os.close();
+//
+//        // The XML is stored into svg
+//        final String svg = new String(os.toByteArray(), Charset.forName("UTF-8"));
+    }
 
     public void genererUmltoFile(List<ClasseEntiere> classes) {
         // Choisir un fichier pour l'enregistrement
@@ -21,11 +31,7 @@ public class UmlService {
 
         if (f == null) return;
 
-        String contenu = "@startuml\n";
-        for (ClasseEntiere classe : classes) {
-             contenu += classe.getUml() + "\n";
-        }
-        contenu += "@enduml";
+        String contenu = genererUml(classes);
 
         String message = "Erreur lors de la génération de l'uml !";
 
@@ -62,5 +68,14 @@ public class UmlService {
         }
 
         Alert.afficheAlert("UML généré avec succès !");
+    }
+
+    private String genererUml(List<ClasseEntiere> classes){
+        String contenu = "@startuml\n";
+        for (ClasseEntiere classe : classes) {
+            contenu += classe.getUml() + "\n";
+        }
+        contenu += "@enduml";
+        return contenu;
     }
 }

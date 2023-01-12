@@ -85,31 +85,17 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                         }
                     }
                 }
-
-
                 break;
             case "Générer le squelette":
                 ClasseEntiere classeE = model.getCurrentClickedClass().getClasseEntiere();
                 SqueletteService squeletteService = new SqueletteService();
                 squeletteService.genererSqueletteUniqueClasse(classeE);
                 break;
-            case "Générer squelette":
-                SqueletteService squeletteService1 = new SqueletteService();
-                squeletteService1.genererSqueletteDiagramme(model.getClasses());
-                break;
-            case "Générer UML":
-                UmlService umlService = new UmlService();
-                umlService.genererUmltoFile(model.getClasses());
-                break;
             case "Cacher interface":
                 model.afficherInterfaceHeritageSelection("Implementation");
                 break;
             case "Cacher heritage":
                 model.afficherInterfaceHeritageSelection("Heritage");
-                break;
-            case "Supprimer les classes":
-                model.supprimerClassesAffichage();
-                ObjectAidApplication.menuBar.getMenus().get(1).getItems().clear();
                 break;
         }
     }

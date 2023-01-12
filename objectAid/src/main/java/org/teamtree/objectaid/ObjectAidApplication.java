@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
+import org.teamtree.objectaid.MVC.Controller.GenererButtonController;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
@@ -71,8 +72,6 @@ public class ObjectAidApplication extends Application {
 
         Menu menuItem = new Menu("Afficher/cacher");
         Menu listeClasse = new Menu("Liste des classes");
-        MenuItem afficher = new MenuItem("Afficher/Cacher");
-        MenuItem supprimer = new MenuItem("Supprimer");
         MenuItem menuItem2 = new MenuItem("Constructeurs");
         menuItem2.setOnAction(new ControllerButtonGeneral(model));
         MenuItem menuItem3 = new MenuItem("Attributs");
@@ -84,7 +83,7 @@ public class ObjectAidApplication extends Application {
 
         Menu supprimer_les_classes = new Menu("Supprimer les classes");
         MenuItem supprimerClasses = new MenuItem("Supprimer les classes");
-        supprimerClasses.setOnAction(new MenuItemController(model));
+        supprimerClasses.setOnAction(new ControllerButtonGeneral(model));
         supprimer_les_classes.getItems().add(supprimerClasses);
 
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
@@ -99,12 +98,16 @@ public class ObjectAidApplication extends Application {
             listeClasse.getItems().add(nomClasseMenu);
         }
 
+        GenererButtonController genererButtonController = new GenererButtonController(model);
         Menu generer = new Menu("Générer");
         MenuItem genererSquelette = new MenuItem("Générer squelette");
-        genererSquelette.setOnAction(new MenuItemController(model));
+        genererSquelette.setOnAction(genererButtonController);
         MenuItem genererUml = new MenuItem("Générer UML");
-        genererUml.setOnAction(new MenuItemController(model));
-        generer.getItems().addAll(genererSquelette, genererUml);
+        genererUml.setOnAction(genererButtonController);
+        MenuItem genererCompilation = new MenuItem("Générer compilation UML");
+        genererCompilation.setOnAction(genererButtonController);
+        generer.getItems().addAll(genererSquelette, genererUml, genererCompilation);
+
 
         menuBar.getMenus().addAll(menuItem, listeClasse, supprimer_les_classes, generer);
 
