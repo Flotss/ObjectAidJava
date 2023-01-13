@@ -66,7 +66,6 @@ public class Model implements Sujet {
 
     /**
      * Retourne le path du projet ouvert
-     *
      * @return Path du projet ouvert
      */
     public Path getCurrentProject() {
@@ -75,7 +74,6 @@ public class Model implements Sujet {
 
     /**
      * Définit le path du projet ouvert
-     *
      * @param currentProject Path du projet ouvert
      */
     public void setCurrentProject(Path currentProject) {
@@ -90,7 +88,6 @@ public class Model implements Sujet {
 
     /**
      * Retourne les noms des classes et leur classe correspondante
-     *
      * @return Les noms des classes et leur classe correspondante
      */
     public Map<String, Class<?>> getClassesPath() {
@@ -99,7 +96,6 @@ public class Model implements Sujet {
 
     /**
      * Ajouter une classe au classesPath
-     *
      * @param className Nom de la classe
      * @param clazz     Classe
      */
@@ -109,7 +105,6 @@ public class Model implements Sujet {
 
     /**
      * Retourne l'état de l'application
-     *
      * @return L'état de l'application
      */
     public ApplicationState getApplicationState() {
@@ -118,7 +113,6 @@ public class Model implements Sujet {
 
     /**
      * Définit l'état de l'application
-     *
      * @param applicationState L'état de l'application
      */
     public void setApplicationState(final ApplicationState applicationState) {
@@ -160,7 +154,10 @@ public class Model implements Sujet {
      * @param observer La classe de l'observateur à notifier
      */
     public <T extends Observateur> void notifierObservateur(final Class<T> observer) {
-        this.observateurs.stream().filter(observer::isInstance).forEach(Observateur::actualiser);
+        this.observateurs
+                .stream()
+                .filter(observer::isInstance)
+                .forEach(Observateur::actualiser);
     }
 
     /**
@@ -235,12 +232,11 @@ public class Model implements Sujet {
                 }
                 break;
             case "recharger methodes":
-                System.out.println("arrive ici");
                 for (Observateur observateur : this.observateurs) {
                     if (observateur instanceof VueClasse) {
                         ((VueClasse) observateur).rechargerMethodes();
                         observateur.actualiser();
-                        ((VueClasse) observateur).actualiserFleches();
+                        ((VueClasse) observateur).rechargerFleches();
                         return;
                     }
                 }
@@ -515,7 +511,6 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de retourner la liste des observateurs d'un type donné
-     *
      * @param nom Le nom de la classe de l'observateur
      */
     public List<Observateur> getObservateur(String nom) {
@@ -534,7 +529,6 @@ public class Model implements Sujet {
 
     /**
      * Methode qui permet de tester si la vue en parametre est une vueClasseAffichage qui est cachée
-     *
      * @param vueClasseAffichage1 La vue à tester
      * @return booleen qui indique si la vue est cachée
      */
@@ -587,9 +581,8 @@ public class Model implements Sujet {
      */
     public void ajouterAttribut(Accessibilite accessibilite, List<Etat> modifiers, String nom, String type) {
         this.currentClickedClass.getClasseEntiere().ajouterAttribut(nom, type, modifiers, accessibilite);
-        this.currentClickedClass.setMethodes();
         this.relations.put(this.currentClickedClass.getClasseEntiere(), new ArrayList<>(this.currentClickedClass.getClasseEntiere().getRelations()));
-        this.notifierObservateur("classe selection complete");
+        this.notifierObservateur("totalite des classes");
     }
 
     /**
@@ -599,11 +592,11 @@ public class Model implements Sujet {
      * @param nomExtend     nom de la classe qu'elle extend
      * @param nomImplemente nom de la classe qu'elle implémente
      * @param accessibilite accesibilite de la classe
-     * @param etats         etats de la classe
-     * @param entite        entitée de la classe
+     * @param etats etats de la classe
+     * @param entite entitée de la classe
      */
-    public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite) {
-        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite);
+    public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
+        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite, this);
         this.ajouterClasse(classe);
 
     }
@@ -611,7 +604,7 @@ public class Model implements Sujet {
     /**
      * Méthode qui permet de afficher ou non les Getters et Setters
      */
-    public void inverserAffichageGetIsSet() {
+    public void inverserAffichageGetIsSet(){
         VueClasseAffichage.setIsGetAffichee = !VueClasseAffichage.setIsGetAffichee;
         this.notifierObservateur("recharger methodes");
     }

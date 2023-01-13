@@ -84,7 +84,6 @@ class MethodeTest {
     @Test
     void testParametre() {
         for (Methode methode : methodes) {
-            System.out.println(methode);
             switch (methode.getNom()) {
                 case "methodePrivee" -> {
                     ArrayList<Parametre> parametres1 = methode.getParametre();

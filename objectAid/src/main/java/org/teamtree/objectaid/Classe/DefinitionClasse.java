@@ -90,8 +90,8 @@ public class DefinitionClasse {
      * Retourne l'entité de la classe
      * @return Entité de la classe : Entite
      */
-    public String getEntite() {
-        return entite.getEntite();
+    public Entite getEntite() {
+        return entite;
     }
 
     @Override

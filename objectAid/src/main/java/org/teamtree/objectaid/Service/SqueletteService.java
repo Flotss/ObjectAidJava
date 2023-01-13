@@ -1,6 +1,6 @@
 package org.teamtree.objectaid.Service;
 
-import static org.teamtree.objectaid.Service.Alert.afficheAlert;
+import static org.teamtree.objectaid.MVC.Composant.Alert.afficheAlert;
 
 import org.teamtree.objectaid.Classe.Attribut;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.stage.DirectoryChooser;
+import org.teamtree.objectaid.MVC.Composant.Alert;
 
 /**
  * Service s'occupant de générer le squelette d'une classe java à partir d'une liste de classe entière.

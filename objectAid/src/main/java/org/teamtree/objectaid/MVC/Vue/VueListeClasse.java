@@ -44,6 +44,12 @@ public class VueListeClasse extends Menu implements Observateur {
 
             getItems().add(menuItem);
         });
+
+        // Pouvoir ajouter une classe
+        final var menuItemAjouterClasse = new MenuItem("Ajouter une classe");
+        menuItemAjouterClasse.setId("ajouterClasse");
+        menuItemAjouterClasse.setOnAction(new MenuItemController(model));
+        getItems().add(menuItemAjouterClasse);
     }
 
     public void changerCouleurTexte(String nom, String couleur) {

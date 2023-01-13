@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.Service;
+package org.teamtree.objectaid.MVC.Composant;
 
 /**
  * Service qui s'occupe de créer une alerte prédéfinie et d'en afficher le contenu.
