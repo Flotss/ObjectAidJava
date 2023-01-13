@@ -34,7 +34,7 @@ Ce project a pour but de faire une application similaire à [ObjectAid UML Explo
 - Cliquer sur le bouton vert `Run ObjectAidApplication.main()`
 
 Note: Si vous n'arrivez toujours pas, on peut éventuellement générer un .jar avec un fatjar/shadow/uberjar et l'exécuter depuis le terminal, plus facilement.
-
+Note: Des projets de tests sont disponibles dans dossier testProject. `rene` et `demoProf` sont fonctionnels.
 ## Exemple
 
 ![](https://i.imgur.com/QWYGMcI.png)
