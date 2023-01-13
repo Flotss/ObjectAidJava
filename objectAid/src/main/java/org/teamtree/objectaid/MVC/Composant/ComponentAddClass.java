@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class ComponentAddClass {
 
-    private Model model;
+    private final Model model;
 
     public ComponentAddClass(Model model) {
         this.model = model;
@@ -147,9 +147,6 @@ public class ComponentAddClass {
         accessibiliteChoiceBox.getItems().addAll(new Public(), new Private(), new Default(), new Protected());
         accessibiliteChoiceBox.setValue(new Public());
 
-        TextField nomTextField = new TextField();
-        nomTextField.setPromptText("Nom du constructeur");
-
         TextField parametresTextField = new TextField();
         parametresTextField.setPromptText("Parametres ex  nom : String");
 
@@ -159,7 +156,7 @@ public class ComponentAddClass {
             stage.close();
         });
 
-        hBox.getChildren().addAll(accessibiliteChoiceBox, nomTextField, parametresTextField, ajouterButton);
+        hBox.getChildren().addAll(accessibiliteChoiceBox, parametresTextField, ajouterButton);
         Scene scene = new Scene(hBox);
 
         stage.setScene(scene);
