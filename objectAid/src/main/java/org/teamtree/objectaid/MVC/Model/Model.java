@@ -50,7 +50,6 @@ public class Model implements Sujet {
      * L'état de l'application
      */
     private ApplicationState applicationState;
-    private Scene scene;
 
     /**
      * Constructeur du model
@@ -614,7 +613,4 @@ public class Model implements Sujet {
         this.notifierObservateur("recharger methodes");
     }
 
-    public void setCurrentScene(Scene scene) {
-        this.scene = scene;
-    }
 }

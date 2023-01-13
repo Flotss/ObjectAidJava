@@ -17,7 +17,7 @@ public class JavaClassFullQualifiedNameResolverService {
         this.rootPath = rootPath;
     }
 
-    protected String getClassFQN(final File directory, final File file, final String className) {
+    protected String getClassFQN(final File directory, final String className) {
         var packageName = directory.getAbsolutePath().substring(rootPath.toAbsolutePath().toString().length()).replace(File.separator, SEPARATOR_STRING);
         if (packageName.startsWith(SEPARATOR_STRING)) {
             packageName = packageName.substring(1);

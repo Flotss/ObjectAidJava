@@ -40,7 +40,7 @@ public class JavaProjectClassLoaderService extends ClassLoader {
 
                 final var service = new JavaClassFullQualifiedNameResolverService(rootPath);
                 final var className = file.getName().substring(0, file.getName().length() - 6);
-                final var fqn = service.getClassFQN(directory, file, className);
+                final var fqn = service.getClassFQN(directory, className);
                 try {
                     final var cl = new URLClassLoader(new java.net.URL[]{rootPath.toAbsolutePath().toUri().toURL()});
                     final var c = cl.loadClass(fqn);

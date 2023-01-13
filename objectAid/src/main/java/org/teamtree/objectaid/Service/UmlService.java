@@ -21,7 +21,7 @@ public class UmlService {
      * @param classes Liste de classes entières
      */
     public void genererUmltoCompilation(List<ClasseEntiere> classes) {
-        String uml = genererUml(classes);
+
 //        SourceStringReader reader = new SourceStringReader(source);
 //        final ByteArrayOutputStream os = new ByteArrayOutputStream();
 //        // Write the first image to "os"

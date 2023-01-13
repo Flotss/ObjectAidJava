@@ -61,7 +61,8 @@ Fonctionnalité achevée
 
 Cette fonctionnalité permet d'exporter une image du diagramme en PNG. Pour ce faire, il faut cliquer sur le bouton "
 exporter" puis choisir l'emplacement où l'on souhaite enregistrer l'image. Une fois l'emplacement choisi, l'image est
-enregistrée. Pour ce faire j'ai dû utilisé une classe utilitaire du module Swing, SwingFxUtils, qui contient une fabrique pour générer une image.
+enregistrée. Pour ce faire j'ai dû utilisé une classe utilitaire du module Swing, SwingFxUtils, qui contient une
+fabrique pour générer une image.
 
 ---
 
@@ -79,7 +80,9 @@ collaborateurs de mon projet.
 ### Critères de validation :
 
 - Après un clic sur le bouton correspondant, nous pouvons exporter le graphique en sourceUML.
+- Avoir une structure de donnée qui permet de générer le code sourceUML
 - Pouvoir choisir l’endroit où on souhaite l’enregistrer
+- Pouvoir choisir le nom du fichier
 
 ### Etat :
 
@@ -87,15 +90,19 @@ Fonctionnalité achevée
 
 #### Détail de la fonctionnalité :
 
-//TODO
+La structure de donnée doit alors s'exporter en puml c'est à dire que la structure de donnée à du être modifié et ainsi
+être exportable en puml.
+Pour cela la ClasseEntiere demande à tout ses composants de s'exporter en uml et ainsi de suite jusqu'à ce que tout soit
+exporté.
+La classeEntiere est donc la classe qui va exporter tout le reste.
 
 ---
 
-## Fonctionnalité 4 : Ajout de la relation composite
+## Fonctionnalité 4 : Ajout de la relation de composition
 
-##### Difficulté : TODO
+##### Difficulté : 2
 
-TODO
+En tant qu'étudiant, nous voulons pouvoir voir les relations de composition, puisqu'il n'y en a pas actuellement.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 
@@ -103,7 +110,9 @@ TODO
 
 ### Critères de validation :
 
-- TODO
+- La relation de composition est visible sur le diagramme
+- La relation de composition est caractérisée par un losange au départ de la flèche
+- Avoir les bonnes cardinalités
 
 ### Etat :
 
@@ -111,14 +120,18 @@ Fonctionnalité achevée
 
 #### Détail de la fonctionnalité :
 
-//TODO
+La relation n'est juste qu'un ajout de la relation d'association, il suffit donc de rajouter un losange au départ de la
+flèche.
+Il faut donc mettre à jour la création de l'affichage pour cela, il nous faut juste crée une nouvelle flèche avec un
+losange au départ
 
 ---
+
 ## Fonctionnalité 5 : Importation - refactor du code et merge
 
 ##### Difficulté : 4
 
-En tant qu’étudiant, je souhaiterais pouvoir ajouter la fonctionnalité d'importation par un utilisateur :
+En tant qu’étudiant, je souhaiterais pouvoir ajouter la fonctionnalité d'importation par un utilisateur:
 L'utilisateur pourra importer ses classes en fournissant le chemin de son fichier ou de son dossier.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
@@ -129,7 +142,9 @@ L'utilisateur pourra importer ses classes en fournissant le chemin de son fichie
 
 - Bouton qui ouvre l’explorateur de fichier pour sélectionner un dossier
 - L’affiche dans une arborescence (à gauche de l’application)
-- Pouvoir glisser et déposer les classes de l’arborescence à l'écran principal pour pouvoir les afficher en tant que diagramme
+- Pouvoir glisser et déposer les classes de l’arborescence à l'écran principal pour pouvoir les afficher en tant que
+  diagramme
+- Merge dans la branche main de la fonctionnalité d'importation
 
 ### Etat :
 
@@ -137,10 +152,15 @@ Fonctionnalité achevée
 
 #### Détail de la fonctionnalité :
 
-//TODO
+Le but était de fusionner la branche de fonctionnalité d'importation à celle principale pour implémenter officiellement
+la fonctionnalité.
+De plus il fallait refactor le code pour qu'il soit plus lisible et plus facile à maintenir. De ce fait, des controleurs
+ont été crées ainsi qu'une classe générique de base "ControllerBase<T>"
+
 
 
 ---
+
 ## Tâche supplémentaire : Correction et amélioration des fonctionnalités
 
 ##### Difficulté : 1
