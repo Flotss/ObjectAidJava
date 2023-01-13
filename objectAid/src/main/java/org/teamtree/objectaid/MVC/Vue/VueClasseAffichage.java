@@ -110,6 +110,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
 
     public void setAttributs(){
+        this.attributs.getChildren().clear();
         attributs.setPadding(new Insets(0, 5, 0, 5));
 
         //Si il existe des attributs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
@@ -177,6 +178,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
      */
     public void setConstructeur(){
         //partie constructeur
+        this.constructeur.getChildren().clear();
         constructeur.setPadding(new Insets(0, 5, 0, 5));
         
         //Si il existe des constructeurs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)

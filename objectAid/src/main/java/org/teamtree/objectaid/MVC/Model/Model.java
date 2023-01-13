@@ -201,7 +201,6 @@ public class Model implements Sujet {
                 break;
             case "totalite des classes":
             case "update hidden classes":
-                //TODO: A modifier --> ne s'occuper que de la visibilitée
                 for (Observateur observateur : this.observateurs) {
                     if (observateur instanceof VueClasse) {
                         observateur.actualiser();
@@ -251,7 +250,6 @@ public class Model implements Sujet {
     public void notifierObservateurFlecheSpecifique(VueClasseAffichage vueClasseAffichage) {
         for (Observateur observateur : this.observateurs) {
             if (observateur instanceof VueClasse) {
-                //TODO: ne modifier que les points
                 ((VueClasse) observateur).actualiserFlechesSpecifique(vueClasseAffichage);
                 return;
             }
@@ -262,6 +260,8 @@ public class Model implements Sujet {
      * Méthode qui permet d'ajouter une Classe au model
      *
      * @param classe Classe
+     * @param x coordonnée x de la classe
+     * @param y coordonnée y de la classe
      */
     public void ajouterClasse(ClasseEntiere classe, int x, int y) {
         if (!relations.containsKey(classe)) {
@@ -340,10 +340,6 @@ public class Model implements Sujet {
                 this.notifierObservateur("selection");
             }
         }
-    }
-
-    public Scene getScene() {
-        return scene;
     }
 
     /**
@@ -455,7 +451,6 @@ public class Model implements Sujet {
             this.currentClickedClass.setClasseAffichee();
             ((VueListeClasse)getObservateur("VueListeClasse").get(0)).changerCouleurTexte(classe.getNom(),"red");
             this.notifierObservateur("update visibilite classe selection");
-            //TODO: A modifier: ne pas mettre à jour toutes les fleches
             this.notifierObservateur("update visibilite fleche");
             this.currentClickedClass = null;
 
@@ -566,7 +561,7 @@ public class Model implements Sujet {
      * @param param         Les paramètres du constructeur
      */
     public void ajouterConstructeur(Accessibilite accessibilite, String param) {
-        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(new Constructeur(this.currentClickedClass.getNom() ,accessibilite, param));
+        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(accessibilite, param);
         this.currentClickedClass.setConstructeur();
         this.notifierObservateur("classe selection complete");
     }
@@ -582,9 +577,10 @@ public class Model implements Sujet {
      */
     public void ajouterAttribut(Accessibilite accessibilite, List<Etat> modifiers, String nom, String type) {
         this.currentClickedClass.getClasseEntiere().ajouterAttribut(nom, type, modifiers, accessibilite);
-        this.currentClickedClass.setMethodes();
         this.relations.put(this.currentClickedClass.getClasseEntiere(), new ArrayList<>(this.currentClickedClass.getClasseEntiere().getRelations()));
+        this.currentClickedClass.setAttributs();
         this.notifierObservateur("classe selection complete");
+        this.notifierObservateur("totalite des classes");
     }
 
     /**

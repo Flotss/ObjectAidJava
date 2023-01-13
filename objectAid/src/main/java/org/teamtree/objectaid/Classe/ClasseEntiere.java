@@ -553,13 +553,6 @@ public class ClasseEntiere {
 
 
     /**
-     * Methode qui ajoute un constructeur à la classe
-     * @param constructeur Le constructeur à ajouter
-     */
-    public void ajouterConstructeur(Constructeur constructeur){
-    }
-
-    /**
      * Methode qui ajoute un attribut à la classe
      * @param nom L'attribut à ajouter
      * @param type Le type de l'attribut
