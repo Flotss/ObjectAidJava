@@ -58,32 +58,39 @@ En tant qu’étudiant, je souhaiterais pouvoir exporter le diagramme en sourceU
 
 ### Critères de validation :
 - Après un clic sur le bouton correspondant, nous pouvons exporter le graphique en sourceUML.
+- Avoir une structure de donnée qui permet de générer le code sourceUML
 - Pouvoir choisir l’endroit où on souhaite l’enregistrer
+- Pouvoir choisir le nom du fichier
 
 ### Etat :
 Fonctionnalité achevée
 
 #### Détail de la fonctionnalité :
-//TODO
+La structure de donnée doit alors s'exporter en puml c'est à dire que la structure de donnée à du être modifié et ainsi être exportable en puml.
+Pour cela la ClasseEntiere demande à tout ses composants de s'exporter en uml et ainsi de suite jusqu'à ce que tout soit exporté.
+La classeEntiere est donc la classe qui va exporter tout le reste.
 
 ---
 
-## Fonctionnalité 4 : Ajout de la relation composite
-##### Difficulté : TODO
+## Fonctionnalité 4 : Ajout de la relation de composition
+##### Difficulté : 2
 
-TODO
+En tant qu'étudiant, nous voulons pouvoir voir les relations de composition, puisqu'il n'y en a pas actuellement.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 - Mangin Florian
 
 ### Critères de validation :
-- TODO
+- La relation de composition est visible sur le diagramme
+- La relation de composition est caractérisée par un losange au départ de la flèche
+- Avoir les bonnes cardinalités
 
 ### Etat :
 Fonctionnalité achevée
 
 #### Détail de la fonctionnalité :
-//TODO
+La relation n'est juste qu'un ajout de la relation d'association, il suffit donc de rajouter un losange au départ de la flèche.
+Il faut donc mettre à jour la création de l'affichage pour cela, il nous faut juste crée une nouvelle flèche avec un losange au départ.
 
 
 
