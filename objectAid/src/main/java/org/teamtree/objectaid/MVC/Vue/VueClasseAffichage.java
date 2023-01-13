@@ -186,22 +186,22 @@ public class VueClasseAffichage extends VBox implements Observateur {
             Shape icon = constructeurX.getAccessibilite().getShape();
 
             //Debut de la ligne (accesibilité, nom,...), du type : + Constructeur(
-            String constr = constructeurX.getNom() + "(";
+            var constr = new StringBuilder(constructeurX.getNom() + "(");
             int n = 0;
 
             //Pour chaque parametre du constructeur, on l'écrit dans l'affichage
             //exemple : + Constructeur(int a, int b)
             for (Parametre parametreX : constructeurX.getParametre()) {
-                constr += parametreX.getType() + " " + parametreX.getNom();
+                constr.append(parametreX.getType()).append(" ").append(parametreX.getNom());
                 if (n != constructeurX.getParametre().size() - 1) {
-                    constr += ", ";
+                    constr.append(", ");
                 }
                 n++;
             }
 
             //On écrit la fin du constructeur puis on l'ajoute avec les autres constructeurs
-            constr += ")";
-            Label constrLabel = new Label(constr);
+            constr.append(")");
+            Label constrLabel = new Label(constr.toString());
 
             line.getChildren().addAll(icon, constrLabel);
             constructeur.getChildren().add(line);
