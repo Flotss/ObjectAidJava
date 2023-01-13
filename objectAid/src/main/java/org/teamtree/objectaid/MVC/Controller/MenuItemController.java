@@ -23,7 +23,6 @@ import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Service.SqueletteService;
-import org.teamtree.objectaid.service.NodeElementScreenshotTakerService;
 
 import javax.imageio.ImageIO;
 import java.io.File;
