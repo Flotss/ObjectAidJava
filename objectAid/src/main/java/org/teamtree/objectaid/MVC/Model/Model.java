@@ -200,7 +200,6 @@ public class Model implements Sujet {
                 break;
             case "totalite des classes":
             case "update hidden classes":
-                //TODO: A modifier --> ne s'occuper que de la visibilitée
                 for (Observateur observateur : this.observateurs) {
                     if (observateur instanceof VueClasse) {
                         observateur.actualiser();
@@ -235,7 +234,6 @@ public class Model implements Sujet {
                 }
                 break;
             case "recharger methodes":
-                System.out.println("arrive ici");
                 for (Observateur observateur : this.observateurs) {
                     if (observateur instanceof VueClasse) {
                         ((VueClasse) observateur).rechargerMethodes();
@@ -251,7 +249,6 @@ public class Model implements Sujet {
     public void notifierObservateurFlecheSpecifique(VueClasseAffichage vueClasseAffichage) {
         for (Observateur observateur : this.observateurs) {
             if (observateur instanceof VueClasse) {
-                //TODO: ne modifier que les points
                 ((VueClasse) observateur).actualiserFlechesSpecifique(vueClasseAffichage);
                 return;
             }
@@ -262,6 +259,8 @@ public class Model implements Sujet {
      * Méthode qui permet d'ajouter une Classe au model
      *
      * @param classe Classe
+     * @param x coordonnée x de la classe
+     * @param y coordonnée y de la classe
      */
     public void ajouterClasse(ClasseEntiere classe, int x, int y) {
         if (!relations.containsKey(classe)) {
@@ -340,10 +339,6 @@ public class Model implements Sujet {
                 this.notifierObservateur("selection");
             }
         }
-    }
-
-    public Scene getScene() {
-        return scene;
     }
 
     /**
