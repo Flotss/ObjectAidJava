@@ -1,0 +1,48 @@
+@startuml
+
+
+class ControllerBase<T : Event> extends EventHandler{
+    - model : Model
+
+    + ControllerBase(model : Model)
+
+    + handle(ActionEvent)
+}
+
+class TreeViewDragDetectedController extends ControllerBase {
++ TreeViewDragDetectedController(model : Model)
+
+    + handle(MouseEvent)
+}
+
+class VboxDragDroppedController extends ControllerBase {
+    + VboxDragDroppedController(model : Model)
+
+    + handle(DragEvent)
+}
+
+class TreeViewDragOverController extends ControllerBase {
+    + TreeViewDragOverController(model : Model)
+
+    + handle(DragEvent)
+}
+
+interface SceneFactory {
+    + getScene() : Scene
+}
+
+class ApplicationLayoutBootstrapRender implements SceneFactory {
+    + getScene() : Scene
+}
+
+class ApplicationLayoutProjectLoadedRender implements SceneFactory {
+    + getScene() : Scene
+}
+
+class ApplicationLayoutView extends Observateur {
+    + ApplicationLayoutView(model : Model, sceneFactory : SceneFactory)
+
+    + render()
+}
+
+@enduml
