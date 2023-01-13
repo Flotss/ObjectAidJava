@@ -92,6 +92,13 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         MenuItem supprimerClasseMenuitem = new MenuItem("Supprimer les classes");
         supprimerClasseMenuitem.setOnAction(new MenuItemController(model));
 
+        Menu exportMenu = new Menu("Exporter");
+
+        MenuItem exportImagePng = new MenuItem("Exporter en PNG");
+        exportImagePng.setOnAction(new MenuItemController(model));
+
+        exportMenu.getItems().addAll(exportImagePng);
+
         supprimerClasseMenu.getItems().add(supprimerClasseMenuitem);
 
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5, menuItem6);
@@ -114,7 +121,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         menuGeneration.getItems().addAll(itemGenererUml, itemGenererSquelette);
 
 
-        menubar.getMenus().addAll(menuItem, listeClasse, supprimerClasseMenu, menuGeneration);
+        menubar.getMenus().addAll(menuItem, listeClasse, supprimerClasseMenu, menuGeneration, exportMenu);
 
         vbox.getChildren().addAll(menubar, vueClasse);
 

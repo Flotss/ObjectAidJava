@@ -1,14 +1,15 @@
 package org.teamtree.objectaid.MVC.Controller;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import org.teamtree.objectaid.Accessibilite.*;
@@ -18,11 +19,16 @@ import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Etat.Final;
 import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.MVC.Vue.VueListeClasse;
 import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Service.SqueletteService;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -30,11 +36,14 @@ import java.util.ArrayList;
  */
 public class MenuItemController implements EventHandler<ActionEvent> {
 
-    /** Modèle */
+    /**
+     * Modèle
+     */
     private final Model model;
 
     /**
      * Constructeur
+     *
      * @param model Modèle
      */
     public MenuItemController(Model model) {
@@ -43,6 +52,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
 
     /**
      * Méthode qui permet de gérer les MenuItem de l'application
+     *
      * @param event Evènement
      */
     @Override
@@ -81,10 +91,48 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                     ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
                 }
             }
+            case "Exporter en PNG" -> {
+                final var vueClasseOptional = model.tryGetObservateur(VueClasse.class);
+
+                if (vueClasseOptional.isEmpty()) {
+                    throw new IllegalArgumentException("VueClasse is not present in the model");
+                }
+
+                final var vueClasse = (VueClasse) vueClasseOptional.get();
+
+                if (vueClasse.getClasses().isEmpty()) {
+                    final var alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Aucune classe n'est présente");
+
+                    alert.showAndWait();
+                    return;
+                }
+
+                final var image = new WritableImage((int) vueClasse.getWidth(), (int) vueClasse.getHeight());
+                final var writableImage = vueClasse.snapshot(null, image);
+                final var bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                final var directoryChooser = new DirectoryChooser();
+                final var selectedDirectory = directoryChooser.showDialog(new Stage());
+
+                bufferedImage.flush();
+
+                // Exporte l'image dans le dossier sélectionné
+                if (selectedDirectory != null) {
+                    final var dateNow = LocalDateTime.now();
+                    final var outputFile = new File(selectedDirectory.getAbsolutePath() + "/export_" + dateNow.getYear() + "_" + dateNow.getMonthValue() + "_" + dateNow.getDayOfMonth() + "_" + dateNow.getHour() + "_" + dateNow.getMinute() + "_" + dateNow.getSecond() + ".png");
+
+                    try {
+                        ImageIO.write(bufferedImage, "png", outputFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
-        if(((MenuItem)event.getSource()).getId() != null) {
-            switch (((MenuItem) event.getSource()).getId()) {
-                case "ajouterMethode" -> ajouterMethode();
+        if (((MenuItem) event.getSource()).getId() != null) {
+            if ("ajouterMethode".equals(((MenuItem) event.getSource()).getId())) {
+                ajouterMethode();
             }
         }
     }
@@ -105,15 +153,15 @@ public class MenuItemController implements EventHandler<ActionEvent> {
         accessibiliteChoiceBox.setValue(new Public());
 
         ChoiceBox<Etat> staticChoiceBox = new ChoiceBox<>();
-        staticChoiceBox.getItems().addAll( new Static(),  null);
+        staticChoiceBox.getItems().addAll(new Static(), null);
         staticChoiceBox.setValue(null);
 
         ChoiceBox<Etat> finalChoiceBox = new ChoiceBox<>();
-        finalChoiceBox.getItems().addAll( new Final(),  null);
+        finalChoiceBox.getItems().addAll(new Final(), null);
         finalChoiceBox.setValue(null);
 
         ChoiceBox<Etat> abstractChoiceBox = new ChoiceBox<>();
-        abstractChoiceBox.getItems().addAll( new Abstract(),  null);
+        abstractChoiceBox.getItems().addAll(new Abstract(), null);
         abstractChoiceBox.setValue(null);
 
         TextField nomTextField = new TextField();
@@ -139,7 +187,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             }
 
 
-          model.ajouterMethode(accessibiliteChoiceBox.getValue(), etats, nomTextField.getText(), typeTextField.getText(), parametresTextField.getText());
+            model.ajouterMethode(accessibiliteChoiceBox.getValue(), etats, nomTextField.getText(), typeTextField.getText(), parametresTextField.getText());
             stage.close();
         });
 
