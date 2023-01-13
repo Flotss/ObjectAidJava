@@ -1,10 +1,13 @@
 package org.teamtree.objectaid.MVC.Vue;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
+
+import java.util.ArrayList;
 
 public class VueListeClasse extends Menu implements Observateur {
     private final Model model;
@@ -43,7 +46,16 @@ public class VueListeClasse extends Menu implements Observateur {
         });
     }
 
-    public void changerCouleurTexte() {
-        this.setStyle("-fx-text-fill: red;");
+    public void changerCouleurTexte(String nom, String couleur) {
+        for (MenuItem m : this.getItems()) {
+            if (m.getText().equals(nom)) {
+                m.setStyle("-fx-text-fill: " + couleur);
+            }
+        }
+    }
+
+
+    public ObservableList<MenuItem> getItemsVue() {
+        return this.getItems();
     }
 }
