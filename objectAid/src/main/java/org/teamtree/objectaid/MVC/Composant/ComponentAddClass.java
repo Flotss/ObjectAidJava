@@ -155,7 +155,7 @@ public class ComponentAddClass {
 
         Button ajouterButton = new Button("Ajouter");
         ajouterButton.setOnAction(event -> {
-            model.ajouterConstructeur(accessibiliteChoiceBox.getValue(), nomTextField.getText(), parametresTextField.getText());
+            model.ajouterConstructeur(accessibiliteChoiceBox.getValue(), parametresTextField.getText());
             stage.close();
         });
 

@@ -544,11 +544,10 @@ public class Model implements Sujet {
     /**
      * Méthode qui permet d'ajouter un constructeur à une classe
      * @param accessibilite L'accessibilité du constructeur
-     * @param nom           Le nom du constructeur
      * @param param         Les paramètres du constructeur
      */
-    public void ajouterConstructeur(Accessibilite accessibilite, String nom, String param){
-        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(new Constructeur(nom,accessibilite,param));
+    public void ajouterConstructeur(Accessibilite accessibilite, String param){
+        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(accessibilite,param);
         this.currentClickedClass.setConstructeur();
         this.notifierObservateur("classe selection complete");
     }

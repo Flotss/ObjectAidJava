@@ -535,7 +535,6 @@ public class ClasseEntiere {
      * @param constructeur Le constructeur à ajouter
      */
     public void ajouterConstructeur(Constructeur constructeur){
-        this.contructeurs.add(constructeur);
     }
 
     /**
@@ -576,5 +575,15 @@ public class ClasseEntiere {
                 this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
             }
         }
+    }
+
+    /**
+     * Constructeur à partir de paramètres
+     * @param accessibilite Accessibilité du constructeur
+     * @param parametres Liste des paramètres du constructeur
+     */
+    public void ajouterConstructeur(Accessibilite accessibilite, String parametres) {
+        this.contructeurs.add(new Constructeur(this.getNom(),accessibilite,parametres));
+
     }
 }
