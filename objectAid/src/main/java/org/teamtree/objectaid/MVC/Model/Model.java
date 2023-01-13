@@ -256,10 +256,8 @@ public class Model implements Sujet {
      *
      * @param classe Classe
      */
-    public void ajouterClasse(ClasseEntiere classe) {
+    public void ajouterClasse(ClasseEntiere classe, int x, int y) {
         if (!relations.containsKey(classe)) {
-            int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
-            int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
 
             //Verification permettant l'execution du main MainBootstrap (car
@@ -583,7 +581,7 @@ public class Model implements Sujet {
      */
     public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
         ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite);
-        this.ajouterClasse(classe);
+        this.ajouterClasse(classe,20,20);
 
     }
 
