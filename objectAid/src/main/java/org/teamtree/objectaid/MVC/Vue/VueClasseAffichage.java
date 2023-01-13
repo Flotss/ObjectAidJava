@@ -354,8 +354,6 @@ public class VueClasseAffichage extends VBox implements Observateur {
         updateAttributsRelation();
 
         //On ajoute les différentes parties de la classe
-        //TODO: a renomé en actualiser (julien le fera)
-        //On ajoute les différentes parties de la classe
         this.getChildren().add(definition);
         if (classeEntiere.isAttributEstAffiche()) {
             this.getChildren().add(attributs);
@@ -369,6 +367,11 @@ public class VueClasseAffichage extends VBox implements Observateur {
         }
     }
 
+    /**
+     * Methode equals qui permet de comparer deux classes affichées
+     * @param o l'objet à comparer
+     * @return true si les deux noms des classes affichées sont égales, false sinon
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -378,18 +381,35 @@ public class VueClasseAffichage extends VBox implements Observateur {
         return Objects.equals(nom, that.nom);
     }
 
+    /**
+     * Methode qui inverse l'affichage de la classe
+     */
+
     public void setClasseAffichee(){
         this.classeAffichee = !this.classeAffichee;
     }
+
+    /**
+     * Setter qui permet de changer le booleen la classe affichée
+     * @param b
+     */
 
     public void setClasseAffichee(boolean b){
         this.classeAffichee = b;
     }
 
+    /**
+     * Methode qui actualise la visibilité de classe affichée
+     */
 
     public void actualiserVisibilite(){
         this.setVisible(classeAffichee);
     }
+
+    /**
+     * Getter qui retourne le booleen de la visibilité de la classe affichée
+     * @return boolean
+     */
 
     public boolean getClasseAffichee(){
         return this.classeAffichee;
