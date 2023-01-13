@@ -451,7 +451,6 @@ public class Model implements Sujet {
             this.currentClickedClass.setClasseAffichee();
             ((VueListeClasse)getObservateur("VueListeClasse").get(0)).changerCouleurTexte(classe.getNom(),"red");
             this.notifierObservateur("update visibilite classe selection");
-            //TODO: A modifier: ne pas mettre à jour toutes les fleches
             this.notifierObservateur("update visibilite fleche");
             this.currentClickedClass = null;
 
