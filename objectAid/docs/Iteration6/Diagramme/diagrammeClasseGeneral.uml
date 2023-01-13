@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="3604.8506856920108" y="1804.8392586016473">org.teamtree.objectaid.Entite.Record</node>
+    <node x="1340.000614563729" y="911.8300792725283">org.teamtree.objectaid.Fabrique.FabriqueAffichage</node>
+    <node x="2838.3673827545954" y="1698.5556791477175">org.teamtree.objectaid.Fabrique.FabriqueAffichageFleche</node>
+    <node x="1690.6472999438508" y="387.04046344521436">org.teamtree.objectaid.MVC.Controller.ControllerBase</node>
+    <node x="2856.588375720277" y="2213.335386867875">org.teamtree.objectaid.MVC.Fleches.FlecheImplementation</node>
+    <node x="4958.522463945967" y="937.8114151816718">org.teamtree.objectaid.Classe.Methode</node>
+    <node x="122.54701851231704" y="593.842002639263">org.teamtree.objectaid.Classe.Relations.Composition</node>
+    <node x="669.9066809214278" y="1417.389686092774">org.teamtree.objectaid.Classe.Attribut</node>
+    <node x="2489.779696769993" y="1234.5795634416095">org.teamtree.objectaid.MVC.Controller.DeplacementClasseDragAndDropController</node>
+    <node x="3315.4870819729836" y="264.3393632116909">org.teamtree.objectaid.Classe.ClasseEntiere</node>
+    <node x="4487.160808545519" y="1800.4185465076746">org.teamtree.objectaid.Entite.Enum</node>
+    <node x="4330.76265184564" y="835.5710384097899">org.teamtree.objectaid.Etat.Final</node>
+    <node x="1980.1493852131632" y="1206.4153213017894">org.teamtree.objectaid.MVC.Controller.ClasseEntiereClickedController</node>
+    <node x="2153.3976995205003" y="1434.3601032210215">org.teamtree.objectaid.Point</node>
+    <node x="4106.416959461536" y="1799.6397134296624">org.teamtree.objectaid.Entite.Interface</node>
+    <node x="3047.9619775438787" y="547.7510557547348">org.teamtree.objectaid.Classe.Parametre</node>
+    <node x="4608.747998179817" y="408.4335990954691">org.teamtree.objectaid.Etat.Abstract</node>
+    <node x="125.09220573719574" y="1002.9953128954519">org.teamtree.objectaid.Accessibilite.Protected</node>
+    <node x="4863.468328472151" y="736.8223146030768">org.teamtree.objectaid.Service.UmlService</node>
+    <node x="1307.0183296729942" y="527.046781465792">org.teamtree.objectaid.MVC.Controller.TreeViewDragDetectedController</node>
+    <node x="1949.1398287864542" y="441.3566690739965">org.teamtree.objectaid.MVC.diagramIcons.EnumTitleIcon</node>
+    <node x="544.4147216561612" y="147.05260611774474">org.teamtree.objectaid.MVC.Model.Model</node>
+    <node x="4047.1807357301795" y="894.2745632964129">org.teamthree.objectaid.introspection.ConstructeurTest</node>
+    <node x="4707.119063167943" y="1516.3534165450803">org.teamtree.objectaid.MVC.Vue.ApplicationLayoutView</node>
+    <node x="1790.2486202847836" y="1540.3889997074696">org.teamtree.objectaid.Fabrique.FabriqueAccessibilite</node>
+    <node x="1844.5970588192952" y="659.0674326476442">org.teamthree.objectaid.introspection.MethodeTest</node>
+    <node x="3441.339365264486" y="1512.069333473974">org.teamtree.objectaid.MVC.Model.ApplicationState</node>
+    <node x="2759.092261360514" y="1514.720358710431">org.teamtree.objectaid.render.ApplicationLayoutBootstrapRender</node>
+    <node x="1583.7016059633588" y="707.1850202271373">org.teamtree.objectaid.MainBootstrap</node>
+    <node x="1559.9243092916354" y="1848.8300625488484">org.teamtree.objectaid.MVC.Fleches.FlecheComposition</node>
+    <node x="3824.6519775951456" y="1791.3178931405578">org.teamtree.objectaid.Entite.Classe</node>
+    <node x="1050.31587923817" y="452.7366151404994">org.teamtree.objectaid.Classe.Relations.Heritage</node>
+    <node x="3509.753410274094" y="1282.2708504334933">org.teamtree.objectaid.MVC.Controller.ClickDroitClasseController</node>
+    <node x="642.0351441066712" y="-13.554474900208106">org.teamtree.objectaid.MVC.Model.Sujet</node>
+    <node x="1080.7613764237458" y="1484.4635767981465">org.teamtree.objectaid.Accessibilite.Private</node>
+    <node x="3793.5931736721577" y="1643.8629549874613">org.teamtree.objectaid.Entite.Entite</node>
+    <node x="226.5032297134581" y="1864.594047855769">org.teamtree.objectaid.MVC.Vue.Fleche</node>
+    <node x="436.9744957085087" y="1547.355607784728">org.teamtree.objectaid.Accessibilite.Default</node>
+    <node x="3758.0047602974105" y="1472.283859381215">org.teamtree.objectaid.Fabrique.FabriqueEtat</node>
+    <node x="3802.553065314977" y="517.9811239789997">org.teamtree.objectaid.Classe.Constructeur</node>
+    <node x="1047.3188274573993" y="845.3140859652924">org.teamtree.objectaid.MVC.Composant.ComponentAddClass</node>
+    <node x="320.89477244132365" y="834.4585928418618">org.teamtree.objectaid.Accessibilite.Accessibilite</node>
+    <node x="4552.377385536768" y="955.0847360407097">org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral</node>
+    <node x="4540.230285227681" y="1238.211779103845">org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender</node>
+    <node x="4264.29484869019" y="684.865140588139">org.teamtree.objectaid.Etat.Etat</node>
+    <node x="2347.1298016462056" y="457.41351936296024">org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon</node>
+    <node x="291.6790717239448" y="150.48121610931173">org.teamtree.objectaid.Classe.Relations.Relation</node>
+    <node x="990.1657341363267" y="1790.6026358390313">org.teamtree.objectaid.MVC.Fleches.FlecheAssociation</node>
+    <node x="4040.9260213422076" y="1309.8363802335189">org.teamtree.objectaid.MVC.Vue.VueClasse</node>
+    <node x="323.04957676746085" y="1231.4745822963764">org.teamtree.objectaid.Accessibilite.Public</node>
+    <node x="1852.2721495482165" y="1687.603606637766">org.teamtree.objectaid.Fabrique.FabriqueEntite</node>
+    <node x="3054.7866227081" y="1285.018653156858">org.teamtree.objectaid.Service.JavaClassFullQualifiedNameResolverService</node>
+    <node x="1908.2324110547838" y="1998.725263890142">org.teamtree.objectaid.MVC.Fleches.FlecheHeritage</node>
+    <node x="3228.603087961648" y="1743.2308182704533">org.teamtree.objectaid.MVC.Vue.VueClasseAffichage</node>
+    <node x="1319.672086388343" y="1660.2353853514885">org.teamtree.objectaid.Service.SqueletteService</node>
+    <node x="2152.4985611307347" y="589.2707973601566">org.teamtree.objectaid.MVC.Controller.VboxDragOverController</node>
+    <node x="2385.3634291206945" y="1527.34138712204">org.teamtree.objectaid.MVC.Vue.VueListeClasse</node>
+    <node x="4171.701694854244" y="527.5938217610039">org.teamtree.objectaid.MVC.Controller.VboxDragDroppedController</node>
+    <node x="2110.45619855129" y="803.1271844967379">org.teamtree.objectaid.Service.JavaProjectClassLoaderService</node>
+    <node x="2958.176817971219" y="407.1082946323068">org.teamtree.objectaid.MVC.diagramIcons.AbstractClassTitleIcon</node>
+    <node x="3304.993487884484" y="97.49778061690898">org.teamtree.objectaid.MVC.Controller.ProjectDirectoryChooserController</node>
+    <node x="1304.5187986696496" y="1169.6398677272355">org.teamthree.objectaid.introspection.ClassePourLesTests</node>
+    <node x="3810.8122852684305" y="1118.2320522227903">org.teamtree.objectaid.ObjectAidApplication</node>
+    <node x="1044.5348090690122" y="148.03821359469669">org.teamtree.objectaid.Classe.Relations.Implementation</node>
+    <node x="2394.784664975759" y="1412.156121701983">org.teamtree.objectaid.Fabrique.SceneFactory</node>
+    <node x="2400.7984237406663" y="1838.9966476321226">org.teamtree.objectaid.Classe.DefinitionClasse</node>
+    <node x="4522.41736608072" y="641.7039831064865">org.teamtree.objectaid.Etat.Static</node>
+    <node x="3791.2099662092537" y="330.87686845341904">org.teamtree.objectaid.MVC.diagramIcons.RecordClassTitleIcon</node>
+    <node x="1289.567038217952" y="693.6036007471541">org.teamtree.objectaid.MVC.Composant.Alert</node>
+    <node x="778.0941964931051" y="1791.8880567954043">org.teamtree.objectaid.MVC.Vue.Observateur</node>
+    <node x="2542.960224977469" y="701.1113418182133">org.teamtree.objectaid.MVC.diagramIcons.ClassTitleIcon</node>
+    <node x="4153.003167453682" y="1123.8132290314284">org.teamtree.objectaid.MVC.Controller.GenererButtonController</node>
+    <node x="2125.8530357021036" y="1739.9167528042121">org.teamtree.objectaid.util.FileExtension</node>
+    <node x="4087.9693439738267" y="352.9225301444237">org.teamtree.objectaid.MVC.diagramIcons.InterfaceTitleIcon</node>
+    <node x="2936.3273867023377" y="942.4804881051774">org.teamthree.objectaid.introspection.ClasseEntiereIntrospectionTests</node>
+    <node x="1224.7891388232122" y="2072.1436220148776">org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse</node>
+    <node x="2396.326491913397" y="992.3690218689852">org.teamtree.objectaid.MVC.Controller.ListenerModificationTailleClasse</node>
+    <node x="-195.3809923514193" y="284.4034151402697">org.teamtree.objectaid.Classe.Relations.Association</node>
+    <node x="2763.4074246510504" y="729.264025642121">org.teamtree.objectaid.MVC.Controller.MenuItemController</node>
+    <node x="1775.1136769901552" y="961.5868170056373">scripts.MakeUmlOfThisProject</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.teamtree.objectaid.MVC.Controller.VboxDragOverController" target="org.teamtree.objectaid.MVC.Controller.ControllerBase" relationship="GENERALIZATION">
+      <point x="4.3886926528102777E-4" y="-52.99979736015665" />
+      <point x="2297.999" y="368.0" />
+      <point x="1789.647" y="368.0" />
+      <point x="-2.9994385090503783E-4" y="-40.00046344521435" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Accessibilite.Private" target="org.teamtree.objectaid.Accessibilite.Accessibilite" relationship="REALIZATION">
+      <point x="-3.764237457062336E-4" y="-74.49957679814645" />
+      <point x="1161.261" y="1399.0" />
+      <point x="304.0" y="1399.0" />
+      <point x="304.0" y="884.4590000000001" />
+      <point x="-80.49977244132364" y="4.0715813821634583E-4" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Vue.Fleche" target="org.teamtree.objectaid.MVC.Vue.Observateur" relationship="REALIZATION">
+      <point x="-2.2971345809708055E-4" y="190.99995214423097" />
+      <point x="469.003" y="2310.0" />
+      <point x="853.094" y="2310.0" />
+      <point x="-1.9649310502245498E-4" y="26.99994320459564" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Etat.Final" target="org.teamtree.objectaid.Etat.Etat" relationship="REALIZATION">
+      <point x="3.4815435947166407E-4" y="-63.00003840978985" />
+      <point x="4405.263" y="802.0" />
+      <point x="4336.795" y="802.0" />
+      <point x="1.5130981046240777E-4" y="38.49985941186105" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Classe.Relations.Composition" target="org.teamtree.objectaid.Classe.Relations.Association" relationship="GENERALIZATION">
+      <point x="-173.0" y="-51.5" />
+      <point x="148.42801086373635" y="122.0" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Accessibilite.Public" target="org.teamtree.objectaid.Accessibilite.Accessibilite" relationship="REALIZATION">
+      <point x="4.232325391484437E-4" y="74.5004177036235" />
+      <point x="403.55" y="1399.0" />
+      <point x="304.0" y="1399.0" />
+      <point x="304.0" y="884.4590000000001" />
+      <point x="-80.49977244132364" y="4.0715813821634583E-4" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Classe.Relations.Heritage" target="org.teamtree.objectaid.Classe.Relations.Relation" relationship="GENERALIZATION">
+      <point x="-97.99987923817002" y="3.848595005901956E-4" />
+      <point x="1015.0" y="504.237" />
+      <point x="1015.0" y="129.553" />
+      <point x="226.0" y="129.553" />
+      <point x="226.0" y="249.481" />
+      <point x="-96.00007172394479" y="-2.1610931173654535E-4" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Fleches.FlecheComposition" target="org.teamtree.objectaid.MVC.Fleches.FlecheAssociation" relationship="GENERALIZATION">
+      <point x="-138.0" y="-23.72742670981711" />
+      <point x="134.5" y="0.0" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Entite.Enum" target="org.teamtree.objectaid.Entite.Entite" relationship="REALIZATION">
+      <point x="1.914544809551444E-4" y="-51.499546507674495" />
+      <point x="4565.161" y="1765.0" />
+      <point x="3871.593" y="1765.0" />
+      <point x="-1.7367215787089663E-4" y="27.00004501253875" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.diagramIcons.InterfaceTitleIcon" target="org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon" relationship="REALIZATION">
+      <point x="-3.4397382660245057E-4" y="-39.999530144423716" />
+      <point x="4181.469" y="78.94600000000003" />
+      <point x="2609.5" y="78.94600000000003" />
+      <point x="2609.5" y="347.0" />
+      <point x="2594.5" y="347.0" />
+      <point x="2594.5" y="530.0" />
+      <point x="2459.13" y="530.0" />
+      <point x="1.9835379453070345E-4" y="27.00048063703975" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Vue.VueClasseAffichage" target="org.teamtree.objectaid.MVC.Vue.Observateur" relationship="REALIZATION">
+      <point x="-8.796164775048965E-5" y="409.50018172954697" />
+      <point x="3386.603" y="2585.0" />
+      <point x="1518.5" y="2585.0" />
+      <point x="1518.5" y="2310.0" />
+      <point x="853.094" y="2310.0" />
+      <point x="-1.9649310502245498E-4" y="26.99994320459564" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Model.Model" target="org.teamtree.objectaid.MVC.Model.Sujet" relationship="REALIZATION">
+      <point x="30.12042245051009" y="-605.0" />
+      <point x="0.0" y="50.0" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.diagramIcons.AbstractClassTitleIcon" target="org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon" relationship="REALIZATION">
+      <point x="1.820287811824528E-4" y="39.99970536769321" />
+      <point x="3071.177" y="530.0" />
+      <point x="2459.13" y="530.0" />
+      <point x="1.9835379453070345E-4" y="27.00048063703975" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.diagramIcons.ClassTitleIcon" target="org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon" relationship="REALIZATION">
+      <point x="-2.249774688607431E-4" y="-40.00034181821326" />
+      <point x="2622.96" y="530.0" />
+      <point x="2459.13" y="530.0" />
+      <point x="1.9835379453070345E-4" y="27.00048063703975" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Controller.VboxDragDroppedController" target="org.teamtree.objectaid.MVC.Controller.ControllerBase" relationship="GENERALIZATION">
+      <point x="3.05145755646663E-4" y="-39.999821761003886" />
+      <point x="4309.702" y="234.0" />
+      <point x="2888.0" y="234.0" />
+      <point x="2888.0" y="368.0" />
+      <point x="1789.647" y="368.0" />
+      <point x="-2.9994385090503783E-4" y="-40.00046344521435" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Entite.Classe" target="org.teamtree.objectaid.Entite.Entite" relationship="REALIZATION">
+      <point x="2.240485446236562E-5" y="-51.49989314055779" />
+      <point x="3902.652" y="1765.0" />
+      <point x="3871.593" y="1765.0" />
+      <point x="-1.7367215787089663E-4" y="27.00004501253875" />
+    </edge>
+    <edge source="org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender" target="org.teamtree.objectaid.Fabrique.SceneFactory" relationship="REALIZATION">
+      <point x="-179.0002852276807" y="-49.44077910384499" />
+      <point x="3037.287" y="1264.771" />
+      <point x="3037.287" y="1490.0" />
+      <point x="2475.285" y="1490.0" />
+      <point x="3.350242411670479E-4" y="26.99987829801705" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Accessibilite.Default" target="org.teamtree.objectaid.Accessibilite.Accessibilite" relationship="REALIZATION">
+      <point x="-80.50049570850871" y="3.9221527208610496E-4" />
+      <point x="304.0" y="1621.856" />
+      <point x="304.0" y="884.4590000000001" />
+      <point x="-80.49977244132364" y="4.0715813821634583E-4" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Fleches.FlecheImplementation" target="org.teamtree.objectaid.MVC.Vue.Fleche" relationship="GENERALIZATION">
+      <point x="-146.50037572027668" y="32.164613132124714" />
+      <point x="2372.353" y="2310.0" />
+      <point x="2372.353" y="2279.0" />
+      <point x="484.003" y="2279.0" />
+      <point x="14.999770286541903" y="190.99995214423097" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Vue.VueClasse" target="org.teamtree.objectaid.MVC.Vue.Observateur" relationship="REALIZATION">
+      <point x="-171.0090213422077" y="213.99961976648115" />
+      <point x="4088.917" y="2585.0" />
+      <point x="1518.5" y="2585.0" />
+      <point x="1518.5" y="2310.0" />
+      <point x="853.094" y="2310.0" />
+      <point x="-1.9649310502245498E-4" y="26.99994320459564" />
+    </edge>
+    <edge source="org.teamtree.objectaid.render.ApplicationLayoutBootstrapRender" target="org.teamtree.objectaid.Fabrique.SceneFactory" relationship="REALIZATION">
+      <point x="-2.613605138321873E-4" y="-53.00035871043087" />
+      <point x="2919.592" y="1490.0" />
+      <point x="2475.285" y="1490.0" />
+      <point x="3.350242411670479E-4" y="26.99987829801705" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Fleches.FlecheAssociation" target="org.teamtree.objectaid.MVC.Vue.Fleche" relationship="GENERALIZATION">
+      <point x="2.658636733485764E-4" y="110.50036416096873" />
+      <point x="1124.6660000000002" y="2279.0" />
+      <point x="484.003" y="2279.0" />
+      <point x="14.999770286541903" y="190.99995214423097" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Entite.Record" target="org.teamtree.objectaid.Entite.Entite" relationship="REALIZATION">
+      <point x="3.143079893561662E-4" y="-51.500258601647374" />
+      <point x="3682.851" y="1765.0" />
+      <point x="3871.593" y="1765.0" />
+      <point x="-1.7367215787089663E-4" y="27.00004501253875" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Controller.ProjectDirectoryChooserController" target="org.teamtree.objectaid.MVC.Controller.ControllerBase" relationship="GENERALIZATION">
+      <point x="-4.8788448384584626E-4" y="53.00021938309101" />
+      <point x="3463.993" y="234.0" />
+      <point x="2888.0" y="234.0" />
+      <point x="2888.0" y="368.0" />
+      <point x="1789.647" y="368.0" />
+      <point x="-2.9994385090503783E-4" y="-40.00046344521435" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse" target="org.teamtree.objectaid.MVC.Vue.Observateur" relationship="REALIZATION">
+      <point x="-1.3882321218261495E-4" y="87.50037798512244" />
+      <point x="1366.289" y="2310.0" />
+      <point x="853.094" y="2310.0" />
+      <point x="-1.9649310502245498E-4" y="26.99994320459564" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Entite.Interface" target="org.teamtree.objectaid.Entite.Entite" relationship="REALIZATION">
+      <point x="4.053846441820497E-5" y="-51.49971342966228" />
+      <point x="4184.4169999999995" y="1765.0" />
+      <point x="3871.593" y="1765.0" />
+      <point x="-1.7367215787089663E-4" y="27.00004501253875" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Vue.ApplicationLayoutView" target="org.teamtree.objectaid.MVC.Vue.Observateur" relationship="REALIZATION">
+      <point x="-6.316794315353036E-5" y="75.99958345491973" />
+      <point x="4849.119" y="2585.0" />
+      <point x="1518.5" y="2585.0" />
+      <point x="1518.5" y="2310.0" />
+      <point x="853.094" y="2310.0" />
+      <point x="-1.9649310502245498E-4" y="26.99994320459564" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.diagramIcons.EnumTitleIcon" target="org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon" relationship="REALIZATION">
+      <point x="1.7121354585469817E-4" y="-39.999669073996486" />
+      <point x="2029.64" y="347.0" />
+      <point x="2594.5" y="347.0" />
+      <point x="2594.5" y="530.0" />
+      <point x="2459.13" y="530.0" />
+      <point x="1.9835379453070345E-4" y="27.00048063703975" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Classe.Relations.Implementation" target="org.teamtree.objectaid.Classe.Relations.Relation" relationship="GENERALIZATION">
+      <point x="-118.99980906901226" y="-2.1359469667459052E-4" />
+      <point x="1015.0" y="199.538" />
+      <point x="1015.0" y="129.553" />
+      <point x="226.0" y="129.553" />
+      <point x="226.0" y="249.481" />
+      <point x="-96.00007172394479" y="-2.1610931173654535E-4" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Etat.Abstract" target="org.teamtree.objectaid.Etat.Etat" relationship="REALIZATION">
+      <point x="5.669001820183439" y="63.00040090453089" />
+      <point x="4688.917" y="802.0" />
+      <point x="4336.795" y="802.0" />
+      <point x="1.5130981046240777E-4" y="38.49985941186105" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Vue.VueListeClasse" target="org.teamtree.objectaid.MVC.Vue.Observateur" relationship="REALIZATION">
+      <point x="-156.50042912069443" y="-3.871220401379105E-4" />
+      <point x="2357.353" y="1603.341" />
+      <point x="2357.353" y="2310.0" />
+      <point x="853.094" y="2310.0" />
+      <point x="-1.9649310502245498E-4" y="26.99994320459564" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Accessibilite.Protected" target="org.teamtree.objectaid.Accessibilite.Accessibilite" relationship="REALIZATION">
+      <point x="80.49979426280427" y="-3.1289545188428747E-4" />
+      <point x="304.0" y="1077.495" />
+      <point x="304.0" y="884.4590000000001" />
+      <point x="-80.49977244132364" y="4.0715813821634583E-4" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Controller.TreeViewDragDetectedController" target="org.teamtree.objectaid.MVC.Controller.ControllerBase" relationship="GENERALIZATION">
+      <point x="-3.296729942121601E-4" y="-52.99978146579204" />
+      <point x="1520.018" y="368.0" />
+      <point x="1789.647" y="368.0" />
+      <point x="-2.9994385090503783E-4" y="-40.00046344521435" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.Fleches.FlecheHeritage" target="org.teamtree.objectaid.MVC.Vue.Fleche" relationship="GENERALIZATION">
+      <point x="-4.1105478385361494E-4" y="64.49973610985785" />
+      <point x="2033.732" y="2279.0" />
+      <point x="484.003" y="2279.0" />
+      <point x="14.999770286541903" y="190.99995214423097" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Etat.Static" target="org.teamtree.objectaid.Etat.Etat" relationship="REALIZATION">
+      <point x="-3.6608071968657896E-4" y="63.00001689351359" />
+      <point x="4596.917" y="802.0" />
+      <point x="4336.795" y="802.0" />
+      <point x="1.5130981046240777E-4" y="38.49985941186105" />
+    </edge>
+    <edge source="org.teamtree.objectaid.MVC.diagramIcons.RecordClassTitleIcon" target="org.teamtree.objectaid.MVC.diagramIcons.ClasseEntiereTitleIcon" relationship="REALIZATION">
+      <point x="3.379074632903212E-5" y="-39.999868453419026" />
+      <point x="3898.71" y="78.94600000000003" />
+      <point x="2609.5" y="78.94600000000003" />
+      <point x="2609.5" y="347.0" />
+      <point x="2594.5" y="347.0" />
+      <point x="2594.5" y="530.0" />
+      <point x="2459.13" y="530.0" />
+      <point x="1.9835379453070345E-4" y="27.00048063703975" />
+    </edge>
+    <edge source="org.teamtree.objectaid.Classe.Relations.Association" target="org.teamtree.objectaid.Classe.Relations.Relation" relationship="GENERALIZATION">
+      <point x="176.99999235141934" y="-4.151402697090134E-4" />
+      <point x="226.0" y="406.403" />
+      <point x="226.0" y="249.481" />
+      <point x="-96.00007172394479" y="-2.1610931173654535E-4" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.16685757922871325" showDependencies="false" x="2596.5" y="1295.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
