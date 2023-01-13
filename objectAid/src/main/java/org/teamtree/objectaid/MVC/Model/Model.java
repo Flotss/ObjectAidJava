@@ -562,7 +562,7 @@ public class Model implements Sujet {
      * @param param         Les paramètres du constructeur
      */
     public void ajouterConstructeur(Accessibilite accessibilite, String param) {
-        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(new Constructeur(this.currentClickedClass.getNom() ,accessibilite, param));
+        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(accessibilite, param);
         this.currentClickedClass.setConstructeur();
         this.notifierObservateur("classe selection complete");
     }
@@ -578,9 +578,10 @@ public class Model implements Sujet {
      */
     public void ajouterAttribut(Accessibilite accessibilite, List<Etat> modifiers, String nom, String type) {
         this.currentClickedClass.getClasseEntiere().ajouterAttribut(nom, type, modifiers, accessibilite);
-        this.currentClickedClass.setMethodes();
         this.relations.put(this.currentClickedClass.getClasseEntiere(), new ArrayList<>(this.currentClickedClass.getClasseEntiere().getRelations()));
+        this.currentClickedClass.setAttributs();
         this.notifierObservateur("classe selection complete");
+        this.notifierObservateur("totalite des classes");
     }
 
     /**
