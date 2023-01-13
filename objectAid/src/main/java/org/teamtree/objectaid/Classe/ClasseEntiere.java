@@ -606,6 +606,5 @@ public class ClasseEntiere {
      */
     public void ajouterConstructeur(Accessibilite accessibilite, String parametres) {
         this.contructeurs.add(new Constructeur(this.getNom(),accessibilite,parametres));
-
     }
 }
