@@ -40,7 +40,7 @@ public class VboxDragDroppedController extends ControllerBase<DragEvent> {
                 }, () -> {
                     final var classeEntiere = new ClasseEntiere(stringClassEntry.getValue());
 
-                    this.model.ajouterClasse(classeEntiere);
+                    this.model.ajouterClasse(classeEntiere, (int) event.getX(), (int) event.getY() - 25);
                     this.model.notifierObservateur(VueListeClasse.class);
                 }));
         }

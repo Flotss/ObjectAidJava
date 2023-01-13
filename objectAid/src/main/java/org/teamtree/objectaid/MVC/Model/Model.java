@@ -66,6 +66,7 @@ public class Model implements Sujet {
 
     /**
      * Retourne le path du projet ouvert
+     *
      * @return Path du projet ouvert
      */
     public Path getCurrentProject() {
@@ -74,6 +75,7 @@ public class Model implements Sujet {
 
     /**
      * Définit le path du projet ouvert
+     *
      * @param currentProject Path du projet ouvert
      */
     public void setCurrentProject(Path currentProject) {
@@ -88,6 +90,7 @@ public class Model implements Sujet {
 
     /**
      * Retourne les noms des classes et leur classe correspondante
+     *
      * @return Les noms des classes et leur classe correspondante
      */
     public Map<String, Class<?>> getClassesPath() {
@@ -96,6 +99,7 @@ public class Model implements Sujet {
 
     /**
      * Ajouter une classe au classesPath
+     *
      * @param className Nom de la classe
      * @param clazz     Classe
      */
@@ -259,10 +263,8 @@ public class Model implements Sujet {
      *
      * @param classe Classe
      */
-    public void ajouterClasse(ClasseEntiere classe) {
+    public void ajouterClasse(ClasseEntiere classe, int x, int y) {
         if (!relations.containsKey(classe)) {
-            int x = getClasses().size() % 6 * 150 + getClasses().size() % 6 * 30 + 30;
-            int y = getClasses().size() / 6 * 300 + getClasses().size() / 6 * 30 + 30;
             classe.deplacer(x, y);
 
             //Verification permettant l'execution du main MainBootstrap (car
@@ -580,8 +582,9 @@ public class Model implements Sujet {
      */
     public void ajouterAttribut(Accessibilite accessibilite, List<Etat> modifiers, String nom, String type) {
         this.currentClickedClass.getClasseEntiere().ajouterAttribut(nom, type, modifiers, accessibilite);
+        this.currentClickedClass.setMethodes();
         this.relations.put(this.currentClickedClass.getClasseEntiere(), new ArrayList<>(this.currentClickedClass.getClasseEntiere().getRelations()));
-        this.notifierObservateur("totalite des classes");
+        this.notifierObservateur("classe selection complete");
     }
 
     /**
@@ -591,11 +594,11 @@ public class Model implements Sujet {
      * @param nomExtend     nom de la classe qu'elle extend
      * @param nomImplemente nom de la classe qu'elle implémente
      * @param accessibilite accesibilite de la classe
-     * @param etats etats de la classe
-     * @param entite entitée de la classe
+     * @param etats         etats de la classe
+     * @param entite        entitée de la classe
      */
-    public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
-        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite, this);
+    public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite) {
+        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite);
         this.ajouterClasse(classe);
 
     }
@@ -603,7 +606,7 @@ public class Model implements Sujet {
     /**
      * Méthode qui permet de afficher ou non les Getters et Setters
      */
-    public void inverserAffichageGetIsSet(){
+    public void inverserAffichageGetIsSet() {
         VueClasseAffichage.setIsGetAffichee = !VueClasseAffichage.setIsGetAffichee;
         this.notifierObservateur("recharger methodes");
     }
