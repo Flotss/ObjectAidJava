@@ -91,15 +91,6 @@ public class DefinitionClasse {
     }
 
     /**
-     * Retourne la liste des états de la classe
-     *
-     * @return Liste des états de la classe : ArrayList<Etat>
-     */
-    public ArrayList<Etat> getEtats() {
-        return etats;
-    }
-
-    /**
      * Retourne l'entité de la classe
      *
      * @return Entité de la classe : Entite

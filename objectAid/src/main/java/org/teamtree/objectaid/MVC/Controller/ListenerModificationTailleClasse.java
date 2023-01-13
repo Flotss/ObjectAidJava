@@ -9,7 +9,7 @@ import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
  * Classe qui permet de gérer la modification de la taille d'une classe
  * et de la mettre à jour dans le modèle
  */
-public class ListenerModificationTailleClasse implements ChangeListener {
+public class ListenerModificationTailleClasse implements ChangeListener<Number> {
 
     /**
      * Modèle
@@ -32,8 +32,19 @@ public class ListenerModificationTailleClasse implements ChangeListener {
         this.vueClasseAffichage = vueClasseAffichage;
     }
 
+
+    /**
+     * Called when the value of an {@link ObservableValue} changes.
+     * <p>
+     * In general, it is considered bad practice to modify the observed value in
+     * this method.
+     *
+     * @param observable The {@code ObservableValue} which value changed
+     * @param oldValue   The old value
+     * @param newValue   The new value
+     */
     @Override
-    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
         model.notifierObservateurFlecheSpecifique(this.vueClasseAffichage);
     }
 }

@@ -7,6 +7,7 @@ import org.teamtree.objectaid.Classe.Methode;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Entite.Entite;
 import org.teamtree.objectaid.Etat.Etat;
+import org.teamtree.objectaid.MVC.Composant.Alert;
 import org.teamtree.objectaid.MVC.Vue.*;
 
 import java.nio.file.Path;
@@ -49,7 +50,6 @@ public class Model implements Sujet {
      * L'état de l'application
      */
     private ApplicationState applicationState;
-    private Scene scene;
 
     /**
      * Constructeur du model
@@ -597,8 +597,12 @@ public class Model implements Sujet {
      * @param entite        entitée de la classe
      */
     public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite) {
-        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite, this);
-        this.ajouterClasse(classe, 20, 20);
+        if(this.getClasse(nom).isEmpty()) {
+            ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite, this);
+            this.ajouterClasse(classe, 20, 20);
+        }else {
+            Alert.afficheAlert("Nom de classe déjà présent, ajout impossible");
+        }
     }
 
     /**
@@ -609,7 +613,4 @@ public class Model implements Sujet {
         this.notifierObservateur("recharger methodes");
     }
 
-    public void setCurrentScene(Scene scene) {
-        this.scene = scene;
-    }
 }

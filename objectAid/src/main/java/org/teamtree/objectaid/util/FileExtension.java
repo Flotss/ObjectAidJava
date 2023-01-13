@@ -23,11 +23,6 @@ public class FileExtension {
         return fileName.endsWith(CLASS_EXTENSION);
     }
 
-    // Retourne si le fichier est un fichier java.
-    public static boolean isJavaFile(final File file) {
-        return isJavaFile(file.getName());
-    }
-
     // Retourne si le fichier est un fichier class.
     public static boolean isClassFile(final File file) {
         return isClassFile(file.getName());

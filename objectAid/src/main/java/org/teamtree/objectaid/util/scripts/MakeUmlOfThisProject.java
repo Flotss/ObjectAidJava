@@ -1,4 +1,4 @@
-package scripts;
+package org.teamtree.objectaid.util.scripts;
 
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Service.UmlService;
@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class MakeUmlOfThisProject {
 
-    public static List<String> pathClasses = new ArrayList<>();
+    public static final List<String> pathClasses = new ArrayList<>();
 
     public static String findAllClasses(File file, String path) {
         if (file.isDirectory()) {
@@ -31,8 +31,8 @@ public class MakeUmlOfThisProject {
         findAllClasses(file, "");
         pathClasses.stream().filter(s -> s.endsWith(".")).forEach(pathClasses::remove);
         pathClasses.forEach(s -> s = s.trim());
-        for (int i = 0; i < pathClasses.size(); i++) {
-            System.out.println(pathClasses.get(i));
+        for (String pathClass : pathClasses) {
+            System.out.println(pathClass);
         }
 
         List<ClasseEntiere> classes = new ArrayList<>();
