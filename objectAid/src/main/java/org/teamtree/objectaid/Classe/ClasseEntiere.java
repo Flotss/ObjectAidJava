@@ -1,11 +1,11 @@
 package org.teamtree.objectaid.Classe;
 
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Classe.Relations.*;
 import org.teamtree.objectaid.Entite.Classe;
 import org.teamtree.objectaid.Entite.Entite;
 import org.teamtree.objectaid.Entite.Interface;
 import org.teamtree.objectaid.Etat.Etat;
-import org.teamtree.objectaid.Classe.Relations.*;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Point;
@@ -29,22 +29,22 @@ public class ClasseEntiere {
      * Coordonnées de la classe defini par un point
      */
     private final Point coordonnees;
-
+    /**
+     * Relation entre classe
+     */
+    private final List<Relation> relations;
     /**
      * Liste des attributs de la classe
      */
     private List<Attribut> attributs;
-
     /**
      * Liste des méthodes de la classe
      */
     private List<Methode> methods;
-
     /**
      * Definition de la classe
      */
     private DefinitionClasse definition;
-
     /**
      * Constructeur est afficher ou non
      */
@@ -57,11 +57,9 @@ public class ClasseEntiere {
      * Methodes sont afficher ou non
      */
     private boolean methodsEstAffiche;
-
-    /** Relation entre classe */
-    private final List<Relation> relations;
-
-    /** Classe qui sera affichée correspondant à la ClasseEntiere */
+    /**
+     * Classe qui sera affichée correspondant à la ClasseEntiere
+     */
     private VueClasseAffichage classeAffichage;
 
     /**
@@ -96,10 +94,9 @@ public class ClasseEntiere {
 
             // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
             if (!nameParent.equals("Object")) {
-                this.relations.add(new Heritage(this.definition.getNom(),nameParent));
+                this.relations.add(new Heritage(this.definition.getNom(), nameParent));
             }
         }
-
 
 
         // Constructeurs
@@ -130,9 +127,9 @@ public class ClasseEntiere {
             // Ajout de la relation si l'attribut n'est pas primitif
             if (isPrimitive) continue;
 
-            if (isCollection){
+            if (isCollection) {
                 this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
-            }else{
+            } else {
                 this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
             }
         }
@@ -144,7 +141,6 @@ public class ClasseEntiere {
         for (Method method : classe.getDeclaredMethods()) {
             this.methods.add(new Methode(method));
         }
-
 
 
         // Partie affichage des attributs, constructeurs, méthodes et relations
@@ -181,10 +177,9 @@ public class ClasseEntiere {
 
             // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
             if (!nameParent.equals("Object")) {
-                this.relations.add(new Heritage(this.definition.getNom(),nameParent));
+                this.relations.add(new Heritage(this.definition.getNom(), nameParent));
             }
         }
-
 
 
         // Constructeurs
@@ -214,10 +209,10 @@ public class ClasseEntiere {
 
             // Ajout de la relation si l'attribut n'est pas primitif
             if (!isPrimitive) {
-                if (isCollection){
+                if (isCollection) {
                     this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
-                }else{
-                    if (! this.definition.getEntite().equals("enum"))
+                } else {
+                    if (!this.definition.getEntite().equals("enum"))
                         this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
                 }
             }
@@ -232,7 +227,6 @@ public class ClasseEntiere {
         }
 
 
-
         // Partie affichage des attributs, constructeurs, méthodes et relations
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
@@ -241,14 +235,15 @@ public class ClasseEntiere {
 
     /**
      * Constructeur permettant de crée une classe à partir de l'application
-     * @param nom nom de la classe
-     * @param nomExtend nom de la classe qu'elle extend
+     *
+     * @param nom           nom de la classe
+     * @param nomExtend     nom de la classe qu'elle extend
      * @param nomImplemente nom de la classe qu'elle implémente
      * @param accessibilite accesibilite de la classe
-     * @param etats etats de la classe
-     * @param entite entitée de la classe
+     * @param etats         etats de la classe
+     * @param entite        entitée de la classe
      */
-    public ClasseEntiere(String nom, String nomImplemente, String nomExtend, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite, Model model){
+    public ClasseEntiere(String nom, String nomImplemente, String nomExtend, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite, Model model) {
         // Création des types des attributs
         this.attributs = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
@@ -260,7 +255,7 @@ public class ClasseEntiere {
 
 
         // Interfaces
-        if(!nomImplemente.equals("")){
+        if (!nomImplemente.equals("")) {
             for (String inter : nomImplemente.split(",")) {
                 // Verification que le nom de la classe qu'on implémente existe et qu'elle est une interface
                 if (model.getClasse(inter).isPresent()) {
@@ -268,14 +263,14 @@ public class ClasseEntiere {
                     if (c.getDefinition().getEntite() instanceof Interface) {
                         this.relations.add(new Implementation(this.definition.getNom(), inter));
                     }
-                }else{
+                } else {
                     this.relations.add(new Implementation(this.definition.getNom(), inter));
                 }
             }
         }
 
         // Classe parent
-        if (!nomExtend.equals("")){
+        if (!nomExtend.equals("")) {
 
             // Verification que l'utilisateur n'essaye pas de faire une classe qui hérite de deux classes
             nomExtend = nomExtend.split(",")[0];
@@ -288,7 +283,7 @@ public class ClasseEntiere {
                     if (c.getDefinition().getEntite() instanceof Classe) {
                         this.relations.add(new Heritage(this.definition.getNom(), nomExtend));
                     }
-                }else{
+                } else {
                     this.relations.add(new Heritage(this.definition.getNom(), nomExtend));
                 }
             }
@@ -365,7 +360,7 @@ public class ClasseEntiere {
         this.methods = methods;
     }
 
-    public List<Constructeur> getContructeurs(){
+    public List<Constructeur> getContructeurs() {
         return contructeurs;
     }
 
@@ -440,6 +435,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne le nom de la classe
+     *
      * @return Le nom de la classe : String
      */
     public String getNom() {
@@ -448,6 +444,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la possibilite d'afficher le constructeur
+     *
      * @return Vrai si le constructeur est affiché : boolean
      */
     public boolean isConstructeurEstAffiche() {
@@ -456,6 +453,7 @@ public class ClasseEntiere {
 
     /**
      * Set la possibilite d'afficher le constructeur
+     *
      * @param constructeurEstAffiche Boolean vrai pour afficher le constructeur sinon faux
      */
     public void setConstructeurEstAffiche(boolean constructeurEstAffiche) {
@@ -464,6 +462,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la possibilite d'afficher les attributs
+     *
      * @return Vrai si les attributs sont affichés : boolean
      */
     public boolean isAttributEstAffiche() {
@@ -472,6 +471,7 @@ public class ClasseEntiere {
 
     /**
      * Set la possibilite d'afficher les attributs
+     *
      * @param attributEstAffiche Boolean vrai pour afficher les attributs sinon faux
      */
     public void setAttributEstAffiche(boolean attributEstAffiche) {
@@ -480,6 +480,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la possibilite d'afficher les méthodes
+     *
      * @return Vrai si les méthodes sont affichées : boolean
      */
     public boolean isMethodsEstAffiche() {
@@ -488,6 +489,7 @@ public class ClasseEntiere {
 
     /**
      * Set la possibilite d'afficher les méthodes
+     *
      * @param methodsEstAffiche Boolean vrai pour afficher les méthodes sinon faux
      */
     public void setMethodsEstAffiche(boolean methodsEstAffiche) {
@@ -496,6 +498,7 @@ public class ClasseEntiere {
 
     /**
      * Retourne la liste des relations de la classe
+     *
      * @return La liste des relations de la classe : List<Relation>
      */
     public VueClasseAffichage getClasseAffichage() {
@@ -506,13 +509,14 @@ public class ClasseEntiere {
         this.classeAffichage = classeAffichage;
     }
 
-    public List<Relation> getRelations(){
+    public List<Relation> getRelations() {
         return relations;
     }
 
 
     /**
      * Retourne l'uml de la classe entiere
+     *
      * @return L'uml de la classe entiere : String
      */
     public String getUml() {
@@ -545,23 +549,25 @@ public class ClasseEntiere {
 
     /**
      * Methode qui ajoute une méthode à la classe
+     *
      * @param methode La méthode à ajouter
      */
-    public void ajouterMethode(Methode methode){
+    public void ajouterMethode(Methode methode) {
         this.methods.add(methode);
     }
 
 
     /**
      * Methode qui ajoute un attribut à la classe
-     * @param nom L'attribut à ajouter
-     * @param type Le type de l'attribut
-     * @param modifiers Les modificateurs de l'attribut
+     *
+     * @param nom           L'attribut à ajouter
+     * @param type          Le type de l'attribut
+     * @param modifiers     Les modificateurs de l'attribut
      * @param accessibilite L'accessibilité de l'attribut
      */
-    public void ajouterAttribut(String nom, String type, List<Etat> modifiers, Accessibilite accessibilite){
+    public void ajouterAttribut(String nom, String type, List<Etat> modifiers, Accessibilite accessibilite) {
         // On cherche si l'attribut est une association donc s'il est primitif ou non
-        Attribut attribut = new Attribut(nom,type,modifiers,accessibilite);
+        Attribut attribut = new Attribut(nom, type, modifiers, accessibilite);
         String destinationType = attribut.getType();
         boolean isCollection = (destinationType.contains("<") && destinationType.contains(">"));
 
@@ -584,9 +590,9 @@ public class ClasseEntiere {
 
         // Ajout de la relation si l'attribut n'est pas primitif
         if (!isPrimitive) {
-            if (isCollection){
+            if (isCollection) {
                 this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
-            }else{
+            } else {
                 this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
             }
         }
@@ -594,10 +600,11 @@ public class ClasseEntiere {
 
     /**
      * Constructeur à partir de paramètres
+     *
      * @param accessibilite Accessibilité du constructeur
-     * @param parametres Liste des paramètres du constructeur
+     * @param parametres    Liste des paramètres du constructeur
      */
     public void ajouterConstructeur(Accessibilite accessibilite, String parametres) {
-        this.contructeurs.add(new Constructeur(this.getNom(),accessibilite,parametres));
+        this.contructeurs.add(new Constructeur(this.getNom(), accessibilite, parametres));
     }
 }

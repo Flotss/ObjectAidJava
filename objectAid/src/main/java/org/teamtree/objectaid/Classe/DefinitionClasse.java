@@ -1,8 +1,8 @@
 package org.teamtree.objectaid.Classe;
 
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
-import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Entite.Entite;
+import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Fabrique.FabriqueAccessibilite;
 import org.teamtree.objectaid.Fabrique.FabriqueEntite;
 import org.teamtree.objectaid.Fabrique.FabriqueEtat;
@@ -14,20 +14,29 @@ import java.util.ArrayList;
  */
 public class DefinitionClasse {
 
-    /** Nom de la classe */
+    /**
+     * Nom de la classe
+     */
     private final String nomClasse;
 
-    /** L'accessibilité de la classe */
+    /**
+     * L'accessibilité de la classe
+     */
     private final Accessibilite accessibilite;
 
-    /** Liste des états de la classe */
+    /**
+     * Liste des états de la classe
+     */
     private final ArrayList<Etat> etats;
 
-    /** Entité de la classe */
+    /**
+     * Entité de la classe
+     */
     private final Entite entite;
 
     /**
      * Constructeur de la définition de la classe
+     *
      * @param classe Classe
      */
     public DefinitionClasse(Class<?> classe) {
@@ -49,12 +58,13 @@ public class DefinitionClasse {
 
     /**
      * Constructeur permettant de crée une définition de classe à partir de l'application
-     * @param nomClasse nom de la classe
+     *
+     * @param nomClasse     nom de la classe
      * @param accessibilite accesibilite de la classe
-     * @param etats etats de la classe
-     * @param entite entite de la classe
+     * @param etats         etats de la classe
+     * @param entite        entite de la classe
      */
-    public DefinitionClasse(String nomClasse, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
+    public DefinitionClasse(String nomClasse, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite) {
 
         this.nomClasse = nomClasse;
         this.accessibilite = accessibilite;
@@ -64,6 +74,7 @@ public class DefinitionClasse {
 
     /**
      * Retourne le nom de la classe
+     *
      * @return Nom de la classe : String
      */
     public String getNom() {
@@ -72,6 +83,7 @@ public class DefinitionClasse {
 
     /**
      * Retourne l'accessibilité de la classe
+     *
      * @return Accessibilité de la classe : Accessibilite
      */
     public String getAccessibilite() {
@@ -80,6 +92,7 @@ public class DefinitionClasse {
 
     /**
      * Retourne la liste des états de la classe
+     *
      * @return Liste des états de la classe : ArrayList<Etat>
      */
     public ArrayList<Etat> getEtats() {
@@ -88,6 +101,7 @@ public class DefinitionClasse {
 
     /**
      * Retourne l'entité de la classe
+     *
      * @return Entité de la classe : Entite
      */
     public Entite getEntite() {
@@ -109,16 +123,17 @@ public class DefinitionClasse {
 
     /**
      * Retourne l'uml de la classe
+     *
      * @return L'uml de la classe
      */
     public String getUml() {
         StringBuilder uml = new StringBuilder();
-        if (etats.size() > 0 && ! entite.getEntite().equals("interface")) {
+        if (etats.size() > 0 && !entite.getEntite().equals("interface")) {
             for (Etat etat : etats) {
                 uml.append(etat.getUml().replace("{", "").replace("}", "")).append(" ");
             }
         }
         uml.append(entite.getEntite()).append(" ").append(nomClasse);
         return uml.toString();
-     }
+    }
 }

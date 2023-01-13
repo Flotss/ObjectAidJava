@@ -25,58 +25,51 @@ import java.util.Optional;
  */
 public class VueClasseAffichage extends VBox implements Observateur {
 
+    public static boolean setIsGetAffichee = true;
     /**
      * Nom de cette classe, permettant de la retrouver lorsqu'on clique dessus notamment
      */
     private final String nom;
-
-    /** ClasseEntiere de la classe qui est affichée */
+    /**
+     * ClasseEntiere de la classe qui est affichée
+     */
     private final ClasseEntiere classeEntiere;
-
     /**
      * HBox qui contient la définition de la classe
      */
     private final HBox definition;
-
     /**
      * VBox qui contient les constructeurs de la classe
      */
     private final VBox constructeur;
-
     /**
      * VBox qui contient les attributs de la classe
      */
     private final VBox attributs;
-
     /**
      * VBox qui contient les attributs en lien avec les relations
      */
     private final VBox attributsRelation;
-
+    /**
+     * Le model
+     */
+    private final Model model;
     /**
      * VBox qui contient les méthodes de la classe
      */
     private VBox methodes;
-
     /**
-     Couleur de la bordure
+     * Couleur de la bordure
      */
     private String couleur;
-
-    /**
-     Le model
-     */
-    private final Model model;
-
     private boolean classeAffichee;
-
-    public static boolean setIsGetAffichee = true;
 
     /**
      * Constructeur de la classe
+     *
      * @param classeEntiere La classe à afficher
      */
-    public VueClasseAffichage(ClasseEntiere classeEntiere, Model model){
+    public VueClasseAffichage(ClasseEntiere classeEntiere, Model model) {
         this.nom = classeEntiere.getNom();
         this.classeEntiere = classeEntiere;
         this.definition = new HBox();
@@ -109,7 +102,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
      * Méthode qui permet de créer la partie constructeurs de la classe
      */
 
-    public void setAttributs(){
+    public void setAttributs() {
         this.attributs.getChildren().clear();
         attributs.setPadding(new Insets(0, 5, 0, 5));
 
@@ -118,7 +111,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
             attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
         }
         //Pour chaque attributs
-        for (Attribut attributX: classeEntiere.getAttributs()) {
+        for (Attribut attributX : classeEntiere.getAttributs()) {
             HBox line = new HBox();
             Shape icon = attributX.getAccessibilite().getShape();
             String att = attributX.getType() + " " + attributX.getNom();
@@ -139,9 +132,9 @@ public class VueClasseAffichage extends VBox implements Observateur {
     /**
      * Méthode qui permet de mettre à jour les attributs qui n'ont pas de relations possible
      * exemple : si Point n'est pas dans le diagramme, mais qu'il a une relation d'association avec la classe
-     *           alors il doit être en attribut
+     * alors il doit être en attribut
      */
-    public void updateAttributsRelation(){
+    public void updateAttributsRelation() {
         this.attributsRelation.getChildren().clear();
         this.attributsRelation.setPadding(new Insets(0, 5, 0, 5));
         boolean bordureAffichee = false;
@@ -149,8 +142,8 @@ public class VueClasseAffichage extends VBox implements Observateur {
         List<Relation> relations = this.classeEntiere.getRelations();
         for (Relation relation : relations) {
             Optional<ClasseEntiere> classeEntiereDestination = model.getClasse(relation.getDestination());
-            if (! classeEntiereDestination.isPresent() && relation instanceof Association association) {
-                if(!bordureAffichee){
+            if (!classeEntiereDestination.isPresent() && relation instanceof Association association) {
+                if (!bordureAffichee) {
                     attributs.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
                     bordureAffichee = true;
                 }
@@ -176,17 +169,17 @@ public class VueClasseAffichage extends VBox implements Observateur {
     /**
      * Méthode qui permet de créer la partie constructeurs de la classe
      */
-    public void setConstructeur(){
+    public void setConstructeur() {
         //partie constructeur
         this.constructeur.getChildren().clear();
         constructeur.setPadding(new Insets(0, 5, 0, 5));
-        
+
         //Si il existe des constructeurs, on crée une bordure sur la catégorie du dessus (pour crée une séparation)
         if (classeEntiere.getContructeurs().size() != 0) {
             constructeur.setStyle("-fx-border-color: black transparent transparent transparent; -fx-border-width: 1px;");
         }
         //Pour chaque Constructeurs
-        for (Constructeur constructeurX: classeEntiere.getContructeurs()) {
+        for (Constructeur constructeurX : classeEntiere.getContructeurs()) {
             HBox line = new HBox();
 
             // Icon selon l'accessibilité
@@ -198,7 +191,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
             //Pour chaque parametre du constructeur, on l'écrit dans l'affichage
             //exemple : + Constructeur(int a, int b)
-            for(Parametre parametreX: constructeurX.getParametre()){
+            for (Parametre parametreX : constructeurX.getParametre()) {
                 constr += parametreX.getType() + " " + parametreX.getNom();
                 if (n != constructeurX.getParametre().size() - 1) {
                     constr += ", ";
@@ -218,7 +211,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
     /**
      * Méthode qui permet de créer la partie méthodes de la classe
      */
-    public void setMethodes(){
+    public void setMethodes() {
         //partie methodes
         this.methodes = new VBox();
         methodes.setPadding(new Insets(0, 5, 0, 5));
@@ -226,20 +219,20 @@ public class VueClasseAffichage extends VBox implements Observateur {
         boolean bordure = false;
         for (int i = 0; i < classeEntiere.getMethods().size(); i++) {
             Methode methodeX = classeEntiere.getMethods().get(i);
-            if(!((methodeX.getNom().indexOf("set")==0||methodeX.getNom().indexOf("get")==0||methodeX.getNom().indexOf("is")==0)&&!setIsGetAffichee)) {
+            if (!((methodeX.getNom().indexOf("set") == 0 || methodeX.getNom().indexOf("get") == 0 || methodeX.getNom().indexOf("is") == 0) && !setIsGetAffichee)) {
                 bordure = true;
                 HBox line = new HBox();
                 Shape icon = methodeX.getAccessibilite().getShape();
 
-            StringBuilder meth = new StringBuilder(methodeX.getNom() + "(");
-            for (int j = 0; j < methodeX.getParametre().size(); j++) {
-                meth.append(methodeX.getParametre().get(j).getType()).append(" ").append(methodeX.getParametre().get(j).getNom());
-                if (j != methodeX.getParametre().size() - 1) {
-                    meth.append(", ");
+                StringBuilder meth = new StringBuilder(methodeX.getNom() + "(");
+                for (int j = 0; j < methodeX.getParametre().size(); j++) {
+                    meth.append(methodeX.getParametre().get(j).getType()).append(" ").append(methodeX.getParametre().get(j).getNom());
+                    if (j != methodeX.getParametre().size() - 1) {
+                        meth.append(", ");
+                    }
                 }
-            }
-            meth.append("): ").append(classeEntiere.getMethods().get(i).getTypeRetourne());
-            Label methodeLabel = new Label(meth.toString());
+                meth.append("): ").append(classeEntiere.getMethods().get(i).getTypeRetourne());
+                Label methodeLabel = new Label(meth.toString());
 
                 for (Etat etat : methodeX.getEtats()) {
                     if (etat instanceof Abstract) {
@@ -263,14 +256,16 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     /**
      * Retourne le nom de la classe affichée
+     *
      * @return le nom de la classe affichée : String
      */
-    public String getNom(){
+    public String getNom() {
         return this.nom;
     }
 
     /**
      * Retourne la partie definition de la classe affichée
+     *
      * @return la partie definition de la classe affichée : HBox
      */
     public HBox getDefinition() {
@@ -279,6 +274,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     /**
      * Retourne la partie attributs de la classe affichée
+     *
      * @return la partie attributs de la classe affichée : VBox
      */
     public VBox getConstructeur() {
@@ -287,6 +283,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     /**
      * Retourne la partie constructeurs de la classe affichée
+     *
      * @return la partie constructeurs de la classe affichée : VBox
      */
     public VBox getAttributs() {
@@ -295,6 +292,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     /**
      * Retourne la partie méthodes de la classe affichée
+     *
      * @return la partie méthodes de la classe affichée : VBox
      */
     public VBox getMethodes() {
@@ -303,14 +301,16 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     /**
      * Retourne la classe entière de la classe affichée
+     *
      * @return la classe entière de la classe affichée : Classe
      */
-    public ClasseEntiere getClasseEntiere(){
+    public ClasseEntiere getClasseEntiere() {
         return this.classeEntiere;
     }
 
     /**
      * Retourne les attributs avec une relation de la classe affichée
+     *
      * @return les attributs avec une relation de la classe affichée : VBox
      */
     public VBox getAttributsRelation() {
@@ -320,28 +320,28 @@ public class VueClasseAffichage extends VBox implements Observateur {
     /**
      * Methode qui affecte la couleur bleu à la bordure de la classe affichée lorsqu'elle est sélectionnée
      */
-    public void classeSelectionnee(){
+    public void classeSelectionnee() {
         this.couleur = "blue";
     }
 
     /**
      * Methode qui affecte la couleur noire à la bordure de la classe affichée lorsqu'elle n'est pas sélectionnée
      */
-    public void classeDeSelectionnee(){
+    public void classeDeSelectionnee() {
         this.couleur = "black";
     }
 
     /**
      * Methode qui permet de mettre à jour la bordure de la classe affichée
      */
-    public void actualiserBordure(){
-        super.setStyle("-fx-border-color: "+this.couleur+ " ; -fx-border-width: 1px;");
+    public void actualiserBordure() {
+        super.setStyle("-fx-border-color: " + this.couleur + " ; -fx-border-width: 1px;");
     }
 
     /**
      * Méthode qui permet de mettre a jour la position de la classe affiché
      */
-    public void actualiserPosition(){
+    public void actualiserPosition() {
         this.setLayoutX(classeEntiere.getX());
         this.setLayoutY(classeEntiere.getY());
     }
@@ -371,6 +371,7 @@ public class VueClasseAffichage extends VBox implements Observateur {
 
     /**
      * Methode equals qui permet de comparer deux classes affichées
+     *
      * @param o l'objet à comparer
      * @return true si les deux noms des classes affichées sont égales, false sinon
      */
@@ -387,33 +388,35 @@ public class VueClasseAffichage extends VBox implements Observateur {
      * Methode qui inverse l'affichage de la classe
      */
 
-    public void setClasseAffichee(){
+    public void setClasseAffichee() {
         this.classeAffichee = !this.classeAffichee;
-    }
-
-    /**
-     * Setter qui permet de changer le booleen la classe affichée
-     * @param b
-     */
-
-    public void setClasseAffichee(boolean b){
-        this.classeAffichee = b;
     }
 
     /**
      * Methode qui actualise la visibilité de classe affichée
      */
 
-    public void actualiserVisibilite(){
+    public void actualiserVisibilite() {
         this.setVisible(classeAffichee);
     }
 
     /**
      * Getter qui retourne le booleen de la visibilité de la classe affichée
+     *
      * @return boolean
      */
 
-    public boolean getClasseAffichee(){
+    public boolean getClasseAffichee() {
         return this.classeAffichee;
+    }
+
+    /**
+     * Setter qui permet de changer le booleen la classe affichée
+     *
+     * @param b
+     */
+
+    public void setClasseAffichee(boolean b) {
+        this.classeAffichee = b;
     }
 }

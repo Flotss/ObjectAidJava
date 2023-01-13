@@ -1,10 +1,9 @@
 package org.teamtree.objectaid.MVC.Controller;
 
-import org.teamtree.objectaid.MVC.Model.Model;
-
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import org.teamtree.objectaid.MVC.Model.Model;
 
 /**
  * Représente le contrôleur qui gère le drag and drop sur la VBox.

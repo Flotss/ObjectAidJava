@@ -10,12 +10,14 @@ interface Sujet {
 
     /**
      * Méthode qui permet d'ajouter une observateur
+     *
      * @param o L'observateur à ajouter
      */
     void ajouterObservateur(Observateur o);
 
     /**
      * Méthode qui permet de supprimer un observateur
+     *
      * @param o L'observateur à supprimer
      */
     void supprimerObservateur(Observateur o);

@@ -16,7 +16,8 @@ public abstract class Relation {
 
     /**
      * Constructeur de la classe
-     * @param depart La classe de départ
+     *
+     * @param depart      La classe de départ
      * @param destination La classe de destination
      */
     public Relation(String depart, String destination) {
@@ -26,14 +27,16 @@ public abstract class Relation {
 
     /**
      * Getter de la classe de départ
+     *
      * @return La classe de départ
      */
-    public String getDepart(){
+    public String getDepart() {
         return depart;
     }
 
     /**
      * Getter de la classe de destination
+     *
      * @return La classe de destination
      */
     public String getDestination() {
@@ -48,6 +51,7 @@ public abstract class Relation {
 
     /**
      * Méthode qui retourne l'uml de la relation
+     *
      * @return L'uml de la relation
      */
     public abstract String getUml();

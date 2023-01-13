@@ -10,6 +10,7 @@ public interface ClasseEntiereTitleIcon {
 
     /**
      * Méthode qui permet de créer un icône
+     *
      * @return Node
      */
     Node getIcon();

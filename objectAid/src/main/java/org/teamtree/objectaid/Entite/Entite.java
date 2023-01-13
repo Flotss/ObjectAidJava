@@ -9,6 +9,7 @@ public interface Entite {
 
     /**
      * Méthode qui retourne l'entité
+     *
      * @return L'entité : String
      */
     String getEntite();

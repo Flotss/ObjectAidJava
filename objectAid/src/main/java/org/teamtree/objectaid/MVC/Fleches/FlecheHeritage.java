@@ -18,10 +18,11 @@ public class FlecheHeritage extends Fleche {
 
     /**
      * Constructeur de la classe
-     * @param model Le model de l'application
+     *
+     * @param model    Le model de l'application
      * @param relation La relation entre les deux classes
      */
-    public FlecheHeritage(Model model, Relation relation){
+    public FlecheHeritage(Model model, Relation relation) {
         super(model, relation);
         this.arrowFermeture = new Line();
         this.getChildren().add(arrowFermeture);
@@ -42,7 +43,7 @@ public class FlecheHeritage extends Fleche {
     }
 
     @Override
-    public void actualiser(){
+    public void actualiser() {
         super.actualiser();
         this.arrowFermeture.setStartX(arrow1.getEndX());
         this.arrowFermeture.setStartY(arrow1.getEndY());
@@ -51,7 +52,7 @@ public class FlecheHeritage extends Fleche {
     }
 
     @Override
-    public String getType(){
+    public String getType() {
         return "Heritage";
     }
 }

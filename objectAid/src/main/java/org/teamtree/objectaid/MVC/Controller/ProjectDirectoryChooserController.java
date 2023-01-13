@@ -1,12 +1,11 @@
 package org.teamtree.objectaid.MVC.Controller;
 
+import javafx.event.ActionEvent;
+import javafx.stage.DirectoryChooser;
 import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-
-import javafx.event.ActionEvent;
-import javafx.stage.DirectoryChooser;
 
 /**
  * Contrôleur chargé de gérer l'événement de sélection d'un répertoire de projet.
@@ -17,7 +16,7 @@ import javafx.stage.DirectoryChooser;
 public class ProjectDirectoryChooserController extends ControllerBase<ActionEvent> {
 
     private static final Logger LOGGER = System.getLogger(
-        ProjectDirectoryChooserController.class.getName());
+            ProjectDirectoryChooserController.class.getName());
 
     public ProjectDirectoryChooserController(final Model model) {
         super(model);

@@ -6,7 +6,9 @@ import javafx.scene.control.MenuItem;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
-/** Vue utilisée pour les boutons d'affichage d'une classe */
+/**
+ * Vue utilisée pour les boutons d'affichage d'une classe
+ */
 public class VueContextMenuClasse extends ContextMenu implements Observateur {
 
     /**
@@ -17,6 +19,7 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
 
     /**
      * Constructeur de la classe
+     *
      * @param model model
      */
     public VueContextMenuClasse(Model model) {
@@ -33,7 +36,6 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         // Pouvoir afficher les constructeurs
         MenuItem itemConstructeurs = new MenuItem("Constructeurs");
         itemConstructeurs.setOnAction(new MenuItemController(model));
-
 
 
         // Pouvoir supprimer une classe
@@ -81,7 +83,6 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
         itemAjouter.getItems().addAll(itemAjouterAttribut, itemAjouterConstructeur, itemAjouterMethode);
 
 
-
         // Ajout de tous ces items dans le menu contextuel
         this.getItems().addAll(itemAttributs, itemMethodes, itemConstructeurs, menuCache, itemSupprimerClasse, itemGenererSquelette, itemAjouter);
         this.classe = null;
@@ -89,19 +90,20 @@ public class VueContextMenuClasse extends ContextMenu implements Observateur {
 
     /**
      * Methode qui permet de retourner la classeAffichage de la vue
+     *
      * @return La classeAffichage de la vue
      */
     public VueClasseAffichage getClasse() {
         return classe;
     }
 
+    public void setClasse(VueClasseAffichage classe) {
+        this.classe = classe;
+    }
+
     public void setCoordonnees(double x, double y) {
         this.setX(x);
         this.setY(y);
-    }
-
-    public void setClasse(VueClasseAffichage classe) {
-        this.classe = classe;
     }
 
     @Override

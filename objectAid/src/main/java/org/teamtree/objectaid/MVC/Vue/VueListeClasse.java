@@ -7,8 +7,10 @@ import org.teamtree.objectaid.MVC.Controller.ControllerButtonGeneral;
 import org.teamtree.objectaid.MVC.Controller.MenuItemController;
 import org.teamtree.objectaid.MVC.Model.Model;
 
-import java.util.ArrayList;
-
+/**
+ * Classe qui permet de gérer le menu de l'application
+ * Notamment celle qui affiche toutes les classes
+ */
 public class VueListeClasse extends Menu implements Observateur {
     private final Model model;
 
@@ -52,6 +54,12 @@ public class VueListeClasse extends Menu implements Observateur {
         getItems().add(menuItemAjouterClasse);
     }
 
+    /**
+     * Définit la couleur de classe à afficher.
+     *
+     * @param nom     Nom de la classe
+     * @param couleur Couleur de la classe
+     */
     public void changerCouleurTexte(String nom, String couleur) {
         for (MenuItem m : this.getItems()) {
             if (m.getText().equals(nom)) {
@@ -60,6 +68,11 @@ public class VueListeClasse extends Menu implements Observateur {
         }
     }
 
+    /**
+     * Récupères les items du menu
+     *
+     * @return ObservableList<MenuItem>
+     */
 
     public ObservableList<MenuItem> getItemsVue() {
         return this.getItems();

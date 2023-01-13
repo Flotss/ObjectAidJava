@@ -15,10 +15,11 @@ public class FlecheImplementation extends Fleche {
 
     /**
      * Constructeur de la classe
-     * @param model Le model de l'application
+     *
+     * @param model    Le model de l'application
      * @param relation La relation entre les deux classes
      */
-    public FlecheImplementation(Model model, Relation relation){
+    public FlecheImplementation(Model model, Relation relation) {
         super(model, relation);
         this.arrowFermeture = new Line();
         this.getChildren().add(arrowFermeture);
@@ -36,12 +37,11 @@ public class FlecheImplementation extends Fleche {
         this.arrowFermeture.setStrokeWidth(2);
 
 
-
         this.line.getStrokeDashArray().addAll(5d, 5d);
     }
 
     @Override
-    public void actualiser(){
+    public void actualiser() {
         super.actualiser();
         this.arrowFermeture.setStartX(arrow1.getEndX());
         this.arrowFermeture.setStartY(arrow1.getEndY());
@@ -50,7 +50,7 @@ public class FlecheImplementation extends Fleche {
     }
 
     @Override
-    public String getType(){
+    public String getType() {
         return "Implementation";
     }
 }

@@ -8,11 +8,22 @@ import javafx.scene.shape.Shape;
  * Classe qui représente l'accessibilité : Public
  */
 public class Public implements Accessibilite {
+
+    /**
+     * Méthode qui retourne le nom de l'accessibilité
+     *
+     * @return Le nom de l'accessibilité
+     */
     @Override
     public String getAcces() {
         return "public";
     }
 
+    /**
+     * Méthode qui retourne la forme de l'accessibilité
+     *
+     * @return La forme de l'accessibilité
+     */
     @Override
     public Shape getShape() {
         // Création d'un cercle vert
@@ -26,17 +37,19 @@ public class Public implements Accessibilite {
 
     /**
      * Méthode qui retroune la chaine d'information
+     *
      * @return La chaine d'information
      */
-    public String toString(){
+    public String toString() {
         return "Public";
     }
 
     /**
      * Méthode qui retourne la chaine de caractère de l'accessibilité en Uml
+     *
      * @return La chaine de caractère de l'accessibilité en Uml
      */
-    public String getUml(){
+    public String getUml() {
         return "+";
     }
 }

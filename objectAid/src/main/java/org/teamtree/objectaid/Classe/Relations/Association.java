@@ -24,9 +24,10 @@ public class Association extends Relation {
 
     /**
      * Constructeur de la classe
-     * @param depart La classe de départ
-     * @param destination La classe de destination
-     * @param attribut L'attribut de l'association
+     *
+     * @param depart       La classe de départ
+     * @param destination  La classe de destination
+     * @param attribut     L'attribut de l'association
      * @param cardinalite1 Cardinalité n°1 de l'association
      * @param cardinalite2 Cardinalité n°2 de l'association
      */
@@ -39,6 +40,7 @@ public class Association extends Relation {
 
     /**
      * Getter de l'attribut de l'association
+     *
      * @return L'attribut de l'association
      */
     public Attribut getAttribut() {
@@ -47,6 +49,7 @@ public class Association extends Relation {
 
     /**
      * Getter de la cardinalité n°1 de l'association
+     *
      * @return La cardinalité n°1 de l'association
      */
     public String getCardinalite1() {
@@ -55,6 +58,7 @@ public class Association extends Relation {
 
     /**
      * Getter de la cardinalité n°2 de l'association
+     *
      * @return La cardinalité n°2 de l'association
      */
     public String getCardinalite2() {
@@ -71,6 +75,7 @@ public class Association extends Relation {
 
     /**
      * Méthode qui retourne l'uml de l'association
+     *
      * @return L'uml de l'association
      */
     @Override

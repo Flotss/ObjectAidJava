@@ -4,7 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import org.teamtree.objectaid.Classe.*;
+import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Controller.ClasseEntiereClickedController;
 import org.teamtree.objectaid.MVC.Controller.ClickDroitClasseController;
 import org.teamtree.objectaid.MVC.Controller.DeplacementClasseDragAndDropController;
@@ -17,28 +17,49 @@ import org.teamtree.objectaid.MVC.diagramIcons.*;
  */
 public class FabriqueAffichage {
 
-    /** La classe à afficher */
+    /**
+     * La classe à afficher
+     */
     private final ClasseEntiere classeEntiere;
 
     /**
-     Le model à associer
+     * Le model à associer
      */
     private final Model model;
 
     /**
      * Constructeur de la classe
+     *
      * @param classeEntiere La classe à afficher
      */
-    public FabriqueAffichage(ClasseEntiere classeEntiere, Model model){
+    public FabriqueAffichage(ClasseEntiere classeEntiere, Model model) {
         this.classeEntiere = classeEntiere;
         this.model = model;
     }
 
     /**
+     * Methode permetant de généré l'icon de la classe
+     *
+     * @return ClasseEntiereTitleIcon icon
+     */
+    public static ClasseEntiereTitleIcon fabriqueIcon(ClasseEntiere c) {
+        return switch (c.getDefinition().getEntite().getEntite()) {
+            case "class" -> new ClassTitleIcon();
+            case "interface" -> new InterfaceTitleIcon();
+            case "record" -> new RecordClassTitleIcon();
+            case "abstract" -> new AbstractClassTitleIcon();
+            case "enum" -> new EnumTitleIcon();
+            default -> null;
+        };
+
+    }
+
+    /**
      * Méthode qui permet de créer un affichage pour une classe
+     *
      * @return Un affichage pour une classe
      */
-    public VueClasseAffichage affichage(){
+    public VueClasseAffichage affichage() {
         //On crée la classeAffichage correspondant a un VBox, servant à recevoir tout le bloc de la classe
         VueClasseAffichage classe = new VueClasseAffichage(classeEntiere, model);
 
@@ -76,52 +97,36 @@ public class FabriqueAffichage {
         //tooltip pour les methodes
         for (Node methode : classe.getMethodes().getChildren()) {
             Node labelNode = ((HBox) methode).getChildren().get(1);
-            ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
+            ((Label) labelNode).setTooltip(new Tooltip(((Label) labelNode).getText()));
         }
 
         //tooltip pour les attributs
         for (Node attribut : classe.getAttributs().getChildren()) {
             Node labelNode = ((HBox) attribut).getChildren().get(1);
-            ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
+            ((Label) labelNode).setTooltip(new Tooltip(((Label) labelNode).getText()));
         }
 
         //tooltip pour les attributs avec relation de la classe
         for (Node attributRelation : classe.getAttributsRelation().getChildren()) {
             Node labelNode = ((HBox) attributRelation).getChildren().get(1);
-            ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
+            ((Label) labelNode).setTooltip(new Tooltip(((Label) labelNode).getText()));
         }
 
         //tooltip pour les construteurs de la classe
         for (Node constructeur : classe.getConstructeur().getChildren()) {
             Node labelNode = ((HBox) constructeur).getChildren().get(1);
-            ((Label)labelNode).setTooltip(new Tooltip(((Label)labelNode).getText()));
+            ((Label) labelNode).setTooltip(new Tooltip(((Label) labelNode).getText()));
         }
 
         //tooltip pour le nom de la classe
-        ((Label)classe.getDefinition().getChildren().get(1)).setTooltip(new Tooltip(((Label)classe.getDefinition().getChildren().get(1)).getText()));
+        ((Label) classe.getDefinition().getChildren().get(1)).setTooltip(new Tooltip(((Label) classe.getDefinition().getChildren().get(1)).getText()));
 
         //on ajoute le controller lorsqu'on clique droit sur la classe
-        classe.setOnContextMenuRequested(new ClickDroitClasseController(model,classe));
+        classe.setOnContextMenuRequested(new ClickDroitClasseController(model, classe));
 
         //ajoute la classe qui est affiché à la classeEntiere
         classeEntiere.setClasseAffichage(classe);
 
         return classe;
-    }
-
-    /**
-     * Methode permetant de généré l'icon de la classe
-     * @return ClasseEntiereTitleIcon icon
-     */
-    public static ClasseEntiereTitleIcon fabriqueIcon(ClasseEntiere c){
-        return switch (c.getDefinition().getEntite().getEntite()) {
-            case "class" -> new ClassTitleIcon();
-            case "interface" -> new InterfaceTitleIcon();
-            case "record" -> new RecordClassTitleIcon();
-            case "abstract" -> new AbstractClassTitleIcon();
-            case "enum" -> new EnumTitleIcon();
-            default -> null;
-        };
-
     }
 }

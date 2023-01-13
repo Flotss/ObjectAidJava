@@ -1,11 +1,10 @@
 package org.teamtree.objectaid.MVC.Controller;
 
-import org.teamtree.objectaid.MVC.Model.Model;
-
 import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import org.teamtree.objectaid.MVC.Model.Model;
 
 /**
  * Représente le contrôleur qui gère le drag and drop sur l'arbre.

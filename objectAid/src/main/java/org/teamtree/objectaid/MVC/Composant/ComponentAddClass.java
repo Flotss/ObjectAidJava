@@ -8,11 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.teamtree.objectaid.Accessibilite.*;
-import org.teamtree.objectaid.Entite.Classe;
-import org.teamtree.objectaid.Entite.Entite;
 import org.teamtree.objectaid.Entite.Enum;
-import org.teamtree.objectaid.Entite.Interface;
 import org.teamtree.objectaid.Entite.Record;
+import org.teamtree.objectaid.Entite.*;
 import org.teamtree.objectaid.Etat.Abstract;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Etat.Final;
@@ -21,9 +19,12 @@ import org.teamtree.objectaid.MVC.Model.Model;
 
 import java.util.ArrayList;
 
+/**
+ * Classe qui représente le composant d'ajout d'une classe
+ */
 public class ComponentAddClass {
 
-    private Model model;
+    private final Model model;
 
     public ComponentAddClass(Model model) {
         this.model = model;
@@ -44,15 +45,15 @@ public class ComponentAddClass {
         accessibiliteChoiceBox.setValue(new Public());
 
         ChoiceBox<Etat> staticChoiceBox = new ChoiceBox<>();
-        staticChoiceBox.getItems().addAll( new Static(),  null);
+        staticChoiceBox.getItems().addAll(new Static(), null);
         staticChoiceBox.setValue(null);
 
         ChoiceBox<Etat> finalChoiceBox = new ChoiceBox<>();
-        finalChoiceBox.getItems().addAll( new Final(),  null);
+        finalChoiceBox.getItems().addAll(new Final(), null);
         finalChoiceBox.setValue(null);
 
         ChoiceBox<Etat> abstractChoiceBox = new ChoiceBox<>();
-        abstractChoiceBox.getItems().addAll( new Abstract(),  null);
+        abstractChoiceBox.getItems().addAll(new Abstract(), null);
         abstractChoiceBox.setValue(null);
 
         TextField nomTextField = new TextField();
@@ -90,7 +91,7 @@ public class ComponentAddClass {
     }
 
 
-    public void ajouterAttribut(){
+    public void ajouterAttribut() {
         Stage stage = new Stage();
         stage.setTitle("Ajouter un attribut");
 
@@ -102,11 +103,11 @@ public class ComponentAddClass {
         accessibiliteChoiceBox.setValue(new Public());
 
         ChoiceBox<Etat> staticChoiceBox = new ChoiceBox<>();
-        staticChoiceBox.getItems().addAll( new Static(),  null);
+        staticChoiceBox.getItems().addAll(new Static(), null);
         staticChoiceBox.setValue(null);
 
         ChoiceBox<Etat> finalChoiceBox = new ChoiceBox<>();
-        finalChoiceBox.getItems().addAll( new Final(),  null);
+        finalChoiceBox.getItems().addAll(new Final(), null);
         finalChoiceBox.setValue(null);
 
         TextField nomTextField = new TextField();
@@ -136,7 +137,10 @@ public class ComponentAddClass {
         stage.show();
     }
 
-    public void ajouterContructeur(){
+    /**
+     * Méthode qui permet d'ajouter un constructeur à une classe
+     */
+    public void ajouterContructeur() {
         Stage stage = new Stage();
         stage.setTitle("Ajouter un constructeur");
 
@@ -167,7 +171,10 @@ public class ComponentAddClass {
     }
 
 
-    public void ajouterClasse(){
+    /**
+     * Méthode qui permet d'ajouter une classe
+     */
+    public void ajouterClasse() {
         Stage stage = new Stage();
         stage.setTitle("Ajouter une classe");
 
@@ -183,15 +190,15 @@ public class ComponentAddClass {
         entiteChoiceBox.setValue(new Classe());
 
         ChoiceBox<Etat> staticChoiceBox = new ChoiceBox<>();
-        staticChoiceBox.getItems().addAll( new Static(),  null);
+        staticChoiceBox.getItems().addAll(new Static(), null);
         staticChoiceBox.setValue(null);
 
         ChoiceBox<Etat> finalChoiceBox = new ChoiceBox<>();
-        finalChoiceBox.getItems().addAll( new Final(),  null);
+        finalChoiceBox.getItems().addAll(new Final(), null);
         finalChoiceBox.setValue(null);
 
         ChoiceBox<Etat> abstractChoiceBox = new ChoiceBox<>();
-        abstractChoiceBox.getItems().addAll( new Abstract(),  null);
+        abstractChoiceBox.getItems().addAll(new Abstract(), null);
         abstractChoiceBox.setValue(null);
 
         TextField nomTextField = new TextField();
@@ -226,7 +233,6 @@ public class ComponentAddClass {
         stage.setScene(scene);
         stage.show();
     }
-
 
 
 }

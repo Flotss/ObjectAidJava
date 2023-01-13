@@ -10,22 +10,22 @@ import org.teamtree.objectaid.MVC.Model.Model;
  */
 public class FlecheComposition extends FlecheAssociation {
 
-    /** Le losange qui représente la composition */
+    /**
+     * Le losange qui représente la composition
+     */
     private final Polygon losange;
 
     /**
      * Constructeur de la flèche de composition
-     * @param model Le model de l'application
+     *
+     * @param model    Le model de l'application
      * @param relation La relation entre les deux classes
      */
     public FlecheComposition(Model model, Relation relation) {
         super(model, relation);
 
         this.losange = new Polygon();
-        losange.getPoints().addAll(   0.0,10.0,
-                10.0, 0.0,
-                20.0, 10.0,
-                10., 20.0);
+        losange.getPoints().addAll(0.0, 10.0, 10.0, 0.0, 20.0, 10.0, 10., 20.0);
         losange.setFill(Color.BLACK);
 
         this.getChildren().addAll(losange);
@@ -55,7 +55,7 @@ public class FlecheComposition extends FlecheAssociation {
     }
 
     @Override
-    public String getType(){
+    public String getType() {
         return "Composition";
     }
 

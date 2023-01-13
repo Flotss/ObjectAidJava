@@ -6,7 +6,6 @@ import org.teamtree.objectaid.Fabrique.FabriqueAccessibilite;
 import org.teamtree.objectaid.Fabrique.FabriqueEtat;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,27 +14,36 @@ import java.util.List;
  */
 public class Attribut {
 
-    /** Nom de l'attribut */
+    /**
+     * Nom de l'attribut
+     */
     private final String nom;
 
-    /** Type de l'attribut */
+    /**
+     * Type de l'attribut
+     */
     private final String type;
 
-    /** Liste des états de l'attribut */
+    /**
+     * Liste des états de l'attribut
+     */
     private final List<Etat> etat;
 
-    /** Accessibilité de l'attribut */
+    /**
+     * Accessibilité de l'attribut
+     */
     private final Accessibilite accessibilite;
 
     /**
      * Constructeur de l'attribut
+     *
      * @param field Attribut de la classe
      */
     public Attribut(Field field) {
         // Est-ce que le type hérite de Collection
         if (Collection.class.isAssignableFrom(field.getType())) {
             // Si oui, on récupère le type de la collection
-            String nomField= field.getGenericType().getTypeName().trim();
+            String nomField = field.getGenericType().getTypeName().trim();
 
             // Ici l'on a un problème de nom, puisqu'il est du type "java.util.List<org.teamtree.objectaid.Classe.ClasseEntiere>"
             // Alors on ne garde que le nom de la classe
@@ -46,7 +54,7 @@ public class Attribut {
             // On a alors le part1 = List, part2 = ClasseEntiere
             // On doit ajouter <> pour que le nom soit complet
             this.type = nomFieldPart1 + "<" + nomFieldPart2 + ">";
-        }else{
+        } else {
             this.type = field.getType().getSimpleName().trim();
         }
 
@@ -62,12 +70,13 @@ public class Attribut {
 
     /**
      * Constructeur de l'attribut
-     * @param nom Nom de l'attribut
-     * @param type Type de l'attribut
-     * @param modifiers Modificateurs de l'attribut
+     *
+     * @param nom           Nom de l'attribut
+     * @param type          Type de l'attribut
+     * @param modifiers     Modificateurs de l'attribut
      * @param accessibilite Accessibilité de l'attribut
      */
-    public Attribut(String nom, String type, List<Etat> modifiers, Accessibilite accessibilite ) {
+    public Attribut(String nom, String type, List<Etat> modifiers, Accessibilite accessibilite) {
         // Est-ce que le type hérite de Collection
 //        if(type!= "boolean"&&type!="byte"&&type!="short"&&type!="int"&&type!="long"&&type!="float"&&type!="double"&&type!="char"&&type!="String"){
 //            // Si oui, on récupère le type de la collection
@@ -83,9 +92,8 @@ public class Attribut {
 //            // On doit ajouter <> pour que le nom soit complet
 //            this.type = nomFieldPart1 + "<" + nomFieldPart2 + ">";
 //        }else{
-            this.type = type;
+        this.type = type;
 //        }
-
 
 
         // Affecte le nom de l'attribut
@@ -100,6 +108,7 @@ public class Attribut {
 
     /**
      * Retourne le type de l'attribut
+     *
      * @return Type de l'attribut : String
      */
     public String getType() {
@@ -108,6 +117,7 @@ public class Attribut {
 
     /**
      * Retourne le nom de l'attribut
+     *
      * @return Nom de l'attribut : String
      */
     public String getNom() {
@@ -116,6 +126,7 @@ public class Attribut {
 
     /**
      * Retourne la liste des états de l'attribut
+     *
      * @return Liste des états de l'attribut : ArrayList<Etat>
      */
     public List<Etat> getEtats() {
@@ -124,6 +135,7 @@ public class Attribut {
 
     /**
      * Retourne l'accessibilité de l'attribut
+     *
      * @return Accessibilité de l'attribut : Accessibilite
      */
     public Accessibilite getAccessibilite() {
@@ -144,6 +156,7 @@ public class Attribut {
 
     /**
      * Retourne l'uml de l'attribut
+     *
      * @return L'uml de l'attribut
      */
     public String getUml() {
