@@ -1,0 +1,17 @@
+@startuml
+
+autonumber
+
+participant "Utilisateur" as user
+participant "ProjectDirectoryChooserController" as pdc
+activate pdc
+activate user
+user -> pdc : handle(ActionEvent)
+pdc --> user : setApplicationState(ApplicationState.PROJECT_LOAED)
+deactivate user
+
+pdc -> pdc : TreeView<String>()
+pdc --> user
+
+
+@enduml

@@ -18,6 +18,7 @@ import org.teamtree.objectaid.Etat.Abstract;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Etat.Final;
 import org.teamtree.objectaid.Etat.Static;
+import org.teamtree.objectaid.MVC.Composant.ComponentAddClass;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.MVC.Vue.VueListeClasse;
@@ -36,14 +37,11 @@ import java.util.ArrayList;
  */
 public class MenuItemController implements EventHandler<ActionEvent> {
 
-    /**
-     * Modèle
-     */
+    /** Modèle */
     private final Model model;
 
     /**
      * Constructeur
-     *
      * @param model Modèle
      */
     public MenuItemController(Model model) {
@@ -52,7 +50,6 @@ public class MenuItemController implements EventHandler<ActionEvent> {
 
     /**
      * Méthode qui permet de gérer les MenuItem de l'application
-     *
      * @param event Evènement
      */
     @Override
@@ -61,9 +58,6 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             case "Attributs" -> model.afficherAttributsSelection();
             case "Méthodes" -> model.afficherMethodesSelection();
             case "Constructeurs" -> model.afficherConstructeursSelection();
-            case "Cacher" -> {
-                model.ajouterClasseCachee(model.getCurrentClickedClass());
-            }
             case "Afficher/Cacher" -> {
                 VueClasseAffichage classe = model.getClasse(((MenuItem) event.getSource()).getParentMenu().getText()).get().getClasseAffichage();
                 if (!model.getHiddenClasses().contains(classe)) {
@@ -82,6 +76,14 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 ClasseEntiere classeE = model.getCurrentClickedClass().getClasseEntiere();
                 SqueletteService squeletteService = new SqueletteService();
                 squeletteService.genererSqueletteUniqueClasse(classeE);
+            }
+            case "Cacher la classe" -> {
+                for (MenuItem m : ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
+                    if (m.getText().equals(model.getCurrentClickedClass().getNom())) {
+                        m.setStyle("-fx-text-fill: red");
+                    }
+                }
+                model.ajouterClasseCachee(model.getCurrentClickedClass());
             }
             case "Cacher interface" -> model.afficherInterfaceHeritageSelection("Implementation");
             case "Cacher heritage" -> model.afficherInterfaceHeritageSelection("Heritage");
@@ -130,9 +132,13 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 }
             }
         }
-        if (((MenuItem) event.getSource()).getId() != null) {
-            if ("ajouterMethode".equals(((MenuItem) event.getSource()).getId())) {
-                ajouterMethode();
+        if(((MenuItem)event.getSource()).getId() != null) {
+            ComponentAddClass componentAddClass = new ComponentAddClass(model);
+            switch (((MenuItem) event.getSource()).getId()) {
+                case "ajouterClasse" -> componentAddClass.ajouterClasse();
+                case "ajouterAttribut" -> componentAddClass.ajouterAttribut();
+                case "ajouterConstructeur" -> componentAddClass.ajouterContructeur();
+                case "ajouterMethode" -> componentAddClass.ajouterMethode();
             }
         }
     }
@@ -179,6 +185,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             if (staticChoiceBox.getValue() != null) {
                 etats.add(staticChoiceBox.getValue());
             }
+
             if (finalChoiceBox.getValue() != null) {
                 etats.add(finalChoiceBox.getValue());
             }

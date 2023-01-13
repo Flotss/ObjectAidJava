@@ -62,7 +62,6 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
                 ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().clear();
             }
             case "set is get" -> {
-                System.out.println("jkjkh");
                 model.inverserAffichageGetIsSet();
             }
         }

@@ -109,7 +109,6 @@ public class Model implements Sujet {
 
     /**
      * Retourne l'état de l'application
-     *
      * @return L'état de l'application
      */
     public ApplicationState getApplicationState() {
@@ -118,7 +117,6 @@ public class Model implements Sujet {
 
     /**
      * Définit l'état de l'application
-     *
      * @param applicationState L'état de l'application
      */
     public void setApplicationState(final ApplicationState applicationState) {
@@ -160,7 +158,10 @@ public class Model implements Sujet {
      * @param observer La classe de l'observateur à notifier
      */
     public <T extends Observateur> void notifierObservateur(final Class<T> observer) {
-        this.observateurs.stream().filter(observer::isInstance).forEach(Observateur::actualiser);
+        this.observateurs
+                .stream()
+                .filter(observer::isInstance)
+                .forEach(Observateur::actualiser);
     }
 
     /**
@@ -238,7 +239,7 @@ public class Model implements Sujet {
                     if (observateur instanceof VueClasse) {
                         ((VueClasse) observateur).rechargerMethodes();
                         observateur.actualiser();
-                        ((VueClasse) observateur).actualiserFleches();
+                        ((VueClasse) observateur).rechargerFleches();
                         return;
                     }
                 }
@@ -508,7 +509,6 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de retourner la liste des observateurs d'un type donné
-     *
      * @param nom Le nom de la classe de l'observateur
      */
     public List<Observateur> getObservateur(String nom) {
@@ -527,7 +527,6 @@ public class Model implements Sujet {
 
     /**
      * Methode qui permet de tester si la vue en parametre est une vueClasseAffichage qui est cachée
-     *
      * @param vueClasseAffichage1 La vue à tester
      * @return booleen qui indique si la vue est cachée
      */
@@ -560,11 +559,10 @@ public class Model implements Sujet {
      * Méthode qui permet d'ajouter un constructeur à une classe
      *
      * @param accessibilite L'accessibilité du constructeur
-     * @param nom           Le nom du constructeur
      * @param param         Les paramètres du constructeur
      */
-    public void ajouterConstructeur(Accessibilite accessibilite, String nom, String param) {
-        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(new Constructeur(nom, accessibilite, param));
+    public void ajouterConstructeur(Accessibilite accessibilite, String param) {
+        this.currentClickedClass.getClasseEntiere().ajouterConstructeur(new Constructeur(this.currentClickedClass.getNom() ,accessibilite, param));
         this.currentClickedClass.setConstructeur();
         this.notifierObservateur("classe selection complete");
     }
@@ -596,9 +594,8 @@ public class Model implements Sujet {
      * @param entite        entitée de la classe
      */
     public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite) {
-        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite);
-        this.ajouterClasse(classe,20,20);
-
+        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite, this);
+        this.ajouterClasse(classe, 20, 20);
     }
 
     /**

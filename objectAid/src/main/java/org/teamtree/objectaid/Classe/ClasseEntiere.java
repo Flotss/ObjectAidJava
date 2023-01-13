@@ -1,9 +1,12 @@
 package org.teamtree.objectaid.Classe;
 
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Entite.Classe;
 import org.teamtree.objectaid.Entite.Entite;
+import org.teamtree.objectaid.Entite.Interface;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Classe.Relations.*;
+import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Point;
 
@@ -234,11 +237,6 @@ public class ClasseEntiere {
         this.attributEstAffiche = true;
         this.methodsEstAffiche = true;
         this.constructeurEstAffiche = true;
-
-        System.out.println("-----------------\n");
-        for (Relation relation : this.relations) {
-            System.out.println(relation);
-        }
     }
 
     /**
@@ -250,9 +248,7 @@ public class ClasseEntiere {
      * @param etats etats de la classe
      * @param entite entitée de la classe
      */
-    public ClasseEntiere(String nom, String nomImplemente, String nomExtend, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
-        // Récupération de la classe
-
+    public ClasseEntiere(String nom, String nomImplemente, String nomExtend, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite, Model model){
         // Création des types des attributs
         this.attributs = new ArrayList<>();
         this.contructeurs = new ArrayList<>();
@@ -264,16 +260,37 @@ public class ClasseEntiere {
 
 
         // Interfaces
-        if(nomImplemente != null){
-            this.relations.add(new Implementation(this.definition.getNom(),nomImplemente));
+        if(!nomImplemente.equals("")){
+            for (String inter : nomImplemente.split(",")) {
+                // Verification que le nom de la classe qu'on implémente existe et qu'elle est une interface
+                if (model.getClasse(inter).isPresent()) {
+                    ClasseEntiere c = model.getClasse(inter).get();
+                    if (c.getDefinition().getEntite() instanceof Interface) {
+                        this.relations.add(new Implementation(this.definition.getNom(), inter));
+                    }
+                }else{
+                    this.relations.add(new Implementation(this.definition.getNom(), inter));
+                }
+            }
         }
 
         // Classe parent
-        if (nomExtend != null) {
+        if (!nomExtend.equals("")){
+
+            // Verification que l'utilisateur n'essaye pas de faire une classe qui hérite de deux classes
+            nomExtend = nomExtend.split(",")[0];
 
             // On ne veut pas avoir de relation avec Object puisque c'est la classe mère de toutes les classes
             if (!nomImplemente.equals("Object")) {
-                this.relations.add(new Heritage(this.definition.getNom(),nomExtend));
+                // Verification que le nom de la classe qu'on extend existe et qu'elle n'est pas une interface
+                if (model.getClasse(nomExtend).isPresent()) {
+                    ClasseEntiere c = model.getClasse(nomExtend).get();
+                    if (c.getDefinition().getEntite() instanceof Classe) {
+                        this.relations.add(new Heritage(this.definition.getNom(), nomExtend));
+                    }
+                }else{
+                    this.relations.add(new Heritage(this.definition.getNom(), nomExtend));
+                }
             }
         }
 
@@ -540,7 +557,6 @@ public class ClasseEntiere {
      * @param constructeur Le constructeur à ajouter
      */
     public void ajouterConstructeur(Constructeur constructeur){
-        this.contructeurs.add(constructeur);
     }
 
     /**
@@ -581,5 +597,14 @@ public class ClasseEntiere {
                 this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
             }
         }
+    }
+
+    /**
+     * Constructeur à partir de paramètres
+     * @param accessibilite Accessibilité du constructeur
+     * @param parametres Liste des paramètres du constructeur
+     */
+    public void ajouterConstructeur(Accessibilite accessibilite, String parametres) {
+        this.contructeurs.add(new Constructeur(this.getNom(),accessibilite,parametres));
     }
 }
