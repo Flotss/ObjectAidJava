@@ -525,6 +525,10 @@ public class Model implements Sujet {
         return observateurs;
     }
 
+    public <T extends Observateur> Optional<Observateur> tryGetObservateur(final Class<T> observerClass) {
+        return this.observateurs.stream().filter(observerClass::isInstance).findFirst();
+    }
+
     /**
      * Methode qui permet de tester si la vue en parametre est une vueClasseAffichage qui est cachée
      *

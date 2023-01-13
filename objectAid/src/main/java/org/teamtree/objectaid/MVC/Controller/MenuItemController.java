@@ -23,6 +23,7 @@ import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Service.SqueletteService;
+import org.teamtree.objectaid.service.NodeElementScreenshotTakerService;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -98,26 +99,42 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 }
             }
             case "Exporter en PNG" -> {
-                final var vueClasse = (VueClasse) model.getObservateur("VueClasse").get(0);
+                final var vueClasseOptional = model.tryGetObservateur(VueClasse.class);
+
+                if (vueClasseOptional.isEmpty()) {
+                    throw new IllegalArgumentException("VueClasse is not present in the model");
+                }
+
+                final var vueClasse = (VueClasse) vueClasseOptional.get();
+
+                if (vueClasse.getClasses().isEmpty()) {
+                    final var alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText("Aucune classe n'est présente");
+
+                    alert.showAndWait();
+                    return;
+                }
+
                 final var image = new WritableImage((int) vueClasse.getWidth(), (int) vueClasse.getHeight());
                 final var writableImage = vueClasse.snapshot(null, image);
-
                 final var bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
                 final var directoryChooser = new DirectoryChooser();
                 final var selectedDirectory = directoryChooser.showDialog(new Stage());
 
                 bufferedImage.flush();
 
+                // Exporte l'image dans le dossier sélectionné
                 if (selectedDirectory != null) {
                     final var dateNow = LocalDateTime.now();
                     final var outputFile = new File(selectedDirectory.getAbsolutePath() + "/export_" + dateNow.getYear() + "_" + dateNow.getMonthValue() + "_" + dateNow.getDayOfMonth() + "_" + dateNow.getHour() + "_" + dateNow.getMinute() + "_" + dateNow.getSecond() + ".png");
+
                     try {
                         ImageIO.write(bufferedImage, "png", outputFile);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-
             }
         }
         if (((MenuItem) event.getSource()).getId() != null) {
