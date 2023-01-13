@@ -21,6 +21,10 @@ public class MainBootstrap extends Application {
 
     public static final MenuBar menuBar = new MenuBar();
 
+    public static void main(String[] args) {
+        launch();
+    }
+
     /**
      * Methode qui permet de lancer l'application
      */
@@ -30,31 +34,31 @@ public class MainBootstrap extends Application {
         VBox applicationLayout = new VBox();
 
         ClasseEntiere c = new ClasseEntiere("org.teamtree.objectaid.Classe.ClasseEntiere");
-        model.ajouterClasse(c,20,20);
+        model.ajouterClasse(c, 20, 20);
 
         ClasseEntiere c1 = new ClasseEntiere("org.teamtree.objectaid.Classe.Attribut");
-        model.ajouterClasse(c1,20,20);
+        model.ajouterClasse(c1, 20, 20);
 
         ClasseEntiere c2 = new ClasseEntiere("org.teamtree.objectaid.Classe.Constructeur");
-        model.ajouterClasse(c2,20,20);
+        model.ajouterClasse(c2, 20, 20);
 
         ClasseEntiere c3 = new ClasseEntiere("org.teamtree.objectaid.Classe.Methode");
-        model.ajouterClasse(c3,20,20);
+        model.ajouterClasse(c3, 20, 20);
 
         ClasseEntiere c4 = new ClasseEntiere("org.teamtree.objectaid.Classe.Parametre");
-        model.ajouterClasse(c4,20,20);
+        model.ajouterClasse(c4, 20, 20);
 
         ClasseEntiere c5 = new ClasseEntiere("org.teamtree.objectaid.Classe.DefinitionClasse");
-        model.ajouterClasse(c5,20,20);
+        model.ajouterClasse(c5, 20, 20);
 
         ClasseEntiere c6 = new ClasseEntiere("org.teamtree.objectaid.Entite.Entite");
-        model.ajouterClasse(c6,20,20);
+        model.ajouterClasse(c6, 20, 20);
 
         ClasseEntiere c7 = new ClasseEntiere("org.teamtree.objectaid.Entite.Classe");
-        model.ajouterClasse(c7,20,20);
+        model.ajouterClasse(c7, 20, 20);
 
         ClasseEntiere c8 = new ClasseEntiere("org.teamtree.objectaid.Entite.Interface");
-        model.ajouterClasse(c8,20,20);
+        model.ajouterClasse(c8, 20, 20);
 
         VueClasse vueClass = new VueClasse(model); // La vue se rajoute elle-même au modèle
 
@@ -72,7 +76,7 @@ public class MainBootstrap extends Application {
 
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5);
 
-        for (ClasseEntiere ce: model.getClasses()) {
+        for (ClasseEntiere ce : model.getClasses()) {
             Menu nomClasseMenu = new Menu(ce.getClasseAffichage().getNom());
             MenuItem afficherCacherClasse = new MenuItem("Afficher/Cacher");
             afficherCacherClasse.setOnAction(new MenuItemController(model));
@@ -89,7 +93,7 @@ public class MainBootstrap extends Application {
 
         menuBar.getMenus().addAll(menuItem, listeClasse, generer);
 
-        applicationLayout.getChildren().addAll(menuBar,vueClass);
+        applicationLayout.getChildren().addAll(menuBar, vueClass);
 
         VueContextMenuClasse contextMenu = new VueContextMenuClasse(model);
         model.ajouterObservateur(contextMenu);
@@ -98,9 +102,5 @@ public class MainBootstrap extends Application {
         stage.setScene(scene);
         stage.show();
         model.notifierObservateur("actualisation fleches");
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }

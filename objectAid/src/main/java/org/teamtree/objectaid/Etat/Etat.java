@@ -8,6 +8,7 @@ public interface Etat {
 
     /**
      * Méthode qui retourne l'état
+     *
      * @return L'état
      */
     String getEtat();
@@ -15,6 +16,7 @@ public interface Etat {
 
     /**
      * Méthode qui retourne la forme UML de l'état
+     *
      * @return La forme UML de l'état
      */
     String getUml();

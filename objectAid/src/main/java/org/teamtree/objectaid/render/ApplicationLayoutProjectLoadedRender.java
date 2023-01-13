@@ -1,22 +1,14 @@
 package org.teamtree.objectaid.render;
 
 
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Fabrique.SceneFactory;
 import org.teamtree.objectaid.MVC.Controller.*;
 import org.teamtree.objectaid.MVC.Model.Model;
-
-import javafx.scene.Scene;
-import javafx.scene.control.CheckBoxTreeItem;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
 import org.teamtree.objectaid.MVC.Vue.VueContextMenuClasse;
 import org.teamtree.objectaid.MVC.Vue.VueListeClasse;
@@ -33,9 +25,8 @@ import java.util.Objects;
  * @see org.teamtree.objectaid.MVC.Model.ApplicationState
  */
 public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
-    private final BorderPane base;
-
     public static MenuBar menubar;
+    private final BorderPane base;
 
     public ApplicationLayoutProjectLoadedRender(Model model) {
         this.base = new BorderPane();
@@ -74,9 +65,9 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
         Menu menuItem = new Menu("Afficher/cacher");
         final var listeClasse = new VueListeClasse("Liste des classes", model);
         MenuItem menuItem2 = new MenuItem("Constructeurs");
-       
+
         final var controllerBtnGeneral = new ControllerButtonGeneral(model);
-        
+
         menuItem2.setOnAction(controllerBtnGeneral);
         MenuItem menuItem3 = new MenuItem("Attributs");
         menuItem3.setOnAction(new ControllerButtonGeneral(model));
@@ -103,7 +94,7 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
         menuItem.getItems().addAll(menuItem2, menuItem3, menuItem4, menuItem5, menuItem6);
 
-        for (ClasseEntiere ce: model.getClasses()) {
+        for (ClasseEntiere ce : model.getClasses()) {
             Menu nomClasseMenu = new Menu(ce.getClasseAffichage().getNom());
             MenuItem afficherCacherClasse = new MenuItem("Afficher/Cacher");
             afficherCacherClasse.setOnAction(new MenuItemController(model));
@@ -135,7 +126,8 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
 
     /**
      * Charge le TreeView récursivement
-     * @param file le fichier à charger
+     *
+     * @param file   le fichier à charger
      * @param parent le parent du fichier
      */
     public void createTree(File file, TreeItem<String> parent) {
@@ -156,8 +148,6 @@ public class ApplicationLayoutProjectLoadedRender implements SceneFactory {
             parent.getChildren().add(checkBox);
         }
     }
-
-
 
 
     @Override

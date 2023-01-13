@@ -1,12 +1,11 @@
 package org.teamtree.objectaid.render;
 
-import org.teamtree.objectaid.Fabrique.SceneFactory;
-import org.teamtree.objectaid.MVC.Controller.ProjectDirectoryChooserController;
-import org.teamtree.objectaid.MVC.Model.Model;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import org.teamtree.objectaid.Fabrique.SceneFactory;
+import org.teamtree.objectaid.MVC.Controller.ProjectDirectoryChooserController;
+import org.teamtree.objectaid.MVC.Model.Model;
 
 /**
  * Représente le rendu de l'application au stade initial.

@@ -2,7 +2,7 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
@@ -12,17 +12,21 @@ import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
  */
 public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
 
-    /** Modèle */
-    private final Model model;
-
-    /** Booleens pour savoir l'etat de l'affichage des boutons de l'affichage general des classes */
+    /**
+     * Booleens pour savoir l'etat de l'affichage des boutons de l'affichage general des classes
+     */
     private static boolean attributGenerauxAffiche = true;
     private static boolean constructeurGenerauxAffiche = true;
     private static boolean methodesGenerauxAffiche = true;
     private static boolean relationsGeneralesAffiche = true;
+    /**
+     * Modèle
+     */
+    private final Model model;
 
     /**
      * Constructeur
+     *
      * @param model Modèle
      */
     public ControllerButtonGeneral(Model model) {
@@ -31,6 +35,7 @@ public class ControllerButtonGeneral implements EventHandler<ActionEvent> {
 
     /**
      * Méthode qui permet de gérer les boutons de l'application
+     *
      * @param event Evènement
      */
     @Override

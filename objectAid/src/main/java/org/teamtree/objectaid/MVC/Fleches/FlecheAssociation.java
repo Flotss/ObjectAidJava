@@ -2,7 +2,7 @@ package org.teamtree.objectaid.MVC.Fleches;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Shape;
 import org.teamtree.objectaid.Classe.Relations.Association;
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -30,10 +30,11 @@ public class FlecheAssociation extends Fleche {
 
     /**
      * Constructeur de la classe
-     * @param model Le model de l'application
+     *
+     * @param model    Le model de l'application
      * @param relation La relation entre les deux classes
      */
-    public FlecheAssociation(Model model, Relation relation){
+    public FlecheAssociation(Model model, Relation relation) {
         super(model, relation);
 
         // Création du label pour le nom de l'association
@@ -58,7 +59,7 @@ public class FlecheAssociation extends Fleche {
     }
 
     @Override
-    public void actualiser(){
+    public void actualiser() {
         super.actualiser();
         actualiserNom();
         actualiserCardinalite();
@@ -67,39 +68,39 @@ public class FlecheAssociation extends Fleche {
     /**
      * Méthode qui permet d'actualiser la position du label
      */
-    public void actualiserNom(){
-        nomFleche.setLayoutX((line.getStartX() + line.getEndX())/2);
-        nomFleche.setLayoutY((line.getStartY() + line.getEndY())/2);
+    public void actualiserNom() {
+        nomFleche.setLayoutX((line.getStartX() + line.getEndX()) / 2);
+        nomFleche.setLayoutY((line.getStartY() + line.getEndY()) / 2);
     }
 
     /**
      * Méthode qui permet d'actualiser la position des cardinalités
      */
-    public void actualiserCardinalite(){
+    public void actualiserCardinalite() {
 
         // Si la destination est à gauche alors la cardinalité doit être un peu plus vers la droite
         // Sinon inversement
-        if (line.getStartX() < line.getEndX()){
-            cardinaliteDepart.setLayoutX(line.getStartX()+10);
-            cardinaliteArrivee.setLayoutX(line.getEndX()-10);
+        if (line.getStartX() < line.getEndX()) {
+            cardinaliteDepart.setLayoutX(line.getStartX() + 10);
+            cardinaliteArrivee.setLayoutX(line.getEndX() - 10);
         } else {
-            cardinaliteDepart.setLayoutX(line.getStartX()-10);
-            cardinaliteArrivee.setLayoutX(line.getEndX()+10);
+            cardinaliteDepart.setLayoutX(line.getStartX() - 10);
+            cardinaliteArrivee.setLayoutX(line.getEndX() + 10);
         }
 
         // Si la destination est en haut alors la cardinalité doit être un peu plus vers le bas
         // Sinon inversement
-        if (line.getStartY() < line.getEndY()){
-            cardinaliteDepart.setLayoutY(line.getStartY()+10);
-            cardinaliteArrivee.setLayoutY(line.getEndY()-10);
+        if (line.getStartY() < line.getEndY()) {
+            cardinaliteDepart.setLayoutY(line.getStartY() + 10);
+            cardinaliteArrivee.setLayoutY(line.getEndY() - 10);
         } else {
-            cardinaliteDepart.setLayoutY(line.getStartY()-10);
-            cardinaliteArrivee.setLayoutY(line.getEndY()+10);
+            cardinaliteDepart.setLayoutY(line.getStartY() - 10);
+            cardinaliteArrivee.setLayoutY(line.getEndY() + 10);
         }
     }
 
     @Override
-    public String getType(){
+    public String getType() {
         return "Association";
     }
 }

@@ -9,6 +9,7 @@ public interface SceneFactory {
 
     /**
      * Méthode qui fabrique une scène
+     *
      * @return La scène : Scene
      */
     Scene getScene();

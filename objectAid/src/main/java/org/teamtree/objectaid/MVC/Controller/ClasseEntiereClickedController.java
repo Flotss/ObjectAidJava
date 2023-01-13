@@ -2,19 +2,22 @@ package org.teamtree.objectaid.MVC.Controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.MVC.Model.Model;
+import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 
 /**
  * Classe qui permet de gérer le clic sur une classe
  */
 public class ClasseEntiereClickedController implements EventHandler<MouseEvent> {
 
-    /** Modèle */
+    /**
+     * Modèle
+     */
     private final Model model;
 
     /**
      * Constructeur
+     *
      * @param model Modèle
      */
     public ClasseEntiereClickedController(final Model model) {
@@ -23,6 +26,7 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
 
     /**
      * Méthode qui permet de gérer le clic sur une classe
+     *
      * @param event Evènement
      */
     @Override
@@ -35,6 +39,7 @@ public class ClasseEntiereClickedController implements EventHandler<MouseEvent> 
 
     /**
      * Méthode qui permet d'affecter le classe en tant que classe sélectionnée et d'afficher les boutons d'affichage spécifiques à la classe
+     *
      * @param source Classe cliquée
      */
     private void addClickedEffect(final VueClasseAffichage source) {

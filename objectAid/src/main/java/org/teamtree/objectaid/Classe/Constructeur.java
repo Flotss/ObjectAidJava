@@ -12,20 +12,27 @@ import java.util.ArrayList;
  */
 public class Constructeur {
 
-    /** Nom du constructeur */
+    /**
+     * Nom du constructeur
+     */
     private final String nom;
 
-    /** L'accessibilité du constructeur */
+    /**
+     * L'accessibilité du constructeur
+     */
     private final Accessibilite accessibilite;
 
-    /** Liste des paramètres du constructeur */
+    /**
+     * Liste des paramètres du constructeur
+     */
     private final ArrayList<Parametre> parametre;
 
     /**
      * Constructeur du constructeur
+     *
      * @param constructor Constructeur de la classe
      */
-    public Constructeur (Constructor<?> constructor) {
+    public Constructeur(Constructor<?> constructor) {
         this.nom = constructor.getName().substring(constructor.getName().lastIndexOf(".") + 1);
 
         FabriqueAccessibilite fabriqueAccess = new FabriqueAccessibilite();
@@ -39,11 +46,12 @@ public class Constructeur {
 
     /**
      * Constructeur à partir de paramètres
-     * @param nom Nom du constructeur
+     *
+     * @param nom           Nom du constructeur
      * @param accessibilite Accessibilité du constructeur
-     * @param parametres Liste des paramètres du constructeur
+     * @param parametres    Liste des paramètres du constructeur
      */
-    public Constructeur (String nom, Accessibilite accessibilite, String parametres) {
+    public Constructeur(String nom, Accessibilite accessibilite, String parametres) {
         this.nom = nom;
 
         this.accessibilite = accessibilite;
@@ -52,7 +60,7 @@ public class Constructeur {
         String[] suiteDeParametre = parametres.split(",");
         for (String parameter : suiteDeParametre) {
             String[] parametreUnique = parameter.split(":");
-            if(parametreUnique.length==2) {
+            if (parametreUnique.length == 2) {
                 this.parametre.add(new Parametre(parametreUnique[0], parametreUnique[1]));
             }
         }
@@ -60,6 +68,7 @@ public class Constructeur {
 
     /**
      * Retourne le nom du constructeur
+     *
      * @return Nom du constructeur : String
      */
     public String getNom() {
@@ -68,6 +77,7 @@ public class Constructeur {
 
     /**
      * Retourne l'accessibilité du constructeur
+     *
      * @return Accessibilité du constructeur : Accessibilite
      */
     public Accessibilite getAccessibilite() {
@@ -76,6 +86,7 @@ public class Constructeur {
 
     /**
      * Retourne la liste des paramètres du constructeur
+     *
      * @return Liste des paramètres du constructeur : ArrayList<Parametre>
      */
     public ArrayList<Parametre> getParametre() {
@@ -98,6 +109,7 @@ public class Constructeur {
 
     /**
      * Méthode qui retroune la forme UML du constructeur
+     *
      * @return Forme UML du constructeur : String
      */
     public String getUml() {

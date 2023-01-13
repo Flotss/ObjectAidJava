@@ -16,6 +16,7 @@ public class FabriqueEtat {
     /**
      * Méthode qui permet de créer une instance d'état
      * grâce à l'entier qui représente le modifier
+     *
      * @param modificateur Entier qui représente le modifier
      * @return Instance d'état
      */

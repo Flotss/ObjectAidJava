@@ -17,19 +17,25 @@ import java.util.Map;
  */
 public class VueClasse extends Pane implements Observateur {
 
-    /** Modèle */
+    /**
+     * Modèle
+     */
     private final Model model;
 
-    /** HashMap qui represente la liste des classes à afficher, chaque classe possede comme clé le nom de la classe */
+    /**
+     * HashMap qui represente la liste des classes à afficher, chaque classe possede comme clé le nom de la classe
+     */
     private final Map<String, VueClasseAffichage> classes;
 
-    /** Liste des fleches */
+    /**
+     * Liste des fleches
+     */
     private final List<Fleche> fleches;
-
 
 
     /**
      * Constructeur de la classe VueClasse
+     *
      * @param model Modèle
      */
     public VueClasse(Model model) {
@@ -75,7 +81,7 @@ public class VueClasse extends Pane implements Observateur {
         }
     }
 
-    public void rechargerFleches(){
+    public void rechargerFleches() {
         // Suppression des fleches
         this.getChildren().removeAll(fleches);
         this.fleches.clear();
@@ -100,10 +106,11 @@ public class VueClasse extends Pane implements Observateur {
 
     /**
      * Méthode qui permet de retourner la classe affichage correspondant au nom de la classe dans la liste des classes
+     *
      * @param nom String
      * @return classeAffichage
      */
-    public VueClasseAffichage getClasseAffichage(String nom){
+    public VueClasseAffichage getClasseAffichage(String nom) {
         return this.classes.get(nom);
     }
 
@@ -121,7 +128,7 @@ public class VueClasse extends Pane implements Observateur {
      */
     public void actualiserFlechesSpecifique(VueClasseAffichage vueClasseAffichage) {
         for (Fleche fleche : fleches) {
-            if(fleche.getVueClasseArrivee().getNom().equals(vueClasseAffichage.getNom()) || fleche.getVueClasseDepart().getNom().equals(vueClasseAffichage.getNom())){
+            if (fleche.getVueClasseArrivee().getNom().equals(vueClasseAffichage.getNom()) || fleche.getVueClasseDepart().getNom().equals(vueClasseAffichage.getNom())) {
                 fleche.actualiser();
             }
         }
@@ -132,13 +139,13 @@ public class VueClasse extends Pane implements Observateur {
      */
     public void actualiserRelationsSpecifique(VueClasseAffichage vueClasseAffichage, String relation) {
         for (Fleche fleche : fleches) {
-            if(fleche.getVueClasseDepart().getNom().equals(vueClasseAffichage.getNom()) && fleche.getType().equals(relation)){
+            if (fleche.getVueClasseDepart().getNom().equals(vueClasseAffichage.getNom()) && fleche.getType().equals(relation)) {
                 VueClasseAffichage arrivee = fleche.getVueClasseArrivee();
 
 
-                if(model.classeMasquee(arrivee)){
+                if (model.classeMasquee(arrivee)) {
                     model.supprimerClasseCachee(arrivee);
-                }else {
+                } else {
                     model.ajouterClasseCachee(arrivee);
                 }
 
@@ -158,7 +165,7 @@ public class VueClasse extends Pane implements Observateur {
         }
     }
 
-    public void definirVisibiliteFleches(boolean visibilite){
+    public void definirVisibiliteFleches(boolean visibilite) {
         for (Fleche fleche : fleches) {
             fleche.definirVisibilite(visibilite);
         }
@@ -170,26 +177,26 @@ public class VueClasse extends Pane implements Observateur {
         return classes;
     }
 
-    public void supprimerFleches(){
+    public void supprimerFleches() {
         this.fleches.clear();
     }
 
-    public void supprimerTout(){
+    public void supprimerTout() {
         this.getChildren().clear();
     }
 
-    public ClasseEntiere ajouterClasse(ClasseEntiere classeEntiere){
+    public ClasseEntiere ajouterClasse(ClasseEntiere classeEntiere) {
         FabriqueAffichage f = new FabriqueAffichage(classeEntiere, model);
         VueClasseAffichage classe = f.affichage();
-        classes.put(classe.getNom(),classe);
+        classes.put(classe.getNom(), classe);
         classeEntiere.setClasseAffichage(classe);
         model.ajouterObservateur(classe);
         this.getChildren().add(classe);
         return classeEntiere;
     }
 
-    public void rechargerMethodes(){
-        for(VueClasseAffichage vueClasseAffichage : this.classes.values()){
+    public void rechargerMethodes() {
+        for (VueClasseAffichage vueClasseAffichage : this.classes.values()) {
             vueClasseAffichage.setMethodes();
         }
     }

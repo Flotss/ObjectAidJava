@@ -2,13 +2,12 @@ package org.teamtree.objectaid.MVC.Model;
 
 import javafx.scene.Scene;
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
-import org.teamtree.objectaid.Classe.Constructeur;
+import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Methode;
+import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.Entite.Entite;
 import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.MVC.Vue.*;
-import org.teamtree.objectaid.Classe.ClasseEntiere;
-import org.teamtree.objectaid.Classe.Relations.Relation;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -109,6 +108,7 @@ public class Model implements Sujet {
 
     /**
      * Retourne l'état de l'application
+     *
      * @return L'état de l'application
      */
     public ApplicationState getApplicationState() {
@@ -117,6 +117,7 @@ public class Model implements Sujet {
 
     /**
      * Définit l'état de l'application
+     *
      * @param applicationState L'état de l'application
      */
     public void setApplicationState(final ApplicationState applicationState) {
@@ -260,8 +261,8 @@ public class Model implements Sujet {
      * Méthode qui permet d'ajouter une Classe au model
      *
      * @param classe Classe
-     * @param x coordonnée x de la classe
-     * @param y coordonnée y de la classe
+     * @param x      coordonnée x de la classe
+     * @param y      coordonnée y de la classe
      */
     public void ajouterClasse(ClasseEntiere classe, int x, int y) {
         if (!relations.containsKey(classe)) {
@@ -449,7 +450,7 @@ public class Model implements Sujet {
             this.hiddenClasses.add(classe);
             this.currentClickedClass = classe;
             this.currentClickedClass.setClasseAffichee();
-            ((VueListeClasse)getObservateur("VueListeClasse").get(0)).changerCouleurTexte(classe.getNom(),"red");
+            ((VueListeClasse) getObservateur("VueListeClasse").get(0)).changerCouleurTexte(classe.getNom(), "red");
             this.notifierObservateur("update visibilite classe selection");
             this.notifierObservateur("update visibilite fleche");
             this.currentClickedClass = null;
@@ -468,7 +469,7 @@ public class Model implements Sujet {
             this.hiddenClasses.remove(classe);
             classe.setClasseAffichee();
             classe.actualiserVisibilite();
-            ((VueListeClasse)getObservateur("VueListeClasse").get(0)).changerCouleurTexte(classe.getNom(),"black");
+            ((VueListeClasse) getObservateur("VueListeClasse").get(0)).changerCouleurTexte(classe.getNom(), "black");
             this.notifierObservateur("update visibilite fleche");
         }
     }
@@ -484,7 +485,7 @@ public class Model implements Sujet {
         this.currentClickedClass = null;
         supprimerObservateur(classe);
         this.relations.remove(getClasse(classe.getNom()).get());
-        ((VueListeClasse)getObservateur("VueListeClasse").get(0)).getItemsVue().removeIf(c -> c.getText().equals(classe.getNom()));
+        ((VueListeClasse) getObservateur("VueListeClasse").get(0)).getItemsVue().removeIf(c -> c.getText().equals(classe.getNom()));
     }
 
     /**
@@ -508,6 +509,7 @@ public class Model implements Sujet {
 
     /**
      * Méthode qui permet de retourner la liste des observateurs d'un type donné
+     *
      * @param nom Le nom de la classe de l'observateur
      */
     public List<Observateur> getObservateur(String nom) {
@@ -526,6 +528,7 @@ public class Model implements Sujet {
 
     /**
      * Methode qui permet de tester si la vue en parametre est une vueClasseAffichage qui est cachée
+     *
      * @param vueClasseAffichage1 La vue à tester
      * @return booleen qui indique si la vue est cachée
      */

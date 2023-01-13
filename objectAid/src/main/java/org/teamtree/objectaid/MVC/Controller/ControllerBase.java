@@ -1,9 +1,8 @@
 package org.teamtree.objectaid.MVC.Controller;
 
-import org.teamtree.objectaid.MVC.Model.Model;
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import org.teamtree.objectaid.MVC.Model.Model;
 
 /**
  * Représente la base de tous les contrôleurs de l'application.

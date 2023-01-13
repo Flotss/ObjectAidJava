@@ -4,8 +4,10 @@ import javafx.stage.FileChooser;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.MVC.Composant.Alert;
 
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,7 +15,12 @@ import java.util.List;
  */
 public class UmlService {
 
-    public void genererUmltoCompilation(List<ClasseEntiere> classes){
+    /**
+     * Compile diagramme UML
+     *
+     * @param classes Liste de classes entières
+     */
+    public void genererUmltoCompilation(List<ClasseEntiere> classes) {
         String uml = genererUml(classes);
 //        SourceStringReader reader = new SourceStringReader(source);
 //        final ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -25,6 +32,11 @@ public class UmlService {
 //        final String svg = new String(os.toByteArray(), Charset.forName("UTF-8"));
     }
 
+    /**
+     * Génére le diagramme UML dans un fichier
+     *
+     * @param classes Liste de classes entières
+     */
     public void genererUmltoFile(List<ClasseEntiere> classes) {
         // Choisir un fichier pour l'enregistrement
         FileChooser fileChooser = new FileChooser();
@@ -43,9 +55,9 @@ public class UmlService {
         try {
             // Verification path
             File file;
-            if (! f.getPath().contains(".puml")){
+            if (!f.getPath().contains(".puml")) {
                 file = new File(f.getPath() + ".puml");
-            }else{
+            } else {
                 file = new File(f.getPath());
             }
 
@@ -74,7 +86,12 @@ public class UmlService {
         Alert.afficheAlert(message);
     }
 
-    private String genererUml(List<ClasseEntiere> classes){
+    /**
+     * Génère le diagramme UML à partir d'une liste de classes entières.
+     *
+     * @param classes Liste de classes entières
+     */
+    private String genererUml(List<ClasseEntiere> classes) {
         StringBuilder contenu = new StringBuilder("@startuml\n");
         for (ClasseEntiere classe : classes) {
             contenu.append(classe.getUml()).append("\n");

@@ -11,15 +11,20 @@ import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
  */
 public class ListenerModificationTailleClasse implements ChangeListener {
 
-    /** Modèle */
+    /**
+     * Modèle
+     */
     private final Model model;
 
-    /** La vue affichée en relation avec le modèle */
+    /**
+     * La vue affichée en relation avec le modèle
+     */
     private final VueClasseAffichage vueClasseAffichage;
 
     /**
      * Constructeur du listener
-     * @param model Modèle
+     *
+     * @param model              Modèle
      * @param vueClasseAffichage Vue affichée en relation avec le modèle
      */
     public ListenerModificationTailleClasse(Model model, VueClasseAffichage vueClasseAffichage) {

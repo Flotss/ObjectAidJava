@@ -19,7 +19,7 @@ public class AbstractClassTitleIcon implements ClasseEntiereTitleIcon {
         final var a = new Label("A");
 
         parent.getChildren().addAll(stackCircle, a);
-        
+
         return parent;
     }
 }

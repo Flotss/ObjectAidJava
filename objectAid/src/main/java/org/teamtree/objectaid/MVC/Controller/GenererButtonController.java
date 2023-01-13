@@ -4,19 +4,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import org.teamtree.objectaid.MVC.Model.Model;
-import org.teamtree.objectaid.Service.SqueletteService;
 import org.teamtree.objectaid.Service.UmlService;
+import org.teamtree.objectaid.Service.SqueletteService;
 
 /**
  * Classe qui permet de gérer le clic sur le menu "Générer"
  */
 public class GenererButtonController implements EventHandler<ActionEvent> {
 
-    /** Modèle */
+    /**
+     * Modèle
+     */
     private final Model model;
 
     /**
      * Constructeur
+     *
      * @param model Modèle
      */
     public GenererButtonController(Model model) {

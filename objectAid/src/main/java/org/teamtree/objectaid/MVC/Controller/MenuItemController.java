@@ -9,9 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import org.teamtree.objectaid.Accessibilite.*;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Etat.Abstract;
@@ -21,9 +19,8 @@ import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.MVC.Composant.ComponentAddClass;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
-import org.teamtree.objectaid.MVC.Vue.VueListeClasse;
-import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
+import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.Service.SqueletteService;
 
 import javax.imageio.ImageIO;
@@ -37,11 +34,14 @@ import java.util.ArrayList;
  */
 public class MenuItemController implements EventHandler<ActionEvent> {
 
-    /** Modèle */
+    /**
+     * Modèle
+     */
     private final Model model;
 
     /**
      * Constructeur
+     *
      * @param model Modèle
      */
     public MenuItemController(Model model) {
@@ -50,6 +50,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
 
     /**
      * Méthode qui permet de gérer les MenuItem de l'application
+     *
      * @param event Evènement
      */
     @Override
@@ -132,7 +133,7 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 }
             }
         }
-        if(((MenuItem)event.getSource()).getId() != null) {
+        if (((MenuItem) event.getSource()).getId() != null) {
             ComponentAddClass componentAddClass = new ComponentAddClass(model);
             switch (((MenuItem) event.getSource()).getId()) {
                 case "ajouterClasse" -> componentAddClass.ajouterClasse();

@@ -1,7 +1,7 @@
 package org.teamtree.objectaid.Classe;
 
-import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
+import org.teamtree.objectaid.Etat.Etat;
 import org.teamtree.objectaid.Fabrique.FabriqueAccessibilite;
 import org.teamtree.objectaid.Fabrique.FabriqueEtat;
 
@@ -14,23 +14,34 @@ import java.util.ArrayList;
  */
 public class Methode {
 
-    /** Nom de la méthode */
+    /**
+     * Nom de la méthode
+     */
     private final String nom;
 
-    /** Type de retour de la méthode */
+    /**
+     * Type de retour de la méthode
+     */
     private final String typeRetourne;
 
-    /** Liste des paramètres de la méthode */
+    /**
+     * Liste des paramètres de la méthode
+     */
     private final ArrayList<Parametre> parametre;
 
-    /** Liste des états de la méthode */
+    /**
+     * Liste des états de la méthode
+     */
     private final ArrayList<Etat> etats;
 
-    /** Accessibilité de la méthode */
+    /**
+     * Accessibilité de la méthode
+     */
     private final Accessibilite accessibilite;
 
     /**
      * Constructeur de la méthode
+     *
      * @param method Méthode de la classe
      */
     public Methode(Method method) {
@@ -40,14 +51,13 @@ public class Methode {
         // Type de retour
         String typeRetourne = method.getGenericReturnType().getTypeName();
         if (typeRetourne.contains("<")) {
-            String [] typeRetourneSplit = typeRetourne.split("<");
+            String[] typeRetourneSplit = typeRetourne.split("<");
             String part1 = typeRetourneSplit[0].substring(typeRetourneSplit[0].lastIndexOf(".") + 1);
-            String part2 = typeRetourneSplit[1].substring(typeRetourneSplit[1].lastIndexOf(".")+1, typeRetourneSplit[1].length() - 1);
+            String part2 = typeRetourneSplit[1].substring(typeRetourneSplit[1].lastIndexOf(".") + 1, typeRetourneSplit[1].length() - 1);
             this.typeRetourne = part1 + "<" + part2 + ">";
         } else {
             this.typeRetourne = typeRetourne.substring(typeRetourne.lastIndexOf(".") + 1);
         }
-
 
 
         // Accessibilite : public, private, protected, default
@@ -69,10 +79,11 @@ public class Methode {
 
     /**
      * Constructeur de la méthode
-     * @param nom Nom de la méthode
-     * @param typeRetourne Type de retour de la méthode
+     *
+     * @param nom           Nom de la méthode
+     * @param typeRetourne  Type de retour de la méthode
      * @param accessibilite Accessibilité de la méthode
-     * @param parametres Les paramètres de la méthode (sous forme de String)
+     * @param parametres    Les paramètres de la méthode (sous forme de String)
      */
     public Methode(String nom, String typeRetourne, Accessibilite accessibilite, String parametres, ArrayList<Etat> modifiers) {
         // Nom de la methode
@@ -80,9 +91,9 @@ public class Methode {
 
         // Type de retour
         if (typeRetourne.contains("<")) {
-            String [] typeRetourneSplit = typeRetourne.split("<");
+            String[] typeRetourneSplit = typeRetourne.split("<");
             String part1 = typeRetourneSplit[0].substring(typeRetourneSplit[0].lastIndexOf(".") + 1);
-            String part2 = typeRetourneSplit[1].substring(typeRetourneSplit[1].lastIndexOf(".")+1, typeRetourneSplit[1].length() - 1);
+            String part2 = typeRetourneSplit[1].substring(typeRetourneSplit[1].lastIndexOf(".") + 1, typeRetourneSplit[1].length() - 1);
             this.typeRetourne = part1 + "<" + part2 + ">";
         } else {
             this.typeRetourne = typeRetourne.substring(typeRetourne.lastIndexOf(".") + 1);
@@ -97,7 +108,7 @@ public class Methode {
         String[] suiteDeParametre = parametres.split(",");
         for (String parameter : suiteDeParametre) {
             String[] parametreUnique = parameter.split(":");
-            if(parametreUnique.length==2) {
+            if (parametreUnique.length == 2) {
                 this.parametre.add(new Parametre(parametreUnique[0], parametreUnique[1]));
             }
         }
@@ -109,6 +120,7 @@ public class Methode {
 
     /**
      * Retourne le type de retour de la méthode
+     *
      * @return Type de retour de la méthode : String
      */
     public String getTypeRetourne() {
@@ -117,6 +129,7 @@ public class Methode {
 
     /**
      * Retourne le nom de la méthode
+     *
      * @return Nom de la méthode : String
      */
     public String getNom() {
@@ -125,6 +138,7 @@ public class Methode {
 
     /**
      * Retourne la liste des paramètres de la méthode
+     *
      * @return Liste des paramètres de la méthode : ArrayList<Parametre>
      */
     public ArrayList<Parametre> getParametre() {
@@ -133,6 +147,7 @@ public class Methode {
 
     /**
      * Retourne la liste des états de la méthode
+     *
      * @return Liste des états de la méthode : ArrayList<Etat>
      */
     public ArrayList<Etat> getEtats() {
@@ -141,6 +156,7 @@ public class Methode {
 
     /**
      * Retourne l'accessibilité de la méthode
+     *
      * @return Accessibilité de la méthode : Accessibilite
      */
     public Accessibilite getAccessibilite() {
@@ -150,7 +166,7 @@ public class Methode {
     @Override
     public String toString() {
         StringBuilder info = new StringBuilder(accessibilite.getAcces());
-        if (etats.size() > 0){
+        if (etats.size() > 0) {
             for (Etat etat : etats) {
                 info.append(" ").append(etat.getEtat());
             }
@@ -169,6 +185,7 @@ public class Methode {
 
     /**
      * Retourne l'uml de la méthode
+     *
      * @return Uml de la méthode : String
      */
     public String getUml() {
