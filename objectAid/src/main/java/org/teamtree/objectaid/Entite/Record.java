@@ -8,4 +8,9 @@ public class Record implements Entite{
     public String getEntite() {
         return "record";
     }
+
+    @Override
+    public String toString() {
+        return "Record";
+    }
 }

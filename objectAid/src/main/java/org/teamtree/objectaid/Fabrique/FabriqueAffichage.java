@@ -114,7 +114,7 @@ public class FabriqueAffichage {
      * @return ClasseEntiereTitleIcon icon
      */
     public static ClasseEntiereTitleIcon fabriqueIcon(ClasseEntiere c){
-        return switch (c.getDefinition().getEntite()) {
+        return switch (c.getDefinition().getEntite().getEntite()) {
             case "class" -> new ClassTitleIcon();
             case "interface" -> new InterfaceTitleIcon();
             case "record" -> new RecordClassTitleIcon();
