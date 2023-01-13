@@ -113,9 +113,39 @@ Fonctionnalité achevée
 
 //TODO
 
+---
+## Fonctionnalité 5 : Importation - refactor du code et merge
+
+##### Difficulté : 4
+
+En tant qu’étudiant, je souhaiterais pouvoir ajouter la fonctionnalité d'importation par un utilisateur :
+L'utilisateur pourra importer ses classes en fournissant le chemin de son fichier ou de son dossier.
+
+#### Les étudiants qui se sont occupés de cette partie sont :
+
+- Gridel Alexis
+
+### Critères de validation :
+
+- Bouton qui ouvre l’explorateur de fichier pour sélectionner un dossier
+- L’affiche dans une arborescence (à gauche de l’application)
+- Pouvoir glisser et déposer les classes de l’arborescence à l'écran principal pour pouvoir les afficher en tant que diagramme
+
+### Etat :
+
+Fonctionnalité achevée
+
+#### Détail de la fonctionnalité :
+
+//TODO
+
+
+---
 ## Tâche supplémentaire : Correction et amélioration des fonctionnalités
 
 ##### Difficulté : 1
+
+TODO (descriptif)
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 
