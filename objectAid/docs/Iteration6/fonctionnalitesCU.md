@@ -165,11 +165,17 @@ ont été crées ainsi qu'une classe générique de base "ControllerBase<T>"
 
 ##### Difficulté : 1
 
-TODO (descriptif)
+En tant qu'étudiant, je souhaiterais pouvoir corriger les bugs et améliorer les fonctionnalités existantes.
 
 #### Les étudiants qui se sont occupés de cette partie sont :
 
 - Grossmann Jérémy
+
+#### Détail de la tâche :
+
+Les vues et les controleurs ont été améliorés et corrigés. Certaines méthodes ont été rajoutées et d'autres ont été changées. 
+Les fonctionnalités "ajouter des classes", "supprimer des classes", "afficher/cacher des classes". 
+
 
 ### Etat :
 
