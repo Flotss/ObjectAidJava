@@ -305,15 +305,6 @@ public class ClasseEntiere {
     }
 
     /**
-     * Set la definition de la classe
-     *
-     * @param definition Definition de la classe
-     */
-    public void setDefinition(DefinitionClasse definition) {
-        this.definition = definition;
-    }
-
-    /**
      * Methode permettant de deplacer la classe
      *
      * @param x Translation de x
@@ -349,15 +340,6 @@ public class ClasseEntiere {
      */
     public List<Methode> getMethods() {
         return methods;
-    }
-
-    /**
-     * Set la liste des méthodes de la classe
-     *
-     * @param methods Liste des méthodes de la classe
-     */
-    public void setMethods(List<Methode> methods) {
-        this.methods = methods;
     }
 
     public List<Constructeur> getContructeurs() {
