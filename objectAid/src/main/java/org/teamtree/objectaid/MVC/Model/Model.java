@@ -232,7 +232,7 @@ public class Model implements Sujet {
                     if (observateur instanceof VueClasse) {
                         ((VueClasse) observateur).rechargerMethodes();
                         observateur.actualiser();
-                        ((VueClasse) observateur).actualiserFleches();
+                        ((VueClasse) observateur).rechargerFleches();
                         return;
                     }
                 }
@@ -562,9 +562,8 @@ public class Model implements Sujet {
      */
     public void ajouterAttribut(Accessibilite accessibilite, List<Etat> modifiers, String nom, String type){
         this.currentClickedClass.getClasseEntiere().ajouterAttribut(nom,type,modifiers,accessibilite);
-        this.currentClickedClass.setMethodes();
         this.relations.put(this.currentClickedClass.getClasseEntiere(), new ArrayList<>(this.currentClickedClass.getClasseEntiere().getRelations()));
-        this.notifierObservateur("classe selection complete");
+        this.notifierObservateur("totalite des classes");
     }
 
     /**

@@ -69,13 +69,13 @@ public class VueClasse extends Pane implements Observateur {
         for (ClasseEntiere classe : model.getClasses()) {
             classe.getClasseAffichage().actualiser();
         }
-        actualiserFleche();
+        rechargerFleches();
         for (Fleche fleche : fleches) {
             fleche.actualiser();
         }
     }
 
-    public void actualiserFleche(){
+    public void rechargerFleches(){
         // Suppression des fleches
         this.getChildren().removeAll(fleches);
         this.fleches.clear();
