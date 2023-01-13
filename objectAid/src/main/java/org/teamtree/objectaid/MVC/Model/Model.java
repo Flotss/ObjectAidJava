@@ -1,6 +1,5 @@
 package org.teamtree.objectaid.MVC.Model;
 
-import javafx.scene.Scene;
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Methode;
@@ -530,7 +529,7 @@ public class Model implements Sujet {
      * @return booleen qui indique si la vue est cachée
      */
 
-    public boolean classeMasquee(VueClasseAffichage vueClasseAffichage1) {
+    public boolean isClasseMasquee(VueClasseAffichage vueClasseAffichage1) {
         for (VueClasseAffichage vueClasseAffichage2 : hiddenClasses) {
             if (vueClasseAffichage2.getNom().equals(vueClasseAffichage1.getNom())) {
                 return true;

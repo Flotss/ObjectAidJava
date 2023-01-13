@@ -143,7 +143,7 @@ public class VueClasse extends Pane implements Observateur {
                 VueClasseAffichage arrivee = fleche.getVueClasseArrivee();
 
 
-                if (model.classeMasquee(arrivee)) {
+                if (model.isClasseMasquee(arrivee)) {
                     model.supprimerClasseCachee(arrivee);
                 } else {
                     model.ajouterClasseCachee(arrivee);
