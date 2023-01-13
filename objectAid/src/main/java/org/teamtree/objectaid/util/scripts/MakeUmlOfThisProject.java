@@ -31,8 +31,8 @@ public class MakeUmlOfThisProject {
         findAllClasses(file, "");
         pathClasses.stream().filter(s -> s.endsWith(".")).forEach(pathClasses::remove);
         pathClasses.forEach(s -> s = s.trim());
-        for (int i = 0; i < pathClasses.size(); i++) {
-            System.out.println(pathClasses.get(i));
+        for (String pathClass : pathClasses) {
+            System.out.println(pathClass);
         }
 
         List<ClasseEntiere> classes = new ArrayList<>();
