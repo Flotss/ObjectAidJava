@@ -8,4 +8,9 @@ public class Interface implements Entite{
     public String getEntite() {
         return "interface";
     }
+
+    @Override
+    public String toString() {
+        return "Interface";
+    }
 }

@@ -8,4 +8,9 @@ public class Enum implements Entite{
     public String getEntite() {
         return "enum";
     }
+
+    @Override
+    public String toString() {
+        return "Enum";
+    }
 }

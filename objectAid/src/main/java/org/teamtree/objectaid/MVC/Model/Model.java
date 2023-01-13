@@ -576,7 +576,7 @@ public class Model implements Sujet {
      * @param entite entitée de la classe
      */
     public void ajouterClasse(String nom, String nomExtend, String nomImplemente, Accessibilite accessibilite, ArrayList<Etat> etats, Entite entite){
-        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite);
+        ClasseEntiere classe = new ClasseEntiere(nom, nomImplemente, nomExtend, accessibilite, etats, entite, this);
         this.ajouterClasse(classe);
 
     }

@@ -8,4 +8,9 @@ public class Classe implements Entite{
     public String getEntite() {
         return "class";
     }
+
+    @Override
+    public String toString() {
+        return "Classe";
+    }
 }
