@@ -28,7 +28,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'org.teamtree.objectaid'
-    mainClass = 'org.teamtree.objectaid.HelloApplication'
+    mainClass = 'org.teamtree.objectaid.ObjectAidApplication'
 }
 
 javafx {
