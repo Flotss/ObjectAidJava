@@ -83,7 +83,6 @@ VueClasse "*" --> "*" Fleche : -fleches
 
 
 
-VueButtonBarClasse "1" -> "1" Model : -model
 
 
 
@@ -113,7 +112,7 @@ VueClasseAffichage "*" -> "1" Model : -model
 
 
 class VueContextMenuClasse implements Observateur{
-    +VueButtonBarClasse(model : Model, classe : VueClasseAffichage)
+    +VueContextMenuClasse(model : Model, classe : VueClasseAffichage)
 
     +actualiser()
 }

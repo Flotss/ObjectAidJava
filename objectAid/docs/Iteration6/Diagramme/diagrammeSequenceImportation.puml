@@ -8,10 +8,11 @@ activate pdc
 activate user
 user -> pdc : handle(ActionEvent)
 pdc --> user : setApplicationState(ApplicationState.PROJECT_LOAED)
-deactivate user
 
 pdc -> pdc : TreeView<String>()
 pdc --> user
+deactivate pdc
+deactivate user
 
 
 @enduml
