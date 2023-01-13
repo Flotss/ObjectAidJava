@@ -20,6 +20,7 @@ import org.teamtree.objectaid.Etat.Final;
 import org.teamtree.objectaid.Etat.Static;
 import org.teamtree.objectaid.MVC.Model.Model;
 import org.teamtree.objectaid.MVC.Vue.VueClasse;
+import org.teamtree.objectaid.MVC.Vue.VueListeClasse;
 import org.teamtree.objectaid.render.ApplicationLayoutProjectLoadedRender;
 import org.teamtree.objectaid.MVC.Vue.VueClasseAffichage;
 import org.teamtree.objectaid.Service.SqueletteService;
@@ -61,11 +62,6 @@ public class MenuItemController implements EventHandler<ActionEvent> {
             case "Méthodes" -> model.afficherMethodesSelection();
             case "Constructeurs" -> model.afficherConstructeursSelection();
             case "Cacher" -> {
-                for (MenuItem m : ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems()) {
-                    if (m.getText().equals(model.getCurrentClickedClass().getNom())) {
-                        m.setStyle("-fx-text-fill: red");
-                    }
-                }
                 model.ajouterClasseCachee(model.getCurrentClickedClass());
             }
             case "Afficher/Cacher" -> {
@@ -73,16 +69,14 @@ public class MenuItemController implements EventHandler<ActionEvent> {
                 if (!model.getHiddenClasses().contains(classe)) {
                     model.setCurrentClickedClass(classe);
                     model.ajouterClasseCachee(classe);
-                    ((MenuItem) event.getSource()).getParentMenu().setStyle("-fx-text-fill: red");
                 } else {
                     model.supprimerClasseCachee(classe);
-                    ((MenuItem) event.getSource()).getParentMenu().setStyle("-fx-text-fill: black");
                 }
             }
             case "Supprimer" -> {
                 VueClasseAffichage classe1 = model.getCurrentClickedClass();
                 model.supprimerClasseAffichage(classe1);
-                ApplicationLayoutProjectLoadedRender.menubar.getMenus().get(1).getItems().removeIf(m -> m.getText().equals(model.getCurrentClickedClass().getNom()));
+
             }
             case "Générer le squelette" -> {
                 ClasseEntiere classeE = model.getCurrentClickedClass().getClasseEntiere();

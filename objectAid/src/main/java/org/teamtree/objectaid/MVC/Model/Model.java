@@ -455,6 +455,7 @@ public class Model implements Sujet {
             this.hiddenClasses.add(classe);
             this.currentClickedClass = classe;
             this.currentClickedClass.setClasseAffichee();
+            ((VueListeClasse)getObservateur("VueListeClasse").get(0)).changerCouleurTexte(classe.getNom(),"red");
             this.notifierObservateur("update visibilite classe selection");
             //TODO: A modifier: ne pas mettre à jour toutes les fleches
             this.notifierObservateur("update visibilite fleche");
@@ -474,6 +475,7 @@ public class Model implements Sujet {
             this.hiddenClasses.remove(classe);
             classe.setClasseAffichee();
             classe.actualiserVisibilite();
+            ((VueListeClasse)getObservateur("VueListeClasse").get(0)).changerCouleurTexte(classe.getNom(),"black");
             this.notifierObservateur("update visibilite fleche");
         }
     }
@@ -488,7 +490,8 @@ public class Model implements Sujet {
         this.notifierObservateur("update visibilite fleche");
         this.currentClickedClass = null;
         supprimerObservateur(classe);
-        this.relations.remove(classe.getClasseEntiere());
+        this.relations.remove(getClasse(classe.getNom()).get());
+        ((VueListeClasse)getObservateur("VueListeClasse").get(0)).getItemsVue().removeIf(c -> c.getText().equals(classe.getNom()));
     }
 
     /**
