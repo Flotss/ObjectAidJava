@@ -143,7 +143,31 @@ package "MVC"{
         + handle(ContextMenuEvent)
     }
 
+    class ControllerBase extends EventHandler{
+        - model : Model
 
+        + ControllerBase(model : Model)
+
+        + handle(ActionEvent)
+    }
+
+    class TreeViewDragDetectedController extends ControllerBase {
+    + TreeViewDragDetectedController(model : Model)
+
+        + handle(MouseEvent)
+    }
+
+    class VboxDragDroppedController extends ControllerBase {
+        + VboxDragDroppedController(model : Model)
+
+        + handle(DragEvent)
+    }
+
+    class TreeViewDragOverController extends ControllerBase {
+        + TreeViewDragOverController(model : Model)
+
+        + handle(DragEvent)
+    }
 
     interface ClasseEntiereTitleIcon{
         getIcon() : Image
