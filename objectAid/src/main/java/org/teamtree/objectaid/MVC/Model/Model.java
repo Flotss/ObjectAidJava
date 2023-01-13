@@ -1,6 +1,5 @@
 package org.teamtree.objectaid.MVC.Model;
 
-import javafx.scene.Scene;
 import org.teamtree.objectaid.Accessibilite.Accessibilite;
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Classe.Methode;
@@ -273,11 +272,8 @@ public class Model implements Sujet {
                 classe = ((VueClasse) getObservateur("VueClasse").get(0)).ajouterClasse(classe);
             }
             relations.put(classe, new ArrayList<>(classe.getRelations()));
-            for (Observateur observateur : this.observateurs) {
-                if (observateur instanceof VueClasse) {
-                    observateur.actualiser();
-                }
-            }
+            notifierObservateur("totalite des classes");
+            notifierObservateur("listeClasse");
         }
 
     }
@@ -431,9 +427,9 @@ public class Model implements Sujet {
      */
 
     public VueClasseAffichage getVueClasseAffichage(String nom) {
-        for (Observateur observateur : this.observateurs) {
-            if (observateur.getClass().getSimpleName().equals("VueClasse")) {
-                return ((VueClasse) observateur).getClasseAffichage(nom);
+        for(ClasseEntiere c : relations.keySet()){
+            if(c.getClasseAffichage().getNom().equals(nom)){
+                return c.getClasseAffichage();
             }
         }
         return null;
@@ -533,7 +529,7 @@ public class Model implements Sujet {
      * @return booleen qui indique si la vue est cachée
      */
 
-    public boolean classeMasquee(VueClasseAffichage vueClasseAffichage1) {
+    public boolean isClasseMasquee(VueClasseAffichage vueClasseAffichage1) {
         for (VueClasseAffichage vueClasseAffichage2 : hiddenClasses) {
             if (vueClasseAffichage2.getNom().equals(vueClasseAffichage1.getNom())) {
                 return true;
