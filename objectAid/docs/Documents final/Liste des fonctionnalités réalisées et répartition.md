@@ -94,17 +94,18 @@
 Étudiant(s) : Grossmann Jérémy
 
 
-##Présentation d’un élément orignal dont nous sommes fiers
+## Présentation d’un élément orignal dont nous sommes fiers
 ### Bernard Julien
 Il y a de nombreux éléments me rendant fier du projet réalisé, mais parmi eux, ce qui me semble
-le plus important sont regroupé dans la possibilité d'adapté le rendu. En effet, pour ne sélectionner que 
-quelques fonctionnalités permettant cette adaptation, je suis fier qu'on ait réussis à ajouter les fonctionnalités
+le plus important sont regroupés dans la possibilité d'adapté le rendu. En effet, pour ne sélectionner que 
+quelques fonctionnalités permettant cette adaptation, je suis fier qu'on ait réussi à ajouter les fonctionnalités
 d'ajout de classe et d'ajout des différentes parties d'une classe, dans les temps. Ces fonctionnalités apportent 
 un gros avantage à l'application puisque l'utilisateur peut créer un graphique de toute pièce. Nous n'étions
-pas sûrs de pouvoir réussir ces tâches dans les temps, mais nous y sommes finalement arrivé, ce qui me rend très fier.
+pas sûrs de pouvoir réussir ces tâches dans les temps, mais nous y sommes finalement arrivés, ce qui me rend très fier.
 
 ### Gridel Alexis
 
 ### Grossmann Jérémy
 
 ### Mangin Florian
+La fonctionnalité que j'ai le plus appréciée de réaliser est des relations en général. Puisque les relations entre classes sont très importante dans ce projet, c'est pourquoi j'y ai passé beaucoup de temps. J'ai apprécié réaliser cette fonctionnalité car elle est très complexe et demande beaucoup de réflexion. J'ai aussi apprécié réaliser cette fonctionnalité car elle est très utile pour l'utilisateur. En effet, elle permet de représenter les relations entre les classes et ainsi de mieux comprendre le diagramme UML. 
