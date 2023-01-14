@@ -130,7 +130,7 @@ public class ClasseEntiere {
             if (isCollection) {
                 this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
             } else {
-                this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "*", "1"));
+                this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
             }
         }
         for (Constructor<?> constructor : classe.getDeclaredConstructors()) {
@@ -213,7 +213,7 @@ public class ClasseEntiere {
                     this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
                 } else {
                     if (!this.definition.getEntite().equals("enum"))
-                        this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "1", "*"));
+                        this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
                 }
             }
         }
@@ -575,7 +575,7 @@ public class ClasseEntiere {
             if (isCollection) {
                 this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "*", "*"));
             } else {
-                this.relations.add(new Composition(this.definition.getNom(), destinationType, attribut, "*", "1"));
+                this.relations.add(new Association(this.definition.getNom(), destinationType, attribut, "1", "*"));
             }
         }
     }

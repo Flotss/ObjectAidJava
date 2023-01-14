@@ -2,7 +2,6 @@ package org.teamtree.objectaid.Fabrique;
 
 import org.teamtree.objectaid.Classe.Relations.Relation;
 import org.teamtree.objectaid.MVC.Fleches.FlecheAssociation;
-import org.teamtree.objectaid.MVC.Fleches.FlecheComposition;
 import org.teamtree.objectaid.MVC.Fleches.FlecheHeritage;
 import org.teamtree.objectaid.MVC.Fleches.FlecheImplementation;
 import org.teamtree.objectaid.MVC.Model.Model;
@@ -26,7 +25,6 @@ public class FabriqueAffichageFleche {
             case "Association" -> new FlecheAssociation(model, relation);
             case "Heritage" -> new FlecheHeritage(model, relation);
             case "Implementation" -> new FlecheImplementation(model, relation);
-            case "Composition" -> new FlecheComposition(model, relation);
             default -> null;
         };
     }
