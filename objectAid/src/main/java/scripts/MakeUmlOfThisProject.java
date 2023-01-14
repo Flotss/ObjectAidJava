@@ -1,4 +1,4 @@
-package org.teamtree.objectaid.util.scripts;
+package scripts;
 
 import org.teamtree.objectaid.Classe.ClasseEntiere;
 import org.teamtree.objectaid.Service.UmlService;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// Classe utilitaire n'est pas utilisée dans le projet.
+// Elle est utilisée pour générer un fichier UML à partir de ce projet.
 public class MakeUmlOfThisProject {
 
     public static final List<String> pathClasses = new ArrayList<>();
